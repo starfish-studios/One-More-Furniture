@@ -1,0 +1,35 @@
+{
+  "entity.owl.ambient": {
+    "sounds": [
+      "nookcranny:mob/owl/idle1",
+      "nookcranny:mob/owl/idle2",
+      "nookcranny:mob/owl/idle3"
+    ],
+    "subtitle": "nookcranny.subtitles.entity.owl.idle"
+  },
+    "entity.owl.hurt": {
+        "sounds": [
+        "nookcranny:mob/owl/hurt1",
+        "nookcranny:mob/owl/hurt2",
+        "nookcranny:mob/owl/hurt3"
+        ],
+        "subtitle": "nookcranny.subtitles.entity.owl.hurt"
+    },
+    "entity.owl.death": {
+        "sounds": [
+        "nookcranny:mob/owl/death"
+        ],
+        "subtitle": "nookcranny.subtitles.entity.owl.death"
+    },
+  "entity.owl.fly": {
+    "sounds": [
+      "mob/enderdragon/wings1",
+      "mob/enderdragon/wings2",
+      "mob/enderdragon/wings3",
+      "mob/enderdragon/wings4",
+      "mob/enderdragon/wings5",
+      "mob/enderdragon/wings6"
+    ],
+    "subtitle": "nookcranny.subtitles.entity.owl.fly"
+  }
+}

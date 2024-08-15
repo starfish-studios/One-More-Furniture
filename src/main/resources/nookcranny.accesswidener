@@ -1,0 +1,2 @@
+accessWidener   v2  named
+accessible method net/minecraft/world/level/block/ComposterBlock addItem (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/level/block/state/BlockState;

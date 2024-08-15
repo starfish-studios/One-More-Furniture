@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "nookcranny",
+	"version": "${version}",
+	"name": "NC",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"accessWidener" : "nookcranny.accesswidener",
+	"authors": [
+		"crispytwig"
+	],
+	"contact": {
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/nook-and-cranny",
+		"issues": "https://github.com/crispytwig/Nook-and-Cranny/issues"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/nookcranny/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.crispytwig.nookcranny.NookAndCranny"
+		],
+		"client": [
+			"com.crispytwig.nookcranny.NCClient"
+		]
+	},
+	"mixins": [
+		"nookcranny.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.24",
+		"fabric-api": "*",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"geckolib": ">=4.2.2"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

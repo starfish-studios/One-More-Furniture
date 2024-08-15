@@ -1,0 +1,6 @@
+{
+    "parent": "nookcranny:block/template/sofa_single",
+    "textures": {
+        "all": "nookcranny:block/sofa/light_blue_sofa"
+    }
+}

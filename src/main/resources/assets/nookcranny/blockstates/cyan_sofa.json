@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=east": {
+            "model": "nookcranny:block/cyan_sofa",
+            "y": 90
+        },
+        "facing=north": {
+            "model": "nookcranny:block/cyan_sofa"
+        },
+        "facing=south": {
+            "model": "nookcranny:block/cyan_sofa",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "nookcranny:block/cyan_sofa",
+            "y": 270
+        }
+    }
+}
