@@ -14,22 +14,24 @@ public class NCCreativeModeTab {
 
     @SuppressWarnings("unused")
     public static final CreativeModeTab ITEM_GROUP = register("item_group", FabricItemGroup.builder().icon(MOD_ICON::getDefaultInstance).title(Component.translatable("itemGroup.nookcranny.tab")).displayItems((featureFlagSet, output) -> {
+        // White, Light Gray, Gray, Black, Brown, Red, Orange, Yellow, Lime, Green, Cyan, Light Blue, Blue, Purple, Magenta, Pink
+
         output.accept(WHITE_SOFA);
+        output.accept(LIGHT_GRAY_SOFA);
+        output.accept(GRAY_SOFA);
+        output.accept(BLACK_SOFA);
+        output.accept(BROWN_SOFA);
+        output.accept(RED_SOFA);
         output.accept(ORANGE_SOFA);
-        output.accept(MAGENTA_SOFA);
-        output.accept(LIGHT_BLUE_SOFA);
         output.accept(YELLOW_SOFA);
         output.accept(LIME_SOFA);
-        output.accept(PINK_SOFA);
-        output.accept(GRAY_SOFA);
-        output.accept(LIGHT_GRAY_SOFA);
-        output.accept(CYAN_SOFA);
-        output.accept(PURPLE_SOFA);
-        output.accept(BLUE_SOFA);
-        output.accept(BROWN_SOFA);
         output.accept(GREEN_SOFA);
-        output.accept(RED_SOFA);
-        output.accept(BLACK_SOFA);
+        output.accept(CYAN_SOFA);
+        output.accept(LIGHT_BLUE_SOFA);
+        output.accept(BLUE_SOFA);
+        output.accept(PURPLE_SOFA);
+        output.accept(MAGENTA_SOFA);
+        output.accept(PINK_SOFA);
 
         }).build()
     );
