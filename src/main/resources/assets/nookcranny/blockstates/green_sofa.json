@@ -1,18 +1,18 @@
 {
     "variants": {
         "facing=east": {
-            "model": "nookcranny:block/green_sofa",
+            "model": "nookcranny:block/sofa/green_sofa",
             "y": 90
         },
         "facing=north": {
-            "model": "nookcranny:block/green_sofa"
+            "model": "nookcranny:block/sofa/green_sofa"
         },
         "facing=south": {
-            "model": "nookcranny:block/green_sofa",
+            "model": "nookcranny:block/sofa/green_sofa",
             "y": 180
         },
         "facing=west": {
-            "model": "nookcranny:block/green_sofa",
+            "model": "nookcranny:block/sofa/green_sofa",
             "y": 270
         }
     }

@@ -1,0 +1,34 @@
+{
+    "variants": {
+        "facing=north,powered=false": {
+            "model": "nookcranny:block/spigot"
+        },
+        "facing=east,powered=false": {
+            "model": "nookcranny:block/spigot",
+            "y": 90
+        },
+        "facing=south,powered=false": {
+            "model": "nookcranny:block/spigot",
+            "y": 180
+        },
+        "facing=west,powered=false": {
+            "model": "nookcranny:block/spigot",
+            "y": 270
+        },
+        "facing=north,powered=true": {
+            "model": "nookcranny:block/spigot_on"
+        },
+        "facing=east,powered=true": {
+            "model": "nookcranny:block/spigot_on",
+            "y": 90
+        },
+        "facing=south,powered=true": {
+            "model": "nookcranny:block/spigot_on",
+            "y": 180
+        },
+        "facing=west,powered=true": {
+            "model": "nookcranny:block/spigot_on",
+            "y": 270
+        }
+    }
+}

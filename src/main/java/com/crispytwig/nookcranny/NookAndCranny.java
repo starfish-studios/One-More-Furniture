@@ -26,6 +26,7 @@ public class NookAndCranny implements ModInitializer{
 				NCSoundEvents.class,
 				NCItems.class,
 				NCBlocks.class,
+				NCBlockEntities.class,
 				NCEntities.class
 		);
 

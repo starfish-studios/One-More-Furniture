@@ -1,12 +1,19 @@
 package com.crispytwig.nookcranny;
 
 import com.crispytwig.nookcranny.client.renderer.SeatRenderer;
+import com.crispytwig.nookcranny.client.renderer.SpigotBlockRenderer;
+import com.crispytwig.nookcranny.registry.NCBlockEntities;
+import com.crispytwig.nookcranny.registry.NCBlocks;
 import com.crispytwig.nookcranny.registry.NCEntities;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -36,6 +43,8 @@ public class NCVanillaIntegration {
 
         private static void registerRenderers() {
             registerEntityRenderers(NCEntities.SEAT, SeatRenderer::new);
+
+            BlockEntityRendererRegistry.register(NCBlockEntities.SPIGOT, context -> new SpigotBlockRenderer());
         }
 
         private static void registerItemModelPredicates() {
@@ -45,8 +54,9 @@ public class NCVanillaIntegration {
         }
 
         private static void registerBlockRenderLayers() {
-//            BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
-//            );
+            BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
+                    NCBlocks.SPIGOT
+            );
         }
 
         private static void registerParticles() {
