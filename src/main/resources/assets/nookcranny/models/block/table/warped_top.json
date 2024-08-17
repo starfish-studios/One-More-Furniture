@@ -1,0 +1,6 @@
+{
+    "parent": "nookcranny:block/template/table_top",
+    "textures": {
+        "all": "nookcranny:block/table/warped_table"
+    }
+}

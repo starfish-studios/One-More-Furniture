@@ -1,0 +1,15 @@
+{
+	"replace": false,
+	"values": [
+		{"id": "nookcranny:oak_table", "required": false},
+		{"id": "nookcranny:spruce_table", "required": false},
+		{"id": "nookcranny:birch_table", "required": false},
+		{"id": "nookcranny:jungle_table", "required": false},
+		{"id": "nookcranny:acacia_table", "required": false},
+		{"id": "nookcranny:cherry_table", "required": false},
+		{"id": "nookcranny:dark_oak_table", "required": false},
+		{"id": "nookcranny:mangrove_table", "required": false},
+		{"id": "nookcranny:bamboo_table", "required": false}
+
+	]
+}

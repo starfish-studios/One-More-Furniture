@@ -17,6 +17,16 @@ public class NCCreativeModeTab {
         // White, Light Gray, Gray, Black, Brown, Red, Orange, Yellow, Lime, Green, Cyan, Light Blue, Blue, Purple, Magenta, Pink
         output.accept(SPIGOT);
 
+        output.accept(OAK_TABLE);
+        output.accept(SPRUCE_TABLE);
+        output.accept(BIRCH_TABLE);
+        output.accept(JUNGLE_TABLE);
+        output.accept(ACACIA_TABLE);
+        output.accept(CHERRY_TABLE);
+        output.accept(DARK_OAK_TABLE);
+        output.accept(MANGROVE_TABLE);
+        output.accept(BAMBOO_TABLE);
+
         output.accept(WHITE_SOFA);
         output.accept(LIGHT_GRAY_SOFA);
         output.accept(GRAY_SOFA);

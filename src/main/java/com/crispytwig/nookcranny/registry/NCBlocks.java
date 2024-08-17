@@ -3,6 +3,7 @@ package com.crispytwig.nookcranny.registry;
 import com.crispytwig.nookcranny.NookAndCranny;
 import com.crispytwig.nookcranny.blocks.SpigotBlock;
 import com.crispytwig.nookcranny.blocks.SofaBlock;
+import com.crispytwig.nookcranny.blocks.TableBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -13,12 +14,24 @@ import net.minecraft.world.level.block.Blocks;
 import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.*;
 
 public class NCBlocks {
+    // Oak, Spruce, Birch, Jungle, Acacia, Cherry, Dark Oak, Mangrove, Bamboo
+    public static final Block OAK_TABLE = register("oak_table", new TableBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block SPRUCE_TABLE = register("spruce_table", new TableBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
+    public static final Block BIRCH_TABLE = register("birch_table", new TableBlock(copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));
+    public static final Block JUNGLE_TABLE = register("jungle_table", new TableBlock(copyOf(Blocks.JUNGLE_PLANKS).noOcclusion()));
+    public static final Block ACACIA_TABLE = register("acacia_table", new TableBlock(copyOf(Blocks.ACACIA_PLANKS).noOcclusion()));
+    public static final Block CHERRY_TABLE = register("cherry_table", new TableBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block DARK_OAK_TABLE = register("dark_oak_table", new TableBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
+    public static final Block MANGROVE_TABLE = register("mangrove_table", new TableBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
+    public static final Block BAMBOO_TABLE = register("bamboo_table", new TableBlock(copyOf(Blocks.BAMBOO).noOcclusion()));
+
+
+    public static final Block SPIGOT = register("spigot", new SpigotBlock(copyOf(Blocks.CAULDRON).noOcclusion().randomTicks()));
 
     public static final Block BLACK_SOFA = register("black_sofa", new SofaBlock(DyeColor.BLACK, copyOf(Blocks.BLACK_WOOL).noOcclusion()));
     public static final Block BLUE_SOFA = register("blue_sofa", new SofaBlock(DyeColor.BLUE, copyOf(Blocks.BLUE_WOOL).noOcclusion()));
     public static final Block BROWN_SOFA = register("brown_sofa", new SofaBlock(DyeColor.BROWN, copyOf(Blocks.BROWN_WOOL).noOcclusion()));
     public static final Block CYAN_SOFA = register("cyan_sofa", new SofaBlock(DyeColor.CYAN, copyOf(Blocks.CYAN_WOOL).noOcclusion()));
-    public static final Block SPIGOT = register("spigot", new SpigotBlock(copyOf(Blocks.CAULDRON).noOcclusion().randomTicks()));
     public static final Block GRAY_SOFA = register("gray_sofa", new SofaBlock(DyeColor.GRAY, copyOf(Blocks.GRAY_WOOL).noOcclusion()));
     public static final Block GREEN_SOFA = register("green_sofa", new SofaBlock(DyeColor.GREEN, copyOf(Blocks.GREEN_WOOL).noOcclusion()));
     public static final Block LIGHT_BLUE_SOFA = register("light_blue_sofa", new SofaBlock(DyeColor.LIGHT_BLUE, copyOf(Blocks.LIGHT_BLUE_WOOL).noOcclusion()));

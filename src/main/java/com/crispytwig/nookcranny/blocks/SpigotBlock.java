@@ -97,7 +97,6 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
                 level.playLocalSound(d, e, f, SoundEvents.WATER_AMBIENT, SoundSource.BLOCKS, 0.2F, 1.3F, false);
             }
 
-            // If the block below it is air
             if (level.getBlockState(pos.below()).isAir()) {
                 for (int i = 0; i < 2; ++i) {
                     double x = (double) pos.getX() + 0.6 + (level.random.nextDouble() * 0.25D - 0.25D);

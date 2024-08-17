@@ -1,0 +1,48 @@
+{
+    "multipart": [
+        {
+            "apply": {
+                "model": "nookcranny:block/table/crimson_top"
+            }
+        },
+        {
+            "when": {
+                "leg_1": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/crimson_leg",
+                "uvlock": false
+            }
+        },
+        {
+            "when": {
+                "leg_2": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/crimson_leg",
+                "y": 90,
+                "uvlock": false
+            }
+        },
+        {
+            "when": {
+                "leg_3": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/crimson_leg",
+                "y": 180,
+                "uvlock": false
+            }
+        },
+        {
+            "when": {
+                "leg_4": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/crimson_leg",
+                "y": 270,
+                "uvlock": false
+            }
+        }
+    ]
+}
