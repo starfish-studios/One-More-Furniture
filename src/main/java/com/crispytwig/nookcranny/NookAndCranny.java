@@ -1,6 +1,8 @@
 package com.crispytwig.nookcranny;
 
+import com.crispytwig.nookcranny.events.ChairInteractions;
 import com.crispytwig.nookcranny.events.DyeSofa;
+import com.crispytwig.nookcranny.events.TableInteractions;
 import com.crispytwig.nookcranny.registry.NCEntities;
 import com.crispytwig.nookcranny.registry.*;
 import com.google.common.reflect.Reflection;
@@ -31,6 +33,8 @@ public class NookAndCranny implements ModInitializer{
 		);
 
 		UseBlockCallback.EVENT.register(new DyeSofa());
+		UseBlockCallback.EVENT.register(new ChairInteractions());
+		UseBlockCallback.EVENT.register(new TableInteractions());
 		NCVanillaIntegration.serverInit();
 	}
 

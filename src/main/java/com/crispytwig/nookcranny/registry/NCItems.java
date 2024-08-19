@@ -20,6 +20,16 @@ public class NCItems {
     public static final Item MANGROVE_TABLE = register("mangrove_table", new BlockItem(NCBlocks.MANGROVE_TABLE, new FabricItemSettings()));
     public static final Item BAMBOO_TABLE = register("bamboo_table", new BlockItem(NCBlocks.BAMBOO_TABLE, new FabricItemSettings()));
 
+    public static final Item OAK_CHAIR = register("oak_chair", new BlockItem(NCBlocks.OAK_CHAIR, new FabricItemSettings()));
+    public static final Item SPRUCE_CHAIR = register("spruce_chair", new BlockItem(NCBlocks.SPRUCE_CHAIR, new FabricItemSettings()));
+    public static final Item BIRCH_CHAIR = register("birch_chair", new BlockItem(NCBlocks.BIRCH_CHAIR, new FabricItemSettings()));
+    public static final Item JUNGLE_CHAIR = register("jungle_chair", new BlockItem(NCBlocks.JUNGLE_CHAIR, new FabricItemSettings()));
+    public static final Item ACACIA_CHAIR = register("acacia_chair", new BlockItem(NCBlocks.ACACIA_CHAIR, new FabricItemSettings()));
+    public static final Item CHERRY_CHAIR = register("cherry_chair", new BlockItem(NCBlocks.CHERRY_CHAIR, new FabricItemSettings()));
+    public static final Item DARK_OAK_CHAIR = register("dark_oak_chair", new BlockItem(NCBlocks.DARK_OAK_CHAIR, new FabricItemSettings()));
+    public static final Item MANGROVE_CHAIR = register("mangrove_chair", new BlockItem(NCBlocks.MANGROVE_CHAIR, new FabricItemSettings()));
+    public static final Item BAMBOO_CHAIR = register("bamboo_chair", new BlockItem(NCBlocks.BAMBOO_CHAIR, new FabricItemSettings()));
+
     public static final Item SPIGOT = register("spigot", new BlockItem(NCBlocks.SPIGOT, new FabricItemSettings()));
 
     public static final Item BLACK_SOFA = register("black_sofa", new BlockItem(NCBlocks.BLACK_SOFA, new FabricItemSettings()));

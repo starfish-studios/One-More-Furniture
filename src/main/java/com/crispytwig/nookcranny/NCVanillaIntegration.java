@@ -55,7 +55,26 @@ public class NCVanillaIntegration {
 
         private static void registerBlockRenderLayers() {
             BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
-                    NCBlocks.SPIGOT
+                    NCBlocks.SPIGOT,
+                    NCBlocks.OAK_TABLE,
+                    NCBlocks.SPRUCE_TABLE,
+                    NCBlocks.BIRCH_TABLE,
+                    NCBlocks.JUNGLE_TABLE,
+                    NCBlocks.ACACIA_TABLE,
+                    NCBlocks.CHERRY_TABLE,
+                    NCBlocks.DARK_OAK_TABLE,
+                    NCBlocks.MANGROVE_TABLE,
+                    NCBlocks.BAMBOO_TABLE,
+
+                    NCBlocks.OAK_CHAIR,
+                    NCBlocks.SPRUCE_CHAIR,
+                    NCBlocks.BIRCH_CHAIR,
+                    NCBlocks.JUNGLE_CHAIR,
+                    NCBlocks.ACACIA_CHAIR,
+                    NCBlocks.CHERRY_CHAIR,
+                    NCBlocks.DARK_OAK_CHAIR,
+                    NCBlocks.MANGROVE_CHAIR,
+                    NCBlocks.BAMBOO_CHAIR
             );
         }
 

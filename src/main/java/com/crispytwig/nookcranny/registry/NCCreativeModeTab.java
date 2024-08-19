@@ -27,6 +27,16 @@ public class NCCreativeModeTab {
         output.accept(MANGROVE_TABLE);
         output.accept(BAMBOO_TABLE);
 
+        output.accept(OAK_CHAIR);
+        output.accept(SPRUCE_CHAIR);
+        output.accept(BIRCH_CHAIR);
+        output.accept(JUNGLE_CHAIR);
+        output.accept(ACACIA_CHAIR);
+        output.accept(CHERRY_CHAIR);
+        output.accept(DARK_OAK_CHAIR);
+        output.accept(MANGROVE_CHAIR);
+        output.accept(BAMBOO_CHAIR);
+
         output.accept(WHITE_SOFA);
         output.accept(LIGHT_GRAY_SOFA);
         output.accept(GRAY_SOFA);

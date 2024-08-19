@@ -1,6 +1,7 @@
 package com.crispytwig.nookcranny.registry;
 
 import com.crispytwig.nookcranny.NookAndCranny;
+import com.crispytwig.nookcranny.blocks.ChairBlock;
 import com.crispytwig.nookcranny.blocks.SpigotBlock;
 import com.crispytwig.nookcranny.blocks.SofaBlock;
 import com.crispytwig.nookcranny.blocks.TableBlock;
@@ -24,6 +25,16 @@ public class NCBlocks {
     public static final Block DARK_OAK_TABLE = register("dark_oak_table", new TableBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
     public static final Block MANGROVE_TABLE = register("mangrove_table", new TableBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
     public static final Block BAMBOO_TABLE = register("bamboo_table", new TableBlock(copyOf(Blocks.BAMBOO).noOcclusion()));
+
+    public static final Block OAK_CHAIR = register("oak_chair", new ChairBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block SPRUCE_CHAIR = register("spruce_chair", new ChairBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
+    public static final Block BIRCH_CHAIR = register("birch_chair", new ChairBlock(copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));
+    public static final Block JUNGLE_CHAIR = register("jungle_chair", new ChairBlock(copyOf(Blocks.JUNGLE_PLANKS).noOcclusion()));
+    public static final Block ACACIA_CHAIR = register("acacia_chair", new ChairBlock(copyOf(Blocks.ACACIA_PLANKS).noOcclusion()));
+    public static final Block CHERRY_CHAIR = register("cherry_chair", new ChairBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block DARK_OAK_CHAIR = register("dark_oak_chair", new ChairBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
+    public static final Block MANGROVE_CHAIR = register("mangrove_chair", new ChairBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
+    public static final Block BAMBOO_CHAIR = register("bamboo_chair", new ChairBlock(copyOf(Blocks.BAMBOO).noOcclusion()));
 
 
     public static final Block SPIGOT = register("spigot", new SpigotBlock(copyOf(Blocks.CAULDRON).noOcclusion().randomTicks()));

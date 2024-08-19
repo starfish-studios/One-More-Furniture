@@ -43,6 +43,134 @@
                 "y": 270,
                 "uvlock": false
             }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/white_tablecloth"
+            },
+            "when": {
+                "tablecloth": "white"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/light_gray_tablecloth"
+            },
+            "when": {
+                "tablecloth": "light_gray"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/gray_tablecloth"
+            },
+            "when": {
+                "tablecloth": "gray"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/black_tablecloth"
+            },
+            "when": {
+                "tablecloth": "black"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/brown_tablecloth"
+            },
+            "when": {
+                "tablecloth": "brown"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/red_tablecloth"
+            },
+            "when": {
+                "tablecloth": "red"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/orange_tablecloth"
+            },
+            "when": {
+                "tablecloth": "orange"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/yellow_tablecloth"
+            },
+            "when": {
+                "tablecloth": "yellow"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/lime_tablecloth"
+            },
+            "when": {
+                "tablecloth": "lime"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/green_tablecloth"
+            },
+            "when": {
+                "tablecloth": "green"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/cyan_tablecloth"
+            },
+            "when": {
+                "tablecloth": "cyan"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/light_blue_tablecloth"
+            },
+            "when": {
+                "tablecloth": "light_blue"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/blue_tablecloth"
+            },
+            "when": {
+                "tablecloth": "blue"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/purple_tablecloth"
+            },
+            "when": {
+                "tablecloth": "purple"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/magenta_tablecloth"
+            },
+            "when": {
+                "tablecloth": "magenta"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/pink_tablecloth"
+            },
+            "when": {
+                "tablecloth": "pink"
+            }
         }
     ]
 }

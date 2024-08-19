@@ -1,0 +1,7 @@
+{
+    "parent": "nookcranny:block/template/chair",
+    "textures": {
+        "all": "nookcranny:block/chair/cherry_chair",
+        "particle": "block/cherry_planks"
+    }
+}
