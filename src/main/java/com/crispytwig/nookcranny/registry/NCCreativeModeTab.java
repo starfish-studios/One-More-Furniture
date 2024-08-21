@@ -16,6 +16,10 @@ public class NCCreativeModeTab {
     public static final CreativeModeTab ITEM_GROUP = register("item_group", FabricItemGroup.builder().icon(MOD_ICON::getDefaultInstance).title(Component.translatable("itemGroup.nookcranny.tab")).displayItems((featureFlagSet, output) -> {
         // White, Light Gray, Gray, Black, Brown, Red, Orange, Yellow, Lime, Green, Cyan, Light Blue, Blue, Purple, Magenta, Pink
         output.accept(SPIGOT);
+//        output.accept(PLATE);
+
+        output.accept(OAK_NIGHTSTAND);
+        output.accept(OAK_SHELF);
 
         output.accept(OAK_TABLE);
         output.accept(SPRUCE_TABLE);

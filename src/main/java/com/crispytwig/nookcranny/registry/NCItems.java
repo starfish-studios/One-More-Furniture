@@ -10,6 +10,12 @@ import net.minecraft.world.item.*;
 public class NCItems {
     public static final Item MOD_ICON = register("mod_icon", new Item(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC).fireproof()));
 
+//    public static final Item PLATE = register("plate", new BlockItem(NCBlocks.PLATE, new FabricItemSettings()));
+
+    public static final Item OAK_NIGHTSTAND = register("oak_nightstand", new BlockItem(NCBlocks.OAK_NIGHTSTAND, new FabricItemSettings()));
+
+    public static final Item OAK_SHELF = register("oak_shelf", new BlockItem(NCBlocks.OAK_SHELF, new FabricItemSettings()));
+
     public static final Item OAK_TABLE = register("oak_table", new BlockItem(NCBlocks.OAK_TABLE, new FabricItemSettings()));
     public static final Item SPRUCE_TABLE = register("spruce_table", new BlockItem(NCBlocks.SPRUCE_TABLE, new FabricItemSettings()));
     public static final Item BIRCH_TABLE = register("birch_table", new BlockItem(NCBlocks.BIRCH_TABLE, new FabricItemSettings()));

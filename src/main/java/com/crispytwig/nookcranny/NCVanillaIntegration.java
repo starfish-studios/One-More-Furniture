@@ -1,7 +1,7 @@
 package com.crispytwig.nookcranny;
 
 import com.crispytwig.nookcranny.client.renderer.SeatRenderer;
-import com.crispytwig.nookcranny.client.renderer.SpigotBlockRenderer;
+import com.crispytwig.nookcranny.client.renderer.ShelfRenderer;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import com.crispytwig.nookcranny.registry.NCBlocks;
 import com.crispytwig.nookcranny.registry.NCEntities;
@@ -13,7 +13,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -43,8 +42,8 @@ public class NCVanillaIntegration {
 
         private static void registerRenderers() {
             registerEntityRenderers(NCEntities.SEAT, SeatRenderer::new);
+            BlockEntityRendererRegistry.register(NCBlockEntities.SHELF, ShelfRenderer::new);
 
-            BlockEntityRendererRegistry.register(NCBlockEntities.SPIGOT, context -> new SpigotBlockRenderer());
         }
 
         private static void registerItemModelPredicates() {
@@ -56,6 +55,18 @@ public class NCVanillaIntegration {
         private static void registerBlockRenderLayers() {
             BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
                     NCBlocks.SPIGOT,
+//                    NCBlocks.PLATE,
+
+                    NCBlocks.OAK_SHELF,
+                    NCBlocks.SPRUCE_SHELF,
+                    NCBlocks.BIRCH_SHELF,
+                    NCBlocks.JUNGLE_SHELF,
+                    NCBlocks.ACACIA_SHELF,
+                    NCBlocks.CHERRY_SHELF,
+                    NCBlocks.DARK_OAK_SHELF,
+                    NCBlocks.MANGROVE_SHELF,
+                    NCBlocks.BAMBOO_SHELF,
+
                     NCBlocks.OAK_TABLE,
                     NCBlocks.SPRUCE_TABLE,
                     NCBlocks.BIRCH_TABLE,

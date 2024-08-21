@@ -1,0 +1,35 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "nookcranny:block/foods/carrot",
+		"particle": "nookcranny:block/foods/carrot"
+	},
+	"elements": [
+		{
+			"from": [6, 0, 7],
+			"to": [13, 2, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 1, 8]},
+			"faces": {
+				"north": {"uv": [8, 0, 15, 2], "texture": "#0"},
+				"east": {"uv": [8, 8, 10, 10], "texture": "#0"},
+				"south": {"uv": [8, 2, 15, 4], "texture": "#0"},
+				"west": {"uv": [8, 10, 10, 12], "texture": "#0"},
+				"up": {"uv": [15, 6, 8, 4], "texture": "#0"},
+				"down": {"uv": [15, 6, 8, 8], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 0, 8],
+			"to": [8, 6, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 1, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 6], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 6], "texture": "#0"},
+				"south": {"uv": [0, 6, 8, 12], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 6], "texture": "#0"},
+				"up": {"uv": [8, 0, 0, 0], "texture": "#0"},
+				"down": {"uv": [8, 0, 0, 0], "texture": "#0"}
+			}
+		}
+	]
+}

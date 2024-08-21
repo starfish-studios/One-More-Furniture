@@ -1,10 +1,7 @@
 package com.crispytwig.nookcranny.registry;
 
 import com.crispytwig.nookcranny.NookAndCranny;
-import com.crispytwig.nookcranny.blocks.ChairBlock;
-import com.crispytwig.nookcranny.blocks.SpigotBlock;
-import com.crispytwig.nookcranny.blocks.SofaBlock;
-import com.crispytwig.nookcranny.blocks.TableBlock;
+import com.crispytwig.nookcranny.blocks.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -15,7 +12,22 @@ import net.minecraft.world.level.block.Blocks;
 import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.*;
 
 public class NCBlocks {
+//    public static final Block PLATE = register("plate", new PlateBlock(copyOf(Blocks.QUARTZ_BLOCK).noOcclusion().noCollission()));
+
     // Oak, Spruce, Birch, Jungle, Acacia, Cherry, Dark Oak, Mangrove, Bamboo
+
+    public static final Block OAK_SHELF = register("oak_shelf", new ShelfBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block SPRUCE_SHELF = register("spruce_shelf", new ShelfBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
+    public static final Block BIRCH_SHELF = register("birch_shelf", new ShelfBlock(copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));
+    public static final Block JUNGLE_SHELF = register("jungle_shelf", new ShelfBlock(copyOf(Blocks.JUNGLE_PLANKS).noOcclusion()));
+    public static final Block ACACIA_SHELF = register("acacia_shelf", new ShelfBlock(copyOf(Blocks.ACACIA_PLANKS).noOcclusion()));
+    public static final Block CHERRY_SHELF = register("cherry_shelf", new ShelfBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block DARK_OAK_SHELF = register("dark_oak_shelf", new ShelfBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
+    public static final Block MANGROVE_SHELF = register("mangrove_shelf", new ShelfBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
+    public static final Block BAMBOO_SHELF = register("bamboo_shelf", new ShelfBlock(copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
+
+    public static final Block OAK_NIGHTSTAND = register("oak_nightstand", new NightstandBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+
     public static final Block OAK_TABLE = register("oak_table", new TableBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
     public static final Block SPRUCE_TABLE = register("spruce_table", new TableBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
     public static final Block BIRCH_TABLE = register("birch_table", new TableBlock(copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));
@@ -24,7 +36,7 @@ public class NCBlocks {
     public static final Block CHERRY_TABLE = register("cherry_table", new TableBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
     public static final Block DARK_OAK_TABLE = register("dark_oak_table", new TableBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
     public static final Block MANGROVE_TABLE = register("mangrove_table", new TableBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
-    public static final Block BAMBOO_TABLE = register("bamboo_table", new TableBlock(copyOf(Blocks.BAMBOO).noOcclusion()));
+    public static final Block BAMBOO_TABLE = register("bamboo_table", new TableBlock(copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
 
     public static final Block OAK_CHAIR = register("oak_chair", new ChairBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
     public static final Block SPRUCE_CHAIR = register("spruce_chair", new ChairBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
@@ -34,7 +46,7 @@ public class NCBlocks {
     public static final Block CHERRY_CHAIR = register("cherry_chair", new ChairBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
     public static final Block DARK_OAK_CHAIR = register("dark_oak_chair", new ChairBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
     public static final Block MANGROVE_CHAIR = register("mangrove_chair", new ChairBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
-    public static final Block BAMBOO_CHAIR = register("bamboo_chair", new ChairBlock(copyOf(Blocks.BAMBOO).noOcclusion()));
+    public static final Block BAMBOO_CHAIR = register("bamboo_chair", new ChairBlock(copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
 
 
     public static final Block SPIGOT = register("spigot", new SpigotBlock(copyOf(Blocks.CAULDRON).noOcclusion().randomTicks()));

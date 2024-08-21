@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "nookcranny:block/foods/potato",
+		"all": "nookcranny:block/foods/potato"
+	},
+	"elements": [
+		{
+			"from": [6, 0, 5],
+			"to": [10, 4, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 0, 5]},
+			"faces": {
+				"north": {"uv": [0, 8, 4, 12], "texture": "#all"},
+				"east": {"uv": [0, 0, 6, 4], "texture": "#all"},
+				"south": {"uv": [10, 0, 14, 4], "texture": "#all"},
+				"west": {"uv": [0, 4, 6, 8], "texture": "#all"},
+				"up": {"uv": [10, 6, 6, 0], "texture": "#all"},
+				"down": {"uv": [10, 6, 6, 12], "texture": "#all"}
+			}
+		}
+	]
+}
