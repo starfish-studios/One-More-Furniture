@@ -6,7 +6,9 @@ import com.crispytwig.nookcranny.blocks.properties.ColorList;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -148,12 +151,19 @@ public class TableInteractions implements UseBlockCallback {
         } else if (item instanceof DyeItem && block instanceof TableBlock && blockState.getValue(TableBlock.TABLECLOTH) != ColorList.EMPTY) {
             BlockState newState = getBlockstateForDye(item, blockState);
             level.setBlockAndUpdate(pos, newState);
+            DyeColor color = ((DyeItem) item).getDyeColor();
             level.playSound(null, pos, SoundEvents.DYE_USE, player.getSoundSource(), 1.0F, 1.0F);
-            for (int i = 0; i < 5; ++i) {
-                double d = level.random.nextGaussian() * 0.025;
-                double e = level.random.nextGaussian() * 0.025;
-                double f = level.random.nextGaussian() * 0.025;
-                level.addParticle(ParticleTypes.POOF, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, d, e, f);
+            for (int j = 0; j < 5; ++j) {
+                double g = level.random.nextGaussian() * 0.2;
+                double h = level.random.nextGaussian() * 0.1;
+                double i = level.random.nextGaussian() * 0.2;
+
+                DustParticleOptions dustParticleOptions = new DustParticleOptions(Vec3.fromRGB24(color.getTextColor()).toVector3f(), 1.0F);
+
+                if (!level.isClientSide) {
+                    ServerLevel serverLevel = (ServerLevel) level;
+                    serverLevel.sendParticles(dustParticleOptions, (double) pos.getX() + 0.5, (double) pos.getY() + 1.1, (double) pos.getZ() + 0.5, 1, g, h, i, 0.0D);
+                }
             }
             return InteractionResult.SUCCESS;
         } else if (itemStack.is(ItemTags.WOOL_CARPETS) && block instanceof TableBlock && blockState.getValue(TableBlock.TABLECLOTH) == ColorList.EMPTY) {

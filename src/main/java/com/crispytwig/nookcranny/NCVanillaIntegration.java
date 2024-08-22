@@ -90,7 +90,6 @@ public class NCVanillaIntegration {
         }
 
         private static void registerParticles() {
-//            ParticleFactoryRegistry.getInstance().register(NCParticles.LEAVES, LeafParticle.Provider::new);
         }
 
         public static <T extends Entity> void registerEntityRenderers(Supplier<EntityType<T>> type, EntityRendererProvider<T> renderProvider) {
