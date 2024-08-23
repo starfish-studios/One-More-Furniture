@@ -1,25 +1,32 @@
 package com.crispytwig.nookcranny.blocks;
 
-import com.crispytwig.nookcranny.blocks.properties.ColorList;
+import com.crispytwig.nookcranny.blocks.entities.MailboxBlockEntity;
 import com.crispytwig.nookcranny.blocks.properties.FlagStatus;
-import com.crispytwig.nookcranny.registry.NCBlockProperties;
+import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -31,7 +38,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-public class MailboxBlock extends Block implements SimpleWaterloggedBlock {
+public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final EnumProperty<FlagStatus> FLAG_STATUS = EnumProperty.create("flag", FlagStatus.class);
@@ -58,13 +65,28 @@ public class MailboxBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            MailboxBlockEntity mailboxBlockEntity = (MailboxBlockEntity) blockEntity;
             if(player.isShiftKeyDown()) {
+
                 if (state.getValue(FLAG_STATUS) == FlagStatus.DOWN) {
-                    player.displayClientMessage(Component.translatable("nookcranny.mailbox.sending").append(" XYZ: " + pos.getX() + " / " + pos.getY() + " / "  + pos.getZ())
-                            .withStyle(ChatFormatting.GREEN).withStyle(ChatFormatting.ITALIC), true);
+                    assert blockEntity != null;
+                    player.displayClientMessage(
+                            Component.translatable("nookcranny.mailbox.sending",
+                                            mailboxBlockEntity.getMailboxName(),
+                                            "XYZ: " + pos.getX() + " / " + pos.getY() + " / "  + pos.getZ()
+                            ).withStyle(ChatFormatting.GREEN).withStyle(ChatFormatting.ITALIC), true
+                    );
+
+
                 } else if (state.getValue(FLAG_STATUS) == FlagStatus.UP) {
-                    player.displayClientMessage(Component.translatable("nookcranny.mailbox.receiving").append(" XYZ: " + pos.getX() + " / " + pos.getY() + " / "  + pos.getZ())
-                            .withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC), true);
+                    assert blockEntity != null;
+                    player.displayClientMessage(
+                            Component.translatable("nookcranny.mailbox.receiving",
+                                    mailboxBlockEntity.getMailboxName(),
+                                    "XYZ: " + pos.getX() + " / " + pos.getY() + " / "  + pos.getZ()
+                            ).withStyle(ChatFormatting.YELLOW).withStyle(ChatFormatting.ITALIC), true
+                    );
                 }
 
 
@@ -73,12 +95,19 @@ public class MailboxBlock extends Block implements SimpleWaterloggedBlock {
                 float f = blockState2.getValue(FLAG_STATUS) == FlagStatus.UP ? 0.5F : 0.6F;
                 level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
                 level.setBlock(pos, state.cycle(FLAG_STATUS), 3);
-            } else {
-                level.setBlock(pos, state.cycle(OPEN), 3);
-                level.playSound(null, pos, state.getValue(OPEN) ? SoundEvents.IRON_TRAPDOOR_CLOSE : SoundEvents.IRON_TRAPDOOR_OPEN, SoundSource.BLOCKS, 1.0F, 1.0F);
+            } else if (blockEntity instanceof MailboxBlockEntity) {
+                player.openMenu((MailboxBlockEntity)blockEntity);
+//                player.awardStat(Stats.OPEN_BARREL);
+//                PiglinAi.angerNearbyPiglins(player, true);
+                return InteractionResult.CONSUME;
             }
         }
         return InteractionResult.SUCCESS;
+    }
+
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
+        return level.isClientSide ? null : createTickerHelper(blockEntityType, NCBlockEntities.MAILBOX, MailboxBlockEntity::sendItemsTick);
     }
 
     @Override
@@ -116,5 +145,43 @@ public class MailboxBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     public boolean propagatesSkylightDown(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return true;
+    }
+
+    public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        if (!blockState.is(blockState2.getBlock())) {
+            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+            if (blockEntity instanceof Container) {
+                Containers.dropContents(level, blockPos, (Container)blockEntity);
+                level.updateNeighbourForOutputSignal(blockPos, this);
+            }
+            super.onRemove(blockState, level, blockPos, blockState2, bl);
+        }
+    }
+
+    public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, @Nullable LivingEntity livingEntity, ItemStack itemStack) {
+        if (itemStack.hasCustomHoverName()) {
+            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+            if (blockEntity instanceof MailboxBlockEntity) {
+                ((MailboxBlockEntity)blockEntity).setCustomName(itemStack.getHoverName());
+            }
+        }
+    }
+
+    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+        BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos);
+        if (blockEntity instanceof MailboxBlockEntity) {
+            ((MailboxBlockEntity)blockEntity).recheckOpen();
+        }
+    }
+
+
+    public RenderShape getRenderShape(BlockState blockState) {
+        return RenderShape.MODEL;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new MailboxBlockEntity(blockPos, blockState);
     }
 }

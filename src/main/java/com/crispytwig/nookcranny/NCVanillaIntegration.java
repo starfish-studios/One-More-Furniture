@@ -1,10 +1,12 @@
 package com.crispytwig.nookcranny;
 
+import com.crispytwig.nookcranny.client.gui.screens.MailboxScreen;
 import com.crispytwig.nookcranny.client.renderer.SeatRenderer;
 import com.crispytwig.nookcranny.client.renderer.ShelfRenderer;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import com.crispytwig.nookcranny.registry.NCBlocks;
 import com.crispytwig.nookcranny.registry.NCEntities;
+import com.crispytwig.nookcranny.registry.NCMenus;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -12,6 +14,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
@@ -50,6 +53,7 @@ public class NCVanillaIntegration {
         }
 
         private static void registerScreens() {
+            MenuScreens.register(NCMenus.GENERIC_1X5, MailboxScreen::new);
         }
 
         private static void registerBlockRenderLayers() {

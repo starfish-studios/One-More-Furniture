@@ -1,7 +1,6 @@
 package com.crispytwig.nookcranny.registry;
 
-import com.crispytwig.nookcranny.NookAndCranny;
-import com.crispytwig.nookcranny.blocks.ShelfBlock;
+import com.crispytwig.nookcranny.blocks.entities.MailboxBlockEntity;
 import com.crispytwig.nookcranny.blocks.entities.ShelfBlockEntity;
 import com.crispytwig.nookcranny.blocks.entities.SpigotBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -13,6 +12,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import static com.crispytwig.nookcranny.NookAndCranny.MOD_ID;
 
 public class NCBlockEntities {
+
+    public static final BlockEntityType<MailboxBlockEntity> MAILBOX = register("mailbox", FabricBlockEntityTypeBuilder.create(MailboxBlockEntity::new, NCBlocks.OAK_MAILBOX).build(null));
+
     public static final BlockEntityType<SpigotBlockEntity> SPIGOT = register("spigot", FabricBlockEntityTypeBuilder.create(SpigotBlockEntity::new, NCBlocks.SPIGOT).build(null));
 
     public static final BlockEntityType<ShelfBlockEntity> SHELF = register("shelf", FabricBlockEntityTypeBuilder.create(ShelfBlockEntity::new,

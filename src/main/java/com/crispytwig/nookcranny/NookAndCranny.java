@@ -27,6 +27,7 @@ public class NookAndCranny implements ModInitializer{
 		Reflection.initialize(
 				NCCreativeModeTab.class,
 				NCSoundEvents.class,
+				NCMenus.class,
 				NCItems.class,
 				NCBlocks.class,
 				NCBlockEntities.class,
