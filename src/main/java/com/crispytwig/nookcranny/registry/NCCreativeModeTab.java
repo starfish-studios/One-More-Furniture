@@ -18,6 +18,8 @@ public class NCCreativeModeTab {
         output.accept(SPIGOT);
 //        output.accept(PLATE);
 
+        output.accept(OAK_MAILBOX);
+
         output.accept(OAK_NIGHTSTAND);
         output.accept(OAK_SHELF);
 

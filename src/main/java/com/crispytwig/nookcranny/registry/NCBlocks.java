@@ -16,6 +16,8 @@ public class NCBlocks {
 
     // Oak, Spruce, Birch, Jungle, Acacia, Cherry, Dark Oak, Mangrove, Bamboo
 
+    public static final Block OAK_MAILBOX = register("oak_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+
     public static final Block OAK_SHELF = register("oak_shelf", new ShelfBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
     public static final Block SPRUCE_SHELF = register("spruce_shelf", new ShelfBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
     public static final Block BIRCH_SHELF = register("birch_shelf", new ShelfBlock(copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));

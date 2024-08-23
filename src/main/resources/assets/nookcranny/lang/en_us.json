@@ -2,6 +2,9 @@
   "itemGroup.nookcranny.tab": "Nook and Cranny",
   "item.nookcranny.nookcranny": "Nook and Cranny",
 
+  "nookcranny.mailbox.sending": "Sending item(s) from Mailbox at",
+  "nookcranny.mailbox.receiving": "Receiving item(s) from Mailbox at",
+
   "block.nookcranny.spigot": "Spigot",
 
   "block.nookcranny.oak_nightstand": "Oak Nightstand",

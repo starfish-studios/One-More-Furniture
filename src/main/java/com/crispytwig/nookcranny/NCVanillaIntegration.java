@@ -55,6 +55,7 @@ public class NCVanillaIntegration {
         private static void registerBlockRenderLayers() {
             BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
                     NCBlocks.SPIGOT,
+                    NCBlocks.OAK_MAILBOX,
 //                    NCBlocks.PLATE,
 
                     NCBlocks.OAK_SHELF,
