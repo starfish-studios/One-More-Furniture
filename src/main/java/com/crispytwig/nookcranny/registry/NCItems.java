@@ -12,6 +12,8 @@ public class NCItems {
 
 //    public static final Item PLATE = register("plate", new BlockItem(NCBlocks.PLATE, new FabricItemSettings()));
 
+    public static final Item OAK_LAMP = register("oak_lamp", new BlockItem(NCBlocks.OAK_LAMP, new FabricItemSettings()));
+
     public static final Item OAK_MAILBOX = register("oak_mailbox", new BlockItem(NCBlocks.OAK_MAILBOX, new FabricItemSettings()));
 
     public static final Item OAK_NIGHTSTAND = register("oak_nightstand", new BlockItem(NCBlocks.OAK_NIGHTSTAND, new FabricItemSettings()));

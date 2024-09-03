@@ -46,7 +46,6 @@ public class NCVanillaIntegration {
         private static void registerRenderers() {
             registerEntityRenderers(NCEntities.SEAT, SeatRenderer::new);
             BlockEntityRendererRegistry.register(NCBlockEntities.SHELF, ShelfRenderer::new);
-
         }
 
         private static void registerItemModelPredicates() {
@@ -57,6 +56,10 @@ public class NCVanillaIntegration {
         }
 
         private static void registerBlockRenderLayers() {
+            BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(),
+                    NCBlocks.OAK_LAMP
+            );
+
             BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
                     NCBlocks.SPIGOT,
                     NCBlocks.OAK_MAILBOX,

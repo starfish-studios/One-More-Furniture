@@ -25,8 +25,6 @@ public class NCBlockEntities {
             NCBlocks.ACACIA_SHELF,
             NCBlocks.DARK_OAK_SHELF,
             NCBlocks.MANGROVE_SHELF,
-//            NCBlocks.CRIMSON_SHELF,
-//            NCBlocks.WARPED_SHELF,
             NCBlocks.BAMBOO_SHELF,
             NCBlocks.CHERRY_SHELF
     ).build(null));

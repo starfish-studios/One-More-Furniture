@@ -1,0 +1,7 @@
+{
+  "multipart": [
+    { "apply": { "model": "nookcranny:block/lamp/oak_lamp" }, "when": {"lit": "false"} },
+    { "apply": { "model": "nookcranny:block/lamp/oak_lamp_on" }, "when": {"lit": "true"} },
+    { "apply": { "model": "nookcranny:block/template/lampshade" }, "when": {"lampshade": "white"} }
+  ]
+}

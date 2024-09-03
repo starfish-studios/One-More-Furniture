@@ -1,6 +1,5 @@
 package com.crispytwig.nookcranny.registry;
 
-import com.crispytwig.nookcranny.NookAndCranny;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -8,16 +7,18 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 
+import static com.crispytwig.nookcranny.NookAndCranny.MOD_ID;
 import static com.crispytwig.nookcranny.registry.NCItems.*;
 
 public class NCCreativeModeTab {
 
     @SuppressWarnings("unused")
-    public static final CreativeModeTab ITEM_GROUP = register("item_group", FabricItemGroup.builder().icon(MOD_ICON::getDefaultInstance).title(Component.translatable("itemGroup.nookcranny.tab")).displayItems((featureFlagSet, output) -> {
+    public static final CreativeModeTab ITEM_GROUP = register(MOD_ID, FabricItemGroup.builder().icon(MOD_ICON::getDefaultInstance).title(Component.translatable("itemGroup.nookcranny.tab")).displayItems((featureFlagSet, output) -> {
         // White, Light Gray, Gray, Black, Brown, Red, Orange, Yellow, Lime, Green, Cyan, Light Blue, Blue, Purple, Magenta, Pink
         output.accept(SPIGOT);
 //        output.accept(PLATE);
 
+        output.accept(OAK_LAMP);
         output.accept(OAK_MAILBOX);
 
         output.accept(OAK_NIGHTSTAND);
@@ -64,6 +65,6 @@ public class NCCreativeModeTab {
     );
 
     private static CreativeModeTab register(String id, CreativeModeTab tab) {
-        return Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, new ResourceLocation(NookAndCranny.MOD_ID, id), tab);
+        return Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, new ResourceLocation(MOD_ID, id), tab);
     }
 }

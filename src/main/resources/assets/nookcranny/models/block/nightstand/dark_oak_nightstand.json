@@ -1,0 +1,8 @@
+{
+    "parent": "nookcranny:block/template/nightstand",
+    "textures": {
+        "bits": "nookcranny:block/nightstand/dark_oak_nightstand_bits",
+        "core": "nookcranny:block/nightstand/dark_oak_nightstand_core",
+        "particle": "block/dark_oak_planks"
+    }
+}

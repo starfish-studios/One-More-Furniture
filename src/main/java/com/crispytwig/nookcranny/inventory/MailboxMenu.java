@@ -63,7 +63,11 @@ public class MailboxMenu extends AbstractContainerMenu {
         if (slot.hasItem()) {
             ItemStack itemStack2 = slot.getItem();
             itemStack = itemStack2.copy();
-            if (!this.moveItemStackTo(itemStack2, 0, 5, false)) {
+            if (i < 5) {
+                if (!this.moveItemStackTo(itemStack2, 5, 41, true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.moveItemStackTo(itemStack2, 0, 5, false)) {
                 return ItemStack.EMPTY;
             }
 

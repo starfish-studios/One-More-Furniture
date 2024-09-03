@@ -44,7 +44,10 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock {
 
     public ChairBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false).setValue(CUSHION, ColorList.EMPTY));
+        this.registerDefaultState(this.getStateDefinition().any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(WATERLOGGED, false)
+                .setValue(CUSHION, ColorList.EMPTY));
     }
 
     @Override

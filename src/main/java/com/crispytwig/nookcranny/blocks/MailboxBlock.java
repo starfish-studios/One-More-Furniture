@@ -36,6 +36,9 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
@@ -46,6 +49,15 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     public static final BooleanProperty FENCE_BELOW = BooleanProperty.create("fence_below");
 //    public static final EnumProperty<ColorList> COLOR = NCBlockProperties.COLOR;
 
+    public static final VoxelShape NORTH_AABB = Block.box(4.0D, 0.0D, 0.0D, 12.0D, 12.0D, 16.0D);
+    public static final VoxelShape NORTH_FENCE_AABB = Block.box(4.0D, 0.0D, -7.0D, 12.0D, 12.0D, 10.0D);
+    public static final VoxelShape EAST_AABB = Block.box(0.0D, 0.0D, 4.0D, 16.0D, 12.0D, 12.0D);
+    public static final VoxelShape EAST_FENCE_AABB = Block.box(6.0D, 0.0D, 4.0D, 23.0D, 12.0D, 12.0D);
+    public static final VoxelShape SOUTH_AABB = Block.box(4.0D, 0.0D, 0.0D, 12.0D, 12.0D, 16.0D);
+    public static final VoxelShape SOUTH_FENCE_AABB = Block.box(4.0D, 0.0D, 6.0D, 12.0D, 12.0D, 23.0D);
+    public static final VoxelShape WEST_AABB = Block.box(0.0D, 0.0D, 4.0D, 16.0D, 12.0D, 12.0D);
+    public static final VoxelShape WEST_FENCE_AABB = Block.box(-7.0D, 0.0D, 4.0D, 10.0D, 12.0D, 12.0D);
+
     public MailboxBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any()
@@ -54,6 +66,15 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 .setValue(FLAG_STATUS, FlagStatus.DOWN)
                 .setValue(OPEN, false)
                 .setValue(FENCE_BELOW, false));
+    }
+
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return switch (blockState.getValue(FACING)) {
+            default -> blockState.getValue(FENCE_BELOW) ? NORTH_FENCE_AABB : NORTH_AABB;
+            case EAST -> blockState.getValue(FENCE_BELOW) ? EAST_FENCE_AABB : EAST_AABB;
+            case SOUTH -> blockState.getValue(FENCE_BELOW) ? SOUTH_FENCE_AABB : SOUTH_AABB;
+            case WEST -> blockState.getValue(FENCE_BELOW) ? WEST_FENCE_AABB : WEST_AABB;
+        };
     }
 
     public BlockState open(BlockState blockState, Level level, BlockPos blockPos) {
@@ -159,7 +180,13 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, @Nullable LivingEntity livingEntity, ItemStack itemStack) {
-        if (itemStack.hasCustomHoverName()) {
+        Player player = livingEntity instanceof Player ? (Player)livingEntity : null;
+        if (player != null && !itemStack.hasCustomHoverName()) {
+            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+            if (blockEntity instanceof MailboxBlockEntity) {
+                ((MailboxBlockEntity)blockEntity).setCustomName(Component.translatable("container.mailbox.player_name", player.getDisplayName()));
+            }
+        } else if (itemStack.hasCustomHoverName()) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
             if (blockEntity instanceof MailboxBlockEntity) {
                 ((MailboxBlockEntity)blockEntity).setCustomName(itemStack.getHoverName());

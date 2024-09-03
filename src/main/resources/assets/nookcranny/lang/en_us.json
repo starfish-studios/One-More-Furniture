@@ -2,7 +2,16 @@
   "itemGroup.nookcranny.tab": "Nook and Cranny",
   "item.nookcranny.nookcranny": "Nook and Cranny",
 
+  "block_type.nookcranny.table": "%s Table",
+  "block_type.nookcranny.chair": "%s Chair",
+  "block_type.nookcranny.nightstand": "%s Nightstand",
+  "block_type.nookcranny.mailbox": "%s Mailbox",
+  "block_type.nookcranny.lamp": "%s Lamp",
+  "block_type.nookcranny.shelf": "%s Shelf",
+
+
   "container.mailbox": "Mailbox",
+  "container.mailbox.player_name": "%s's Mailbox",
   "nookcranny.mailbox.sending": "Sending item(s) from %s at %s",
   "nookcranny.mailbox.receiving": "Receiving item(s) from %s at %s",
   "nookcranny.mailbox.at": "at",
@@ -10,6 +19,10 @@
   "block.nookcranny.spigot": "Spigot",
 
   "block.nookcranny.oak_nightstand": "Oak Nightstand",
+
+  "block.nookcranny.oak_lamp": "Oak Lamp",
+
+  "block.nookcranny.oak_mailbox": "Oak Mailbox",
 
   "block.nookcranny.oak_table": "Oak Table",
   "block.nookcranny.spruce_table": "Spruce Table",

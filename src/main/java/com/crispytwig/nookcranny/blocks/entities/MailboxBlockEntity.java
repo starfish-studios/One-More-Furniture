@@ -87,11 +87,9 @@ public class MailboxBlockEntity extends RandomizableContainerBlockEntity {
             if (itemStack.hasCustomHoverName()) {
                 String name = itemStack.getHoverName().getString();
 
-                // Check if the name has the coordinate format
-                if (name.matches("-?\\d+ -?\\d+ -?\\d+")) {  // Matches coordinates with optional negative sign
+                if (name.matches("-?\\d+ -?\\d+ -?\\d+")) {
                     String[] coords = name.split(" ");
 
-                    // Ensure the coordinates array has exactly three elements
                     if (coords.length == 3) {
                         try {
                             int x = Integer.parseInt(coords[0]);
@@ -103,13 +101,10 @@ public class MailboxBlockEntity extends RandomizableContainerBlockEntity {
                             MailboxBlockEntity mailboxBlockEntity = (MailboxBlockEntity) this.level.getBlockEntity(blockPos);
 
                             if (mailboxBlockEntity != null) {
-                                // You might want to add a check to ensure the mailbox can accommodate the items
                                 for (int j = 0; j < this.items.size(); j++) {
                                     ItemStack itemStack1 = this.items.get(j);
-                                    // Assumes mailboxBlockEntity.items has the same size as this.items
                                     mailboxBlockEntity.items.set(j, itemStack1);
                                 }
-                                // Optionally, you might want to break out of the loop if you only send items to one mailbox
                                 break;
                             } else {
                                 System.out.println("Can't find Mailbox at: " + blockPos);

@@ -29,22 +29,23 @@ loom {
 
 
 dependencies {
-	// To change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	// BASE DEPENDENCIES
 	mappings loom.officialMojangMappings()
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+
+	// EXTRA DEPENDENCIES
 	modImplementation ("software.bernie.geckolib:geckolib-fabric-1.20.1:${project.geckolib_version}")
 	modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
 	modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
-	modImplementation "vazkii.patchouli:Patchouli:1.20.1-84-FABRIC"
-	modImplementation ("curse.maven:framework-549225:5626896")
 
-	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Uncomment the following line to enable the deprecated Fabric API modules.
-	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
-	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
+	// COMPATIBILITY
+	modImplementation ("curse.maven:every-compat-628539:5670282")
+	modImplementation ("curse.maven:selene-499980:5666908")
+
 }
 
 base {
