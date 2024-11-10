@@ -1,0 +1,7 @@
+{
+    "parent": "nookcranny:block/template/shelf/shelf_bottom_middle",
+    "textures": {
+        "all": "nookcranny:block/shelf/birch_shelf",
+        "particle": "block/birch_planks"
+    }
+}

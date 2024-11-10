@@ -1,5 +1,6 @@
 package com.crispytwig.nookcranny.entities;
 
+import com.crispytwig.nookcranny.blocks.BenchBlock;
 import com.crispytwig.nookcranny.blocks.SeatBlock;
 import com.crispytwig.nookcranny.registry.NCEntities;
 import net.minecraft.core.BlockPos;
@@ -115,6 +116,7 @@ public class SeatEntity extends Entity {
         BlockPos pos = this.blockPosition();
         BlockState state = this.level().getBlockState(pos);
         if (state.getBlock() instanceof SeatBlock seatBlock) passenger.setYRot(seatBlock.setRiderRotation(state, passenger));
+
         super.addPassenger(passenger);
     }
 

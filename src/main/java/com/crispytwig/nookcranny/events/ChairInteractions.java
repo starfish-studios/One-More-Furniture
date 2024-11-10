@@ -1,11 +1,16 @@
 package com.crispytwig.nookcranny.events;
 
 import com.crispytwig.nookcranny.blocks.ChairBlock;
+import com.crispytwig.nookcranny.blocks.LampBlock;
+import com.crispytwig.nookcranny.blocks.SofaBlock;
 import com.crispytwig.nookcranny.blocks.properties.ColorList;
+import com.crispytwig.nookcranny.registry.NCBlocks;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
@@ -18,6 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -127,6 +133,25 @@ public class ChairInteractions implements UseBlockCallback {
         }
     }
 
+    private static final Map<Integer, BlockState> COLOR_MAP = Util.make(new HashMap<>(), (map) -> {
+        map.put(DyeColor.WHITE.getId(), NCBlocks.WHITE_SOFA.defaultBlockState());
+        map.put(DyeColor.ORANGE.getId(), NCBlocks.ORANGE_SOFA.defaultBlockState());
+        map.put(DyeColor.MAGENTA.getId(), NCBlocks.MAGENTA_SOFA.defaultBlockState());
+        map.put(DyeColor.LIGHT_BLUE.getId(), NCBlocks.LIGHT_BLUE_SOFA.defaultBlockState());
+        map.put(DyeColor.YELLOW.getId(), NCBlocks.YELLOW_SOFA.defaultBlockState());
+        map.put(DyeColor.LIME.getId(), NCBlocks.LIME_SOFA.defaultBlockState());
+        map.put(DyeColor.PINK.getId(), NCBlocks.PINK_SOFA.defaultBlockState());
+        map.put(DyeColor.GRAY.getId(), NCBlocks.GRAY_SOFA.defaultBlockState());
+        map.put(DyeColor.LIGHT_GRAY.getId(), NCBlocks.LIGHT_GRAY_SOFA.defaultBlockState());
+        map.put(DyeColor.CYAN.getId(), NCBlocks.CYAN_SOFA.defaultBlockState());
+        map.put(DyeColor.PURPLE.getId(), NCBlocks.PURPLE_SOFA.defaultBlockState());
+        map.put(DyeColor.BLUE.getId(), NCBlocks.BLUE_SOFA.defaultBlockState());
+        map.put(DyeColor.BROWN.getId(), NCBlocks.BROWN_SOFA.defaultBlockState());
+        map.put(DyeColor.GREEN.getId(), NCBlocks.GREEN_SOFA.defaultBlockState());
+        map.put(DyeColor.RED.getId(), NCBlocks.RED_SOFA.defaultBlockState());
+        map.put(DyeColor.BLACK.getId(), NCBlocks.BLACK_SOFA.defaultBlockState());
+    });
+
     @Override
     public InteractionResult interact(Player player, Level level, InteractionHand hand, BlockHitResult hitResult) {
         BlockPos pos = hitResult.getBlockPos();
@@ -146,14 +171,22 @@ public class ChairInteractions implements UseBlockCallback {
             }
         } else if (item instanceof DyeItem && block instanceof ChairBlock && blockState.getValue(ChairBlock.CUSHION) != ColorList.EMPTY) {
             BlockState newState = getBlockstateForDye(item, blockState);
-            level.setBlockAndUpdate(pos, newState.setValue(BlockStateProperties.HORIZONTAL_FACING, blockState.getValue(BlockStateProperties.HORIZONTAL_FACING)));
+            level.setBlockAndUpdate(pos, newState);
+            DyeColor color = ((DyeItem) item).getDyeColor();
             level.playSound(null, pos, SoundEvents.DYE_USE, player.getSoundSource(), 1.0F, 1.0F);
-            for (int i = 0; i < 5; ++i) {
-                double d = level.random.nextGaussian() * 0.025;
-                double e = level.random.nextGaussian() * 0.025;
-                double f = level.random.nextGaussian() * 0.025;
-                level.addParticle(ParticleTypes.POOF, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, d, e, f);
+            for (int j = 0; j < 5; ++j) {
+                double g = level.random.nextGaussian() * 0.2;
+                double h = level.random.nextGaussian() * 0.1;
+                double i = level.random.nextGaussian() * 0.2;
+
+                DustParticleOptions dustParticleOptions = new DustParticleOptions(Vec3.fromRGB24(color.getTextColor()).toVector3f(), 1.0F);
+
+                if (!level.isClientSide) {
+                    ServerLevel serverLevel = (ServerLevel) level;
+                    serverLevel.sendParticles(dustParticleOptions, (double) pos.getX() + 0.5, (double) pos.getY() + 0.8, (double) pos.getZ() + 0.5, 1, g, h, i, 0.0D);
+                }
             }
+
             return InteractionResult.SUCCESS;
         } else if (itemStack.is(ItemTags.WOOL_CARPETS) && block instanceof ChairBlock && blockState.getValue(ChairBlock.CUSHION) == ColorList.EMPTY) {
             BlockState newState = getBlockstateForCarpet(item, blockState);

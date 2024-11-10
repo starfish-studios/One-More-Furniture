@@ -14,7 +14,43 @@ import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSetting
 public class NCBlocks {
 //    public static final Block PLATE = register("plate", new PlateBlock(copyOf(Blocks.QUARTZ_BLOCK).noOcclusion().noCollission()));
 
-    // Oak, Spruce, Birch, Jungle, Acacia, Cherry, Dark Oak, Mangrove, Bamboo
+    // Oak, Spruce, Birch, Jungle, Acacia, Cherry, Dark Oak, Mangrove, Bamboo, Crimson, Warped
+
+    public static final Block OAK_DRAWER = register("oak_drawer", new DrawerBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block SPRUCE_DRAWER = register("spruce_drawer", new DrawerBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
+    public static final Block BIRCH_DRAWER = register("birch_drawer", new DrawerBlock(copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));
+    public static final Block JUNGLE_DRAWER = register("jungle_drawer", new DrawerBlock(copyOf(Blocks.JUNGLE_PLANKS).noOcclusion()));
+    public static final Block ACACIA_DRAWER = register("acacia_drawer", new DrawerBlock(copyOf(Blocks.ACACIA_PLANKS).noOcclusion()));
+    public static final Block CHERRY_DRAWER = register("cherry_drawer", new DrawerBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block DARK_OAK_DRAWER = register("dark_oak_drawer", new DrawerBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
+    public static final Block MANGROVE_DRAWER = register("mangrove_drawer", new DrawerBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
+    public static final Block BAMBOO_DRAWER = register("bamboo_drawer", new DrawerBlock(copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final Block CRIMSON_DRAWER = register("crimson_drawer", new DrawerBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block WARPED_DRAWER = register("warped_drawer", new DrawerBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
+
+    public static final Block OAK_BENCH = register("oak_bench", new BenchBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block SPRUCE_BENCH = register("spruce_bench", new BenchBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
+    public static final Block BIRCH_BENCH = register("birch_bench", new BenchBlock(copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));
+    public static final Block JUNGLE_BENCH = register("jungle_bench", new BenchBlock(copyOf(Blocks.JUNGLE_PLANKS).noOcclusion()));
+    public static final Block ACACIA_BENCH = register("acacia_bench", new BenchBlock(copyOf(Blocks.ACACIA_PLANKS).noOcclusion()));
+    public static final Block CHERRY_BENCH = register("cherry_bench", new BenchBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block DARK_OAK_BENCH = register("dark_oak_bench", new BenchBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
+    public static final Block MANGROVE_BENCH = register("mangrove_bench", new BenchBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
+    public static final Block BAMBOO_BENCH = register("bamboo_bench", new BenchBlock(copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final Block CRIMSON_BENCH = register("crimson_bench", new BenchBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block WARPED_BENCH = register("warped_bench", new BenchBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
+
+    public static final Block OAK_FLOWER_BASKET = register("oak_flower_basket", new FlowerBasketBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block SPRUCE_FLOWER_BASKET = register("spruce_flower_basket", new FlowerBasketBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
+    public static final Block BIRCH_FLOWER_BASKET = register("birch_flower_basket", new FlowerBasketBlock(copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));
+    public static final Block JUNGLE_FLOWER_BASKET = register("jungle_flower_basket", new FlowerBasketBlock(copyOf(Blocks.JUNGLE_PLANKS).noOcclusion()));
+    public static final Block ACACIA_FLOWER_BASKET = register("acacia_flower_basket", new FlowerBasketBlock(copyOf(Blocks.ACACIA_PLANKS).noOcclusion()));
+    public static final Block CHERRY_FLOWER_BASKET = register("cherry_flower_basket", new FlowerBasketBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block DARK_OAK_FLOWER_BASKET = register("dark_oak_flower_basket", new FlowerBasketBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
+    public static final Block MANGROVE_FLOWER_BASKET = register("mangrove_flower_basket", new FlowerBasketBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
+    public static final Block BAMBOO_FLOWER_BASKET = register("bamboo_flower_basket", new FlowerBasketBlock(copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final Block CRIMSON_FLOWER_BASKET = register("crimson_flower_basket", new FlowerBasketBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block WARPED_FLOWER_BASKET = register("warped_flower_basket", new FlowerBasketBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
 
     public static final Block OAK_LAMP = register("oak_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
 
@@ -29,6 +65,8 @@ public class NCBlocks {
     public static final Block DARK_OAK_SHELF = register("dark_oak_shelf", new ShelfBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
     public static final Block MANGROVE_SHELF = register("mangrove_shelf", new ShelfBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
     public static final Block BAMBOO_SHELF = register("bamboo_shelf", new ShelfBlock(copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final Block CRIMSON_SHELF = register("crimson_shelf", new ShelfBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block WARPED_SHELF = register("warped_shelf", new ShelfBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
 
     public static final Block OAK_NIGHTSTAND = register("oak_nightstand", new NightstandBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
 
@@ -41,6 +79,8 @@ public class NCBlocks {
     public static final Block DARK_OAK_TABLE = register("dark_oak_table", new TableBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
     public static final Block MANGROVE_TABLE = register("mangrove_table", new TableBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
     public static final Block BAMBOO_TABLE = register("bamboo_table", new TableBlock(copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final Block CRIMSON_TABLE = register("crimson_table", new TableBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block WARPED_TABLE = register("warped_table", new TableBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
 
     public static final Block OAK_CHAIR = register("oak_chair", new ChairBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
     public static final Block SPRUCE_CHAIR = register("spruce_chair", new ChairBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
@@ -51,6 +91,8 @@ public class NCBlocks {
     public static final Block DARK_OAK_CHAIR = register("dark_oak_chair", new ChairBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
     public static final Block MANGROVE_CHAIR = register("mangrove_chair", new ChairBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
     public static final Block BAMBOO_CHAIR = register("bamboo_chair", new ChairBlock(copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final Block CRIMSON_CHAIR = register("crimson_chair", new ChairBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block WARPED_CHAIR = register("warped_chair", new ChairBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
 
 
     public static final Block SPIGOT = register("spigot", new SpigotBlock(copyOf(Blocks.CAULDRON).noOcclusion().randomTicks()));

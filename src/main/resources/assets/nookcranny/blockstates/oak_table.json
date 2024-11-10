@@ -1,9 +1,39 @@
 {
   "multipart": [
     {
-    "apply": {
-      "model": "nookcranny:block/table/oak_top"
-    }
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "nookcranny:block/table/oak_top"
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "nookcranny:block/table/oak_top",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "nookcranny:block/table/oak_top",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "nookcranny:block/table/oak_top",
+        "y": 270
+      }
     },
     {
       "when": {

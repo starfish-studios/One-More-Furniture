@@ -1,6 +1,7 @@
 package com.crispytwig.nookcranny.registry;
 
 import com.crispytwig.nookcranny.NookAndCranny;
+import com.crispytwig.nookcranny.inventory.DrawerMenu;
 import com.crispytwig.nookcranny.inventory.MailboxMenu;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -14,6 +15,8 @@ import net.minecraft.world.level.block.Block;
 public class NCMenus {
 
     public static final MenuType<MailboxMenu> GENERIC_1X5 = register("generic_1x5", MailboxMenu::new);
+
+    public static final MenuType<DrawerMenu> DRAWER = register("drawer", DrawerMenu::new);
 
 
     private static <T extends AbstractContainerMenu> MenuType register(String id, MenuType.MenuSupplier<T> menuSupplier) {

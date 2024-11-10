@@ -146,7 +146,7 @@ public class LampInteractions implements UseBlockCallback {
                 level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, player.getSoundSource(), 1.0F, 1.0F);
                 return InteractionResult.SUCCESS;
             }
-        } else if (item instanceof DyeItem && block instanceof TableBlock && blockState.getValue(LampBlock.LAMPSHADE) != ColorList.EMPTY) {
+        } else if (item instanceof DyeItem && block instanceof LampBlock && blockState.getValue(LampBlock.LAMPSHADE) != ColorList.EMPTY) {
             BlockState newState = getBlockstateForDye(item, blockState);
             level.setBlockAndUpdate(pos, newState);
             DyeColor color = ((DyeItem) item).getDyeColor();

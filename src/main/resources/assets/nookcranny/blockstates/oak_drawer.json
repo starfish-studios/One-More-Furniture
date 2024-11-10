@@ -1,0 +1,47 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "nookcranny:block/template/drawer"
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "nookcranny:block/template/drawer",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "nookcranny:block/template/drawer",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "nookcranny:block/template/drawer",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "countertop": "oak"
+      },
+      "apply": {
+        "model": "nookcranny:block/template/countertop"
+      }
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 package com.crispytwig.nookcranny;
 
+import com.crispytwig.nookcranny.client.gui.screens.DrawerScreen;
 import com.crispytwig.nookcranny.client.gui.screens.MailboxScreen;
 import com.crispytwig.nookcranny.client.renderer.SeatRenderer;
 import com.crispytwig.nookcranny.client.renderer.ShelfRenderer;
+import com.crispytwig.nookcranny.client.renderer.blockentity.FlowerBasketRenderer;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import com.crispytwig.nookcranny.registry.NCBlocks;
 import com.crispytwig.nookcranny.registry.NCEntities;
@@ -46,6 +48,8 @@ public class NCVanillaIntegration {
         private static void registerRenderers() {
             registerEntityRenderers(NCEntities.SEAT, SeatRenderer::new);
             BlockEntityRendererRegistry.register(NCBlockEntities.SHELF, ShelfRenderer::new);
+            BlockEntityRendererRegistry.register(NCBlockEntities.FLOWER_BASKET, FlowerBasketRenderer::new);
+
         }
 
         private static void registerItemModelPredicates() {
@@ -53,6 +57,7 @@ public class NCVanillaIntegration {
 
         private static void registerScreens() {
             MenuScreens.register(NCMenus.GENERIC_1X5, MailboxScreen::new);
+            MenuScreens.register(NCMenus.DRAWER, DrawerScreen::new);
         }
 
         private static void registerBlockRenderLayers() {
@@ -65,6 +70,20 @@ public class NCVanillaIntegration {
                     NCBlocks.OAK_MAILBOX,
 //                    NCBlocks.PLATE,
 
+                    NCBlocks.OAK_BENCH,
+                    NCBlocks.SPRUCE_BENCH,
+                    NCBlocks.BIRCH_BENCH,
+                    NCBlocks.JUNGLE_BENCH,
+                    NCBlocks.ACACIA_BENCH,
+                    NCBlocks.CHERRY_BENCH,
+                    NCBlocks.DARK_OAK_BENCH,
+                    NCBlocks.MANGROVE_BENCH,
+                    NCBlocks.BAMBOO_BENCH,
+                    NCBlocks.CRIMSON_BENCH,
+                    NCBlocks.WARPED_BENCH,
+
+                    NCBlocks.OAK_FLOWER_BASKET,
+
                     NCBlocks.OAK_SHELF,
                     NCBlocks.SPRUCE_SHELF,
                     NCBlocks.BIRCH_SHELF,
@@ -74,6 +93,8 @@ public class NCVanillaIntegration {
                     NCBlocks.DARK_OAK_SHELF,
                     NCBlocks.MANGROVE_SHELF,
                     NCBlocks.BAMBOO_SHELF,
+                    NCBlocks.CRIMSON_SHELF,
+                    NCBlocks.WARPED_SHELF,
 
                     NCBlocks.OAK_TABLE,
                     NCBlocks.SPRUCE_TABLE,
@@ -84,6 +105,8 @@ public class NCVanillaIntegration {
                     NCBlocks.DARK_OAK_TABLE,
                     NCBlocks.MANGROVE_TABLE,
                     NCBlocks.BAMBOO_TABLE,
+                    NCBlocks.CRIMSON_TABLE,
+                    NCBlocks.WARPED_TABLE,
 
                     NCBlocks.OAK_CHAIR,
                     NCBlocks.SPRUCE_CHAIR,
@@ -93,7 +116,9 @@ public class NCVanillaIntegration {
                     NCBlocks.CHERRY_CHAIR,
                     NCBlocks.DARK_OAK_CHAIR,
                     NCBlocks.MANGROVE_CHAIR,
-                    NCBlocks.BAMBOO_CHAIR
+                    NCBlocks.BAMBOO_CHAIR,
+                    NCBlocks.CRIMSON_CHAIR,
+                    NCBlocks.WARPED_CHAIR
             );
         }
 

@@ -7,13 +7,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HalfTransparentBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -24,6 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class TableBlock extends HalfTransparentBlock implements SimpleWaterloggedBlock {
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LEG1 = BooleanProperty.create("leg_1");
     public static final BooleanProperty LEG2 = BooleanProperty.create("leg_2");
     public static final BooleanProperty LEG3 = BooleanProperty.create("leg_3");
@@ -42,6 +42,7 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
     public TableBlock(Properties properties) {
         super(properties);
         registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
                 .setValue(LEG1, true)
                 .setValue(LEG2, true)
                 .setValue(LEG3, true)
@@ -67,6 +68,7 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         boolean waterlogged = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
         BlockState state = this.defaultBlockState()
+                .setValue(FACING, context.getHorizontalDirection().getOpposite())
                 .setValue(WATERLOGGED, waterlogged);
         return getConnections(state, context.getLevel(), context.getClickedPos());
     }
@@ -84,12 +86,45 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LEG1, LEG2, LEG3, LEG4, UPDATE, WATERLOGGED, TABLECLOTH);
+        builder.add(FACING, LEG1, LEG2, LEG3, LEG4, UPDATE, WATERLOGGED, TABLECLOTH);
     }
 
     @Override
     public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
         return false;
+    }
+
+    @Override
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        boolean leg1 = state.getValue(LEG1);
+        boolean leg2 = state.getValue(LEG2);
+        boolean leg3 = state.getValue(LEG3);
+        boolean leg4 = state.getValue(LEG4);
+        return switch(rotation) {
+            case NONE -> state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+            case CLOCKWISE_90 -> state
+                    .setValue(FACING, rotation.rotate(state.getValue(FACING)))
+                    .setValue(LEG1, leg4)
+                    .setValue(LEG2, leg1)
+                    .setValue(LEG3, leg2)
+                    .setValue(LEG4, leg3);
+            case CLOCKWISE_180 -> state
+                    .setValue(FACING, rotation.rotate(state.getValue(FACING)))
+                    .setValue(LEG1, leg3)
+                    .setValue(LEG2, leg4)
+                    .setValue(LEG3, leg1).setValue(LEG4, leg2);
+            case COUNTERCLOCKWISE_90 -> state
+                    .setValue(FACING, rotation.rotate(state.getValue(FACING)))
+                    .setValue(LEG1, leg2)
+                    .setValue(LEG2, leg3)
+                    .setValue(LEG3, leg4)
+                    .setValue(LEG4, leg1);
+        };
+    }
+
+    @Override
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
     public BlockState getConnections(BlockState state, LevelAccessor level, BlockPos pos) {

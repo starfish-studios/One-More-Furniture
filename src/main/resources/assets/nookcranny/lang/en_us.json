@@ -9,12 +9,17 @@
   "block_type.nookcranny.lamp": "%s Lamp",
   "block_type.nookcranny.shelf": "%s Shelf",
 
+  "container.drawer": "Drawer",
+  "block.nookcranny.oak_drawer": "Oak Drawer",
+
 
   "container.mailbox": "Mailbox",
   "container.mailbox.player_name": "%s's Mailbox",
   "nookcranny.mailbox.sending": "Sending item(s) from %s at %s",
   "nookcranny.mailbox.receiving": "Receiving item(s) from %s at %s",
   "nookcranny.mailbox.at": "at",
+
+  "item.nookcranny.copper_saw": "Copper Saw",
 
   "block.nookcranny.spigot": "Spigot",
 
@@ -23,6 +28,30 @@
   "block.nookcranny.oak_lamp": "Oak Lamp",
 
   "block.nookcranny.oak_mailbox": "Oak Mailbox",
+
+  "block.nookcranny.oak_bench": "Oak Bench",
+    "block.nookcranny.spruce_bench": "Spruce Bench",
+    "block.nookcranny.birch_bench": "Birch Bench",
+    "block.nookcranny.jungle_bench": "Jungle Bench",
+    "block.nookcranny.acacia_bench": "Acacia Bench",
+    "block.nookcranny.cherry_bench": "Cherry Bench",
+    "block.nookcranny.dark_oak_bench": "Dark Oak Bench",
+    "block.nookcranny.mangrove_bench": "Mangrove Bench",
+    "block.nookcranny.bamboo_bench": "Bamboo Bench",
+    "block.nookcranny.crimson_bench": "Crimson Bench",
+    "block.nookcranny.warped_bench": "Warped Bench",
+
+  "block.nookcranny.oak_shelf": "Oak Shelf",
+    "block.nookcranny.spruce_shelf": "Spruce Shelf",
+    "block.nookcranny.birch_shelf": "Birch Shelf",
+    "block.nookcranny.jungle_shelf": "Jungle Shelf",
+    "block.nookcranny.acacia_shelf": "Acacia Shelf",
+    "block.nookcranny.cherry_shelf": "Cherry Shelf",
+    "block.nookcranny.dark_oak_shelf": "Dark Oak Shelf",
+    "block.nookcranny.mangrove_shelf": "Mangrove Shelf",
+    "block.nookcranny.bamboo_shelf": "Bamboo Shelf",
+    "block.nookcranny.crimson_shelf": "Crimson Shelf",
+    "block.nookcranny.warped_shelf": "Warped Shelf",
 
   "block.nookcranny.oak_table": "Oak Table",
   "block.nookcranny.spruce_table": "Spruce Table",
@@ -33,6 +62,8 @@
   "block.nookcranny.dark_oak_table": "Dark Oak Table",
   "block.nookcranny.mangrove_table": "Mangrove Table",
   "block.nookcranny.bamboo_table": "Bamboo Table",
+    "block.nookcranny.crimson_table": "Crimson Table",
+    "block.nookcranny.warped_table": "Warped Table",
 
   "block.nookcranny.oak_chair": "Oak Chair",
     "block.nookcranny.spruce_chair": "Spruce Chair",
@@ -43,6 +74,8 @@
     "block.nookcranny.dark_oak_chair": "Dark Oak Chair",
     "block.nookcranny.mangrove_chair": "Mangrove Chair",
     "block.nookcranny.bamboo_chair": "Bamboo Chair",
+    "block.nookcranny.crimson_chair": "Crimson Chair",
+    "block.nookcranny.warped_chair": "Warped Chair",
 
   "block.nookcranny.black_sofa": "Black Sofa",
   "block.nookcranny.blue_sofa": "Blue Sofa",

@@ -1,0 +1,7 @@
+{
+    "parent": "nookcranny:block/template/bench_single",
+    "textures": {
+        "all": "nookcranny:block/bench/mangrove_bench",
+        "particle": "block/mangrove_planks"
+    }
+}

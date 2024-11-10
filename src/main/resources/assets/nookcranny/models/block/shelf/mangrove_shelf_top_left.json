@@ -1,0 +1,7 @@
+{
+    "parent": "nookcranny:block/template/shelf/shelf_top_left",
+    "textures": {
+        "all": "nookcranny:block/shelf/mangrove_shelf",
+        "particle": "block/mangrove_planks"
+    }
+}

@@ -12,13 +12,41 @@ public class NCItems {
 
 //    public static final Item PLATE = register("plate", new BlockItem(NCBlocks.PLATE, new FabricItemSettings()));
 
+    public static final Item COPPER_SAW = register("copper_saw", new Item(new FabricItemSettings().maxCount(1).durability(128)));
+
+    public static final Item OAK_DRAWER = register("oak_drawer", new BlockItem(NCBlocks.OAK_DRAWER, new FabricItemSettings()));
+
+    public static final Item OAK_FLOWER_BASKET = register("oak_flower_basket", new BlockItem(NCBlocks.OAK_FLOWER_BASKET, new FabricItemSettings()));
+
     public static final Item OAK_LAMP = register("oak_lamp", new BlockItem(NCBlocks.OAK_LAMP, new FabricItemSettings()));
 
     public static final Item OAK_MAILBOX = register("oak_mailbox", new BlockItem(NCBlocks.OAK_MAILBOX, new FabricItemSettings()));
 
     public static final Item OAK_NIGHTSTAND = register("oak_nightstand", new BlockItem(NCBlocks.OAK_NIGHTSTAND, new FabricItemSettings()));
 
+    public static final Item OAK_BENCH = register("oak_bench", new BlockItem(NCBlocks.OAK_BENCH, new FabricItemSettings()));
+    public static final Item SPRUCE_BENCH = register("spruce_bench", new BlockItem(NCBlocks.SPRUCE_BENCH, new FabricItemSettings()));
+    public static final Item BIRCH_BENCH = register("birch_bench", new BlockItem(NCBlocks.BIRCH_BENCH, new FabricItemSettings()));
+    public static final Item JUNGLE_BENCH = register("jungle_bench", new BlockItem(NCBlocks.JUNGLE_BENCH, new FabricItemSettings()));
+    public static final Item ACACIA_BENCH = register("acacia_bench", new BlockItem(NCBlocks.ACACIA_BENCH, new FabricItemSettings()));
+    public static final Item CHERRY_BENCH = register("cherry_bench", new BlockItem(NCBlocks.CHERRY_BENCH, new FabricItemSettings()));
+    public static final Item DARK_OAK_BENCH = register("dark_oak_bench", new BlockItem(NCBlocks.DARK_OAK_BENCH, new FabricItemSettings()));
+    public static final Item MANGROVE_BENCH = register("mangrove_bench", new BlockItem(NCBlocks.MANGROVE_BENCH, new FabricItemSettings()));
+    public static final Item BAMBOO_BENCH = register("bamboo_bench", new BlockItem(NCBlocks.BAMBOO_BENCH, new FabricItemSettings()));
+    public static final Item CRIMSON_BENCH = register("crimson_bench", new BlockItem(NCBlocks.CRIMSON_BENCH, new FabricItemSettings()));
+    public static final Item WARPED_BENCH = register("warped_bench", new BlockItem(NCBlocks.WARPED_BENCH, new FabricItemSettings()));
+
     public static final Item OAK_SHELF = register("oak_shelf", new BlockItem(NCBlocks.OAK_SHELF, new FabricItemSettings()));
+    public static final Item SPRUCE_SHELF = register("spruce_shelf", new BlockItem(NCBlocks.SPRUCE_SHELF, new FabricItemSettings()));
+    public static final Item BIRCH_SHELF = register("birch_shelf", new BlockItem(NCBlocks.BIRCH_SHELF, new FabricItemSettings()));
+    public static final Item JUNGLE_SHELF = register("jungle_shelf", new BlockItem(NCBlocks.JUNGLE_SHELF, new FabricItemSettings()));
+    public static final Item ACACIA_SHELF = register("acacia_shelf", new BlockItem(NCBlocks.ACACIA_SHELF, new FabricItemSettings()));
+    public static final Item CHERRY_SHELF = register("cherry_shelf", new BlockItem(NCBlocks.CHERRY_SHELF, new FabricItemSettings()));
+    public static final Item DARK_OAK_SHELF = register("dark_oak_shelf", new BlockItem(NCBlocks.DARK_OAK_SHELF, new FabricItemSettings()));
+    public static final Item MANGROVE_SHELF = register("mangrove_shelf", new BlockItem(NCBlocks.MANGROVE_SHELF, new FabricItemSettings()));
+    public static final Item BAMBOO_SHELF = register("bamboo_shelf", new BlockItem(NCBlocks.BAMBOO_SHELF, new FabricItemSettings()));
+    public static final Item CRIMSON_SHELF = register("crimson_shelf", new BlockItem(NCBlocks.CRIMSON_SHELF, new FabricItemSettings()));
+    public static final Item WARPED_SHELF = register("warped_shelf", new BlockItem(NCBlocks.WARPED_SHELF, new FabricItemSettings()));
 
     public static final Item OAK_TABLE = register("oak_table", new BlockItem(NCBlocks.OAK_TABLE, new FabricItemSettings()));
     public static final Item SPRUCE_TABLE = register("spruce_table", new BlockItem(NCBlocks.SPRUCE_TABLE, new FabricItemSettings()));
@@ -29,6 +57,8 @@ public class NCItems {
     public static final Item DARK_OAK_TABLE = register("dark_oak_table", new BlockItem(NCBlocks.DARK_OAK_TABLE, new FabricItemSettings()));
     public static final Item MANGROVE_TABLE = register("mangrove_table", new BlockItem(NCBlocks.MANGROVE_TABLE, new FabricItemSettings()));
     public static final Item BAMBOO_TABLE = register("bamboo_table", new BlockItem(NCBlocks.BAMBOO_TABLE, new FabricItemSettings()));
+    public static final Item CRIMSON_TABLE = register("crimson_table", new BlockItem(NCBlocks.CRIMSON_TABLE, new FabricItemSettings()));
+    public static final Item WARPED_TABLE = register("warped_table", new BlockItem(NCBlocks.WARPED_TABLE, new FabricItemSettings()));
 
     public static final Item OAK_CHAIR = register("oak_chair", new BlockItem(NCBlocks.OAK_CHAIR, new FabricItemSettings()));
     public static final Item SPRUCE_CHAIR = register("spruce_chair", new BlockItem(NCBlocks.SPRUCE_CHAIR, new FabricItemSettings()));
@@ -39,6 +69,8 @@ public class NCItems {
     public static final Item DARK_OAK_CHAIR = register("dark_oak_chair", new BlockItem(NCBlocks.DARK_OAK_CHAIR, new FabricItemSettings()));
     public static final Item MANGROVE_CHAIR = register("mangrove_chair", new BlockItem(NCBlocks.MANGROVE_CHAIR, new FabricItemSettings()));
     public static final Item BAMBOO_CHAIR = register("bamboo_chair", new BlockItem(NCBlocks.BAMBOO_CHAIR, new FabricItemSettings()));
+    public static final Item CRIMSON_CHAIR = register("crimson_chair", new BlockItem(NCBlocks.CRIMSON_CHAIR, new FabricItemSettings()));
+    public static final Item WARPED_CHAIR = register("warped_chair", new BlockItem(NCBlocks.WARPED_CHAIR, new FabricItemSettings()));
 
     public static final Item SPIGOT = register("spigot", new BlockItem(NCBlocks.SPIGOT, new FabricItemSettings()));
 

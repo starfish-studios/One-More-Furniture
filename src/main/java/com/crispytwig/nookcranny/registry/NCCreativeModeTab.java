@@ -15,14 +15,41 @@ public class NCCreativeModeTab {
     @SuppressWarnings("unused")
     public static final CreativeModeTab ITEM_GROUP = register(MOD_ID, FabricItemGroup.builder().icon(MOD_ICON::getDefaultInstance).title(Component.translatable("itemGroup.nookcranny.tab")).displayItems((featureFlagSet, output) -> {
         // White, Light Gray, Gray, Black, Brown, Red, Orange, Yellow, Lime, Green, Cyan, Light Blue, Blue, Purple, Magenta, Pink
-        output.accept(SPIGOT);
+        output.accept(COPPER_SAW);
+        output.accept(OAK_DRAWER);
+
+                output.accept(SPIGOT);
 //        output.accept(PLATE);
 
+        output.accept(OAK_FLOWER_BASKET);
         output.accept(OAK_LAMP);
         output.accept(OAK_MAILBOX);
 
         output.accept(OAK_NIGHTSTAND);
+
+        output.accept(OAK_BENCH);
+        output.accept(SPRUCE_BENCH);
+        output.accept(BIRCH_BENCH);
+        output.accept(JUNGLE_BENCH);
+        output.accept(ACACIA_BENCH);
+        output.accept(CHERRY_BENCH);
+        output.accept(DARK_OAK_BENCH);
+        output.accept(MANGROVE_BENCH);
+        output.accept(BAMBOO_BENCH);
+        output.accept(CRIMSON_BENCH);
+        output.accept(WARPED_BENCH);
+
         output.accept(OAK_SHELF);
+        output.accept(SPRUCE_SHELF);
+        output.accept(BIRCH_SHELF);
+        output.accept(JUNGLE_SHELF);
+        output.accept(ACACIA_SHELF);
+        output.accept(CHERRY_SHELF);
+        output.accept(DARK_OAK_SHELF);
+        output.accept(MANGROVE_SHELF);
+        output.accept(BAMBOO_SHELF);
+        output.accept(CRIMSON_SHELF);
+        output.accept(WARPED_SHELF);
 
         output.accept(OAK_TABLE);
         output.accept(SPRUCE_TABLE);
@@ -33,6 +60,8 @@ public class NCCreativeModeTab {
         output.accept(DARK_OAK_TABLE);
         output.accept(MANGROVE_TABLE);
         output.accept(BAMBOO_TABLE);
+        output.accept(CRIMSON_TABLE);
+        output.accept(WARPED_TABLE);
 
         output.accept(OAK_CHAIR);
         output.accept(SPRUCE_CHAIR);
@@ -43,6 +72,8 @@ public class NCCreativeModeTab {
         output.accept(DARK_OAK_CHAIR);
         output.accept(MANGROVE_CHAIR);
         output.accept(BAMBOO_CHAIR);
+        output.accept(CRIMSON_CHAIR);
+        output.accept(WARPED_CHAIR);
 
         output.accept(WHITE_SOFA);
         output.accept(LIGHT_GRAY_SOFA);
