@@ -19,7 +19,7 @@ public class DrawerMenu extends AbstractContainerMenu {
     private final Container drawer;
 
     public DrawerMenu(int i, Inventory inventory) {
-        this(i, inventory, new SimpleContainer(SLOT_COUNT));
+        this(i, inventory, new SimpleContainer(SLOT_COUNT), 0);
     }
 
 
@@ -27,7 +27,7 @@ public class DrawerMenu extends AbstractContainerMenu {
         return this.drawer;
     }
 
-    public DrawerMenu(int i, Inventory inventory, Container container) {
+    public DrawerMenu(int i, Inventory inventory, Container container, int listOffset) {
         super(NCMenus.GENERIC_1X5, i);
         checkContainerSize(container, 5);
         this.drawer = container;
@@ -36,7 +36,7 @@ public class DrawerMenu extends AbstractContainerMenu {
         int k;
         for(j = 0; j < 1; ++j) {
             for(k = 0; k < 5; ++k) {
-                this.addSlot(new Slot(container, k + j * 5, 44 + k * 18, 35 + j * 18));
+                this.addSlot(new Slot(container, listOffset + k + j * 5, 44 + k * 18, 35 + j * 18));
             }
         }
 

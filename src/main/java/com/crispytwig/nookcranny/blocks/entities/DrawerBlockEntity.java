@@ -8,7 +8,9 @@ package com.crispytwig.nookcranny.blocks.entities;
 import com.crispytwig.nookcranny.blocks.DrawerBlock;
 import com.crispytwig.nookcranny.inventory.DrawerMenu;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
@@ -18,6 +20,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -26,11 +29,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class DrawerBlockEntity extends RandomizableContainerBlockEntity {
+public class DrawerBlockEntity extends RandomizableContainerBlockEntity implements MenuProvider {
     private static final SoundEvent SOUND_OPEN = SoundEvents.BARREL_OPEN;
     private static final SoundEvent SOUND_CLOSE = SoundEvents.BARREL_CLOSE;
 
@@ -131,8 +138,39 @@ public class DrawerBlockEntity extends RandomizableContainerBlockEntity {
         return Component.translatable("container.drawer");
     }
 
-    protected @NotNull AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory) {
-        return new DrawerMenu(i, inventory, this);
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        Pair<Integer, Direction> raycastResult = new Pair<>(0, Direction.UP);
+
+        //do a raycast from player's POV
+        HitResult hitResult = player.pick(10, 1, false);
+        if (hitResult.getType() == HitResult.Type.BLOCK) {
+            BlockHitResult blockHitResult = (BlockHitResult) hitResult;
+            //get the local hit pos result by subtracting the center point from the raycast result
+            Vec3 localHitPos = blockHitResult.getLocation().subtract(Vec3.atCenterOf(blockHitResult.getBlockPos()));
+
+            //convert depending on which face was raycasted to
+            int relativePos = -switch (blockHitResult.getDirection()) {
+                case NORTH, SOUTH, EAST, WEST -> (int) Math.floor(1.0 - (localHitPos.y() + 0.5) * 16);
+                case UP -> (int) Math.floor((localHitPos.z() + 0.5) * 16);
+                case DOWN -> (int) Math.floor(1.0 - (localHitPos.z() + 0.5) * 16);
+            };
+
+            raycastResult = new Pair<>(relativePos, blockHitResult.getDirection());
+            System.out.println(raycastResult.getFirst());
+        }
+
+        if (raycastResult.getSecond() == this.getBlockState().getValue(DrawerBlock.FACING)) {
+            return new DrawerMenu(i, inventory, this, raycastResult.getFirst() < 7 ? 0 : 5);
+        }
+        return null;
+    }
+
+    //UNUSED, SHOULDN'T BE CALLED (?)
+    @Override
+    protected @NotNull AbstractContainerMenu createMenu(int i, Inventory inventory) {
+        return new DrawerMenu(i, inventory, this, 0);
     }
 
     public void startOpen(@NotNull Player player) {
