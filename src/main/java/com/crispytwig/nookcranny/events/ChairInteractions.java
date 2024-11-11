@@ -4,6 +4,7 @@ import com.crispytwig.nookcranny.blocks.ChairBlock;
 import com.crispytwig.nookcranny.blocks.LampBlock;
 import com.crispytwig.nookcranny.blocks.SofaBlock;
 import com.crispytwig.nookcranny.blocks.properties.ColorList;
+import com.crispytwig.nookcranny.blocks.properties.Cushionable;
 import com.crispytwig.nookcranny.registry.NCBlocks;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.Util;
@@ -28,7 +29,14 @@ import net.minecraft.world.phys.Vec3;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChairInteractions implements UseBlockCallback {
+public class ChairInteractions implements UseBlockCallback, Cushionable {
+    public static BlockState getBlockstateForDye(Item item, BlockState blockState) {
+        return blockState.setValue(ChairBlock.CUSHION, DYE_MAP.get(item));
+    }
+
+    public static BlockState getBlockstateForCarpet(Item item, BlockState blockState) {
+        return blockState.setValue(ChairBlock.CUSHION, CARPET_MAP.get(item));
+    }
 
     private static final Map<ColorList, Item> SHEAR_MAP = Util.make(new HashMap<>(), (map) -> {
         map.put(ColorList.WHITE, Items.WHITE_CARPET);
@@ -48,108 +56,41 @@ public class ChairInteractions implements UseBlockCallback {
         map.put(ColorList.MAGENTA, Items.MAGENTA_CARPET);
         map.put(ColorList.PINK, Items.PINK_CARPET);
     });
-
-    public static BlockState getBlockstateForDye(Item item, BlockState blockState) {
-        return blockState.setValue(ChairBlock.CUSHION, getColorFor(item));
-    }
-
-    public static ColorList getColorFor(Item item) {
-        if (item == Items.WHITE_DYE) {
-            return ColorList.WHITE;
-        } else if (item == Items.ORANGE_DYE) {
-            return ColorList.ORANGE;
-        } else if (item == Items.MAGENTA_DYE) {
-            return ColorList.MAGENTA;
-        } else if (item == Items.LIGHT_BLUE_DYE) {
-            return ColorList.LIGHT_BLUE;
-        } else if (item == Items.YELLOW_DYE) {
-            return ColorList.YELLOW;
-        } else if (item == Items.LIME_DYE) {
-            return ColorList.LIME;
-        } else if (item == Items.PINK_DYE) {
-            return ColorList.PINK;
-        } else if (item == Items.GRAY_DYE) {
-            return ColorList.GRAY;
-        } else if (item == Items.LIGHT_GRAY_DYE) {
-            return ColorList.LIGHT_GRAY;
-        } else if (item == Items.CYAN_DYE) {
-            return ColorList.CYAN;
-        } else if (item == Items.PURPLE_DYE) {
-            return ColorList.PURPLE;
-        } else if (item == Items.BLUE_DYE) {
-            return ColorList.BLUE;
-        } else if (item == Items.BROWN_DYE) {
-            return ColorList.BROWN;
-        } else if (item == Items.GREEN_DYE) {
-            return ColorList.GREEN;
-        } else if (item == Items.RED_DYE) {
-            return ColorList.RED;
-        } else if (item == Items.BLACK_DYE) {
-            return ColorList.BLACK;
-        } else {
-            return ColorList.EMPTY;
-        }
-    }
-
-    public static BlockState getBlockstateForCarpet(Item item, BlockState blockState) {
-        return blockState.setValue(ChairBlock.CUSHION, getCarpetFor(item));
-    }
-
-    public static ColorList getCarpetFor(Item item) {
-        if (item == Items.WHITE_CARPET) {
-            return ColorList.WHITE;
-        } else if (item == Items.LIGHT_GRAY_CARPET) {
-            return ColorList.LIGHT_GRAY;
-        } else if (item == Items.GRAY_CARPET) {
-            return ColorList.GRAY;
-        } else if (item == Items.BLACK_CARPET) {
-            return ColorList.BLACK;
-        } else if (item == Items.BROWN_CARPET) {
-            return ColorList.BROWN;
-        } else if (item == Items.RED_CARPET) {
-            return ColorList.RED;
-        } else if (item == Items.ORANGE_CARPET) {
-            return ColorList.ORANGE;
-        } else if (item == Items.YELLOW_CARPET) {
-            return ColorList.YELLOW;
-        } else if (item == Items.LIME_CARPET) {
-            return ColorList.LIME;
-        } else if (item == Items.GREEN_CARPET) {
-            return ColorList.GREEN;
-        } else if (item == Items.CYAN_CARPET) {
-            return ColorList.CYAN;
-        } else if (item == Items.LIGHT_BLUE_CARPET) {
-            return ColorList.LIGHT_BLUE;
-        } else if (item == Items.BLUE_CARPET) {
-            return ColorList.BLUE;
-        } else if (item == Items.PURPLE_CARPET) {
-            return ColorList.PURPLE;
-        } else if (item == Items.MAGENTA_CARPET) {
-            return ColorList.MAGENTA;
-        } else if (item == Items.PINK_CARPET) {
-            return ColorList.PINK;
-        } else {
-            return ColorList.EMPTY;
-        }
-    }
-
-    private static final Map<Integer, BlockState> COLOR_MAP = Util.make(new HashMap<>(), (map) -> {
-        map.put(DyeColor.WHITE.getId(), NCBlocks.WHITE_SOFA.defaultBlockState());
-        map.put(DyeColor.ORANGE.getId(), NCBlocks.ORANGE_SOFA.defaultBlockState());
-        map.put(DyeColor.MAGENTA.getId(), NCBlocks.MAGENTA_SOFA.defaultBlockState());
-        map.put(DyeColor.LIGHT_BLUE.getId(), NCBlocks.LIGHT_BLUE_SOFA.defaultBlockState());
-        map.put(DyeColor.YELLOW.getId(), NCBlocks.YELLOW_SOFA.defaultBlockState());
-        map.put(DyeColor.LIME.getId(), NCBlocks.LIME_SOFA.defaultBlockState());
-        map.put(DyeColor.PINK.getId(), NCBlocks.PINK_SOFA.defaultBlockState());
-        map.put(DyeColor.GRAY.getId(), NCBlocks.GRAY_SOFA.defaultBlockState());
-        map.put(DyeColor.LIGHT_GRAY.getId(), NCBlocks.LIGHT_GRAY_SOFA.defaultBlockState());
-        map.put(DyeColor.CYAN.getId(), NCBlocks.CYAN_SOFA.defaultBlockState());
-        map.put(DyeColor.PURPLE.getId(), NCBlocks.PURPLE_SOFA.defaultBlockState());
-        map.put(DyeColor.BLUE.getId(), NCBlocks.BLUE_SOFA.defaultBlockState());
-        map.put(DyeColor.BROWN.getId(), NCBlocks.BROWN_SOFA.defaultBlockState());
-        map.put(DyeColor.GREEN.getId(), NCBlocks.GREEN_SOFA.defaultBlockState());
-        map.put(DyeColor.RED.getId(), NCBlocks.RED_SOFA.defaultBlockState());
-        map.put(DyeColor.BLACK.getId(), NCBlocks.BLACK_SOFA.defaultBlockState());
+    private static final Map<Item, ColorList> DYE_MAP = Util.make(new HashMap<>(), (map) -> {
+        map.put(Items.WHITE_DYE, ColorList.WHITE);
+        map.put(Items.ORANGE_DYE, ColorList.ORANGE);
+        map.put(Items.MAGENTA_DYE, ColorList.MAGENTA);
+        map.put(Items.LIGHT_BLUE_DYE, ColorList.LIGHT_BLUE);
+        map.put(Items.YELLOW_DYE, ColorList.YELLOW);
+        map.put(Items.LIME_DYE, ColorList.LIME);
+        map.put(Items.PINK_DYE, ColorList.PINK);
+        map.put(Items.GRAY_DYE, ColorList.GRAY);
+        map.put(Items.LIGHT_GRAY_DYE, ColorList.LIGHT_GRAY);
+        map.put(Items.CYAN_DYE, ColorList.CYAN);
+        map.put(Items.PURPLE_DYE, ColorList.PURPLE);
+        map.put(Items.BLUE_DYE, ColorList.BLUE);
+        map.put(Items.BROWN_DYE, ColorList.BROWN);
+        map.put(Items.GREEN_DYE, ColorList.GREEN);
+        map.put(Items.RED_DYE, ColorList.RED);
+        map.put(Items.BLACK_DYE, ColorList.BLACK);
+    });
+    private static final Map<Item, ColorList> CARPET_MAP = Util.make(new HashMap<>(), (map) -> {
+        map.put(Items.WHITE_CARPET, ColorList.WHITE);
+        map.put(Items.LIGHT_GRAY_CARPET, ColorList.LIGHT_GRAY);
+        map.put(Items.GRAY_CARPET, ColorList.GRAY);
+        map.put(Items.BLACK_CARPET, ColorList.BLACK);
+        map.put(Items.BROWN_CARPET, ColorList.BROWN);
+        map.put(Items.RED_CARPET, ColorList.RED);
+        map.put(Items.ORANGE_CARPET, ColorList.ORANGE);
+        map.put(Items.YELLOW_CARPET, ColorList.YELLOW);
+        map.put(Items.LIME_CARPET, ColorList.LIME);
+        map.put(Items.GREEN_CARPET, ColorList.GREEN);
+        map.put(Items.CYAN_CARPET, ColorList.CYAN);
+        map.put(Items.LIGHT_BLUE_CARPET, ColorList.LIGHT_BLUE);
+        map.put(Items.BLUE_CARPET, ColorList.BLUE);
+        map.put(Items.PURPLE_CARPET, ColorList.PURPLE);
+        map.put(Items.MAGENTA_CARPET, ColorList.MAGENTA);
+        map.put(Items.PINK_CARPET, ColorList.PINK);
     });
 
     @Override
@@ -183,7 +124,7 @@ public class ChairInteractions implements UseBlockCallback {
 
                 if (!level.isClientSide) {
                     ServerLevel serverLevel = (ServerLevel) level;
-                    serverLevel.sendParticles(dustParticleOptions, (double) pos.getX() + 0.5, (double) pos.getY() + 0.8, (double) pos.getZ() + 0.5, 1, g, h, i, 0.0D);
+                    serverLevel.sendParticles(dustParticleOptions, (double) pos.getX() + 0.5, dyeHeight(), (double) pos.getZ() + 0.5, 1, g, h, i, 0.0D);
                 }
             }
 

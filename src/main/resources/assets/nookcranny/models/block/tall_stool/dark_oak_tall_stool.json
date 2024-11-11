@@ -1,0 +1,7 @@
+{
+    "parent": "nookcranny:block/template/tall_stool",
+    "textures": {
+        "all": "nookcranny:block/tall_stool/dark_oak_tall_stool",
+        "particle": "block/dark_oak_planks"
+    }
+}

@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public class NCBlockProperties {
-    public static final EnumProperty<DyeColor> CUSHION = EnumProperty.create("cushion", DyeColor.class);
+    public static final EnumProperty<ColorList> CUSHION = EnumProperty.create("cushion", ColorList.class);
     public static final EnumProperty<HorizontalConnectionType> HORIZONTAL_CONNECTION_TYPE = EnumProperty.create("horizontal", HorizontalConnectionType.class);
     public static final EnumProperty<ColorList> COLOR = EnumProperty.create("color", ColorList.class);
 

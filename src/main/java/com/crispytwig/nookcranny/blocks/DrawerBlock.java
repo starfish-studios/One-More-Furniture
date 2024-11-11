@@ -63,7 +63,7 @@ public class DrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
         return blockState;
     }
 
-    public BlockState openBottom(BlockState blockState, Level level, BlockPos blockPos) {
+    public static BlockState openBottom(BlockState blockState, Level level, BlockPos blockPos) {
         blockState = blockState.cycle(BOTTOM_OPEN);
         level.setBlock(blockPos, blockState, 3);
         return blockState;

@@ -16,6 +16,8 @@ public class NCItems {
 
     public static final Item OAK_DRAWER = register("oak_drawer", new BlockItem(NCBlocks.OAK_DRAWER, new FabricItemSettings()));
 
+    public static final Item OAK_TALL_STOOL = register("oak_tall_stool", new BlockItem(NCBlocks.OAK_TALL_STOOL, new FabricItemSettings()));
+
     public static final Item OAK_FLOWER_BASKET = register("oak_flower_basket", new BlockItem(NCBlocks.OAK_FLOWER_BASKET, new FabricItemSettings()));
 
     public static final Item OAK_LAMP = register("oak_lamp", new BlockItem(NCBlocks.OAK_LAMP, new FabricItemSettings()));

@@ -17,6 +17,7 @@ public class NCCreativeModeTab {
         // White, Light Gray, Gray, Black, Brown, Red, Orange, Yellow, Lime, Green, Cyan, Light Blue, Blue, Purple, Magenta, Pink
         output.accept(COPPER_SAW);
         output.accept(OAK_DRAWER);
+        output.accept(OAK_TALL_STOOL);
 
                 output.accept(SPIGOT);
 //        output.accept(PLATE);

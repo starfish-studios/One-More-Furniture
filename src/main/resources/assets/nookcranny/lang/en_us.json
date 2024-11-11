@@ -10,7 +10,12 @@
   "block_type.nookcranny.shelf": "%s Shelf",
 
   "container.drawer": "Drawer",
+  "container.drawer_top": "Top Drawer",
+  "container.drawer_bottom": "Bottom Drawer",
   "block.nookcranny.oak_drawer": "Oak Drawer",
+
+  "block.nookcranny.oak_tall_stool": "Oak Tall Stool",
+
 
 
   "container.mailbox": "Mailbox",

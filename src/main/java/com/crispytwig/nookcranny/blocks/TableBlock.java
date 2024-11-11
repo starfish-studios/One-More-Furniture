@@ -38,6 +38,24 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
     protected static final VoxelShape LEG_2 = Block.box(12.0D, 0.0D, 12.0D, 15.0D, 13.0D, 15.0D);
     protected static final VoxelShape LEG_3 = Block.box(1.0D, 0.0D, 12.0D, 4.0D, 13.0D, 15.0D);
     protected static final VoxelShape LEG_4 = Block.box(1.0D, 0.0D, 1.0D, 4.0D, 13.0D, 4.0D);
+    protected static final VoxelShape[] SHAPES = new VoxelShape[]{
+            TOP,
+            Shapes.or(TOP, LEG_1),
+            Shapes.or(TOP, LEG_2),
+            Shapes.or(TOP, LEG_1, LEG_2),
+            Shapes.or(TOP, LEG_3),
+            Shapes.or(TOP, LEG_1, LEG_3),
+            Shapes.or(TOP, LEG_2, LEG_3),
+            Shapes.or(TOP, LEG_1, LEG_2, LEG_3),
+            Shapes.or(TOP, LEG_4),
+            Shapes.or(TOP, LEG_1, LEG_4),
+            Shapes.or(TOP, LEG_2, LEG_4),
+            Shapes.or(TOP, LEG_1, LEG_2, LEG_4),
+            Shapes.or(TOP, LEG_3, LEG_4),
+            Shapes.or(TOP, LEG_1, LEG_3, LEG_4),
+            Shapes.or(TOP, LEG_2, LEG_3, LEG_4),
+            Shapes.or(TOP, LEG_1, LEG_2, LEG_3, LEG_4)
+    };
 
     public TableBlock(Properties properties) {
         super(properties);
@@ -53,14 +71,12 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        VoxelShape shape = Shapes.empty();
-        if (state.getValue(TABLECLOTH ) != ColorList.EMPTY) shape = Shapes.or(shape, TOP_CLOTHED);
-        if (state.getValue(LEG1)) shape = Shapes.or(shape, LEG_1);
-        if (state.getValue(LEG2)) shape = Shapes.or(shape, LEG_2);
-        if (state.getValue(LEG3)) shape = Shapes.or(shape, LEG_3);
-        if (state.getValue(LEG4)) shape = Shapes.or(shape, LEG_4);
-        shape = Shapes.or(shape, TOP);
-        return shape;
+        int shape = 0;
+        if (state.getValue(LEG1)) shape += 1;
+        if (state.getValue(LEG2)) shape += 2;
+        if (state.getValue(LEG3)) shape += 4;
+        if (state.getValue(LEG4)) shape += 8;
+        return SHAPES[shape];
     }
 
     @Nullable

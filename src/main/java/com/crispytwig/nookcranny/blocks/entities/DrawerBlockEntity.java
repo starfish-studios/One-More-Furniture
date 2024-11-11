@@ -26,6 +26,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -42,44 +43,18 @@ public class DrawerBlockEntity extends RandomizableContainerBlockEntity implemen
     private static final SoundEvent SOUND_CLOSE = SoundEvents.BARREL_CLOSE;
 
     private NonNullList<ItemStack> items;
-    private final ContainerOpenersCounter openersCounterTop;
-    private final ContainerOpenersCounter openersCounterBottom;
+    private final ContainerOpenersCounter openersCounter;
 
     public DrawerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NCBlockEntities.DRAWER, blockPos, blockState);
         this.items = NonNullList.withSize(27, ItemStack.EMPTY);
-        this.openersCounterTop = new ContainerOpenersCounter() {
+        this.openersCounter = new ContainerOpenersCounter() {
             protected void onOpen(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
                 DrawerBlockEntity.this.playSound(blockState, SOUND_OPEN);
-                DrawerBlockEntity.this.updateTopState(blockState, true);
             }
 
             protected void onClose(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
                 DrawerBlockEntity.this.playSound(blockState, SOUND_CLOSE);
-                DrawerBlockEntity.this.updateTopState(blockState, false);
-            }
-
-            protected void openerCountChanged(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState, int i, int j) {
-            }
-
-            protected boolean isOwnContainer(@NotNull Player player) {
-                if (player.containerMenu instanceof DrawerMenu) {
-                    Container container = ((DrawerMenu)player.containerMenu).getContainer();
-                    return container == DrawerBlockEntity.this;
-                } else {
-                    return false;
-                }
-            }
-        };
-        this.openersCounterBottom = new ContainerOpenersCounter() {
-            protected void onOpen(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
-                DrawerBlockEntity.this.playSound(blockState, SOUND_OPEN);
-                DrawerBlockEntity.this.updateBottomState(blockState, true);
-            }
-
-            protected void onClose(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
-                DrawerBlockEntity.this.playSound(blockState, SOUND_CLOSE);
-                DrawerBlockEntity.this.updateBottomState(blockState, false);
             }
 
             protected void openerCountChanged(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState, int i, int j) {
@@ -143,6 +118,10 @@ public class DrawerBlockEntity extends RandomizableContainerBlockEntity implemen
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
         Pair<Integer, Direction> raycastResult = new Pair<>(0, Direction.UP);
 
+        assert level != null;
+        BlockPos blockPos = this.getBlockPos();
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+
         //do a raycast from player's POV
         HitResult hitResult = player.pick(10, 1, false);
         if (hitResult.getType() == HitResult.Type.BLOCK) {
@@ -158,10 +137,18 @@ public class DrawerBlockEntity extends RandomizableContainerBlockEntity implemen
             };
 
             raycastResult = new Pair<>(relativePos, blockHitResult.getDirection());
-            System.out.println(raycastResult.getFirst());
         }
 
         if (raycastResult.getSecond() == this.getBlockState().getValue(DrawerBlock.FACING)) {
+
+            if (blockEntity instanceof DrawerBlockEntity) {
+                if (raycastResult.getFirst() > 7) {
+                    ((DrawerBlockEntity) blockEntity).setCustomName(Component.translatable("container.drawer_top"));
+                } else {
+                    ((DrawerBlockEntity) blockEntity).setCustomName(Component.translatable("container.drawer_bottom"));
+                }
+            }
+
             return new DrawerMenu(i, inventory, this, raycastResult.getFirst() < 7 ? 0 : 5);
         }
         return null;
@@ -175,21 +162,61 @@ public class DrawerBlockEntity extends RandomizableContainerBlockEntity implemen
 
     public void startOpen(@NotNull Player player) {
         if (!this.remove && !player.isSpectator()) {
-            this.openersCounterTop.incrementOpeners(player, Objects.requireNonNull(this.getLevel()), this.getBlockPos(), this.getBlockState());
+            this.openersCounter.incrementOpeners(player, Objects.requireNonNull(this.getLevel()), this.getBlockPos(), this.getBlockState());
         }
+        Pair<Integer, Direction> raycastResult = new Pair<>(0, Direction.UP);
 
+        HitResult hitResult = player.pick(10, 1, false);
+        if (hitResult.getType() == HitResult.Type.BLOCK) {
+            BlockHitResult blockHitResult = (BlockHitResult) hitResult;
+            Vec3 localHitPos = blockHitResult.getLocation().subtract(Vec3.atCenterOf(blockHitResult.getBlockPos()));
+
+            int relativePos = -switch (blockHitResult.getDirection()) {
+                case NORTH, SOUTH, EAST, WEST -> (int) Math.floor(1.0 - (localHitPos.y() + 0.5) * 16);
+                case UP -> (int) Math.floor((localHitPos.z() + 0.5) * 16);
+                case DOWN -> (int) Math.floor(1.0 - (localHitPos.z() + 0.5) * 16);
+            };
+
+            raycastResult = new Pair<>(relativePos, blockHitResult.getDirection());
+            if (raycastResult.getFirst() < 7) {
+                this.updateBottomState(this.getBlockState(), true);
+            } else {
+                this.updateTopState(this.getBlockState(), true);
+            }
+        }
     }
 
     public void stopOpen(@NotNull Player player) {
         if (!this.remove && !player.isSpectator()) {
-            this.openersCounterTop.decrementOpeners(player, Objects.requireNonNull(this.getLevel()), this.getBlockPos(), this.getBlockState());
+            this.openersCounter.decrementOpeners(player, Objects.requireNonNull(this.getLevel()), this.getBlockPos(), this.getBlockState());
+        }
+
+        Pair<Integer, Direction> raycastResult = new Pair<>(0, Direction.UP);
+
+        HitResult hitResult = player.pick(10, 1, false);
+        if (hitResult.getType() == HitResult.Type.BLOCK) {
+            BlockHitResult blockHitResult = (BlockHitResult) hitResult;
+            Vec3 localHitPos = blockHitResult.getLocation().subtract(Vec3.atCenterOf(blockHitResult.getBlockPos()));
+
+            int relativePos = -switch (blockHitResult.getDirection()) {
+                case NORTH, SOUTH, EAST, WEST -> (int) Math.floor(1.0 - (localHitPos.y() + 0.5) * 16);
+                case UP -> (int) Math.floor((localHitPos.z() + 0.5) * 16);
+                case DOWN -> (int) Math.floor(1.0 - (localHitPos.z() + 0.5) * 16);
+            };
+
+            raycastResult = new Pair<>(relativePos, blockHitResult.getDirection());
+            if (raycastResult.getFirst() < 7) {
+                this.updateBottomState(this.getBlockState(), false);
+            } else {
+                this.updateTopState(this.getBlockState(), false);
+            }
         }
 
     }
 
     public void recheckOpen() {
         if (!this.remove) {
-            this.openersCounterTop.recheckOpeners(Objects.requireNonNull(this.getLevel()), this.getBlockPos(), this.getBlockState());
+            this.openersCounter.recheckOpeners(Objects.requireNonNull(this.getLevel()), this.getBlockPos(), this.getBlockState());
         }
 
     }

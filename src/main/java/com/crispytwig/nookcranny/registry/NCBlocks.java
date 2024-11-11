@@ -28,6 +28,18 @@ public class NCBlocks {
     public static final Block CRIMSON_DRAWER = register("crimson_drawer", new DrawerBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
     public static final Block WARPED_DRAWER = register("warped_drawer", new DrawerBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
 
+    public static final Block OAK_TALL_STOOL = register("oak_tall_stool", new TallStoolBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block SPRUCE_TALL_STOOL = register("spruce_tall_stool", new TallStoolBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
+    public static final Block BIRCH_TALL_STOOL = register("birch_tall_stool", new TallStoolBlock(copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));
+    public static final Block JUNGLE_TALL_STOOL = register("jungle_tall_stool", new TallStoolBlock(copyOf(Blocks.JUNGLE_PLANKS).noOcclusion()));
+    public static final Block ACACIA_TALL_STOOL = register("acacia_tall_stool", new TallStoolBlock(copyOf(Blocks.ACACIA_PLANKS).noOcclusion()));
+    public static final Block CHERRY_TALL_STOOL = register("cherry_tall_stool", new TallStoolBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block DARK_OAK_TALL_STOOL = register("dark_oak_tall_stool", new TallStoolBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
+    public static final Block MANGROVE_TALL_STOOL = register("mangrove_tall_stool", new TallStoolBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
+    public static final Block BAMBOO_TALL_STOOL = register("bamboo_tall_stool", new TallStoolBlock(copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final Block CRIMSON_TALL_STOOL = register("crimson_tall_stool", new TallStoolBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block WARPED_TALL_STOOL = register("warped_tall_stool", new TallStoolBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
+
     public static final Block OAK_BENCH = register("oak_bench", new BenchBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
     public static final Block SPRUCE_BENCH = register("spruce_bench", new BenchBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
     public static final Block BIRCH_BENCH = register("birch_bench", new BenchBlock(copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));

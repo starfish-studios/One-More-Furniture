@@ -1,0 +1,7 @@
+{
+    "parent": "nookcranny:block/template/tall_stool_cushion",
+    "textures": {
+        "all": "nookcranny:block/tall_stool/cushion/red_cushion",
+        "particle": "block/red_wool"
+    }
+}

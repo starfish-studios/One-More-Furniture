@@ -1,0 +1,7 @@
+{
+    "parent": "nookcranny:block/template/tall_stool",
+    "textures": {
+        "all": "nookcranny:block/tall_stool/warped_tall_stool",
+        "particle": "block/warped_planks"
+    }
+}
