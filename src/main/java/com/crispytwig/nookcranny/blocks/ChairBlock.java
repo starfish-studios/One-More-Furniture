@@ -36,11 +36,24 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock {
             Block.box(12.0D, 0.0D, 12.0D, 14.0D, 8.0D, 14.0D),
             Block.box(12.0D, 0.0D, 2.0D, 14.0D, 8.0D, 4.0D));
     public static final VoxelShape CUSHION_AABB = Block.box(1.0D, 10.0D, 1.0D, 15.0D, 11.0D, 15.0D);
-    public static final VoxelShape NORTH_AABB = Block.box(2.0D, 10.0D, 13.0D, 14.0D, 22.0D, 15.0D);
-    public static final VoxelShape EAST_AABB = Block.box(1.0D, 10.0D, 2.0D, 3.0D, 22.0D, 14.0D);
-    public static final VoxelShape SOUTH_AABB = Block.box(2.0D, 10.0D, 1.0D, 14.0D, 22.0D, 3.0D);
-    public static final VoxelShape WEST_AABB = Block.box(13.0D, 10.0D, 2.0D, 15.0D, 22.0D, 14.0D);
+    public static final VoxelShape BOTTOM_WITHOUT_CUSHION = BOTTOM_AABB;
+    public static final VoxelShape BOTTOM_WITH_CUSHION = Shapes.or(BOTTOM_AABB, CUSHION_AABB);
 
+    public static final VoxelShape NORTH_AABB = Block.box(2.0D, 10.0D, 13.0D, 14.0D, 22.0D, 15.0D);
+    public static final VoxelShape NORTH_WITHOUT_CUSHION = Shapes.or(BOTTOM_WITHOUT_CUSHION, NORTH_AABB);
+    public static final VoxelShape NORTH_WITH_CUSHION = Shapes.or(BOTTOM_WITH_CUSHION, NORTH_AABB);
+
+    public static final VoxelShape EAST_AABB = Block.box(1.0D, 10.0D, 2.0D, 3.0D, 22.0D, 14.0D);
+    public static final VoxelShape EAST_WITHOUT_CUSHION = Shapes.or(BOTTOM_WITHOUT_CUSHION, EAST_AABB);
+    public static final VoxelShape EAST_WITH_CUSHION = Shapes.or(BOTTOM_WITH_CUSHION, EAST_AABB);
+
+    public static final VoxelShape SOUTH_AABB = Block.box(2.0D, 10.0D, 1.0D, 14.0D, 22.0D, 3.0D);
+    public static final VoxelShape SOUTH_WITHOUT_CUSHION = Shapes.or(BOTTOM_WITHOUT_CUSHION, SOUTH_AABB);
+    public static final VoxelShape SOUTH_WITH_CUSHION = Shapes.or(BOTTOM_WITH_CUSHION, SOUTH_AABB);
+
+    public static final VoxelShape WEST_AABB = Block.box(13.0D, 10.0D, 2.0D, 15.0D, 22.0D, 14.0D);
+    public static final VoxelShape WEST_WITHOUT_CUSHION = Shapes.or(BOTTOM_WITHOUT_CUSHION, WEST_AABB);
+    public static final VoxelShape WEST_WITH_CUSHION = Shapes.or(BOTTOM_WITH_CUSHION, WEST_AABB);
 
     public ChairBlock(Properties properties) {
         super(properties);
@@ -52,14 +65,17 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, net.minecraft.world.phys.shapes.CollisionContext context) {
-        VoxelShape shape = Shapes.empty();
-        if (state.getValue(CUSHION) != ColorList.EMPTY) shape = Shapes.or(shape, CUSHION_AABB);
-        if (state.getValue(FACING) == Direction.NORTH) shape = Shapes.or(shape, NORTH_AABB);
-        if (state.getValue(FACING) == Direction.EAST) shape = Shapes.or(shape, EAST_AABB);
-        if (state.getValue(FACING) == Direction.SOUTH) shape = Shapes.or(shape, SOUTH_AABB);
-        if (state.getValue(FACING) == Direction.WEST) shape = Shapes.or(shape, WEST_AABB);
-        shape = Shapes.or(shape, BOTTOM_AABB);
-        return shape;
+        boolean hasCushion = state.getValue(CUSHION) != ColorList.EMPTY;
+        Direction facing = state.getValue(FACING);
+
+        // Select the precomputed shape based on the state values
+        return switch (facing) {
+            case NORTH -> hasCushion ? NORTH_WITH_CUSHION : NORTH_WITHOUT_CUSHION;
+            case EAST -> hasCushion ? EAST_WITH_CUSHION : EAST_WITHOUT_CUSHION;
+            case SOUTH -> hasCushion ? SOUTH_WITH_CUSHION : SOUTH_WITHOUT_CUSHION;
+            case WEST -> hasCushion ? WEST_WITH_CUSHION : WEST_WITHOUT_CUSHION;
+            default -> BOTTOM_AABB; // Default in case of unexpected direction
+        };
     }
 
     @Override
