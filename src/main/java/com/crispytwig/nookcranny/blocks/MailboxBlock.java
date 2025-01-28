@@ -3,9 +3,11 @@ package com.crispytwig.nookcranny.blocks;
 import com.crispytwig.nookcranny.blocks.entities.MailboxBlockEntity;
 import com.crispytwig.nookcranny.blocks.properties.FlagStatus;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
+import com.crispytwig.nookcranny.world.NCSavedData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.GlobalPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -26,7 +28,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -37,7 +38,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
@@ -175,21 +175,40 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 Containers.dropContents(level, blockPos, (Container)blockEntity);
                 level.updateNeighbourForOutputSignal(blockPos, this);
             }
+
+            if (level instanceof ServerLevel serverLevel) {
+                var mailboxes = NCSavedData.getMailboxes(serverLevel);
+                var globalPos = GlobalPos.of(level.dimension(), blockPos);
+
+                mailboxes.mailboxes.removeIf(entry -> entry.globalPos().equals(globalPos));
+                mailboxes.setDirty();
+            }
+
             super.onRemove(blockState, level, blockPos, blockState2, bl);
         }
     }
 
     public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, @Nullable LivingEntity livingEntity, ItemStack itemStack) {
         Player player = livingEntity instanceof Player ? (Player)livingEntity : null;
-        if (player != null && !itemStack.hasCustomHoverName()) {
-            BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof MailboxBlockEntity) {
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+
+        if (blockEntity instanceof MailboxBlockEntity) {
+            if (player != null && !itemStack.hasCustomHoverName()) {
                 ((MailboxBlockEntity)blockEntity).setCustomName(Component.translatable("container.mailbox.player_name", player.getDisplayName()));
-            }
-        } else if (itemStack.hasCustomHoverName()) {
-            BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof MailboxBlockEntity) {
+            } else if (itemStack.hasCustomHoverName()) {
                 ((MailboxBlockEntity)blockEntity).setCustomName(itemStack.getHoverName());
+            }
+
+            if (level instanceof ServerLevel serverLevel) {
+                var mailboxes = NCSavedData.getMailboxes(serverLevel);
+                var globalPos = GlobalPos.of(level.dimension(), blockPos);
+
+                mailboxes.mailboxes.add(new NCSavedData.MailboxData(
+                        player != null ? player.getDisplayName().getString() : "PlayerName",
+                        itemStack.hasCustomHoverName() ? itemStack.getHoverName().getString() : "PlayerMailbox",
+                        globalPos
+                ));
+                mailboxes.setDirty();
             }
         }
     }
