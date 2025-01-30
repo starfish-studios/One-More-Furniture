@@ -10,35 +10,49 @@ import com.crispytwig.nookcranny.blocks.properties.FlagStatus;
 import com.crispytwig.nookcranny.inventory.MailboxMenu;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import com.crispytwig.nookcranny.world.NCSavedData;
+import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.Nameable;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
 
-public class MailboxBlockEntity extends RandomizableContainerBlockEntity {
+public class MailboxBlockEntity extends BlockEntity
+        implements Container,
+        Nameable {
     private NonNullList<ItemStack> items;
     private final ContainerOpenersCounter openersCounter;
+    public String targetString = "";
+    private int sendDelay = 20 * 2;
+    @Nullable
+    private Component name;
 
     public MailboxBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NCBlockEntities.MAILBOX, blockPos, blockState);
-        this.items = NonNullList.withSize(27, ItemStack.EMPTY);
+        this.items = NonNullList.withSize(5, ItemStack.EMPTY);
+
         this.openersCounter = new ContainerOpenersCounter() {
             protected void onOpen(Level level, BlockPos blockPos, BlockState blockState) {
                 MailboxBlockEntity.this.playSound(blockState, SoundEvents.IRON_TRAPDOOR_OPEN);
@@ -71,19 +85,31 @@ public class MailboxBlockEntity extends RandomizableContainerBlockEntity {
 
     protected void saveAdditional(CompoundTag compoundTag) {
         super.saveAdditional(compoundTag);
-        if (!this.trySaveLootTable(compoundTag)) {
-            ContainerHelper.saveAllItems(compoundTag, this.items);
+        ContainerHelper.saveAllItems(compoundTag, this.items);
+        if (!targetString.isEmpty()) {
+            compoundTag.putString("Target", targetString);
         }
-
+        compoundTag.putInt("SendDelay", sendDelay);
+        if (this.name != null) {
+            compoundTag.putString("CustomName", Component.Serializer.toJson(this.name));
+        }
     }
 
     public void load(CompoundTag compoundTag) {
         super.load(compoundTag);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        if (!this.tryLoadLootTable(compoundTag)) {
-            ContainerHelper.loadAllItems(compoundTag, this.items);
+        ContainerHelper.loadAllItems(compoundTag, this.items);
+        if (compoundTag.contains("Target")) {
+            targetString = compoundTag.getString("Target");
         }
+        sendDelay = compoundTag.getInt("SendDelay");
+        if (compoundTag.contains("CustomName", 8)) {
+            this.name = Component.Serializer.fromJson(compoundTag.getString("CustomName"));
+        }
+    }
 
+    private static boolean canMergeItems(ItemStack stack1, ItemStack stack2) {
+        return stack1.getCount() <= stack1.getMaxStackSize() && ItemStack.isSameItemSameTags(stack1, stack2);
     }
 
     public void sendToMailbox() {
@@ -91,42 +117,87 @@ public class MailboxBlockEntity extends RandomizableContainerBlockEntity {
             return;
         }
 
-        for (ItemStack itemStack : this.items) {
-            if (itemStack.hasCustomHoverName()) {
-                String name = itemStack.getHoverName().getString();
+        BlockPos blockPos = resolveBlockPos(targetString);
+        if (blockPos == null) {
+            return;
+        }
 
-                BlockPos blockPos = resolveBlockPos(name);
-                if (blockPos == null) {
-                    continue;
+        var server = this.level.getServer();
+        if (server != null && !level.isClientSide) {
+            boolean foundLevel = false;
+            for (Level dimLevel : server.getAllLevels()) {
+                if (dimLevel.isClientSide) {
+                    return;
                 }
+                MailboxBlockEntity mailboxBlockEntity = (MailboxBlockEntity) dimLevel.getBlockEntity(blockPos);
 
-                var server = this.level.getServer();
-                if (server != null) {
-                    for (Level dimLevel : server.getAllLevels()) {
-                        MailboxBlockEntity mailboxBlockEntity = (MailboxBlockEntity) dimLevel.getBlockEntity(blockPos);
+                if (mailboxBlockEntity != null) {
+                    foundLevel = true;
+                    boolean validFlagState = this.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.UP;
+                    boolean validTargetFlag = mailboxBlockEntity.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.DOWN;
 
-                        if (mailboxBlockEntity != null) {
+                    if (validFlagState && validTargetFlag) {
 
-                            boolean validFlagState = this.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.UP;
-                            boolean validTargetFlag = mailboxBlockEntity.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.DOWN;
-
-                            if (validFlagState && validTargetFlag) {
-                                for (int j = 0; j < this.items.size(); j++) {
-                                    ItemStack itemStack1 = this.items.get(j).copy();
-                                    if (!itemStack1.isEmpty() && mailboxBlockEntity.items.get(j).isEmpty()) {
-                                        mailboxBlockEntity.items.set(j, itemStack1);
-                                        items.set(j, ItemStack.EMPTY);
-                                    }
-
-                                }
-                                break;
-                            }
-
+                        if (sendDelay > 0) {
+                            sendDelay--;
+                            setChanged();
+                            return;
                         } else {
-                            System.out.println("Can't find Mailbox at: " + blockPos);
+                            sendDelay = 20 * 2;
+                            setChanged();
+                        }
+
+                        boolean sentMail = false;
+
+                        for (int o = 0; o < this.items.size(); o++) {
+                            ItemStack toSendStack = this.items.get(o).copy();
+
+                            if (!toSendStack.isEmpty()) {
+                                boolean merged = false;
+
+                                // Try to merge into an existing stack
+                                for (int i = 0; i < mailboxBlockEntity.items.size(); i++) {
+                                    ItemStack targetStack = mailboxBlockEntity.items.get(i);
+
+                                    if (!targetStack.isEmpty() && canMergeItems(targetStack, toSendStack)) {
+                                        int spaceAvailable = targetStack.getMaxStackSize() - targetStack.getCount();
+                                        int transferAmount = Math.min(toSendStack.getCount(), spaceAvailable);
+
+                                        if (transferAmount > 0) {
+                                            targetStack.grow(transferAmount);
+                                            toSendStack.shrink(transferAmount);
+                                            sentMail = true;
+
+                                            if (toSendStack.isEmpty()) {
+                                                items.set(o, ItemStack.EMPTY);
+                                                merged = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                // If we couldn't merge, find an empty slot to insert into
+                                if (!merged) {
+                                    for (int i = 0; i < mailboxBlockEntity.items.size(); i++) {
+                                        if (mailboxBlockEntity.items.get(i).isEmpty()) {
+                                            mailboxBlockEntity.items.set(i, toSendStack);
+                                            items.set(o, ItemStack.EMPTY);
+                                            sentMail = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (sentMail) {
+                            dimLevel.setBlock(blockPos, getBlockState().setValue(MailboxBlock.FLAG_STATUS, FlagStatus.DOWN), 3);
                         }
                     }
                 }
+            }
+            if (!foundLevel) {
+                System.out.println("Mailbox not found in any dim");
             }
         }
     }
@@ -209,31 +280,57 @@ public class MailboxBlockEntity extends RandomizableContainerBlockEntity {
         return null;
     }
 
-    public int getContainerSize() {
-        return 27;
-    }
-
-    protected NonNullList<ItemStack> getItems() {
-        return this.items;
-    }
-
-    protected void setItems(NonNullList<ItemStack> nonNullList) {
-        this.items = nonNullList;
-    }
-
     protected Component getDefaultName() {
         return Component.translatable("container.mailbox");
     }
 
-    protected AbstractContainerMenu createMenu(int i, Inventory inventory) {
-        return new MailboxMenu(i, inventory, this);
+    @Override
+    public int getContainerSize() {
+        return 5;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.items.isEmpty();
+    }
+
+    @Override
+    public ItemStack getItem(int slot) {
+        return items.get(slot);
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int amount) {
+        ItemStack itemStack = ContainerHelper.removeItem(this.items, slot, amount);
+        if (!itemStack.isEmpty()) {
+            this.setChanged();
+        }
+        return itemStack;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot) {
+        return ContainerHelper.takeItem(this.items, slot);
+    }
+
+    @Override
+    public void setItem(int slot, ItemStack stack) {
+        this.items.set(slot, stack);
+        if (stack.getCount() > this.getMaxStackSize()) {
+            stack.setCount(this.getMaxStackSize());
+        }
+        this.setChanged();
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return Container.stillValidBlockEntity(this, player);
     }
 
     public void startOpen(Player player) {
         if (!this.remove && !player.isSpectator()) {
             this.openersCounter.incrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
         }
-
     }
 
     public void stopOpen(Player player) {
@@ -266,5 +363,19 @@ public class MailboxBlockEntity extends RandomizableContainerBlockEntity {
         if (!level.isClientSide) {
             mailboxBlockEntity.sendToMailbox();
         }
+    }
+
+    @Override
+    public void clearContent() {
+        items.clear();
+    }
+
+    @Override
+    public Component getName() {
+        return name;
+    }
+
+    public void setCustomName(Component translatable) {
+        this.name = translatable;
     }
 }

@@ -1,12 +1,15 @@
 package com.crispytwig.nookcranny;
 
+import com.crispytwig.nookcranny.blocks.entities.MailboxBlockEntity;
 import com.crispytwig.nookcranny.events.*;
+import com.crispytwig.nookcranny.inventory.MailboxMenu;
 import com.crispytwig.nookcranny.registry.NCEntities;
 import com.crispytwig.nookcranny.registry.*;
 import com.google.common.reflect.Reflection;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.minecraft.Util;
@@ -48,6 +51,18 @@ public class NookAndCranny implements ModInitializer{
 //		UseBlockCallback.EVENT.register(new PlateInteractions());
 
 		NCVanillaIntegration.serverInit();
+
+		ServerPlayNetworking.registerGlobalReceiver(MailboxMenu.packetChannel, (server, serverPlayer, listener, buf, packetSender) -> {
+			var name =  buf.readUtf();
+			var pos = buf.readBlockPos();
+			server.execute(() -> {
+				var be = serverPlayer.level().getBlockEntity(pos);
+				if (be instanceof MailboxBlockEntity mailboxBlockEntity) {
+					mailboxBlockEntity.targetString = name;
+					mailboxBlockEntity.setChanged();
+				}
+			});
+		});
 	}
 
 

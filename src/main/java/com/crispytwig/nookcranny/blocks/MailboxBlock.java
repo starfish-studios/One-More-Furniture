@@ -2,14 +2,19 @@ package com.crispytwig.nookcranny.blocks;
 
 import com.crispytwig.nookcranny.blocks.entities.MailboxBlockEntity;
 import com.crispytwig.nookcranny.blocks.properties.FlagStatus;
+import com.crispytwig.nookcranny.inventory.MailboxMenu;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import com.crispytwig.nookcranny.world.NCSavedData;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.GlobalPos;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -19,7 +24,9 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -116,10 +123,32 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 float f = blockState2.getValue(FLAG_STATUS) == FlagStatus.UP ? 0.5F : 0.6F;
                 level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
                 level.setBlock(pos, state.cycle(FLAG_STATUS), 3);
-            } else if (blockEntity instanceof MailboxBlockEntity) {
-                player.openMenu((MailboxBlockEntity)blockEntity);
-//                player.awardStat(Stats.OPEN_BARREL);
-//                PiglinAi.angerNearbyPiglins(player, true);
+            } else if (blockEntity instanceof MailboxBlockEntity mailboxBlockEntity1) {
+
+                var factory = new ExtendedScreenHandlerFactory() {
+
+                    @Nullable
+                    @Override
+                    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+                        var buf = new FriendlyByteBuf(Unpooled.buffer());
+                        if (player instanceof ServerPlayer serverPlayer) {
+                            writeScreenOpeningData(serverPlayer, buf);
+                        }
+                        return new MailboxMenu(i, inventory, buf);
+                    }
+
+                    @Override
+                    public Component getDisplayName() {
+                        return mailboxBlockEntity1.getDisplayName();
+                    }
+
+                    @Override
+                    public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
+                        buf.writeBlockPos(pos);
+                    }
+                };
+                player.openMenu(factory);
+
                 return InteractionResult.CONSUME;
             }
         }
@@ -215,8 +244,8 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
     public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos);
-        if (blockEntity instanceof MailboxBlockEntity) {
-            ((MailboxBlockEntity)blockEntity).recheckOpen();
+        if (blockEntity instanceof MailboxBlockEntity mailboxBlockEntity) {
+            mailboxBlockEntity.recheckOpen();
         }
     }
 

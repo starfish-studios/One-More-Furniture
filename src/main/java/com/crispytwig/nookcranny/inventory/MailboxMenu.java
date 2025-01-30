@@ -5,12 +5,22 @@
 
 package com.crispytwig.nookcranny.inventory;
 
+import com.crispytwig.nookcranny.NookAndCranny;
+import com.crispytwig.nookcranny.blocks.entities.MailboxBlockEntity;
 import com.crispytwig.nookcranny.registry.NCMenus;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.gui.screens.inventory.AnvilScreen;
+import net.minecraft.client.gui.screens.inventory.HopperScreen;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.HopperMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -18,26 +28,36 @@ import net.minecraft.world.item.ItemStack;
 public class MailboxMenu extends AbstractContainerMenu {
     private static final int SLOT_COUNT = 5;
     private final Container mailbox;
+    private final BlockPos pos;
+    public MailboxBlockEntity mailboxBlockEntity;
+    public static ResourceLocation packetChannel = new ResourceLocation(NookAndCranny.MOD_ID, "mailbox_sync");
 
-    public MailboxMenu(int i, Inventory inventory) {
-        this(i, inventory, new SimpleContainer(5));
+
+    public MailboxMenu(int i, Inventory inventory, FriendlyByteBuf buf) {
+        this(i, inventory, new SimpleContainer(5), buf);
     }
-
 
     public Container getContainer() {
         return this.mailbox;
     }
 
-    public MailboxMenu(int i, Inventory inventory, Container container) {
+    public MailboxMenu(int i, Inventory inventory, Container container, FriendlyByteBuf buf) {
         super(NCMenus.GENERIC_1X5, i);
-        checkContainerSize(container, 5);
-        this.mailbox = container;
-        container.startOpen(inventory.player);
+
+        pos = buf.readBlockPos();
+        var be = inventory.player.level().getBlockEntity(pos);
+        if (be instanceof MailboxBlockEntity entity) {
+            this.mailboxBlockEntity = entity;
+        }
+        this.mailbox = mailboxBlockEntity;
+        checkContainerSize(mailbox, 5);
+
+        mailbox.startOpen(inventory.player);
         int j;
         int k;
         for(j = 0; j < 1; ++j) {
-            for(k = 0; k < 5; ++k) {
-                this.addSlot(new Slot(container, k + j * 5, 44 + k * 18, 35 + j * 18));
+            for(k = 0; k < SLOT_COUNT; ++k) {
+                this.addSlot(new Slot(mailbox, k + j * SLOT_COUNT, 26 + k * 18, 35 + j * 18));
             }
         }
 
@@ -64,7 +84,7 @@ public class MailboxMenu extends AbstractContainerMenu {
             ItemStack itemStack2 = slot.getItem();
             itemStack = itemStack2.copy();
             if (i < 5) {
-                if (!this.moveItemStackTo(itemStack2, 5, 41, true)) {
+                if (!this.moveItemStackTo(itemStack2, SLOT_COUNT, 41, true)) {
                     return ItemStack.EMPTY;
                 }
             } else if (!this.moveItemStackTo(itemStack2, 0, 5, false)) {
@@ -90,5 +110,14 @@ public class MailboxMenu extends AbstractContainerMenu {
     public void removed(Player player) {
         super.removed(player);
         this.mailbox.stopOpen(player);
+    }
+
+    public void updateTargetString(String s) {
+        FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+        buf.writeUtf(s);
+        buf.writeBlockPos(pos);
+        ClientPlayNetworking.send(packetChannel, buf);
+        mailboxBlockEntity.targetString = s;
+        mailboxBlockEntity.setChanged();
     }
 }
