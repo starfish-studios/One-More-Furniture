@@ -11,14 +11,20 @@ import com.crispytwig.nookcranny.blocks.properties.FlagStatus;
 import com.crispytwig.nookcranny.inventory.MailboxMenu;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import com.crispytwig.nookcranny.world.NCSavedData;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -128,14 +134,26 @@ public class MailboxBlockEntity extends BlockEntity
 
                     if (sendToMailboxItems(targetMailbox)) {
                         failedToSend = false;
+                        sendMessageState(failedToSend);
                         this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(MailboxBlock.FLAG_STATUS, FlagStatus.DOWN), 3);
                     } else {
-                        failedToSend = true;
+                        sendMessageState(failedToSend);
                     }
 
                     setChanged();
                 }
+            } else {
+                sendMessageState(failedToSend);
             }
+        }
+    }
+
+    private void sendMessageState(boolean fail){
+        for (ServerPlayer serverPlayer : PlayerLookup.tracking(this)) {
+            FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+            buf.writeBlockPos(getBlockPos());
+            buf.writeBoolean(fail);
+            ServerPlayNetworking.send(serverPlayer, packetChannel, buf);
         }
     }
 

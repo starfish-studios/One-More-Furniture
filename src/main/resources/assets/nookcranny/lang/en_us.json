@@ -21,6 +21,7 @@
   "container.mailbox": "Mailbox",
   "container.mailbox.player_name": "%s's Mailbox",
   "container.mailbox.send": "Send to Mailbox:",
+  "container.mailbox.error": "Cannot send!",
   "nookcranny.mailbox.sending": "Sending item(s) from %s at %s",
   "nookcranny.mailbox.receiving": "Receiving item(s) from %s at %s",
   "nookcranny.mailbox.at": "at",

@@ -1,5 +1,6 @@
 package com.crispytwig.nookcranny.client.gui.screens;
 
+import com.crispytwig.nookcranny.NookAndCranny;
 import com.crispytwig.nookcranny.inventory.MailboxMenu;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -8,6 +9,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
@@ -26,6 +28,7 @@ public class MailboxScreen extends AbstractContainerScreen<MailboxMenu> {
     private final int boxHeight = 16;
 
     public Component statusMessage = Component.translatable("container.mailbox.send");
+    public Component errorMessage = Component.translatable("container.mailbox.error").withStyle(Style.EMPTY.withColor(Color.RED.getRGB()));
 
     public MailboxScreen(MailboxMenu mailboxMenu, Inventory inventory, Component component) {
         super(mailboxMenu, inventory, component);
@@ -91,21 +94,23 @@ public class MailboxScreen extends AbstractContainerScreen<MailboxMenu> {
         super.renderLabels(guiGraphics, mouseX, mouseY);
         var data = menu.mailboxBlockEntity.failedToSend;
 
-        guiGraphics.drawString(this.font, statusMessage,
-                this.titleLabelX + 32 * 3 + 21 + (data ? 6 : 0),
+        guiGraphics.drawString(this.font, data ? errorMessage : statusMessage,
+                this.titleLabelX + 32 * 3 + 32 + (data ? 9 : 0),
                 this.titleLabelY,
                 4210752, false
         );
 
         if (data) {
             guiGraphics.blit(
-                    CONTAINER_LOCATION,
-                    this.titleLabelX + 32 * 3 + 21,
-                    this.titleLabelY,
-                    175,
-                    34,
-                    16,
-                    16
+                    new ResourceLocation(MOD_ID, "textures/gui/excl.png"),
+                    this.titleLabelX + 32 * 3 + 21 + 6,
+                    this.titleLabelY - 2,
+                    0,
+                    0,
+                    12,
+                    12,
+                    12,
+                    12
 
             );
         }
