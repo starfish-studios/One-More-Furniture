@@ -144,7 +144,7 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
                     @Override
                     public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
-                        buf.writeBlockPos(pos);
+                        buf.writeBlockPos(pos.immutable());
                     }
                 };
                 player.openMenu(factory);

@@ -1,6 +1,6 @@
 package com.crispytwig.nookcranny.client.gui.screens;
 
-import com.crispytwig.nookcranny.NookAndCranny;
+import com.crispytwig.nookcranny.client.gui.screens.widget.LockTargetMailboxWidget;
 import com.crispytwig.nookcranny.inventory.MailboxMenu;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -63,6 +63,10 @@ public class MailboxScreen extends AbstractContainerScreen<MailboxMenu> {
         this.addWidget(this.targetString);
         this.setInitialFocus(this.targetString);
         this.targetString.setEditable(true);
+
+        var lockWidget = new LockTargetMailboxWidget(menu, i + 64 + 120 + 36 + 12, j + 32 - 9 - 4);
+        lockWidget.locked = menu.mailboxBlockEntity.lockTarget;
+        addRenderableWidget(lockWidget);
     }
 
     private void onNameChanged(String s) {

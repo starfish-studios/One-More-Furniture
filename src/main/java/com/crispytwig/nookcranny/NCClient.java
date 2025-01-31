@@ -24,5 +24,16 @@ public class NCClient implements ClientModInitializer {
 				}
 			});
 		});
+
+		ClientPlayNetworking.registerGlobalReceiver(MailboxBlockEntity.packetChannel2, (client, handler, buf, responseSender) -> {
+			var pos = buf.readBlockPos();
+			client.execute(() -> {
+				var be = client.level.getBlockEntity(pos);
+				if (be instanceof MailboxBlockEntity mailbox) {
+					mailbox.targetString = "";
+					mailbox.setChanged();
+				}
+			});
+		});
 	}
 }

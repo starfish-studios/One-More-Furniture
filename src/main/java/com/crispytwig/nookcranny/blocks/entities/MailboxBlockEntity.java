@@ -12,7 +12,6 @@ import com.crispytwig.nookcranny.inventory.MailboxMenu;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import com.crispytwig.nookcranny.world.NCSavedData;
 import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
@@ -44,6 +43,7 @@ import java.util.function.Function;
 public class MailboxBlockEntity extends BlockEntity
         implements Container,
         Nameable {
+    public boolean lockTarget = false;
     private NonNullList<ItemStack> items;
     private final ContainerOpenersCounter openersCounter;
     public String targetString = "";
@@ -51,6 +51,7 @@ public class MailboxBlockEntity extends BlockEntity
     @Nullable
     private Component name;
     public static ResourceLocation packetChannel = new ResourceLocation(NookAndCranny.MOD_ID, "sync_mailbox_fail");
+    public static ResourceLocation packetChannel2 = new ResourceLocation(NookAndCranny.MOD_ID, "sync_mailbox_text_reset");
 
     public boolean failedToSend = false;
 
@@ -99,6 +100,7 @@ public class MailboxBlockEntity extends BlockEntity
             compoundTag.putString("CustomName", Component.Serializer.toJson(this.name));
         }
         compoundTag.putBoolean("FailedToSend", failedToSend);
+        compoundTag.putBoolean("LockTarget", lockTarget);
     }
 
     public void load(CompoundTag compoundTag) {
@@ -113,6 +115,7 @@ public class MailboxBlockEntity extends BlockEntity
             this.name = Component.Serializer.fromJson(compoundTag.getString("CustomName"));
         }
         failedToSend = compoundTag.getBoolean("FailedToSend");
+        lockTarget = compoundTag.getBoolean("LockTarget");
     }
 
     private static boolean canMergeItems(ItemStack stack1, ItemStack stack2) {
@@ -136,6 +139,15 @@ public class MailboxBlockEntity extends BlockEntity
                         failedToSend = false;
                         sendMessageState(failedToSend);
                         this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(MailboxBlock.FLAG_STATUS, FlagStatus.DOWN), 3);
+                        if (!lockTarget) {
+                            targetString = "";
+                            for (ServerPlayer serverPlayer : PlayerLookup.tracking(this)) {
+                                FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+                                buf.writeBlockPos(getBlockPos());
+                                ServerPlayNetworking.send(serverPlayer, packetChannel2, buf);
+                            }
+                            setChanged();
+                        }
                     } else {
                         sendMessageState(failedToSend);
                     }
@@ -401,10 +413,6 @@ public class MailboxBlockEntity extends BlockEntity
         if (!level.isClientSide) {
             mailboxBlockEntity.serverTick();
         }
-        if (!mailboxBlockEntity.targetString.isEmpty()) {
-            //System.out.println(level.isClientSide + " : " + mailboxBlockEntity.targetString);
-        }
-
     }
 
     @Override

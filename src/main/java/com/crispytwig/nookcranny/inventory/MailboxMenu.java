@@ -10,8 +10,6 @@ import com.crispytwig.nookcranny.blocks.entities.MailboxBlockEntity;
 import com.crispytwig.nookcranny.registry.NCMenus;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.client.gui.screens.inventory.AnvilScreen;
-import net.minecraft.client.gui.screens.inventory.HopperScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -20,15 +18,13 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.HopperMenu;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 public class MailboxMenu extends AbstractContainerMenu {
     private static final int SLOT_COUNT = 5;
     private final Container mailbox;
-    private final BlockPos pos;
+    public final BlockPos pos;
     public MailboxBlockEntity mailboxBlockEntity;
     public static ResourceLocation packetChannel = new ResourceLocation(NookAndCranny.MOD_ID, "mailbox_sync");
 
