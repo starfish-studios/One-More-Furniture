@@ -25,6 +25,8 @@ public class MailboxScreen extends AbstractContainerScreen<MailboxMenu> {
     private final int boxWidth = 97;
     private final int boxHeight = 16;
 
+    public Component statusMessage = Component.translatable("container.mailbox.send");
+
     public MailboxScreen(MailboxMenu mailboxMenu, Inventory inventory, Component component) {
         super(mailboxMenu, inventory, component);
         this.imageWidth = 252;
@@ -34,7 +36,7 @@ public class MailboxScreen extends AbstractContainerScreen<MailboxMenu> {
 
     protected void init() {
         super.init();
-        this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2 - 48;
+        this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2 - 56;
 
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
@@ -85,6 +87,31 @@ public class MailboxScreen extends AbstractContainerScreen<MailboxMenu> {
     }
 
     @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        super.renderLabels(guiGraphics, mouseX, mouseY);
+        var data = menu.mailboxBlockEntity.failedToSend;
+
+        guiGraphics.drawString(this.font, statusMessage,
+                this.titleLabelX + 32 * 3 + 21 + (data ? 6 : 0),
+                this.titleLabelY,
+                4210752, false
+        );
+
+        if (data) {
+            guiGraphics.blit(
+                    CONTAINER_LOCATION,
+                    this.titleLabelX + 32 * 3 + 21,
+                    this.titleLabelY,
+                    175,
+                    34,
+                    16,
+                    16
+
+            );
+        }
+    }
+
+    @Override
     public void resize(Minecraft minecraft, int i, int j) {
         String string = this.targetString.getValue();
         this.init(minecraft, i, j);
@@ -104,5 +131,11 @@ public class MailboxScreen extends AbstractContainerScreen<MailboxMenu> {
         int k = (this.width - this.imageWidth) / 2;
         int l = (this.height - this.imageHeight) / 2;
         guiGraphics.blit(CONTAINER_LOCATION, k, l, 0, 0, this.imageWidth, this.imageHeight);
+    }
+
+    @Override
+    protected void containerTick() {
+        super.containerTick();
+        targetString.tick();
     }
 }

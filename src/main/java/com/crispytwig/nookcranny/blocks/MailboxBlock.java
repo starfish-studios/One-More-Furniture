@@ -157,7 +157,7 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(blockEntityType, NCBlockEntities.MAILBOX, MailboxBlockEntity::sendItemsTick);
+        return createTickerHelper(blockEntityType, NCBlockEntities.MAILBOX, MailboxBlockEntity::sendItemsTick);
     }
 
     @Override

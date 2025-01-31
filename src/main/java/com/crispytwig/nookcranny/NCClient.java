@@ -11,6 +11,4 @@ public class NCClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		NCVanillaIntegration.Client.clientInit();
 	}
-
-
 }

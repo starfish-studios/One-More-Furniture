@@ -5,34 +5,29 @@
 
 package com.crispytwig.nookcranny.blocks.entities;
 
+import com.crispytwig.nookcranny.NookAndCranny;
 import com.crispytwig.nookcranny.blocks.MailboxBlock;
 import com.crispytwig.nookcranny.blocks.properties.FlagStatus;
 import com.crispytwig.nookcranny.inventory.MailboxMenu;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import com.crispytwig.nookcranny.world.NCSavedData;
-import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.Nameable;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -49,6 +44,9 @@ public class MailboxBlockEntity extends BlockEntity
     private int sendDelay = 20 * 2;
     @Nullable
     private Component name;
+    public static ResourceLocation packetChannel = new ResourceLocation(NookAndCranny.MOD_ID, "sync_mailbox_fail");
+
+    public boolean failedToSend = false;
 
     public MailboxBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NCBlockEntities.MAILBOX, blockPos, blockState);
@@ -94,6 +92,7 @@ public class MailboxBlockEntity extends BlockEntity
         if (this.name != null) {
             compoundTag.putString("CustomName", Component.Serializer.toJson(this.name));
         }
+        compoundTag.putBoolean("FailedToSend", failedToSend);
     }
 
     public void load(CompoundTag compoundTag) {
@@ -107,97 +106,120 @@ public class MailboxBlockEntity extends BlockEntity
         if (compoundTag.contains("CustomName", 8)) {
             this.name = Component.Serializer.fromJson(compoundTag.getString("CustomName"));
         }
+        failedToSend = compoundTag.getBoolean("FailedToSend");
     }
 
     private static boolean canMergeItems(ItemStack stack1, ItemStack stack2) {
         return stack1.getCount() <= stack1.getMaxStackSize() && ItemStack.isSameItemSameTags(stack1, stack2);
     }
 
-    public void sendToMailbox() {
-        if (level == null) {
-            return;
+    private void serverTick() {
+        boolean validFlagState = this.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.UP;
+        if (validFlagState && !items.isEmpty() && !targetString.isEmpty()) {
+
+            var targetMailbox = getTargetMailbox();
+
+            if (targetMailbox != null) {
+
+                if (sendDelay > 0) {
+                    sendDelay--;
+                } else {
+                    sendDelay = 20 * 2;
+
+                    if (sendToMailboxItems(targetMailbox)) {
+                        failedToSend = false;
+                        this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(MailboxBlock.FLAG_STATUS, FlagStatus.DOWN), 3);
+                    } else {
+                        failedToSend = true;
+                    }
+
+                    setChanged();
+                }
+            }
+        }
+    }
+
+    private MailboxBlockEntity getTargetMailbox() {
+        if (level == null || level.isClientSide) {
+            return null;
         }
 
         GlobalPos globalPos = resolveBlockPos(targetString);
         if (globalPos == null) {
-            return;
+            return null;
         }
 
-        var server = this.level.getServer();
-        if (server != null && !level.isClientSide) {
+        var server = level.getServer();
+        if (server == null) {
+            return null;
+        }
 
-            var dimLevel = server.getLevel(globalPos.dimension());
+        var dimLevel = server.getLevel(globalPos.dimension());
+        if (dimLevel == null || dimLevel.isClientSide) {
+            return null;
+        }
 
-            if (dimLevel == null || dimLevel.isClientSide) {
-                return;
-            }
+        var be = dimLevel.getBlockEntity(globalPos.pos());
+        if (be instanceof MailboxBlockEntity) {
+            return (MailboxBlockEntity) be;
+        }
 
-            MailboxBlockEntity mailboxBlockEntity = (MailboxBlockEntity) dimLevel.getBlockEntity(globalPos.pos());
+        return null;
+    }
 
-            if (mailboxBlockEntity != null) {
-                boolean validFlagState = this.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.UP;
-                boolean validTargetFlag = mailboxBlockEntity.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.DOWN;
+    private boolean sendToMailboxItems(MailboxBlockEntity targetMailbox) {
+        boolean validFlagState = this.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.UP;
+        boolean validTargetFlag = targetMailbox.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.DOWN;
 
-                if (validFlagState && validTargetFlag) {
+        if (!validFlagState || !validTargetFlag) {
+            return false;
+        }
 
-                    if (sendDelay > 0) {
-                        sendDelay--;
-                        setChanged();
-                        return;
-                    } else {
-                        sendDelay = 20 * 2;
-                        setChanged();
-                    }
+        boolean sentMail = false;
 
-                    boolean sentMail = false;
+        for (int o = 0; o < this.items.size(); o++) {
+            ItemStack toSendStack = this.items.get(o).copy();
 
-                    for (int o = 0; o < this.items.size(); o++) {
-                        ItemStack toSendStack = this.items.get(o).copy();
+            if (!toSendStack.isEmpty()) {
+                boolean merged = false;
 
-                        if (!toSendStack.isEmpty()) {
-                            boolean merged = false;
+                // Try to merge into an existing stack
+                for (int i = 0; i < targetMailbox.items.size(); i++) {
+                    ItemStack targetStack = targetMailbox.items.get(i);
 
-                            // Try to merge into an existing stack
-                            for (int i = 0; i < mailboxBlockEntity.items.size(); i++) {
-                                ItemStack targetStack = mailboxBlockEntity.items.get(i);
+                    if (!targetStack.isEmpty() && canMergeItems(targetStack, toSendStack)) {
+                        int spaceAvailable = targetStack.getMaxStackSize() - targetStack.getCount();
+                        int transferAmount = Math.min(toSendStack.getCount(), spaceAvailable);
 
-                                if (!targetStack.isEmpty() && canMergeItems(targetStack, toSendStack)) {
-                                    int spaceAvailable = targetStack.getMaxStackSize() - targetStack.getCount();
-                                    int transferAmount = Math.min(toSendStack.getCount(), spaceAvailable);
+                        if (transferAmount > 0) {
+                            targetStack.grow(transferAmount);
+                            toSendStack.shrink(transferAmount);
+                            sentMail = true;
 
-                                    if (transferAmount > 0) {
-                                        targetStack.grow(transferAmount);
-                                        toSendStack.shrink(transferAmount);
-                                        sentMail = true;
-
-                                        if (toSendStack.isEmpty()) {
-                                            items.set(o, ItemStack.EMPTY);
-                                            merged = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-
-                            // If we couldn't merge, find an empty slot to insert into
-                            if (!merged) {
-                                for (int i = 0; i < mailboxBlockEntity.items.size(); i++) {
-                                    if (mailboxBlockEntity.items.get(i).isEmpty()) {
-                                        mailboxBlockEntity.items.set(i, toSendStack);
-                                        items.set(o, ItemStack.EMPTY);
-                                        sentMail = true;
-                                        break;
-                                    }
-                                }
+                            if (toSendStack.isEmpty()) {
+                                items.set(o, ItemStack.EMPTY);
+                                merged = true;
+                                break;
                             }
                         }
                     }
-                    if (sentMail) {
-                        dimLevel.setBlock(globalPos.pos(), getBlockState().setValue(MailboxBlock.FLAG_STATUS, FlagStatus.DOWN), 3);
+                }
+
+                // If we couldn't merge, find an empty slot to insert into
+                if (!merged) {
+                    for (int i = 0; i < targetMailbox.items.size(); i++) {
+                        if (targetMailbox.items.get(i).isEmpty()) {
+                            targetMailbox.items.set(i, toSendStack);
+                            items.set(o, ItemStack.EMPTY);
+                            sentMail = true;
+                            break;
+                        }
                     }
                 }
             }
         }
+
+        return sentMail;
     }
 
     private GlobalPos resolveBlockPos(String name) {
@@ -359,8 +381,12 @@ public class MailboxBlockEntity extends BlockEntity
 
     public static void sendItemsTick(Level level, BlockPos pos, BlockState state, MailboxBlockEntity mailboxBlockEntity) {
         if (!level.isClientSide) {
-            mailboxBlockEntity.sendToMailbox();
+            mailboxBlockEntity.serverTick();
         }
+        if (!mailboxBlockEntity.targetString.isEmpty()) {
+            //System.out.println(level.isClientSide + " : " + mailboxBlockEntity.targetString);
+        }
+
     }
 
     @Override
