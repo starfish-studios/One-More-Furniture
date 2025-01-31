@@ -126,76 +126,74 @@ public class MailboxBlockEntity extends BlockEntity
         var server = this.level.getServer();
         if (server != null && !level.isClientSide) {
 
-            for (Level dimLevel : server.getAllLevels()) {
-                if (dimLevel.isClientSide) {
-                    return;
-                }
-                if (dimLevel.dimension() != globalPos.dimension()) {
-                    return;
-                }
-                MailboxBlockEntity mailboxBlockEntity = (MailboxBlockEntity) dimLevel.getBlockEntity(globalPos.pos());
+            var dimLevel = server.getLevel(globalPos.dimension());
 
-                if (mailboxBlockEntity != null) {
-                    boolean validFlagState = this.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.UP;
-                    boolean validTargetFlag = mailboxBlockEntity.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.DOWN;
+            if (dimLevel == null || dimLevel.isClientSide) {
+                return;
+            }
 
-                    if (validFlagState && validTargetFlag) {
+            MailboxBlockEntity mailboxBlockEntity = (MailboxBlockEntity) dimLevel.getBlockEntity(globalPos.pos());
 
-                        if (sendDelay > 0) {
-                            sendDelay--;
-                            setChanged();
-                            return;
-                        } else {
-                            sendDelay = 20 * 2;
-                            setChanged();
-                        }
+            if (mailboxBlockEntity != null) {
+                boolean validFlagState = this.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.UP;
+                boolean validTargetFlag = mailboxBlockEntity.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.DOWN;
 
-                        boolean sentMail = false;
+                if (validFlagState && validTargetFlag) {
 
-                        for (int o = 0; o < this.items.size(); o++) {
-                            ItemStack toSendStack = this.items.get(o).copy();
+                    if (sendDelay > 0) {
+                        sendDelay--;
+                        setChanged();
+                        return;
+                    } else {
+                        sendDelay = 20 * 2;
+                        setChanged();
+                    }
 
-                            if (!toSendStack.isEmpty()) {
-                                boolean merged = false;
+                    boolean sentMail = false;
 
-                                // Try to merge into an existing stack
-                                for (int i = 0; i < mailboxBlockEntity.items.size(); i++) {
-                                    ItemStack targetStack = mailboxBlockEntity.items.get(i);
+                    for (int o = 0; o < this.items.size(); o++) {
+                        ItemStack toSendStack = this.items.get(o).copy();
 
-                                    if (!targetStack.isEmpty() && canMergeItems(targetStack, toSendStack)) {
-                                        int spaceAvailable = targetStack.getMaxStackSize() - targetStack.getCount();
-                                        int transferAmount = Math.min(toSendStack.getCount(), spaceAvailable);
+                        if (!toSendStack.isEmpty()) {
+                            boolean merged = false;
 
-                                        if (transferAmount > 0) {
-                                            targetStack.grow(transferAmount);
-                                            toSendStack.shrink(transferAmount);
-                                            sentMail = true;
+                            // Try to merge into an existing stack
+                            for (int i = 0; i < mailboxBlockEntity.items.size(); i++) {
+                                ItemStack targetStack = mailboxBlockEntity.items.get(i);
 
-                                            if (toSendStack.isEmpty()) {
-                                                items.set(o, ItemStack.EMPTY);
-                                                merged = true;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
+                                if (!targetStack.isEmpty() && canMergeItems(targetStack, toSendStack)) {
+                                    int spaceAvailable = targetStack.getMaxStackSize() - targetStack.getCount();
+                                    int transferAmount = Math.min(toSendStack.getCount(), spaceAvailable);
 
-                                // If we couldn't merge, find an empty slot to insert into
-                                if (!merged) {
-                                    for (int i = 0; i < mailboxBlockEntity.items.size(); i++) {
-                                        if (mailboxBlockEntity.items.get(i).isEmpty()) {
-                                            mailboxBlockEntity.items.set(i, toSendStack);
+                                    if (transferAmount > 0) {
+                                        targetStack.grow(transferAmount);
+                                        toSendStack.shrink(transferAmount);
+                                        sentMail = true;
+
+                                        if (toSendStack.isEmpty()) {
                                             items.set(o, ItemStack.EMPTY);
-                                            sentMail = true;
+                                            merged = true;
                                             break;
                                         }
                                     }
                                 }
                             }
+
+                            // If we couldn't merge, find an empty slot to insert into
+                            if (!merged) {
+                                for (int i = 0; i < mailboxBlockEntity.items.size(); i++) {
+                                    if (mailboxBlockEntity.items.get(i).isEmpty()) {
+                                        mailboxBlockEntity.items.set(i, toSendStack);
+                                        items.set(o, ItemStack.EMPTY);
+                                        sentMail = true;
+                                        break;
+                                    }
+                                }
+                            }
                         }
-                        if (sentMail) {
-                            dimLevel.setBlock(globalPos.pos(), getBlockState().setValue(MailboxBlock.FLAG_STATUS, FlagStatus.DOWN), 3);
-                        }
+                    }
+                    if (sentMail) {
+                        dimLevel.setBlock(globalPos.pos(), getBlockState().setValue(MailboxBlock.FLAG_STATUS, FlagStatus.DOWN), 3);
                     }
                 }
             }
@@ -221,7 +219,7 @@ public class MailboxBlockEntity extends BlockEntity
 
     /**
      * @param name name of the mailbox
-     * @return a BlockPos if the level saved state has a mailbox name present
+     * @return a GlobalPos if the level saved state has a mailbox name present
      */
     private GlobalPos checkMailboxName(String name) {
         if (level instanceof ServerLevel serverLevel) {
@@ -239,7 +237,7 @@ public class MailboxBlockEntity extends BlockEntity
 
     /**
      * @param name name of the item's target mailbox
-     * @return a BlockPos if the level saved state has a player name matching the name param
+     * @return a GlobalPos if the level saved state has a player name matching the name param
      */
     private GlobalPos checkPlayerName(String name) {
         if (level instanceof ServerLevel serverLevel) {
@@ -257,7 +255,7 @@ public class MailboxBlockEntity extends BlockEntity
 
     /**
      * @param name name of the item's target mailbox in coordinates.
-     * @return a BlockPos if the param name can be translated to a valid BlockPos
+     * @return a GlobalPos if the param name can be translated to a valid BlockPos
      */
     private GlobalPos checkCoordinates(String name) {
         if (name.matches("-?\\d+ -?\\d+ -?\\d+")) {
