@@ -12,6 +12,7 @@ import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import com.crispytwig.nookcranny.world.NCSavedData;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.GlobalPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
@@ -117,22 +118,24 @@ public class MailboxBlockEntity extends BlockEntity
             return;
         }
 
-        BlockPos blockPos = resolveBlockPos(targetString);
-        if (blockPos == null) {
+        GlobalPos globalPos = resolveBlockPos(targetString);
+        if (globalPos == null) {
             return;
         }
 
         var server = this.level.getServer();
         if (server != null && !level.isClientSide) {
-            boolean foundLevel = false;
+
             for (Level dimLevel : server.getAllLevels()) {
                 if (dimLevel.isClientSide) {
                     return;
                 }
-                MailboxBlockEntity mailboxBlockEntity = (MailboxBlockEntity) dimLevel.getBlockEntity(blockPos);
+                if (dimLevel.dimension() != globalPos.dimension()) {
+                    return;
+                }
+                MailboxBlockEntity mailboxBlockEntity = (MailboxBlockEntity) dimLevel.getBlockEntity(globalPos.pos());
 
                 if (mailboxBlockEntity != null) {
-                    foundLevel = true;
                     boolean validFlagState = this.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.UP;
                     boolean validTargetFlag = mailboxBlockEntity.getBlockState().getValue(MailboxBlock.FLAG_STATUS) == FlagStatus.DOWN;
 
@@ -191,26 +194,23 @@ public class MailboxBlockEntity extends BlockEntity
                             }
                         }
                         if (sentMail) {
-                            dimLevel.setBlock(blockPos, getBlockState().setValue(MailboxBlock.FLAG_STATUS, FlagStatus.DOWN), 3);
+                            dimLevel.setBlock(globalPos.pos(), getBlockState().setValue(MailboxBlock.FLAG_STATUS, FlagStatus.DOWN), 3);
                         }
                     }
                 }
             }
-            if (!foundLevel) {
-                System.out.println("Mailbox not found in any dim");
-            }
         }
     }
 
-    private BlockPos resolveBlockPos(String name) {
-        List<Function<String, BlockPos>> resolvers = List.of(
+    private GlobalPos resolveBlockPos(String name) {
+        List<Function<String, GlobalPos>> resolvers = List.of(
                 this::checkCoordinates,
                 this::checkPlayerName,
                 this::checkMailboxName
         );
 
-        for (Function<String, BlockPos> resolver : resolvers) {
-            BlockPos blockPos = resolver.apply(name);
+        for (Function<String, GlobalPos> resolver : resolvers) {
+            GlobalPos blockPos = resolver.apply(name);
             if (blockPos != null) {
                 return blockPos;
             }
@@ -223,13 +223,13 @@ public class MailboxBlockEntity extends BlockEntity
      * @param name name of the mailbox
      * @return a BlockPos if the level saved state has a mailbox name present
      */
-    private BlockPos checkMailboxName(String name) {
+    private GlobalPos checkMailboxName(String name) {
         if (level instanceof ServerLevel serverLevel) {
             var data = NCSavedData.getMailboxes(serverLevel);
 
             return data.mailboxes.stream()
                     .filter(mailbox -> mailbox.name().equals(name))
-                    .map(mailbox -> mailbox.globalPos().pos())
+                    .map(NCSavedData.MailboxData::globalPos)
                     .findFirst()
                     .orElse(null);
         }
@@ -241,13 +241,13 @@ public class MailboxBlockEntity extends BlockEntity
      * @param name name of the item's target mailbox
      * @return a BlockPos if the level saved state has a player name matching the name param
      */
-    private BlockPos checkPlayerName(String name) {
+    private GlobalPos checkPlayerName(String name) {
         if (level instanceof ServerLevel serverLevel) {
             var data = NCSavedData.getMailboxes(serverLevel);
 
             return data.mailboxes.stream()
                     .filter(mailbox -> mailbox.playerName().equals(name))
-                    .map(mailbox -> mailbox.globalPos().pos())
+                    .map(NCSavedData.MailboxData::globalPos)
                     .findFirst()
                     .orElse(null);
         }
@@ -259,7 +259,7 @@ public class MailboxBlockEntity extends BlockEntity
      * @param name name of the item's target mailbox in coordinates.
      * @return a BlockPos if the param name can be translated to a valid BlockPos
      */
-    private BlockPos checkCoordinates(String name) {
+    private GlobalPos checkCoordinates(String name) {
         if (name.matches("-?\\d+ -?\\d+ -?\\d+")) {
             String[] coords = name.split(" ");
 
@@ -269,7 +269,7 @@ public class MailboxBlockEntity extends BlockEntity
                     int y = Integer.parseInt(coords[1]);
                     int z = Integer.parseInt(coords[2]);
 
-                    return new BlockPos(x, y, z).immutable();
+                    return GlobalPos.of(this.level.dimension(), new BlockPos(x, y, z));
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid coordinate format: " + name);
                 }
