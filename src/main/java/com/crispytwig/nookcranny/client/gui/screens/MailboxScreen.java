@@ -97,9 +97,9 @@ public class MailboxScreen extends AbstractContainerScreen<MailboxMenu> {
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         super.renderLabels(guiGraphics, mouseX, mouseY);
         var data = menu.mailboxBlockEntity.failedToSend;
-        int x = (this.width - this.imageWidth) / 2;
+        int x = (this.imageWidth) / 2;
         guiGraphics.drawString(this.font, data ? errorMessage : statusMessage,
-                x + 32 * 2 + (data ? 9 : 0),
+                x + 32 * 1 - 7 + (data ? 9 : 0),
                 this.titleLabelY,
                 4210752, false
         );
@@ -107,7 +107,7 @@ public class MailboxScreen extends AbstractContainerScreen<MailboxMenu> {
         if (data) {
             guiGraphics.blit(
                     new ResourceLocation(MOD_ID, "textures/gui/excl.png"),
-                    x + 32 * 1 + 21 + 6,
+                    x + 21,
                     this.titleLabelY - 2,
                     0,
                     0,
