@@ -21,6 +21,9 @@
 		],
 		"client": [
 			"com.crispytwig.nookcranny.NCClient"
+		],
+		"fabric-datagen": [
+			"com.crispytwig.nookcranny.data.NCDataGenerator"
 		]
 	},
 	"mixins": [

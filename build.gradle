@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'fabric-loom' version '1.9-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -28,6 +28,11 @@ loom {
 	accessWidenerPath.set(file("src/main/resources/nookcranny.accesswidener"))
 }
 
+fabricApi {
+	configureDataGeneration {
+		client = true
+	}
+}
 
 dependencies {
 	// BASE DEPENDENCIES
