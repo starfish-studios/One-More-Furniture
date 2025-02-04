@@ -8,10 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.data.models.blockstates.PropertyDispatch;
-import net.minecraft.data.models.blockstates.Variant;
-import net.minecraft.data.models.blockstates.VariantProperties;
+import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.ModelTemplate;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
@@ -25,6 +22,7 @@ public class NCModelProvider extends FabricModelProvider {
 
     public static final TextureSlot SIDES = TextureSlot.create("sides");
     public static final ModelTemplate DRAWER_CUBE_ORIENTABLE = createTemplate("drawer", TextureSlot.TOP, TextureSlot.FRONT, SIDES);
+    public static final ModelTemplate DRAWER_COUNTER_TOP_ORIENTABLE = createTemplate("countertop", TextureSlot.TOP, SIDES, TextureSlot.PARTICLE);
 
     public NCModelProvider(FabricDataOutput output) {
         super(output);
@@ -33,6 +31,7 @@ public class NCModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockModelGenerators generators) {
         createDrawerBlock(generators, NCBlocks.OAK_DRAWER);
+
     }
 
     @Override
@@ -61,27 +60,59 @@ public class NCModelProvider extends FabricModelProvider {
      * @param block the drawer to generate a model for
      */
     public final void createDrawerBlock(BlockModelGenerators generators, Block block) {
-        TextureMapping textureMapping = new TextureMapping()
+        TextureMapping baseMapping = new TextureMapping()
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
-                .put(SIDES, getTexture(block, "drawer", "_side"))
-                .put(TextureSlot.FRONT, getTexture(block, "drawer", "_front"));
+                .put(SIDES, getTexture(block, "drawer", "_side"));
 
-        ResourceLocation resourceLocation = DRAWER_CUBE_ORIENTABLE.create(block, textureMapping, generators.modelOutput);
+        TextureMapping drawerTextureMapping = baseMapping.put(
+                TextureSlot.FRONT, getTexture(block, "drawer", "_front")
+        );
+        TextureMapping drawerTextureMapping2 = baseMapping.put(
+                TextureSlot.PARTICLE,  getTexture(block, "drawer", "_side")
+        );
+        ResourceLocation drawerId = DRAWER_CUBE_ORIENTABLE.create(block, drawerTextureMapping, generators.modelOutput);
+        ResourceLocation countertopId = DRAWER_COUNTER_TOP_ORIENTABLE.createWithSuffix(block, "_countertop", drawerTextureMapping2, generators.modelOutput);
 
         generators.blockStateOutput
-                .accept(
-                        MultiVariantGenerator.multiVariant(block)
-                                .with(
-                                        PropertyDispatch.property(BlockStateProperties.HORIZONTAL_FACING)
-                                                .select(Direction.NORTH, Variant.variant().with(VariantProperties.MODEL, resourceLocation))
-                                                .select(Direction.EAST, Variant.variant().with(VariantProperties.MODEL, resourceLocation).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
-                                                .select(
-                                                        Direction.SOUTH, Variant.variant().with(VariantProperties.MODEL, resourceLocation).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                                                )
-                                                .select(Direction.WEST, Variant.variant().with(VariantProperties.MODEL, resourceLocation).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
-                                )
-                );
+                .accept(createDrawerMultipart(block, countertopId, drawerId));
     }
+
+
+    public static BlockStateGenerator createDrawerMultipart(
+		Block drawerBlock,
+        ResourceLocation counterTopId,
+		ResourceLocation drawerId
+	) {
+		return MultiPartGenerator.multiPart(drawerBlock)
+			.with(
+                    Variant.variant()
+                            .with(VariantProperties.MODEL, counterTopId)
+            )
+			.with(
+				Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH),
+				Variant.variant()
+                        .with(VariantProperties.MODEL, drawerId)
+			)
+			.with(
+				Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST),
+				Variant.variant()
+                        .with(VariantProperties.MODEL, drawerId)
+                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+			)
+			.with(
+				Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH),
+				Variant.variant()
+                        .with(VariantProperties.MODEL, drawerId)
+                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+			)
+			.with(
+				Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST),
+				Variant.variant()
+                        .with(VariantProperties.MODEL, drawerId)
+                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+			);
+	}
+
 
     public static ResourceLocation getTexture(Block block, String folder, String textureSuffix) {
         ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
