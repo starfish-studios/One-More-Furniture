@@ -1,6 +1,8 @@
 package com.crispytwig.nookcranny.data;
 
 import com.crispytwig.nookcranny.NookAndCranny;
+import com.crispytwig.nookcranny.blocks.DrawerBlock;
+import com.crispytwig.nookcranny.blocks.properties.CountertopType;
 import com.crispytwig.nookcranny.registry.NCBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -17,6 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 public class NCModelProvider extends FabricModelProvider {
 
@@ -70,49 +73,42 @@ public class NCModelProvider extends FabricModelProvider {
         TextureMapping drawerTextureMapping2 = baseMapping.put(
                 TextureSlot.PARTICLE,  getTexture(block, "drawer", "_side")
         );
-        ResourceLocation drawerId = DRAWER_CUBE_ORIENTABLE.create(block, drawerTextureMapping, generators.modelOutput);
-        ResourceLocation countertopId = DRAWER_COUNTER_TOP_ORIENTABLE.createWithSuffix(block, "_countertop", drawerTextureMapping2, generators.modelOutput);
 
-        generators.blockStateOutput
-                .accept(createDrawerMultipart(block, countertopId, drawerId));
+        ResourceLocation drawerId = DRAWER_CUBE_ORIENTABLE.create(block, drawerTextureMapping, generators.modelOutput);
+
+        generators.blockStateOutput.accept(createDrawerMultipart(
+                block,
+                type -> DRAWER_COUNTER_TOP_ORIENTABLE.createWithSuffix(block, "_countertop_" + type.getSerializedName(), drawerTextureMapping2, generators.modelOutput),
+                drawerId
+        ));
     }
 
 
     public static BlockStateGenerator createDrawerMultipart(
-		Block drawerBlock,
-        ResourceLocation counterTopId,
-		ResourceLocation drawerId
-	) {
-		return MultiPartGenerator.multiPart(drawerBlock)
-			.with(
-                    Variant.variant()
-                            .with(VariantProperties.MODEL, counterTopId)
-            )
-			.with(
-				Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH),
-				Variant.variant()
-                        .with(VariantProperties.MODEL, drawerId)
-			)
-			.with(
-				Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST),
-				Variant.variant()
-                        .with(VariantProperties.MODEL, drawerId)
-                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-			)
-			.with(
-				Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH),
-				Variant.variant()
-                        .with(VariantProperties.MODEL, drawerId)
-                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-			)
-			.with(
-				Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST),
-				Variant.variant()
-                        .with(VariantProperties.MODEL, drawerId)
-                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-			);
-	}
+            Block drawerBlock,
+            Function<CountertopType, ResourceLocation> counterTopModelFunction,
+            ResourceLocation drawerId
+    ) {
+        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(drawerBlock);
 
+        for (CountertopType type : CountertopType.values()) {
+            multiPart.with(
+                    Condition.condition().term(DrawerBlock.COUNTERTOP, type),
+                    Variant.variant().with(VariantProperties.MODEL, counterTopModelFunction.apply(type))
+            );
+        }
+
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            multiPart.with(
+                    Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, direction),
+                    Variant.variant()
+                            .with(VariantProperties.MODEL, drawerId)
+                            .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[direction.get2DDataValue() * 90 / 90])
+            );
+        }
+
+        return multiPart;
+    }
 
     public static ResourceLocation getTexture(Block block, String folder, String textureSuffix) {
         ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
