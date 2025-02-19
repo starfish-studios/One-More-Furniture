@@ -40,6 +40,9 @@ public class NCBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             if (block instanceof SofaBlock) {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
             }
+            if (block instanceof FlowerBasketBlock) {
+                getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
+            }
         }
 
     }

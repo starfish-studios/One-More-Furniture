@@ -35,7 +35,7 @@ public class NCBlockLootTableProvider extends FabricBlockLootTableProvider {
 
         for (Block block : NCBlocks.BLOCKS) {
             if (!(block instanceof ChairBlock)) {
-                //dropSelf(block);
+                dropSelf(block);
             } else {
                 this.add(block, createLootTableForChair(block));
             }
