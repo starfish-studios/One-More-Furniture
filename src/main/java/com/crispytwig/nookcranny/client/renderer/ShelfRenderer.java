@@ -12,6 +12,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.debug.DebugRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -62,6 +63,7 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
 
                     poseStack.pushPose();
                     poseStack.translate(0.0, 0.0, -0.25);
+                    poseStack.mulPose(Axis.YP.rotationDegrees(- rotation - 90));
                     renderFloatingText(poseStack, bufferSource, String.valueOf(count), pos.getX() + 6, pos.getY() + 6, pos.getZ() - 16, 0.03f, packedLight);
                     poseStack.popPose();
                 }
@@ -86,6 +88,8 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
             double camY = camera.getPosition().y;
             double camZ = camera.getPosition().z;
             poseStack.pushPose();
+
+
             poseStack.mulPoseMatrix(new Matrix4f().rotation(camera.rotation()));
             poseStack.scale(-scale, -scale, scale);
 
