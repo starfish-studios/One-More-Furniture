@@ -59,7 +59,7 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
                     var pos = blockEntity.getBlockPos();
                     int count = stack.getCount();
                     if (count <= 1) return;
-                    renderFloatingText(poseStack, bufferSource, String.valueOf(count), pos.getX() + 10, pos.getY() + 10, pos.getZ() - 16,16777215, 0.03f, 0.0F);
+                    renderFloatingText(poseStack, bufferSource, String.valueOf(count), pos.getX() + 6, pos.getY() + 6, pos.getZ() - 20,16777215, 0.03f, 0.0F);
                 }
 
                 poseStack.popPose();
