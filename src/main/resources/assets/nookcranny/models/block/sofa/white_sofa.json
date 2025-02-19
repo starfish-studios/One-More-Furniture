@@ -1,6 +1,7 @@
 {
   "parent": "nookcranny:block/template/sofa_single",
   "textures": {
-    "all": "nookcranny:block/sofa/white_sofa"
+    "all": "nookcranny:block/sofa/white_sofa",
+    "particle": "block/white_wool"
   }
 }
