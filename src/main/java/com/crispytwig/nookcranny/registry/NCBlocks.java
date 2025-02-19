@@ -9,12 +9,17 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.*;
 
 public class NCBlocks {
 //    public static final Block PLATE = register("plate", new PlateBlock(copyOf(Blocks.QUARTZ_BLOCK).noOcclusion().noCollission()));
 
     // Oak, Spruce, Birch, Jungle, Acacia, Cherry, Dark Oak, Mangrove, Bamboo, Crimson, Warped
+
+    public static final List<String> BLOCK_NAMES = new ArrayList<>();
 
     public static final Block OAK_DRAWER = register("oak_drawer", new DrawerBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
     public static final Block SPRUCE_DRAWER = register("spruce_drawer", new DrawerBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
@@ -127,6 +132,7 @@ public class NCBlocks {
     public static final Block YELLOW_SOFA = register("yellow_sofa", new SofaBlock(DyeColor.YELLOW, copyOf(Blocks.YELLOW_WOOL).noOcclusion()));
 
     private static Block register(String id, Block block) {
+        BLOCK_NAMES.add(id);
         return Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(NookAndCranny.MOD_ID, id), block);
     }
 }

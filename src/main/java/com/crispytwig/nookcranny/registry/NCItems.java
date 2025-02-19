@@ -7,7 +7,15 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 public class NCItems {
+
+    public static final List<String> ITEM_NAMES = new ArrayList<>();
+
     public static final Item MOD_ICON = register("mod_icon", new Item(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC).fireproof()));
 
 //    public static final Item PLATE = register("plate", new BlockItem(NCBlocks.PLATE, new FabricItemSettings()));
@@ -94,6 +102,7 @@ public class NCItems {
     public static final Item YELLOW_SOFA = register("yellow_sofa", new BlockItem(NCBlocks.YELLOW_SOFA, new FabricItemSettings()));
 
     private static Item register(String id, Item item) {
+        ITEM_NAMES.add(id);
         return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(NookAndCranny.MOD_ID, id), item);
     }
 }

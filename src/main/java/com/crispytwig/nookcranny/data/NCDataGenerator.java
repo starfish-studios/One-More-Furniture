@@ -10,5 +10,6 @@ public class NCDataGenerator implements DataGeneratorEntrypoint  {
         var pack = fabricDataGenerator.createPack();
 
         pack.addProvider(NCModelProvider::new);
+        pack.addProvider(NCLangProvider::new);
     }
 }
