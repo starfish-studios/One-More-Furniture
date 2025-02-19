@@ -1,7 +1,5 @@
 package com.crispytwig.nookcranny.blocks;
 
-import com.crispytwig.nookcranny.blocks.properties.HorizontalConnectionType;
-import com.crispytwig.nookcranny.registry.NCBlockProperties;
 import com.crispytwig.nookcranny.util.block.BlockPart;
 import com.crispytwig.nookcranny.blocks.entities.ShelfBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -16,7 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -197,6 +194,4 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(HALF, FACING, WATERLOGGED/*, TYPE*/);
     }
-
-
 }
