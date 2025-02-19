@@ -6,6 +6,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -19,7 +20,9 @@ public class NCBlocks {
 
     // Oak, Spruce, Birch, Jungle, Acacia, Cherry, Dark Oak, Mangrove, Bamboo, Crimson, Warped
 
+    //For Datagen
     public static final List<String> BLOCK_NAMES = new ArrayList<>();
+    public static final List<Block> BLOCKS = new ArrayList<>();
 
     public static final Block OAK_DRAWER = register("oak_drawer", new DrawerBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
     public static final Block SPRUCE_DRAWER = register("spruce_drawer", new DrawerBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
@@ -133,6 +136,7 @@ public class NCBlocks {
 
     private static Block register(String id, Block block) {
         BLOCK_NAMES.add(id);
+        BLOCKS.add(block);
         return Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(NookAndCranny.MOD_ID, id), block);
     }
 }
