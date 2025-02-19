@@ -12,12 +12,10 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.debug.DebugRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import org.joml.Matrix4f;
 
 @Environment(value= EnvType.CLIENT)
 public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
@@ -57,15 +55,17 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
 
                 Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
 
-                if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.isShiftKeyDown() && i == 0) {
-                    var pos = blockEntity.getBlockPos();
+                boolean shouldRender = Minecraft.getInstance().player != null && Minecraft.getInstance().player.isShiftKeyDown();
+                if (shouldRender && i == 0) {
                     int count = stack.getCount();
+                    if (count > 1) {
 
-                    poseStack.pushPose();
-                    poseStack.translate(0.0, 0.0, -0.25);
-                    poseStack.mulPose(Axis.YP.rotationDegrees(- rotation - 90));
-                    renderFloatingText(poseStack, bufferSource, String.valueOf(count), pos.getX() + 6, pos.getY() + 6, pos.getZ() - 16, 0.03f, packedLight);
-                    poseStack.popPose();
+                        poseStack.pushPose();
+                        poseStack.translate(-0.3, 0.0, -0.75);
+                        poseStack.mulPose(Axis.YP.rotationDegrees(- rotation - 90));
+                        renderFloatingText(poseStack, bufferSource, String.valueOf(count), 0.03f, packedLight);
+                        poseStack.popPose();
+                    }
                 }
 
                 poseStack.popPose();
@@ -75,7 +75,7 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
         poseStack.popPose();
     }
 
-    public static void renderFloatingText(PoseStack poseStack, MultiBufferSource buffer, String text, double x, double y, double z, float scale, int packedLight) {
+    public static void renderFloatingText(PoseStack poseStack, MultiBufferSource buffer, String text, float scale, int packedLight) {
         Minecraft minecraft = Minecraft.getInstance();
         Camera camera = minecraft.gameRenderer.getMainCamera();
         if (camera.isInitialized()) {
@@ -84,18 +84,16 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
             float opacity = Minecraft.getInstance().options.getBackgroundOpacity(0.5F);
             int alpha = (int)(opacity * 255.0F) << 24;
 
-            double camX = camera.getPosition().x;
-            double camY = camera.getPosition().y;
-            double camZ = camera.getPosition().z;
             poseStack.pushPose();
 
+            poseStack.mulPose(Axis.YP.rotationDegrees(-camera.getYRot()));
+            poseStack.mulPose(Axis.XP.rotationDegrees(camera.getXRot()));
 
-            poseStack.mulPoseMatrix(new Matrix4f().rotation(camera.rotation()));
             poseStack.scale(-scale, -scale, scale);
 
-            poseStack.translate((float)(x - camX), (float)(y - camY) , (float)(z - camZ));
-            float h = (float)(-font.width(text)) / 2.0F;
+            float h = (float) (-font.width(text)) / 2.0F;
 
+            //Font.DisplayMode.SEE_THROUGH is what's make it render through blocks, setting it as Normal scissors the render through the item
             font.drawInBatch(text, h, 0.0F, 553648127, false, poseStack.last().pose(), buffer, Font.DisplayMode.SEE_THROUGH, alpha, packedLight);
             font.drawInBatch(text, h, 0.0F, -1, false, poseStack.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, packedLight);
 
