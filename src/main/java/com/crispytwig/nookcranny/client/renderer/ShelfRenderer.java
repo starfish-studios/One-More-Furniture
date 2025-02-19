@@ -59,7 +59,6 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
                 if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.isShiftKeyDown() && i == 0) {
                     var pos = blockEntity.getBlockPos();
                     int count = stack.getCount();
-                    if (count <= 1) return;
 
                     poseStack.pushPose();
                     poseStack.translate(0.0, 0.0, -0.25);
