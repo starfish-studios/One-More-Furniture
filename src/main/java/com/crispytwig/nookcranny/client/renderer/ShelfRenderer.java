@@ -79,7 +79,7 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
         if (camera.isInitialized()) {
             Font font = minecraft.font;
 
-            float opacity = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
+            float opacity = Minecraft.getInstance().options.getBackgroundOpacity(0.5F);
             int alpha = (int)(opacity * 255.0F) << 24;
 
             double camX = camera.getPosition().x;
