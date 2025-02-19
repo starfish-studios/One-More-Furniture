@@ -77,22 +77,6 @@
     "nookcranny:mangrove_chair",
     "nookcranny:bamboo_chair",
     "nookcranny:crimson_chair",
-    "nookcranny:warped_chair",
-    "nookcranny:black_sofa",
-    "nookcranny:blue_sofa",
-    "nookcranny:brown_sofa",
-    "nookcranny:cyan_sofa",
-    "nookcranny:gray_sofa",
-    "nookcranny:green_sofa",
-    "nookcranny:light_blue_sofa",
-    "nookcranny:light_gray_sofa",
-    "nookcranny:lime_sofa",
-    "nookcranny:magenta_sofa",
-    "nookcranny:orange_sofa",
-    "nookcranny:pink_sofa",
-    "nookcranny:purple_sofa",
-    "nookcranny:red_sofa",
-    "nookcranny:white_sofa",
-    "nookcranny:yellow_sofa"
+    "nookcranny:warped_chair"
   ]
 }
