@@ -6,15 +6,20 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.debug.DebugRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.state.properties.SlabType;
+import org.joml.Matrix4f;
 
 @Environment(value= EnvType.CLIENT)
 public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
@@ -54,11 +59,39 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
 
                 Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
 
+                if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.isShiftKeyDown() && i == 0) {
+                    var pos = blockEntity.getBlockPos();
+                    int count = stack.getCount();
+                    if (count <= 1) return;
+                    renderFloatingText(poseStack, bufferSource, String.valueOf(count), pos.getX() + 10, pos.getY() + 10, pos.getZ() - 16,16777215, 0.03f, 0.0F);
+                }
+
                 poseStack.popPose();
             }
 
         }
         poseStack.popPose();
+    }
+
+    public static void renderFloatingText(PoseStack poseStack, MultiBufferSource buffer, String text, double x, double y, double z, int color, float scale, float f) {
+        Minecraft minecraft = Minecraft.getInstance();
+        Camera camera = minecraft.gameRenderer.getMainCamera();
+        if (camera.isInitialized()) {
+            Font font = minecraft.font;
+            double d = camera.getPosition().x;
+            double e = camera.getPosition().y;
+            double g = camera.getPosition().z;
+            poseStack.pushPose();
+            poseStack.scale(-scale, -scale, scale);
+            poseStack.translate((float)(x - d), (float)(y - e) + 0.07F, (float)(z - g));
+
+            float h = (float)(-font.width(text)) / 2.0F;
+            h -= f / scale;
+            font.drawInBatch(
+                    text, h, 0.0F, color, true, poseStack.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, 15728880
+            );
+            poseStack.popPose();
+        }
     }
 
     public int getAmount(int count) {
