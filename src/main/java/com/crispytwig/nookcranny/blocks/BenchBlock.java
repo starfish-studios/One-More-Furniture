@@ -69,6 +69,16 @@ public class BenchBlock extends SeatBlock implements SimpleWaterloggedBlock, Cha
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         Direction facing = state.getValue(FACING);
+
+        boolean back = state.getValue(BACK);
+
+        if (!back) {
+            return switch (facing) {
+                case EAST, WEST -> AABB_X;
+                default -> AABB_Z;
+            };
+        }
+
         return switch (facing) {
             case EAST -> AABB_EAST;
             case SOUTH -> AABB_SOUTH;
