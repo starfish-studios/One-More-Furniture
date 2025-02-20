@@ -4,6 +4,7 @@ import com.crispytwig.nookcranny.registry.NCBlocks;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -28,16 +29,21 @@ import java.util.Map;
 public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-
+    public static final EnumProperty<SofaShape> SHAPE = EnumProperty.create("shape", SofaShape.class);
 
     public SofaBlock(@Nullable DyeColor dyeColor, Properties properties) {
         super(properties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
+
+        this.registerDefaultState(this.getStateDefinition().any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(WATERLOGGED, false)
+                .setValue(SHAPE, SofaShape.SINGLE)
+        );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateDefinition) {
-        stateDefinition.add(FACING, WATERLOGGED);
+        stateDefinition.add(FACING, WATERLOGGED, SHAPE);
     }
 
     @Override
@@ -86,7 +92,49 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock {
 
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
-        if (state.getValue(WATERLOGGED)) level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+        if (state.getValue(WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+        return updateShape(state, level, currentPos);
     }
+
+    private BlockState updateShape(BlockState state, LevelAccessor level, BlockPos pos) {
+        Direction facing = state.getValue(FACING);
+        BlockState frontState = level.getBlockState(pos.relative(facing));
+        BlockState backState = level.getBlockState(pos.relative(facing.getOpposite()));
+
+        boolean hasFront = frontState.getBlock() instanceof SofaBlock;
+        boolean hasBack = backState.getBlock() instanceof SofaBlock;
+
+        SofaShape shape = SofaShape.SINGLE;
+        if (hasFront && hasBack) shape = SofaShape.MIDDLE;
+        else if (hasFront) shape = SofaShape.LEFT;
+        else if (hasBack) shape = SofaShape.RIGHT;
+
+        return state.setValue(SHAPE, shape);
+    }
+
+    public enum SofaShape implements StringRepresentable {
+        SINGLE("single"),
+        LEFT("left"),
+        RIGHT("right"),
+        MIDDLE("middle"),
+        CORNER("corner");
+
+        private final String name;
+
+        private SofaShape(String name) {
+            this.name = name;
+        }
+
+        public String toString() {
+            return this.name;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name;
+        }
+    }
+
 }
