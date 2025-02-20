@@ -30,6 +30,8 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
@@ -37,6 +39,10 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
+    public static final VoxelShape NORTH_SHAPE = Block.box(6.0, 6.0, 7.0, 10.0, 12.0, 16.0);
+    public static final VoxelShape EAST_SHAPE = Block.box(0.0, 6.0, 6.0, 9.0, 12.0, 10.0);
+    public static final VoxelShape SOUTH_SHAPE = Block.box(6.0, 6.0, 0.0, 10.0, 12.0, 9.0);
+    public static final VoxelShape WEST_SHAPE = Block.box(7.0, 6.0, 6.0, 16.0, 12.0, 10.0);
 
     public SpigotBlock(Properties properties) {
         super(properties);
@@ -46,6 +52,16 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     @Override
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return switch (state.getValue(BlockStateProperties.HORIZONTAL_FACING)) {
+            case SOUTH -> SOUTH_SHAPE;
+            case WEST -> WEST_SHAPE;
+            case EAST -> EAST_SHAPE;
+            default -> NORTH_SHAPE;
+        };
     }
 
     @Override
