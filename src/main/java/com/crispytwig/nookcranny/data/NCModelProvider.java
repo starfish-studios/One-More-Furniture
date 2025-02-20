@@ -48,7 +48,6 @@ public class NCModelProvider extends FabricModelProvider {
     }
 
 
-
     @Override
     public void generateItemModels(ItemModelGenerators generators) {
 

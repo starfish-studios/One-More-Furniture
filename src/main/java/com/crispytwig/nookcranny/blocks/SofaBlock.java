@@ -95,23 +95,41 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock {
         if (state.getValue(WATERLOGGED)) {
             level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-        return updateShape(state, level, currentPos);
+        return state.setValue(SHAPE, determineSofaShape(state, level, currentPos));
     }
 
-    private BlockState updateShape(BlockState state, LevelAccessor level, BlockPos pos) {
+    private SofaShape determineSofaShape(BlockState state, LevelAccessor level, BlockPos pos) {
         Direction facing = state.getValue(FACING);
         BlockState frontState = level.getBlockState(pos.relative(facing));
-        BlockState backState = level.getBlockState(pos.relative(facing.getOpposite()));
+        BlockState rightState = level.getBlockState(pos.relative(facing.getClockWise()));
+        BlockState leftState = level.getBlockState(pos.relative(facing.getCounterClockWise()));
 
-        boolean hasFront = frontState.getBlock() instanceof SofaBlock;
-        boolean hasBack = backState.getBlock() instanceof SofaBlock;
+        if (isSofa(rightState) && isSofa(leftState)) {
+            return SofaShape.MIDDLE;
+        }
 
-        SofaShape shape = SofaShape.SINGLE;
-        if (hasFront && hasBack) shape = SofaShape.MIDDLE;
-        else if (hasFront) shape = SofaShape.LEFT;
-        else if (hasBack) shape = SofaShape.RIGHT;
+        //TODO rotate one of the corner pieces when we know which the default rotation the corner model will have
+        if (isSofa(frontState) && isSofa(rightState)) {
+            return SofaShape.CORNER;
+        }
 
-        return state.setValue(SHAPE, shape);
+        if (isSofa(frontState) && isSofa(leftState)) {
+            return SofaShape.CORNER;
+        }
+
+        if (isSofa(rightState)) {
+            return SofaShape.LEFT;
+        }
+
+        if (isSofa(leftState)) {
+            return SofaShape.RIGHT;
+        }
+
+        return SofaShape.SINGLE;
+    }
+
+    public boolean isSofa(BlockState state){
+        return state.getBlock() instanceof SofaBlock;
     }
 
     public enum SofaShape implements StringRepresentable {
