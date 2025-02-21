@@ -2,11 +2,13 @@ package com.crispytwig.nookcranny.data;
 
 import com.crispytwig.nookcranny.blocks.*;
 import com.crispytwig.nookcranny.registry.NCBlocks;
+import com.crispytwig.nookcranny.registry.NCTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -47,7 +49,18 @@ public class NCBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             if (block instanceof SpigotBlock) {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(block);
             }
+
+            if (block instanceof TableBlock) {
+                getOrCreateTagBuilder(NCTags.BlockTags.TABLES_CONNECTABLE).add(block);
+                getOrCreateTagBuilder(NCTags.BlockTags.TABLES).add(block);
+            }
+            if (block instanceof NightstandBlock) {
+                getOrCreateTagBuilder(NCTags.BlockTags.TABLES_CONNECTABLE).add(block);
+                getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
+            }
         }
 
+        getOrCreateTagBuilder(NCTags.BlockTags.TABLES_CONNECTABLE)
+                .add(Blocks.SCAFFOLDING);
     }
 }

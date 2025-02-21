@@ -1,11 +1,16 @@
 package com.crispytwig.nookcranny.blocks;
 
+import com.crispytwig.nookcranny.blocks.properties.ChangeableBlock;
 import com.crispytwig.nookcranny.blocks.properties.ColorList;
 import com.crispytwig.nookcranny.registry.NCTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,12 +22,13 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class TableBlock extends HalfTransparentBlock implements SimpleWaterloggedBlock {
+public class TableBlock extends HalfTransparentBlock implements SimpleWaterloggedBlock, ChangeableBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LEG1 = BooleanProperty.create("leg_1");
     public static final BooleanProperty LEG2 = BooleanProperty.create("leg_2");
@@ -30,6 +36,7 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
     public static final BooleanProperty LEG4 = BooleanProperty.create("leg_4");
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty UPDATE = BooleanProperty.create("update");
+    public static final BooleanProperty SHORT = BooleanProperty.create("short");
     public static final EnumProperty<ColorList> TABLECLOTH = EnumProperty.create("tablecloth", ColorList.class);
 
     protected static final VoxelShape TOP = Block.box(0.0D, 13.0D, 0.0D, 16.0D, 16.0D, 16.0D);
@@ -66,7 +73,16 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
                 .setValue(LEG3, true)
                 .setValue(LEG4, true)
                 .setValue(WATERLOGGED, false)
+                .setValue(SHORT, false)
                 .setValue(TABLECLOTH, ColorList.EMPTY));
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (tryChangeBlock(SHORT, state, level, pos, player, hand)) return InteractionResult.SUCCESS;
+
+        if (hand == InteractionHand.MAIN_HAND) return InteractionResult.FAIL;
+        return super.use(state, level, pos, player, hand, hit);
     }
 
     @Override
@@ -102,7 +118,7 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, LEG1, LEG2, LEG3, LEG4, UPDATE, WATERLOGGED, TABLECLOTH);
+        builder.add(FACING, LEG1, LEG2, LEG3, LEG4, UPDATE, WATERLOGGED, TABLECLOTH, SHORT);
     }
 
     @Override
@@ -144,19 +160,22 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
     }
 
     public BlockState getConnections(BlockState state, LevelAccessor level, BlockPos pos) {
-        boolean n = validConnection(level.getBlockState(pos.north()));
-        boolean e = validConnection(level.getBlockState(pos.east()));
-        boolean s = validConnection(level.getBlockState(pos.south()));
-        boolean w = validConnection(level.getBlockState(pos.west()));
-        boolean leg1 = (!n && !e) || (n && e && !(validConnection(level.getBlockState(pos.north().east()))));
-        boolean leg2 = (!e && !s) || (e && s && !(validConnection(level.getBlockState(pos.south().east()))));
-        boolean leg3 = (!s && !w) || (s && w && !(validConnection(level.getBlockState(pos.south().west()))));
-        boolean leg4 = (!n && !w) || (n && w && !(validConnection(level.getBlockState(pos.north().west()))));
+        boolean n = validConnection(state, level.getBlockState(pos.north()));
+        boolean e = validConnection(state, level.getBlockState(pos.east()));
+        boolean s = validConnection(state, level.getBlockState(pos.south()));
+        boolean w = validConnection(state, level.getBlockState(pos.west()));
+        boolean leg1 = (!n && !e) || (n && e && !(validConnection(state, level.getBlockState(pos.north().east()))));
+        boolean leg2 = (!e && !s) || (e && s && !(validConnection(state, level.getBlockState(pos.south().east()))));
+        boolean leg3 = (!s && !w) || (s && w && !(validConnection(state, level.getBlockState(pos.south().west()))));
+        boolean leg4 = (!n && !w) || (n && w && !(validConnection(state, level.getBlockState(pos.north().west()))));
         boolean update = ((n ? 1 : 0) + (e ? 1 : 0) + (s ? 1 : 0) + (w ? 1 : 0)) % 2 == 0;
         return state.setValue(LEG1, leg1).setValue(LEG2, leg2).setValue(LEG3, leg3).setValue(LEG4, leg4).setValue(UPDATE, update);
     }
 
-    public boolean validConnection(BlockState state) {
+    public boolean validConnection(BlockState thisState, BlockState state) {
+        if (state.hasProperty(SHORT)) {
+            return (state.getValue(SHORT) && thisState.getValue(SHORT)) || (!state.getValue(SHORT) && !thisState.getValue(SHORT));
+        }
         return state.is(NCTags.BlockTags.TABLES_CONNECTABLE);
     }
 }

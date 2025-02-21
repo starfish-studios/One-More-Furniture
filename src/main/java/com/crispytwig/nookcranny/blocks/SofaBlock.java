@@ -101,6 +101,7 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock {
     private SofaShape determineSofaShape(BlockState state, LevelAccessor level, BlockPos pos) {
         Direction facing = state.getValue(FACING);
         BlockState frontState = level.getBlockState(pos.relative(facing));
+        BlockState backState = level.getBlockState(pos.relative(facing.getOpposite()));
         BlockState rightState = level.getBlockState(pos.relative(facing.getClockWise()));
         BlockState leftState = level.getBlockState(pos.relative(facing.getCounterClockWise()));
 
@@ -115,6 +116,14 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock {
 
         if (isSofa(frontState) && isSofa(leftState)) {
             return SofaShape.CORNER;
+        }
+
+        if (isSofa(backState) && isSofa(rightState)) {
+            return SofaShape.CORNER_OUTER;
+        }
+
+        if (isSofa(backState) && isSofa(leftState)) {
+            return SofaShape.CORNER_OUTER;
         }
 
         if (isSofa(rightState)) {
@@ -137,7 +146,8 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock {
         LEFT("left"),
         RIGHT("right"),
         MIDDLE("middle"),
-        CORNER("corner");
+        CORNER("corner"),
+        CORNER_OUTER("corner_outer");
 
         private final String name;
 

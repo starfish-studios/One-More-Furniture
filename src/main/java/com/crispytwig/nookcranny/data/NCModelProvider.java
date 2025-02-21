@@ -35,6 +35,7 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate SOFA_RIGHT = createTemplate("sofa_right", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate SOFA_MIDDLE = createTemplate("sofa_middle", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate SOFA_CORNER = createTemplate("sofa_corner", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate SOFA_CORNER_OUTER = createTemplate("sofa_corner_outer", TextureSlot.ALL, TextureSlot.PARTICLE);
 
     public NCModelProvider(FabricDataOutput output) {
         super(output);
@@ -44,7 +45,11 @@ public class NCModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockModelGenerators generators) {
         createDrawerBlock(generators, NCBlocks.OAK_DRAWER);
 
-        createSofaBlock(generators, NCBlocks.BLACK_SOFA);
+        for (Block block : NCBlocks.BLOCKS) {
+            if (block instanceof SofaBlock) {
+                createSofaBlock(generators, block);
+            }
+        }
     }
 
 
@@ -66,6 +71,7 @@ public class NCModelProvider extends FabricModelProvider {
         ResourceLocation right = SOFA_RIGHT.createWithSuffix(sofa, "_right",textMap, generators.modelOutput);
         ResourceLocation middle = SOFA_MIDDLE.createWithSuffix(sofa, "_middle",textMap, generators.modelOutput);
         ResourceLocation corner = SOFA_CORNER.createWithSuffix(sofa, "_corner",textMap, generators.modelOutput);
+        ResourceLocation outerCorner = SOFA_CORNER_OUTER.createWithSuffix(sofa, "_corner_outer",textMap, generators.modelOutput);
 
         multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
         multiVariant.with(
@@ -75,6 +81,7 @@ public class NCModelProvider extends FabricModelProvider {
                         .select(SofaBlock.SofaShape.RIGHT, Variant.variant().with(VariantProperties.MODEL, right))
                         .select(SofaBlock.SofaShape.MIDDLE, Variant.variant().with(VariantProperties.MODEL, middle))
                         .select(SofaBlock.SofaShape.CORNER, Variant.variant().with(VariantProperties.MODEL, corner))
+                        .select(SofaBlock.SofaShape.CORNER_OUTER, Variant.variant().with(VariantProperties.MODEL, outerCorner))
         );
 
         generators.blockStateOutput.accept(multiVariant);

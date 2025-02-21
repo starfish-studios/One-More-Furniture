@@ -1,7 +1,0 @@
-{
-    "parent": "nookcranny:block/template/sofa_single",
-    "textures": {
-        "all": "nookcranny:block/sofa/lime_sofa",
-        "particle": "block/lime_wool"
-    }
-}
