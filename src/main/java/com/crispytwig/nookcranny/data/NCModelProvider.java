@@ -6,6 +6,7 @@ import com.crispytwig.nookcranny.blocks.NightstandBlock;
 import com.crispytwig.nookcranny.blocks.SofaBlock;
 import com.crispytwig.nookcranny.blocks.properties.CountertopType;
 import com.crispytwig.nookcranny.registry.NCBlocks;
+import com.crispytwig.nookcranny.registry.NCItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.core.Direction;
@@ -65,7 +66,7 @@ public class NCModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerators generators) {
-
+        generators.generateFlatItem(NCItems.COPPER_SAW, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 
 
