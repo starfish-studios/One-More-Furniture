@@ -89,6 +89,16 @@ public class NCBlocks {
     public static final Block WARPED_SHELF = register("warped_shelf", new ShelfBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
 
     public static final Block OAK_NIGHTSTAND = register("oak_nightstand", new NightstandBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block SPRUCE_NIGHTSTAND = register("spruce_nightstand", new NightstandBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
+    public static final Block BIRCH_NIGHTSTAND = register("birch_nightstand", new NightstandBlock(copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));
+    public static final Block JUNGLE_NIGHTSTAND = register("jungle_nightstand", new NightstandBlock(copyOf(Blocks.JUNGLE_PLANKS).noOcclusion()));
+    public static final Block ACACIA_NIGHTSTAND = register("acacia_nightstand", new NightstandBlock(copyOf(Blocks.ACACIA_PLANKS).noOcclusion()));
+    public static final Block CHERRY_NIGHTSTAND = register("cherry_nightstand", new NightstandBlock(copyOf(Blocks.CHERRY_PLANKS).noOcclusion()));
+    public static final Block DARK_OAK_NIGHTSTAND = register("dark_oak_nightstand", new NightstandBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
+    public static final Block MANGROVE_NIGHTSTAND = register("mangrove_nightstand", new NightstandBlock(copyOf(Blocks.MANGROVE_PLANKS).noOcclusion()));
+    public static final Block BAMBOO_NIGHTSTAND = register("bamboo_nightstand", new NightstandBlock(copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final Block CRIMSON_NIGHTSTAND = register("crimson_nightstand", new NightstandBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block WARPED_NIGHTSTAND = register("warped_nightstand", new NightstandBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
 
     public static final Block OAK_TABLE = register("oak_table", new TableBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
     public static final Block SPRUCE_TABLE = register("spruce_table", new TableBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));

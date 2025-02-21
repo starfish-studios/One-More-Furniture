@@ -2,6 +2,7 @@ package com.crispytwig.nookcranny.data;
 
 import com.crispytwig.nookcranny.NookAndCranny;
 import com.crispytwig.nookcranny.blocks.DrawerBlock;
+import com.crispytwig.nookcranny.blocks.NightstandBlock;
 import com.crispytwig.nookcranny.blocks.SofaBlock;
 import com.crispytwig.nookcranny.blocks.properties.CountertopType;
 import com.crispytwig.nookcranny.registry.NCBlocks;
@@ -30,6 +31,12 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate DRAWER_COUNTER_TOP_ORIENTABLE = createTemplate("countertop", TextureSlot.TOP, SIDES, TextureSlot.PARTICLE);
 
 
+    public static final TextureSlot CORE = TextureSlot.create("core");
+    public static final TextureSlot BITS = TextureSlot.create("bits");
+
+    public static final ModelTemplate NIGHTSTAND = createTemplate("nightstand", CORE, BITS, TextureSlot.PARTICLE);
+    public static final ModelTemplate NIGHTSTAND_OPEN = createTemplate("nightstand_open", CORE, BITS, TextureSlot.PARTICLE);
+
     public static final ModelTemplate SOFA_SINGLE = createTemplate("sofa_single", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate SOFA_LEFT = createTemplate("sofa_left", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate SOFA_RIGHT = createTemplate("sofa_right", TextureSlot.ALL, TextureSlot.PARTICLE);
@@ -45,6 +52,8 @@ public class NCModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockModelGenerators generators) {
         createDrawerBlock(generators, NCBlocks.OAK_DRAWER);
 
+        createNightstandBlock(generators, NCBlocks.OAK_NIGHTSTAND);
+
         for (Block block : NCBlocks.BLOCKS) {
             if (block instanceof SofaBlock) {
                 createSofaBlock(generators, block);
@@ -53,9 +62,31 @@ public class NCModelProvider extends FabricModelProvider {
     }
 
 
+
     @Override
     public void generateItemModels(ItemModelGenerators generators) {
 
+    }
+
+
+    private void createNightstandBlock(BlockModelGenerators generators, Block nightstand) {
+
+        MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(nightstand);
+
+        var textMap = new TextureMapping()
+                .put(CORE, getTexture(nightstand, "nightstand", "_core"))
+                .put(BITS, getTexture(nightstand, "nightstand", "_bits"))
+                .put(TextureSlot.PARTICLE, getTexture(nightstand, "nightstand", ""));
+
+        ResourceLocation closed = NIGHTSTAND.create(nightstand, textMap, generators.modelOutput);
+        ResourceLocation open = NIGHTSTAND_OPEN.createWithSuffix(nightstand, "_open", textMap, generators.modelOutput);
+
+        multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
+        multiVariant.with(PropertyDispatch.property(NightstandBlock.OPEN)
+                .select(true, Variant.variant().with(VariantProperties.MODEL, open))
+                .select(false, Variant.variant().with(VariantProperties.MODEL, closed)));
+
+        generators.blockStateOutput.accept(multiVariant);
     }
 
     private void createSofaBlock(BlockModelGenerators generators, Block sofa) {

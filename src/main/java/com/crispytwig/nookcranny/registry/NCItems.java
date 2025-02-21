@@ -33,6 +33,16 @@ public class NCItems {
     public static final Item OAK_MAILBOX = register("oak_mailbox", new BlockItem(NCBlocks.OAK_MAILBOX, new FabricItemSettings()));
 
     public static final Item OAK_NIGHTSTAND = register("oak_nightstand", new BlockItem(NCBlocks.OAK_NIGHTSTAND, new FabricItemSettings()));
+    public static final Item SPRUCE_NIGHTSTAND = register("spruce_nightstand", new BlockItem(NCBlocks.SPRUCE_NIGHTSTAND, new FabricItemSettings()));
+    public static final Item BIRCH_NIGHTSTAND = register("birch_nightstand", new BlockItem(NCBlocks.BIRCH_NIGHTSTAND, new FabricItemSettings()));
+    public static final Item JUNGLE_NIGHTSTAND = register("jungle_nightstand", new BlockItem(NCBlocks.JUNGLE_NIGHTSTAND, new FabricItemSettings()));
+    public static final Item ACACIA_NIGHTSTAND = register("acacia_nightstand", new BlockItem(NCBlocks.ACACIA_NIGHTSTAND, new FabricItemSettings()));
+    public static final Item CHERRY_NIGHTSTAND = register("cherry_nightstand", new BlockItem(NCBlocks.CHERRY_NIGHTSTAND, new FabricItemSettings()));
+    public static final Item DARK_OAK_NIGHTSTAND = register("dark_oak_nightstand", new BlockItem(NCBlocks.DARK_OAK_NIGHTSTAND, new FabricItemSettings()));
+    public static final Item MANGROVE_NIGHTSTAND = register("mangrove_nightstand", new BlockItem(NCBlocks.MANGROVE_NIGHTSTAND, new FabricItemSettings()));
+    public static final Item BAMBOO_NIGHTSTAND = register("bamboo_nightstand", new BlockItem(NCBlocks.BAMBOO_NIGHTSTAND, new FabricItemSettings()));
+    public static final Item CRIMSON_NIGHTSTAND = register("crimson_nightstand", new BlockItem(NCBlocks.CRIMSON_NIGHTSTAND, new FabricItemSettings()));
+    public static final Item WARPED_NIGHTSTAND = register("warped_nightstand", new BlockItem(NCBlocks.WARPED_NIGHTSTAND, new FabricItemSettings()));
 
     public static final Item OAK_BENCH = register("oak_bench", new BlockItem(NCBlocks.OAK_BENCH, new FabricItemSettings()));
     public static final Item SPRUCE_BENCH = register("spruce_bench", new BlockItem(NCBlocks.SPRUCE_BENCH, new FabricItemSettings()));
