@@ -5,7 +5,8 @@
                 "model": "nookcranny:block/chair/oak_chair"
             },
             "when": {
-                "facing": "north"
+                "facing": "north",
+                "back": true
             }
         },
         {
@@ -14,7 +15,8 @@
                 "y": 90
             },
             "when": {
-                "facing": "east"
+                "facing": "east",
+                "back": true
             }
         },
         {
@@ -23,7 +25,8 @@
                 "y": 180
             },
             "when": {
-                "facing": "south"
+                "facing": "south",
+                "back": true
             }
         },
         {
@@ -32,7 +35,47 @@
                 "y": 270
             },
             "when": {
-                "facing": "west"
+                "facing": "west",
+                "back": true
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/chair/oak_chair_backless"
+            },
+            "when": {
+                "facing": "north",
+                "back": false
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/chair/oak_chair_backless",
+                "y": 90
+            },
+            "when": {
+                "facing": "east",
+                "back": false
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/chair/oak_chair_backless",
+                "y": 180
+            },
+            "when": {
+                "facing": "south",
+                "back": false
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/chair/oak_chair_backless",
+                "y": 270
+            },
+            "when": {
+                "facing": "west",
+                "back": false
             }
         },
         {
