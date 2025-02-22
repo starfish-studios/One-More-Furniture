@@ -21,7 +21,7 @@
       "when": { "lit": "true", "lamp_type": "single" }
     },
     {
-      "apply": { "model": "nookcranny:block/lamp/oak_lamp_on" },
+      "apply": { "model": "nookcranny:block/lamp/oak_lamp_top_on" },
       "when": { "lit": "true", "lamp_type": "top" }
     },
     {
