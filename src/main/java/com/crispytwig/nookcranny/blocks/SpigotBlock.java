@@ -130,6 +130,19 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
                     double z = (double) pos.getZ() + 0.6 + (level.random.nextDouble() * 0.25D - 0.25D);
                     level.addParticle(ParticleTypes.CLOUD, x, y, z, 0.0D, 0.0D, 0.0D);
                 }
+            } else if (level.getBlockState(pos.below()).getBlock() instanceof SpongeBlock || level.getBlockState(pos.below()).getBlock() instanceof WetSpongeBlock) {
+                for (int i = 0; i < 2; ++i) {
+                    double x = (double) pos.getX() + 0.6 + (level.random.nextDouble() * 0.25D - 0.25D);
+                    double y = (double) pos.getY() + 0.2 + (level.random.nextDouble() * 0.2D - 0.1D);
+                    double z = (double) pos.getZ() + 0.6 + (level.random.nextDouble() * 0.25D - 0.25D);
+                    level.addParticle(ParticleTypes.FALLING_WATER, x, y, z, 0.0D, 0.0D, 0.0D);
+                }
+                for (int i = 0; i < 1; ++i) {
+                    double x = (double) pos.getX() + 0.6 + (level.random.nextDouble() * 0.25D - 0.25D);
+                    double y = (double) pos.getY() + 0.2 + (level.random.nextDouble() * 0.2D - 0.1D);
+                    double z = (double) pos.getZ() + 0.6 + (level.random.nextDouble() * 0.25D - 0.25D);
+                    level.addParticle(ParticleTypes.CLOUD, x, y, z, 0.0D, 0.0D, 0.0D);
+                }
             }
 
             if (level.getBlockState(pos.below()).getBlock() instanceof SimpleWaterloggedBlock && level.getBlockState(pos.below()).getValue(WATERLOGGED)
