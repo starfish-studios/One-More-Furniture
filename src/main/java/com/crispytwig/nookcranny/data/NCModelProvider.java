@@ -2,6 +2,7 @@ package com.crispytwig.nookcranny.data;
 
 import com.crispytwig.nookcranny.NookAndCranny;
 import com.crispytwig.nookcranny.blocks.DrawerBlock;
+import com.crispytwig.nookcranny.blocks.LampBlock;
 import com.crispytwig.nookcranny.blocks.NightstandBlock;
 import com.crispytwig.nookcranny.blocks.SofaBlock;
 import com.crispytwig.nookcranny.blocks.properties.CountertopType;
@@ -37,6 +38,12 @@ public class NCModelProvider extends FabricModelProvider {
 
     public static final ModelTemplate NIGHTSTAND = createTemplate("nightstand", CORE, BITS, TextureSlot.PARTICLE);
     public static final ModelTemplate NIGHTSTAND_OPEN = createTemplate("nightstand_open", CORE, BITS, TextureSlot.PARTICLE);
+
+    public static final ModelTemplate LAMP = createTemplate("lamp", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate LAMP_BOTTOM = createTemplate("lamp_bottom", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate LAMP_MIDDLE = createTemplate("lamp_middle", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate LAMP_TOP = createTemplate("lamp_top", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate LAMPSHADE = createTemplate("lampshade", TextureSlot.ALL, TextureSlot.PARTICLE);
 
     public static final ModelTemplate SOFA_SINGLE = createTemplate("sofa_single", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate SOFA_LEFT = createTemplate("sofa_left", TextureSlot.ALL, TextureSlot.PARTICLE);
@@ -86,6 +93,29 @@ public class NCModelProvider extends FabricModelProvider {
         multiVariant.with(PropertyDispatch.property(NightstandBlock.OPEN)
                 .select(true, Variant.variant().with(VariantProperties.MODEL, open))
                 .select(false, Variant.variant().with(VariantProperties.MODEL, closed)));
+
+        generators.blockStateOutput.accept(multiVariant);
+    }
+
+    private void createLampBlock(BlockModelGenerators generators, Block lamp) {
+
+        MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(lamp);
+
+        var textMap = new TextureMapping()
+                .put(TextureSlot.ALL, getTexture(lamp, "lamp", ""))
+                .put(TextureSlot.PARTICLE, getTexture(lamp, "lamp", ""));
+
+        ResourceLocation bottom = LAMP_BOTTOM.create(lamp, textMap, generators.modelOutput);
+        ResourceLocation middle = LAMP_MIDDLE.createWithSuffix(lamp, "_middle", textMap, generators.modelOutput);
+        ResourceLocation top = LAMP_TOP.createWithSuffix(lamp, "_top", textMap, generators.modelOutput);
+
+        multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
+        multiVariant.with(
+                PropertyDispatch.property(LampBlock.LAMP_TYPE)
+                        .select(LampBlock.LampType.BOTTOM, Variant.variant().with(VariantProperties.MODEL, bottom))
+                        .select(LampBlock.LampType.MIDDLE, Variant.variant().with(VariantProperties.MODEL, middle))
+                        .select(LampBlock.LampType.TOP, Variant.variant().with(VariantProperties.MODEL, top))
+        );
 
         generators.blockStateOutput.accept(multiVariant);
     }
