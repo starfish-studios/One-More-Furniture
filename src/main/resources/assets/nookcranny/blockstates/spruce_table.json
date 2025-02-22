@@ -1,13 +1,48 @@
 {
     "multipart": [
         {
+            "when": {
+                "facing": "north",
+                "short": "false"
+            },
             "apply": {
                 "model": "nookcranny:block/table/spruce_top"
             }
         },
         {
             "when": {
-                "leg_1": "true"
+                "facing": "east",
+                "short": "false"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/spruce_top",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "short": "false"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/spruce_top",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "short": "false"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/spruce_top",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "leg_1": "true",
+                "short": "false"
             },
             "apply": {
                 "model": "nookcranny:block/table/spruce_leg",
@@ -16,7 +51,8 @@
         },
         {
             "when": {
-                "leg_2": "true"
+                "leg_2": "true",
+                "short": "false"
             },
             "apply": {
                 "model": "nookcranny:block/table/spruce_leg",
@@ -26,7 +62,8 @@
         },
         {
             "when": {
-                "leg_3": "true"
+                "leg_3": "true",
+                "short": "false"
             },
             "apply": {
                 "model": "nookcranny:block/table/spruce_leg",
@@ -36,7 +73,8 @@
         },
         {
             "when": {
-                "leg_4": "true"
+                "leg_4": "true",
+                "short": "false"
             },
             "apply": {
                 "model": "nookcranny:block/table/spruce_leg",
@@ -49,7 +87,8 @@
                 "model": "nookcranny:block/table/tablecloth/white_tablecloth"
             },
             "when": {
-                "tablecloth": "white"
+                "tablecloth": "white",
+                "short": "false"
             }
         },
         {
@@ -57,7 +96,8 @@
                 "model": "nookcranny:block/table/tablecloth/light_gray_tablecloth"
             },
             "when": {
-                "tablecloth": "light_gray"
+                "tablecloth": "light_gray",
+                "short": "false"
             }
         },
         {
@@ -65,7 +105,8 @@
                 "model": "nookcranny:block/table/tablecloth/gray_tablecloth"
             },
             "when": {
-                "tablecloth": "gray"
+                "tablecloth": "gray",
+                "short": "false"
             }
         },
         {
@@ -73,7 +114,8 @@
                 "model": "nookcranny:block/table/tablecloth/black_tablecloth"
             },
             "when": {
-                "tablecloth": "black"
+                "tablecloth": "black",
+                "short": "false"
             }
         },
         {
@@ -81,7 +123,8 @@
                 "model": "nookcranny:block/table/tablecloth/brown_tablecloth"
             },
             "when": {
-                "tablecloth": "brown"
+                "tablecloth": "brown",
+                "short": "false"
             }
         },
         {
@@ -89,7 +132,8 @@
                 "model": "nookcranny:block/table/tablecloth/red_tablecloth"
             },
             "when": {
-                "tablecloth": "red"
+                "tablecloth": "red",
+                "short": "false"
             }
         },
         {
@@ -97,7 +141,8 @@
                 "model": "nookcranny:block/table/tablecloth/orange_tablecloth"
             },
             "when": {
-                "tablecloth": "orange"
+                "tablecloth": "orange",
+                "short": "false"
             }
         },
         {
@@ -105,7 +150,8 @@
                 "model": "nookcranny:block/table/tablecloth/yellow_tablecloth"
             },
             "when": {
-                "tablecloth": "yellow"
+                "tablecloth": "yellow",
+                "short": "false"
             }
         },
         {
@@ -113,7 +159,8 @@
                 "model": "nookcranny:block/table/tablecloth/lime_tablecloth"
             },
             "when": {
-                "tablecloth": "lime"
+                "tablecloth": "lime",
+                "short": "false"
             }
         },
         {
@@ -121,7 +168,8 @@
                 "model": "nookcranny:block/table/tablecloth/green_tablecloth"
             },
             "when": {
-                "tablecloth": "green"
+                "tablecloth": "green",
+                "short": "false"
             }
         },
         {
@@ -129,7 +177,8 @@
                 "model": "nookcranny:block/table/tablecloth/cyan_tablecloth"
             },
             "when": {
-                "tablecloth": "cyan"
+                "tablecloth": "cyan",
+                "short": "false"
             }
         },
         {
@@ -137,7 +186,8 @@
                 "model": "nookcranny:block/table/tablecloth/light_blue_tablecloth"
             },
             "when": {
-                "tablecloth": "light_blue"
+                "tablecloth": "light_blue",
+                "short": "false"
             }
         },
         {
@@ -145,7 +195,8 @@
                 "model": "nookcranny:block/table/tablecloth/blue_tablecloth"
             },
             "when": {
-                "tablecloth": "blue"
+                "tablecloth": "blue",
+                "short": "false"
             }
         },
         {
@@ -153,7 +204,8 @@
                 "model": "nookcranny:block/table/tablecloth/purple_tablecloth"
             },
             "when": {
-                "tablecloth": "purple"
+                "tablecloth": "purple",
+                "short": "false"
             }
         },
         {
@@ -161,7 +213,8 @@
                 "model": "nookcranny:block/table/tablecloth/magenta_tablecloth"
             },
             "when": {
-                "tablecloth": "magenta"
+                "tablecloth": "magenta",
+                "short": "false"
             }
         },
         {
@@ -169,7 +222,234 @@
                 "model": "nookcranny:block/table/tablecloth/pink_tablecloth"
             },
             "when": {
-                "tablecloth": "pink"
+                "tablecloth": "pink",
+                "short": "false"
+            }
+        },
+        {
+            "when": {
+                "facing": "north",
+                "short": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/spruce_top_short"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "short": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/spruce_top_short",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "short": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/spruce_top_short",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "short": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/spruce_top_short",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "leg_1": "true",
+                "short": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/spruce_leg_short",
+                "uvlock": false
+            }
+        },
+        {
+            "when": {
+                "leg_2": "true",
+                "short": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/spruce_leg_short",
+                "y": 90,
+                "uvlock": false
+            }
+        },
+        {
+            "when": {
+                "leg_3": "true",
+                "short": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/spruce_leg_short",
+                "y": 180,
+                "uvlock": false
+            }
+        },
+        {
+            "when": {
+                "leg_4": "true",
+                "short": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/table/spruce_leg_short",
+                "y": 270,
+                "uvlock": false
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/white_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "white",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/light_gray_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "light_gray",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/gray_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "gray",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/black_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "black",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/brown_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "brown",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/red_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "red",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/orange_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "orange",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/yellow_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "yellow",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/lime_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "lime",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/green_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "green",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/cyan_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "cyan",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/light_blue_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "light_blue",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/blue_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "blue",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/purple_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "purple",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/magenta_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "magenta",
+                "short": "true"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/table/tablecloth/pink_tablecloth_short"
+            },
+            "when": {
+                "tablecloth": "pink",
+                "short": "true"
             }
         }
     ]

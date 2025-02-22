@@ -1,5 +1,6 @@
 package com.crispytwig.nookcranny.client.renderer;
 
+import com.crispytwig.nookcranny.NCConfig;
 import com.crispytwig.nookcranny.blocks.ShelfBlock;
 import com.crispytwig.nookcranny.blocks.entities.ShelfBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -44,10 +45,9 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
 
                 poseStack.pushPose();
 
-                poseStack.translate(0.0, (Math.sin((blockEntity.getLevel().getGameTime() + partialTick) / 8.0) / 32.0), 0.0);
-
-                float spinSpeed = 2.0f;
-                float dynamicRotation = (blockEntity.getLevel().getGameTime() + partialTick) * spinSpeed % 360;
+                if (!NCConfig.stillItems) {
+                    poseStack.translate(0.0, (Math.sin((blockEntity.getLevel().getGameTime() + partialTick) / 8.0) / 32.0), 0.0);
+                }
 
 
                 poseStack.translate(0.225 + 0.0 * (j % 2), 0.5 * -(j % 2), -0.225 + 0.4 * (j / 2));
@@ -55,13 +55,25 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
                 poseStack.scale(0.375F, 0.375F, 0.375F);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90f));
 
+                if (!NCConfig.stillItems) {
+                    float spinSpeed = 2.0f;
+                    float dynamicRotation = (blockEntity.getLevel().getGameTime() + partialTick) * spinSpeed % 360;
+                    poseStack.mulPose(Axis.YP.rotationDegrees(dynamicRotation));
+                }
+
                 Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
 
                 boolean shouldRender = Minecraft.getInstance().player != null && Minecraft.getInstance().player.isShiftKeyDown();
+                if (NCConfig.constantStackCount) {
+                    shouldRender = true;
+                }
+                if (NCConfig.noStackCount) {
+                    shouldRender = false;
+                }
+
                 if (shouldRender && i == 0) {
                     int count = stack.getCount();
                     if (count > 1) {
-
                         poseStack.pushPose();
                         poseStack.translate(-0.3, 0.0, -0.75);
                         poseStack.mulPose(Axis.YP.rotationDegrees(- rotation - 90));

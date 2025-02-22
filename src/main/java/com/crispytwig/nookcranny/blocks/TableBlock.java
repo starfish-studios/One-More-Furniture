@@ -64,6 +64,32 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
             Shapes.or(TOP, LEG_1, LEG_2, LEG_3, LEG_4)
     };
 
+    protected static final VoxelShape TOP_SHORT = Block.box(0.0D, 5.0D, 0.0D, 16.0D, 8.0D, 16.0D);
+    protected static final VoxelShape TOP_CLOTHED_SHORT = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
+    protected static final VoxelShape LEG_1_SHORT = Block.box(12.0D, 0.0D, 1.0D, 15.0D, 5.0D, 4.0D);
+    protected static final VoxelShape LEG_2_SHORT = Block.box(12.0D, 0.0D, 12.0D, 15.0D, 5.0D, 15.0D);
+    protected static final VoxelShape LEG_3_SHORT = Block.box(1.0D, 0.0D, 12.0D, 4.0D, 5.0D, 15.0D);
+    protected static final VoxelShape LEG_4_SHORT = Block.box(1.0D, 0.0D, 1.0D, 4.0D, 5.0D, 4.0D);
+    protected static final VoxelShape[] SHAPES_SHORT = new VoxelShape[]{
+            TOP_SHORT,
+            Shapes.or(TOP_SHORT, LEG_1_SHORT),
+            Shapes.or(TOP_SHORT, LEG_2_SHORT),
+            Shapes.or(TOP_SHORT, LEG_1_SHORT, LEG_2_SHORT),
+            Shapes.or(TOP_SHORT, LEG_3_SHORT),
+            Shapes.or(TOP_SHORT, LEG_1_SHORT, LEG_3_SHORT),
+            Shapes.or(TOP_SHORT, LEG_2_SHORT, LEG_3_SHORT),
+            Shapes.or(TOP_SHORT, LEG_1_SHORT, LEG_2_SHORT, LEG_3_SHORT),
+            Shapes.or(TOP_SHORT, LEG_4_SHORT),
+            Shapes.or(TOP_SHORT, LEG_1_SHORT, LEG_4_SHORT),
+            Shapes.or(TOP_SHORT, LEG_2_SHORT, LEG_4_SHORT),
+            Shapes.or(TOP_SHORT, LEG_1_SHORT, LEG_2_SHORT, LEG_4_SHORT),
+            Shapes.or(TOP_SHORT, LEG_3_SHORT),
+            Shapes.or(TOP_SHORT, LEG_1_SHORT, LEG_3_SHORT),
+            Shapes.or(TOP_SHORT, LEG_2_SHORT, LEG_3_SHORT),
+            Shapes.or(TOP_SHORT, LEG_1_SHORT, LEG_2_SHORT, LEG_3_SHORT, LEG_4_SHORT)
+
+    };
+
     public TableBlock(Properties properties) {
         super(properties);
         registerDefaultState(this.stateDefinition.any()
@@ -92,8 +118,17 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
         if (state.getValue(LEG2)) shape += 2;
         if (state.getValue(LEG3)) shape += 4;
         if (state.getValue(LEG4)) shape += 8;
-        return SHAPES[shape];
+
+        VoxelShape baseShape = state.getValue(SHORT) ? SHAPES_SHORT[shape] : SHAPES[shape];
+
+        if (state.getValue(TABLECLOTH) != ColorList.EMPTY) {
+            VoxelShape clothShape = state.getValue(SHORT) ? TOP_CLOTHED_SHORT : TOP_CLOTHED;
+            return Shapes.or(baseShape, clothShape);
+        }
+
+        return baseShape;
     }
+
 
     @Nullable
     @Override

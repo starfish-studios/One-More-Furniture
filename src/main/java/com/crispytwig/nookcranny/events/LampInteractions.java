@@ -164,14 +164,6 @@ public class LampInteractions implements UseBlockCallback {
                 }
             }
             return InteractionResult.SUCCESS;
-        } else if (itemStack.is(ItemTags.WOOL_CARPETS) && block instanceof TableBlock && blockState.getValue(LampBlock.LAMPSHADE) == ColorList.EMPTY) {
-            BlockState newState = getBlockstateForCarpet(item, blockState);
-            level.setBlockAndUpdate(pos, newState);
-            level.playSound(null, pos, SoundEvents.WOOL_PLACE, player.getSoundSource(), 1.0F, 1.0F);
-            if (!player.isCreative()) {
-                itemStack.shrink(1);
-            }
-            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }

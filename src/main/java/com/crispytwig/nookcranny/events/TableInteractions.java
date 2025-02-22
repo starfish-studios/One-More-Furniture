@@ -144,7 +144,11 @@ public class TableInteractions implements UseBlockCallback {
             Item carpet = SHEAR_MAP.get(color);
             if (carpet != null) {
                 level.setBlockAndUpdate(pos, blockState.setValue(TableBlock.TABLECLOTH, ColorList.EMPTY));
-                level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, new ItemStack(carpet, 1)));
+                if (blockState.getValue(TableBlock.SHORT)) {
+                    level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(carpet, 1)));
+                } else {
+                    level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, new ItemStack(carpet, 1)));
+                }
                 level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, player.getSoundSource(), 1.0F, 1.0F);
                 return InteractionResult.SUCCESS;
             }
@@ -162,7 +166,10 @@ public class TableInteractions implements UseBlockCallback {
 
                 if (!level.isClientSide) {
                     ServerLevel serverLevel = (ServerLevel) level;
-                    serverLevel.sendParticles(dustParticleOptions, (double) pos.getX() + 0.5, (double) pos.getY() + 1.1, (double) pos.getZ() + 0.5, 1, g, h, i, 0.0D);
+                    if (blockState.getValue(TableBlock.SHORT)) {
+                        serverLevel.sendParticles(dustParticleOptions, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 1, g, h, i, 0.0D);
+                    } else
+                        serverLevel.sendParticles(dustParticleOptions, (double) pos.getX() + 0.5, (double) pos.getY() + 1.1, (double) pos.getZ() + 0.5, 1, g, h, i, 0.0D);
                 }
             }
             return InteractionResult.SUCCESS;
