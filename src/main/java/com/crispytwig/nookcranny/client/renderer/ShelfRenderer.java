@@ -46,6 +46,8 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
 
                 poseStack.translate(0.0, (Math.sin((blockEntity.getLevel().getGameTime() + partialTick) / 8.0) / 32.0), 0.0);
 
+                float spinSpeed = 2.0f;
+                float dynamicRotation = (blockEntity.getLevel().getGameTime() + partialTick) * spinSpeed % 360;
 
 
                 poseStack.translate(0.225 + 0.0 * (j % 2), 0.5 * -(j % 2), -0.225 + 0.4 * (j / 2));
@@ -94,7 +96,7 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
             float h = (float) (-font.width(text)) / 2.0F;
 
             //Font.DisplayMode.SEE_THROUGH is what's make it render through blocks, setting it as Normal scissors the render through the item
-            font.drawInBatch(text, h, 0.0F, 553648127, false, poseStack.last().pose(), buffer, Font.DisplayMode.SEE_THROUGH, alpha, packedLight);
+            font.drawInBatch(text, h, 0.0F, 553648127, false, poseStack.last().pose(), buffer, Font.DisplayMode.NORMAL, alpha, packedLight);
             font.drawInBatch(text, h, 0.0F, -1, false, poseStack.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, packedLight);
 
             poseStack.popPose();
