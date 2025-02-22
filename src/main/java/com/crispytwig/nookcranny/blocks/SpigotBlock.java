@@ -117,7 +117,7 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
                 level.playLocalSound(d, e, f, SoundEvents.WATER_AMBIENT, SoundSource.BLOCKS, 0.2F, 1.3F, false);
             }
 
-            if (level.getBlockState(pos.below()).isAir()) {
+            if (level.getBlockState(pos.below()).isAir() || level.getBlockState(pos.below()).getBlock() instanceof CauldronBlock) {
                 for (int i = 0; i < 2; ++i) {
                     double x = (double) pos.getX() + 0.6 + (level.random.nextDouble() * 0.25D - 0.25D);
                     double y = (double) pos.getY() - 0.4 + (level.random.nextDouble() * 0.2D - 0.1D);
@@ -146,24 +146,36 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
             }
 
             if (level.getBlockState(pos.below()).getBlock() instanceof SimpleWaterloggedBlock && level.getBlockState(pos.below()).getValue(WATERLOGGED)
-            || (level.getBlockState(pos.below()).getBlock() instanceof LayeredCauldronBlock && level.getBlockState(pos.below()).is(Blocks.WATER_CAULDRON))
-            || (level.getBlockState(pos.below()).getBlock() instanceof CauldronBlock)) {
+            || (level.getBlockState(pos.below()).getBlock() instanceof LayeredCauldronBlock && level.getBlockState(pos.below()).is(Blocks.WATER_CAULDRON))) {
+
+                double yOffset = 0.0D;
+                int levelBelow = level.getBlockState(pos.below()).getValue(LayeredCauldronBlock.LEVEL);
+
+                if (level.getBlockState(pos.below()).getBlock() instanceof LayeredCauldronBlock) {
+                    if (levelBelow == 1) {
+                        yOffset = -0.3D;
+                    } else if (levelBelow == 2) {
+                        yOffset = -0.1D;
+                    } else if (levelBelow == 3) {
+                        yOffset = 0.1D;
+                    }
+                }
                 if (randomSource.nextDouble() < 0.3) {
                     double d = (double)pos.getX() + 0.5;
                     double e = pos.getY();
                     double f = (double)pos.getZ() + 0.5;
                     level.playLocalSound(d, e, f, SoundEvents.FISHING_BOBBER_SPLASH, SoundSource.BLOCKS, 0.02F, 1.0F, false);
                 }
-                for(int i = 0; i < 5; ++i) {
-                    double x = (double) pos.getX() + 0.5  + (level.random.nextDouble() * 0.5D - 0.25D);
-                    double y = (double) pos.getY() - 0.1D + (level.random.nextDouble() * 0.2D - 0.1D);
-                    double z = (double) pos.getZ() + 0.4  + (level.random.nextDouble() * 0.5D - 0.25D);
+                for (int i = 0; i < 5; ++i) {
+                    double x = (double) pos.getX() + 0.5 + (level.random.nextDouble() * 0.5D - 0.25D);
+                    double y = (double) pos.getY() - 0.1D + yOffset + (level.random.nextDouble() * 0.2D - 0.1D);
+                    double z = (double) pos.getZ() + 0.4 + (level.random.nextDouble() * 0.5D - 0.25D);
                     level.addParticle(ParticleTypes.BUBBLE_POP, x, y, z, 0.0D, 0.0D, 0.0D);
                 }
                 for (int i = 0; i < 1; ++i) {
                     double x = (double) pos.getX() + 0.5 + (level.random.nextDouble() * 0.5D - 0.25D);
-                    double y = (double) pos.getY() - 0.2D + (level.random.nextDouble() * 0.2D - 0.1D);
-                    double z = (double) pos.getZ() + 0.4  + (level.random.nextDouble() * 0.5D - 0.25D);
+                    double y = (double) pos.getY() - 0.2D + yOffset + (level.random.nextDouble() * 0.2D - 0.1D);
+                    double z = (double) pos.getZ() + 0.4 + (level.random.nextDouble() * 0.5D - 0.25D);
                     level.addParticle(ParticleTypes.CLOUD, x, y, z, 0.0D, 0.0D, 0.0D);
                 }
             }
