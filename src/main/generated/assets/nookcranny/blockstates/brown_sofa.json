@@ -1,11 +1,11 @@
 {
   "variants": {
-    "facing=east,shape=corner": {
-      "model": "nookcranny:block/brown_sofa_corner",
+    "facing=east,shape=inner_left": {
+      "model": "nookcranny:block/brown_sofa_inner",
       "y": 90
     },
-    "facing=east,shape=corner_outer": {
-      "model": "nookcranny:block/brown_sofa_corner_outer",
+    "facing=east,shape=inner_right": {
+      "model": "nookcranny:block/brown_sofa_inner",
       "y": 90
     },
     "facing=east,shape=left": {
@@ -16,6 +16,14 @@
       "model": "nookcranny:block/brown_sofa_middle",
       "y": 90
     },
+    "facing=east,shape=outer_left": {
+      "model": "nookcranny:block/brown_sofa_outer",
+      "y": 90
+    },
+    "facing=east,shape=outer_right": {
+      "model": "nookcranny:block/brown_sofa_outer",
+      "y": 90
+    },
     "facing=east,shape=right": {
       "model": "nookcranny:block/brown_sofa_right",
       "y": 90
@@ -24,11 +32,12 @@
       "model": "nookcranny:block/brown_sofa",
       "y": 90
     },
-    "facing=north,shape=corner": {
-      "model": "nookcranny:block/brown_sofa_corner"
+    "facing=north,shape=inner_left": {
+      "model": "nookcranny:block/brown_sofa_inner"
     },
-    "facing=north,shape=corner_outer": {
-      "model": "nookcranny:block/brown_sofa_corner_outer"
+    "facing=north,shape=inner_right": {
+      "model": "nookcranny:block/brown_sofa_inner",
+      "y": 90
     },
     "facing=north,shape=left": {
       "model": "nookcranny:block/brown_sofa_left"
@@ -36,19 +45,26 @@
     "facing=north,shape=middle": {
       "model": "nookcranny:block/brown_sofa_middle"
     },
+    "facing=north,shape=outer_left": {
+      "model": "nookcranny:block/brown_sofa_outer"
+    },
+    "facing=north,shape=outer_right": {
+      "model": "nookcranny:block/brown_sofa_outer",
+      "y": 90
+    },
     "facing=north,shape=right": {
       "model": "nookcranny:block/brown_sofa_right"
     },
     "facing=north,shape=single": {
       "model": "nookcranny:block/brown_sofa"
     },
-    "facing=south,shape=corner": {
-      "model": "nookcranny:block/brown_sofa_corner",
+    "facing=south,shape=inner_left": {
+      "model": "nookcranny:block/brown_sofa_inner",
       "y": 180
     },
-    "facing=south,shape=corner_outer": {
-      "model": "nookcranny:block/brown_sofa_corner_outer",
-      "y": 180
+    "facing=south,shape=inner_right": {
+      "model": "nookcranny:block/brown_sofa_inner",
+      "y": 90
     },
     "facing=south,shape=left": {
       "model": "nookcranny:block/brown_sofa_left",
@@ -58,6 +74,14 @@
       "model": "nookcranny:block/brown_sofa_middle",
       "y": 180
     },
+    "facing=south,shape=outer_left": {
+      "model": "nookcranny:block/brown_sofa_outer",
+      "y": 180
+    },
+    "facing=south,shape=outer_right": {
+      "model": "nookcranny:block/brown_sofa_outer",
+      "y": 90
+    },
     "facing=south,shape=right": {
       "model": "nookcranny:block/brown_sofa_right",
       "y": 180
@@ -66,13 +90,13 @@
       "model": "nookcranny:block/brown_sofa",
       "y": 180
     },
-    "facing=west,shape=corner": {
-      "model": "nookcranny:block/brown_sofa_corner",
+    "facing=west,shape=inner_left": {
+      "model": "nookcranny:block/brown_sofa_inner",
       "y": 270
     },
-    "facing=west,shape=corner_outer": {
-      "model": "nookcranny:block/brown_sofa_corner_outer",
-      "y": 270
+    "facing=west,shape=inner_right": {
+      "model": "nookcranny:block/brown_sofa_inner",
+      "y": 90
     },
     "facing=west,shape=left": {
       "model": "nookcranny:block/brown_sofa_left",
@@ -81,6 +105,14 @@
     "facing=west,shape=middle": {
       "model": "nookcranny:block/brown_sofa_middle",
       "y": 270
+    },
+    "facing=west,shape=outer_left": {
+      "model": "nookcranny:block/brown_sofa_outer",
+      "y": 270
+    },
+    "facing=west,shape=outer_right": {
+      "model": "nookcranny:block/brown_sofa_outer",
+      "y": 90
     },
     "facing=west,shape=right": {
       "model": "nookcranny:block/brown_sofa_right",

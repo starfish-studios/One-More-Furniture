@@ -49,8 +49,8 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate SOFA_LEFT = createTemplate("sofa_left", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate SOFA_RIGHT = createTemplate("sofa_right", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate SOFA_MIDDLE = createTemplate("sofa_middle", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate SOFA_CORNER = createTemplate("sofa_corner", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate SOFA_CORNER_OUTER = createTemplate("sofa_corner_outer", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate SOFA_INNER = createTemplate("sofa_corner_inner", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate SOFA_OUTER = createTemplate("sofa_corner_outer", TextureSlot.ALL, TextureSlot.PARTICLE);
 
     public NCModelProvider(FabricDataOutput output) {
         super(output);
@@ -121,7 +121,6 @@ public class NCModelProvider extends FabricModelProvider {
     }
 
     private void createSofaBlock(BlockModelGenerators generators, Block sofa) {
-
         MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(sofa);
 
         var textMap = new TextureMapping()
@@ -130,24 +129,33 @@ public class NCModelProvider extends FabricModelProvider {
 
         ResourceLocation single = SOFA_SINGLE.create(sofa, textMap, generators.modelOutput);
         ResourceLocation left = SOFA_LEFT.createWithSuffix(sofa, "_left", textMap, generators.modelOutput);
-        ResourceLocation right = SOFA_RIGHT.createWithSuffix(sofa, "_right",textMap, generators.modelOutput);
-        ResourceLocation middle = SOFA_MIDDLE.createWithSuffix(sofa, "_middle",textMap, generators.modelOutput);
-        ResourceLocation corner = SOFA_CORNER.createWithSuffix(sofa, "_corner",textMap, generators.modelOutput);
-        ResourceLocation outerCorner = SOFA_CORNER_OUTER.createWithSuffix(sofa, "_corner_outer",textMap, generators.modelOutput);
+        ResourceLocation right = SOFA_RIGHT.createWithSuffix(sofa, "_right", textMap, generators.modelOutput);
+        ResourceLocation middle = SOFA_MIDDLE.createWithSuffix(sofa, "_middle", textMap, generators.modelOutput);
+        ResourceLocation inner = SOFA_INNER.createWithSuffix(sofa, "_inner", textMap, generators.modelOutput);
+        ResourceLocation outer = SOFA_OUTER.createWithSuffix(sofa, "_outer", textMap, generators.modelOutput);
 
         multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
+
         multiVariant.with(
                 PropertyDispatch.property(SofaBlock.SHAPE)
                         .select(SofaBlock.SofaShape.SINGLE, Variant.variant().with(VariantProperties.MODEL, single))
                         .select(SofaBlock.SofaShape.LEFT, Variant.variant().with(VariantProperties.MODEL, left))
                         .select(SofaBlock.SofaShape.RIGHT, Variant.variant().with(VariantProperties.MODEL, right))
                         .select(SofaBlock.SofaShape.MIDDLE, Variant.variant().with(VariantProperties.MODEL, middle))
-                        .select(SofaBlock.SofaShape.CORNER, Variant.variant().with(VariantProperties.MODEL, corner))
-                        .select(SofaBlock.SofaShape.CORNER_OUTER, Variant.variant().with(VariantProperties.MODEL, outerCorner))
+                        .select(SofaBlock.SofaShape.INNER_LEFT, Variant.variant().with(VariantProperties.MODEL, inner))
+                        .select(SofaBlock.SofaShape.INNER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, inner)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                        .select(SofaBlock.SofaShape.OUTER_LEFT, Variant.variant()
+                                .with(VariantProperties.MODEL, outer))
+                        .select(SofaBlock.SofaShape.OUTER_RIGHT, Variant.variant()
+                                .with(VariantProperties.MODEL, outer)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
         );
 
         generators.blockStateOutput.accept(multiVariant);
     }
+
 
     /**
      * Creates a reference to our own model templates

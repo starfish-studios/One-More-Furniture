@@ -58,7 +58,32 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock {
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+        Direction direction = state.getValue(FACING);
+        SofaShape type = state.getValue(SHAPE);
+        switch (mirror) {
+            case LEFT_RIGHT:
+                if (direction.getAxis() == Direction.Axis.Z) {
+                    return switch (type) {
+                        case INNER_LEFT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, SofaShape.INNER_RIGHT);
+                        case INNER_RIGHT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, SofaShape.INNER_LEFT);
+                        case OUTER_LEFT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, SofaShape.OUTER_RIGHT);
+                        case OUTER_RIGHT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, SofaShape.OUTER_LEFT);
+                        default -> state.rotate(Rotation.CLOCKWISE_180);
+                    };
+                }
+                break;
+            case FRONT_BACK:
+                if (direction.getAxis() == Direction.Axis.X) {
+                    return switch (type) {
+                        case INNER_LEFT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, SofaShape.INNER_LEFT);
+                        case INNER_RIGHT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, SofaShape.INNER_RIGHT);
+                        case OUTER_LEFT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, SofaShape.OUTER_RIGHT);
+                        case OUTER_RIGHT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, SofaShape.OUTER_LEFT);
+                        default -> state.rotate(Rotation.CLOCKWISE_180);
+                    };
+                }
+        }
+        return super.mirror(state, mirror);
     }
 
     @Override
@@ -76,18 +101,19 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock {
         return state.getValue(FACING).toYRot();
     }
 
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        boolean waterlogged = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
-        return this.getStateDefinition().any()
-                .setValue(FACING, context.getHorizontalDirection().getOpposite())
-                .setValue(WATERLOGGED, waterlogged);
-    }
-
     @Override
     public boolean propagatesSkylightDown(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return true;
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockPos blockPos = context.getClickedPos();
+        FluidState fluidState = context.getLevel().getFluidState(blockPos);
+        BlockState blockState = this.defaultBlockState()
+                .setValue(FACING, context.getHorizontalDirection().getOpposite())
+                .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+        return blockState.setValue(SHAPE, getConnection(blockState, context.getLevel(), blockPos));
     }
 
     @Override
@@ -95,59 +121,64 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock {
         if (state.getValue(WATERLOGGED)) {
             level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-        return state.setValue(SHAPE, determineSofaShape(state, level, currentPos));
+
+        return direction.getAxis().isHorizontal() ? state.setValue(SHAPE, getConnection(state, (Level)level, currentPos)) : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
-    private SofaShape determineSofaShape(BlockState state, LevelAccessor level, BlockPos pos) {
+    public static SofaShape getConnection(BlockState state, Level level, BlockPos pos) {
         Direction facing = state.getValue(FACING);
-        BlockState frontState = level.getBlockState(pos.relative(facing));
-        BlockState backState = level.getBlockState(pos.relative(facing.getOpposite()));
-        BlockState rightState = level.getBlockState(pos.relative(facing.getClockWise()));
-        BlockState leftState = level.getBlockState(pos.relative(facing.getCounterClockWise()));
 
-        if (isSofa(rightState) && isSofa(leftState)) {
+        Direction dir1;
+        BlockState state1 = level.getBlockState(pos.relative(facing));
+        if (state1.getBlock() instanceof SofaBlock && (dir1 = state1.getValue(FACING)).getAxis() != state.getValue(FACING).getAxis() && isDifferentOrientation(state, level, pos, dir1.getOpposite())) {
+            if (dir1 == facing.getCounterClockWise()) {
+                return SofaShape.INNER_LEFT;
+            }
+            return SofaShape.INNER_RIGHT;
+        }
+
+        Direction dir2;
+        BlockState state2 = level.getBlockState(pos.relative(facing.getOpposite()));
+        if (state2.getBlock() instanceof SofaBlock && (dir2 = state2.getValue(FACING)).getAxis() != state.getValue(FACING).getAxis() && isDifferentOrientation(state, level, pos, dir2)) {
+            if (dir2 == facing.getCounterClockWise()) {
+                return SofaShape.OUTER_LEFT;
+            }
+            return SofaShape.OUTER_RIGHT;
+        }
+
+        boolean left = canConnect(level, pos, state.getValue(FACING).getCounterClockWise());
+        boolean right = canConnect(level, pos, state.getValue(FACING).getClockWise());
+        if (left && right) {
             return SofaShape.MIDDLE;
         }
-
-        //TODO rotate one of the corner pieces when we know which the default rotation the corner model will have
-        if (isSofa(frontState) && isSofa(rightState)) {
-            return SofaShape.CORNER;
-        }
-
-        if (isSofa(frontState) && isSofa(leftState)) {
-            return SofaShape.CORNER;
-        }
-
-        if (isSofa(backState) && isSofa(rightState)) {
-            return SofaShape.CORNER_OUTER;
-        }
-
-        if (isSofa(backState) && isSofa(leftState)) {
-            return SofaShape.CORNER_OUTER;
-        }
-
-        if (isSofa(rightState)) {
+        else if (left) {
             return SofaShape.LEFT;
         }
-
-        if (isSofa(leftState)) {
+        else if (right) {
             return SofaShape.RIGHT;
         }
-
         return SofaShape.SINGLE;
     }
 
-    public boolean isSofa(BlockState state){
+    public static boolean canConnect(Level level, BlockPos pos, Direction direction) {
+        BlockState state = level.getBlockState(pos.relative(direction));
         return state.getBlock() instanceof SofaBlock;
+    }
+
+    public static boolean isDifferentOrientation(BlockState state, Level level, BlockPos pos, Direction dir) {
+        BlockState blockState = level.getBlockState(pos.relative(dir));
+        return !(blockState.getBlock() instanceof SofaBlock) || blockState.getValue(FACING) != state.getValue(FACING);
     }
 
     public enum SofaShape implements StringRepresentable {
         SINGLE("single"),
         LEFT("left"),
-        RIGHT("right"),
         MIDDLE("middle"),
-        CORNER("corner"),
-        CORNER_OUTER("corner_outer");
+        RIGHT("right"),
+        INNER_LEFT("inner_left"),
+        INNER_RIGHT("inner_right"),
+        OUTER_LEFT("outer_left"),
+        OUTER_RIGHT("outer_right");
 
         private final String name;
 
