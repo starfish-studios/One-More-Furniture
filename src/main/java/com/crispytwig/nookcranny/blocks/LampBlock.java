@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -23,6 +24,9 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class LampBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -31,6 +35,12 @@ public class LampBlock extends Block implements SimpleWaterloggedBlock {
 
     public static final EnumProperty<ColorList> LAMPSHADE = EnumProperty.create("lampshade", ColorList.class);
 
+    protected static final VoxelShape SINGLE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
+    protected static final VoxelShape TOP = Block.box(3.0D, 7.0D, 3.0D, 13.0D, 16.0D, 13.0D);
+    protected static final VoxelShape MIDDLE = Block.box(7.0D, 0.0D, 7.0D, 9.0D, 16.0D, 9.0D);
+    protected static final VoxelShape BOTTOM = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 2.0D, 12.0D);
+
+
     public LampBlock(Properties properties) {
         super(properties);
         this.defaultBlockState()
@@ -38,6 +48,16 @@ public class LampBlock extends Block implements SimpleWaterloggedBlock {
                 .setValue(LIT, true)
                 .setValue(LAMP_TYPE, LampType.SINGLE)
                 .setValue(LAMPSHADE, ColorList.WHITE);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return switch (state.getValue(LAMP_TYPE)){
+            case SINGLE -> Shapes.or(SINGLE, MIDDLE, TOP);
+            case BOTTOM -> Shapes.or(BOTTOM, MIDDLE);
+            case MIDDLE -> MIDDLE;
+            case TOP ->  Shapes.or(TOP, MIDDLE);
+        };
     }
 
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
