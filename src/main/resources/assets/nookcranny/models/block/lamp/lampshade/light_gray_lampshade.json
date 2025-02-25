@@ -1,0 +1,7 @@
+{
+    "parent": "nookcranny:block/template/lampshade",
+    "textures": {
+        "all": "nookcranny:block/lamp/lampshade/light_gray_lampshade",
+        "particle": "block/light_gray_wool"
+    }
+}

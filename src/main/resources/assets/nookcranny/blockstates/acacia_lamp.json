@@ -1,36 +1,342 @@
 {
-  "multipart": [
-    {
-      "apply": { "model": "nookcranny:block/lamp/acacia_lamp" },
-      "when": { "lamp_type": "single" }
-    },
-    {
-      "apply": { "model": "nookcranny:block/lamp/acacia_lamp_bottom" },
-      "when": { "lamp_type": "bottom" }
-    },
-    {
-      "apply": { "model": "nookcranny:block/lamp/acacia_lamp_middle" },
-      "when": { "lamp_type": "middle" }
-    },
-    {
-      "apply": { "model": "nookcranny:block/lamp/acacia_lamp_top" },
-      "when": { "lamp_type": "top" }
-    },
-    {
-      "apply": { "model": "nookcranny:block/lamp/acacia_lamp_on" },
-      "when": { "lit": "true", "lamp_type": "single" }
-    },
-    {
-      "apply": { "model": "nookcranny:block/lamp/acacia_lamp_top_on" },
-      "when": { "lit": "true", "lamp_type": "top" }
-    },
-    {
-      "apply": { "model": "nookcranny:block/template/lampshade" },
-      "when": { "lamp_type": "single", "lampshade": "white" }
-    },
-    {
-      "apply": { "model": "nookcranny:block/template/lampshade" },
-      "when": { "lamp_type": "top", "lampshade": "white" }
-    }
-  ]
+    "multipart": [
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/acacia_lamp"
+            },
+            "when": {
+                "lamp_type": "single"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/acacia_lamp_bottom"
+            },
+            "when": {
+                "lamp_type": "bottom"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/acacia_lamp_middle"
+            },
+            "when": {
+                "lamp_type": "middle"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/acacia_lamp_top"
+            },
+            "when": {
+                "lamp_type": "top"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/acacia_lamp_on"
+            },
+            "when": {
+                "lit": "true",
+                "lamp_type": "single"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/acacia_lamp_top_on"
+            },
+            "when": {
+                "lit": "true",
+                "lamp_type": "top"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/white_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "white"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/white_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "white"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/light_gray_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "light_gray"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/light_gray_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "light_gray"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/gray_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "gray"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/gray_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "gray"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/black_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "black"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/black_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "black"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/brown_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "brown"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/brown_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "brown"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/red_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "red"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/red_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "red"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/orange_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "orange"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/orange_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "orange"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/yellow_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "yellow"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/yellow_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "yellow"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/lime_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "lime"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/lime_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "lime"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/green_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "green"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/green_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "green"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/cyan_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "cyan"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/cyan_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "cyan"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/light_blue_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "light_blue"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/light_blue_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "light_blue"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/blue_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "blue"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/blue_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "blue"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/purple_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "purple"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/purple_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "purple"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/magenta_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "magenta"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/magenta_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "magenta"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/pink_lampshade"
+            },
+            "when": {
+                "lamp_type": "single",
+                "lampshade": "pink"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/lamp/lampshade/pink_lampshade"
+            },
+            "when": {
+                "lamp_type": "top",
+                "lampshade": "pink"
+            }
+        }
+    ]
 }
