@@ -5,3 +5,4 @@ classes/
 **/run/
 .idea/
 /src/main/generated/.cache/
+*.py

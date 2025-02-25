@@ -1,0 +1,7 @@
+{
+    "parent": "nookcranny:block/template/chair_backless",
+    "textures": {
+        "all": "nookcranny:block/chair/spruce_chair",
+        "particle": "block/spruce_planks"
+    }
+}
