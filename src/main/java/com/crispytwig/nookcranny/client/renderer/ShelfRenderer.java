@@ -15,11 +15,15 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 @Environment(value= EnvType.CLIENT)
 public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
+
+    private final RandomSource random = RandomSource.create();
 
     public ShelfRenderer(BlockEntityRendererProvider.Context context) {
 
@@ -37,11 +41,19 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
             ItemStack stack = items.get(j);
             if (stack.isEmpty()) continue;
 
+            int seed = Item.getId(stack.getItem()) + stack.getDamageValue();
+            this.random.setSeed(seed);
+
+            float o = -0.0F * (float)(j - 1) * 0.5F;
+            float p = -0.0F * (float)(j - 1) * 0.5F;
+            float q = -0.09375F * (float)(j - 1) * 0.5F;
+            poseStack.translate(o, p, q);
+
             int renderCount = getAmount(stack.getCount());
             for (int i = 0; i < renderCount; ++i) {
-                float fx = (-0.10375f * (float)(i - 1) * 0.5f) % 0.09f;
-                float fy = (-0.04375f * (float)(i - 1) * 0.5f) % 0.09f;
-                float fz = (-0.05375f * (float)(i - 1) * 0.5f) % 0.09f;
+
+                float fx = (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
+                float fy = (this.random.nextFloat() * 2.0F - 1.0F) * 0.15F * 0.5F;
 
                 poseStack.pushPose();
 
@@ -49,19 +61,10 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
                     poseStack.translate(0.0, (Math.sin((blockEntity.getLevel().getGameTime() + partialTick) / 8.0) / 32.0), 0.0);
                 }
 
-
                 poseStack.translate(0.225 + 0.0 * (j % 2), 0.5 * -(j % 2), -0.225 + 0.4 * (j / 2));
-                poseStack.translate(fx, fy, fz);
+                poseStack.translate(fx, fy, 0.0);
                 poseStack.scale(0.375F, 0.375F, 0.375F);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90f));
-
-                if (!NCConfig.stillItems) {
-                    float spinSpeed = 2.0f;
-                    float dynamicRotation = (blockEntity.getLevel().getGameTime() + partialTick) * spinSpeed % 360;
-                    poseStack.mulPose(Axis.YP.rotationDegrees(dynamicRotation));
-                }
-
-                Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
 
                 boolean shouldRender = Minecraft.getInstance().player != null && Minecraft.getInstance().player.isShiftKeyDown();
                 if (NCConfig.constantStackCount) {
@@ -81,6 +84,15 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
                         poseStack.popPose();
                     }
                 }
+
+                if (!NCConfig.stillItems) {
+                    float spinSpeed = 2.0f;
+                    float dynamicRotation = (blockEntity.getLevel().getGameTime() + partialTick) * spinSpeed % 360;
+                    poseStack.mulPose(Axis.YP.rotationDegrees(dynamicRotation));
+                }
+
+                Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+
 
                 poseStack.popPose();
             }
