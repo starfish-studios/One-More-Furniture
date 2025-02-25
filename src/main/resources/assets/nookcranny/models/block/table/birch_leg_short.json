@@ -1,0 +1,6 @@
+{
+    "parent": "nookcranny:block/template/table_leg_short",
+    "textures": {
+        "all": "nookcranny:block/table/birch_table"
+    }
+}
