@@ -57,12 +57,12 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
 
                 poseStack.pushPose();
 
-                if (!NCConfig.stillItems) {
-                    poseStack.translate(0.0, (Math.sin((blockEntity.getLevel().getGameTime() + partialTick) / 8.0) / 32.0), 0.0);
-                }
+//                if (!NCConfig.stillItems) {
+//                    poseStack.translate(0.0, (Math.sin((blockEntity.getLevel().getGameTime() + partialTick) / 8.0) / 32.0), 0.0);
+//                }
 
                 poseStack.translate(0.225 + 0.0 * (j % 2), 0.5 * -(j % 2), -0.225 + 0.4 * (j / 2));
-                poseStack.translate(fx, fy, 0.0);
+                poseStack.translate(fx, fy + 0.025, 0.0);
                 poseStack.scale(0.375F, 0.375F, 0.375F);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90f));
 
@@ -88,6 +88,7 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
                 if (!NCConfig.stillItems) {
                     float spinSpeed = 2.0f;
                     float dynamicRotation = (blockEntity.getLevel().getGameTime() + partialTick) * spinSpeed % 360;
+                    poseStack.translate(0.0, (Math.sin((blockEntity.getLevel().getGameTime() + partialTick) / 8.0) / 16.0), 0.0);
                     poseStack.mulPose(Axis.YP.rotationDegrees(dynamicRotation));
                 }
 
