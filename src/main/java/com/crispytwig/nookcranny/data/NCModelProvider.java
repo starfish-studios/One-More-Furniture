@@ -5,6 +5,7 @@ import com.crispytwig.nookcranny.blocks.DrawerBlock;
 import com.crispytwig.nookcranny.blocks.LampBlock;
 import com.crispytwig.nookcranny.blocks.NightstandBlock;
 import com.crispytwig.nookcranny.blocks.SofaBlock;
+import com.crispytwig.nookcranny.blocks.properties.ColorList;
 import com.crispytwig.nookcranny.blocks.properties.CountertopType;
 import com.crispytwig.nookcranny.registry.NCBlocks;
 import com.crispytwig.nookcranny.registry.NCItems;
@@ -70,6 +71,9 @@ public class NCModelProvider extends FabricModelProvider {
             if (block instanceof DrawerBlock) {
                 createDrawerBlock(generators, block);
             }
+            if (block instanceof LampBlock) {
+                //createLampBlock(generators, block);
+            }
         }
     }
 
@@ -103,25 +107,23 @@ public class NCModelProvider extends FabricModelProvider {
 
     private void createLampBlock(BlockModelGenerators generators, Block lamp) {
 
-        MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(lamp);
-
         var textMap = new TextureMapping()
                 .put(TextureSlot.ALL, getTexture(lamp, "lamp", ""))
                 .put(TextureSlot.PARTICLE, getTexture(lamp, "lamp", ""));
 
-        ResourceLocation bottom = LAMP_BOTTOM.create(lamp, textMap, generators.modelOutput);
+        ResourceLocation bottom = LAMP_BOTTOM.createWithSuffix(lamp,"_bottom", textMap, generators.modelOutput);
         ResourceLocation middle = LAMP_MIDDLE.createWithSuffix(lamp, "_middle", textMap, generators.modelOutput);
         ResourceLocation top = LAMP_TOP.createWithSuffix(lamp, "_top", textMap, generators.modelOutput);
+        ResourceLocation single = LAMP.createWithSuffix(lamp, "", textMap, generators.modelOutput);
+        ResourceLocation shade = LAMPSHADE.createWithSuffix(lamp, "_shade", textMap, generators.modelOutput);
 
-        multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
-        multiVariant.with(
-                PropertyDispatch.property(LampBlock.LAMP_TYPE)
-                        .select(LampBlock.LampType.BOTTOM, Variant.variant().with(VariantProperties.MODEL, bottom))
-                        .select(LampBlock.LampType.MIDDLE, Variant.variant().with(VariantProperties.MODEL, middle))
-                        .select(LampBlock.LampType.TOP, Variant.variant().with(VariantProperties.MODEL, top))
-        );
+        ResourceLocation lampId = LAMP.create(lamp, textMap, generators.modelOutput);
 
-        generators.blockStateOutput.accept(multiVariant);
+        generators.blockStateOutput.accept(createLampMultipart(
+                lamp,
+                type -> LAMP.createWithSuffix(lamp, "_type", textMap, generators.modelOutput),
+                lampId
+        ));
     }
 
     private void createSofaBlock(BlockModelGenerators generators, Block sofa) {
@@ -223,6 +225,32 @@ public class NCModelProvider extends FabricModelProvider {
                     Variant.variant()
                             .with(VariantProperties.MODEL, drawerId)
                             .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[direction.get2DDataValue() * 90 / 90])
+            );
+        }
+
+        return multiPart;
+    }
+
+
+    public static BlockStateGenerator createLampMultipart(
+            Block lampBlock,
+            Function<LampBlock.LampType, ResourceLocation> lampModelFunction,
+            ResourceLocation lampId
+    ) {
+        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(lampBlock);
+
+        for (LampBlock.LampType type : LampBlock.LampType.values()) {
+            multiPart.with(
+                    Condition.condition().term(LampBlock.LAMP_TYPE, type),
+                    Variant.variant().with(VariantProperties.MODEL, lampModelFunction.apply(type))
+            );
+        }
+
+        for (ColorList color : ColorList.values()) {
+            multiPart.with(
+                    Condition.condition().term(LampBlock.LAMPSHADE, color),
+                    Variant.variant()
+                            .with(VariantProperties.MODEL, lampId)
             );
         }
 

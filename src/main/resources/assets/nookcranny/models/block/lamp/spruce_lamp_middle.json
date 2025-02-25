@@ -1,0 +1,7 @@
+{
+  "parent": "nookcranny:block/template/lamp_middle",
+  "textures": {
+    "all": "nookcranny:block/lamp/spruce_lamp",
+    "particle": "block/spruce_planks"
+  }
+}

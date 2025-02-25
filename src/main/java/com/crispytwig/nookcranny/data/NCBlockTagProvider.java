@@ -44,7 +44,7 @@ public class NCBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             }
 
             if (block instanceof LampBlock) {
-                getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(block);
+                getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
             }
             if (block instanceof SpigotBlock) {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(block);

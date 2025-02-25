@@ -35,7 +35,7 @@ public class LampBlock extends Block implements SimpleWaterloggedBlock {
 
     public static final EnumProperty<ColorList> LAMPSHADE = EnumProperty.create("lampshade", ColorList.class);
 
-    protected static final VoxelShape SINGLE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
+    protected static final VoxelShape SINGLE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 5.0D, 11.0D);
     protected static final VoxelShape TOP = Block.box(3.0D, 7.0D, 3.0D, 13.0D, 16.0D, 13.0D);
     protected static final VoxelShape MIDDLE = Block.box(7.0D, 0.0D, 7.0D, 9.0D, 16.0D, 9.0D);
     protected static final VoxelShape BOTTOM = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 2.0D, 12.0D);

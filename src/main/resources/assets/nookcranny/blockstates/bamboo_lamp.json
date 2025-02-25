@@ -1,0 +1,36 @@
+{
+  "multipart": [
+    {
+      "apply": { "model": "nookcranny:block/lamp/bamboo_lamp" },
+      "when": { "lamp_type": "single" }
+    },
+    {
+      "apply": { "model": "nookcranny:block/lamp/bamboo_lamp_bottom" },
+      "when": { "lamp_type": "bottom" }
+    },
+    {
+      "apply": { "model": "nookcranny:block/lamp/bamboo_lamp_middle" },
+      "when": { "lamp_type": "middle" }
+    },
+    {
+      "apply": { "model": "nookcranny:block/lamp/bamboo_lamp_top" },
+      "when": { "lamp_type": "top" }
+    },
+    {
+      "apply": { "model": "nookcranny:block/lamp/bamboo_lamp_on" },
+      "when": { "lit": "true", "lamp_type": "single" }
+    },
+    {
+      "apply": { "model": "nookcranny:block/lamp/bamboo_lamp_top_on" },
+      "when": { "lit": "true", "lamp_type": "top" }
+    },
+    {
+      "apply": { "model": "nookcranny:block/template/lampshade" },
+      "when": { "lamp_type": "single", "lampshade": "white" }
+    },
+    {
+      "apply": { "model": "nookcranny:block/template/lampshade" },
+      "when": { "lamp_type": "top", "lampshade": "white" }
+    }
+  ]
+}

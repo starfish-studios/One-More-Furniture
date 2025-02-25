@@ -1,0 +1,7 @@
+{
+  "parent": "nookcranny:block/template/lamp_top",
+  "textures": {
+    "all": "nookcranny:block/lamp/crimson_lamp",
+    "particle": "block/crimson_planks"
+  }
+}

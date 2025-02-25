@@ -73,6 +73,16 @@ public class NCBlocks {
     public static final Block WARPED_FLOWER_BASKET = register("warped_flower_basket", new FlowerBasketBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
 
     public static final Block OAK_LAMP = register("oak_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
+    public static final Block SPRUCE_LAMP = register("spruce_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
+    public static final Block BIRCH_LAMP = register("birch_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
+    public static final Block JUNGLE_LAMP = register("jungle_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
+    public static final Block ACACIA_LAMP = register("acacia_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
+    public static final Block CHERRY_LAMP = register("cherry_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
+    public static final Block DARK_OAK_LAMP = register("dark_oak_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
+    public static final Block MANGROVE_LAMP = register("mangrove_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
+    public static final Block BAMBOO_LAMP = register("bamboo_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
+    public static final Block CRIMSON_LAMP = register("crimson_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
+    public static final Block WARPED_LAMP = register("warped_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
 
     public static final Block OAK_MAILBOX = register("oak_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
 

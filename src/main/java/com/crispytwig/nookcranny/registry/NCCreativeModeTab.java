@@ -27,6 +27,16 @@ public class NCCreativeModeTab {
 
                         output.accept(OAK_FLOWER_BASKET);
                         output.accept(OAK_LAMP);
+                        output.accept(SPRUCE_LAMP);
+                        output.accept(BIRCH_LAMP);
+                        output.accept(JUNGLE_LAMP);
+                        output.accept(ACACIA_LAMP);
+                        output.accept(CHERRY_LAMP);
+                        output.accept(DARK_OAK_LAMP);
+                        output.accept(MANGROVE_LAMP);
+                        output.accept(BAMBOO_LAMP);
+                        output.accept(CRIMSON_LAMP);
+                        output.accept(WARPED_LAMP);
                         output.accept(OAK_MAILBOX);
 
                         output.accept(OAK_NIGHTSTAND);

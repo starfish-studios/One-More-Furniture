@@ -29,6 +29,16 @@ public class NCItems {
     public static final Item OAK_FLOWER_BASKET = register("oak_flower_basket", new BlockItem(NCBlocks.OAK_FLOWER_BASKET, new FabricItemSettings()));
 
     public static final Item OAK_LAMP = register("oak_lamp", new BlockItem(NCBlocks.OAK_LAMP, new FabricItemSettings()));
+    public static final Item SPRUCE_LAMP = register("spruce_lamp", new BlockItem(NCBlocks.SPRUCE_LAMP, new FabricItemSettings()));
+    public static final Item BIRCH_LAMP = register("birch_lamp", new BlockItem(NCBlocks.BIRCH_LAMP, new FabricItemSettings()));
+    public static final Item JUNGLE_LAMP = register("jungle_lamp", new BlockItem(NCBlocks.JUNGLE_LAMP, new FabricItemSettings()));
+    public static final Item ACACIA_LAMP = register("acacia_lamp", new BlockItem(NCBlocks.ACACIA_LAMP, new FabricItemSettings()));
+    public static final Item CHERRY_LAMP = register("cherry_lamp", new BlockItem(NCBlocks.CHERRY_LAMP, new FabricItemSettings()));
+    public static final Item DARK_OAK_LAMP = register("dark_oak_lamp", new BlockItem(NCBlocks.DARK_OAK_LAMP, new FabricItemSettings()));
+    public static final Item MANGROVE_LAMP = register("mangrove_lamp", new BlockItem(NCBlocks.MANGROVE_LAMP, new FabricItemSettings()));
+    public static final Item BAMBOO_LAMP = register("bamboo_lamp", new BlockItem(NCBlocks.BAMBOO_LAMP, new FabricItemSettings()));
+    public static final Item CRIMSON_LAMP = register("crimson_lamp", new BlockItem(NCBlocks.CRIMSON_LAMP, new FabricItemSettings()));
+    public static final Item WARPED_LAMP = register("warped_lamp", new BlockItem(NCBlocks.WARPED_LAMP, new FabricItemSettings()));
 
     public static final Item OAK_MAILBOX = register("oak_mailbox", new BlockItem(NCBlocks.OAK_MAILBOX, new FabricItemSettings()));
 
