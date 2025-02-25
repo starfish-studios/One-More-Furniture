@@ -45,7 +45,7 @@ public class LampBlock extends Block implements SimpleWaterloggedBlock {
         super(properties);
         this.defaultBlockState()
                 .setValue(WATERLOGGED, false)
-                .setValue(LIT, true)
+                .setValue(LIT, false)
                 .setValue(LAMP_TYPE, LampType.SINGLE)
                 .setValue(LAMPSHADE, ColorList.WHITE);
     }
@@ -103,7 +103,7 @@ public class LampBlock extends Block implements SimpleWaterloggedBlock {
 
         return this.defaultBlockState()
                 .setValue(WATERLOGGED, waterlogged)
-                .setValue(LIT, true)
+                .setValue(LIT, false)
                 .setValue(LAMPSHADE, ColorList.WHITE)
                 .setValue(LAMP_TYPE, LampType.SINGLE);
     }
