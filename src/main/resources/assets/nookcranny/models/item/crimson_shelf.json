@@ -1,3 +1,6 @@
 {
-    "parent": "nookcranny:block/shelf/crimson_shelf_top_single"
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "nookcranny:item/crimson_shelf"
+    }
 }
