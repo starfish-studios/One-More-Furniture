@@ -118,6 +118,20 @@ public class LampBlock extends Block implements SimpleWaterloggedBlock {
         if (!state.canSurvive(level, pos)) {
             level.scheduleTick(pos, this, 1);
         }
+
+        var thisType = state.getValue(LAMP_TYPE);
+        var aboveState = level.getBlockState(pos.above());
+
+        if (!(aboveState.getBlock() instanceof LampBlock)) {
+            if (thisType == LampType.MIDDLE) {
+                level.setBlock(pos, state.setValue(LAMP_TYPE, LampType.TOP), 3);
+            }
+
+            if (thisType == LampType.BOTTOM) {
+                level.setBlock(pos, state.setValue(LAMP_TYPE, LampType.SINGLE), 3);
+            }
+        }
+
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
@@ -137,9 +151,8 @@ public class LampBlock extends Block implements SimpleWaterloggedBlock {
 
         return switch (type) {
             case SINGLE -> super.canSurvive(state, level, pos);
-            case MIDDLE -> belowIsLamp && aboveIsLamp;
+            case MIDDLE, TOP -> belowIsLamp;
             case BOTTOM -> aboveIsLamp;
-            case TOP -> belowIsLamp;
         };
     }
 
