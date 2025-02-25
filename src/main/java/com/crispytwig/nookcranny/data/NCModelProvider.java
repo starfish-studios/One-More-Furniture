@@ -58,13 +58,17 @@ public class NCModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators generators) {
-        createDrawerBlock(generators, NCBlocks.OAK_DRAWER);
 
-        createNightstandBlock(generators, NCBlocks.OAK_NIGHTSTAND);
 
         for (Block block : NCBlocks.BLOCKS) {
             if (block instanceof SofaBlock) {
                 createSofaBlock(generators, block);
+            }
+            if (block instanceof NightstandBlock) {
+                createNightstandBlock(generators, block);
+            }
+            if (block instanceof DrawerBlock) {
+                createDrawerBlock(generators, block);
             }
         }
     }

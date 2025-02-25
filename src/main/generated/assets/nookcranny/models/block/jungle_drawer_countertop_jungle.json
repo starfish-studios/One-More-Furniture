@@ -1,0 +1,8 @@
+{
+  "parent": "nookcranny:block/template/countertop",
+  "textures": {
+    "particle": "nookcranny:block/drawer/jungle_drawer_side",
+    "sides": "nookcranny:block/drawer/jungle_drawer_side",
+    "top": "nookcranny:block/jungle_drawer_top"
+  }
+}
