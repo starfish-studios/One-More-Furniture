@@ -45,13 +45,6 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
             int seed = Item.getId(stack.getItem()) + stack.getDamageValue();
             this.random.setSeed(seed);
 
-            if (!NCConfig.stillItems) {
-                float spinSpeed = 2.0f;
-                float dynamicRotation = (blockEntity.getLevel().getGameTime() + partialTick) * spinSpeed % 360;
-                poseStack.translate(0.0, (Math.sin((blockEntity.getLevel().getGameTime() + partialTick) / 8.0) / 16.0), 0.0);
-                poseStack.mulPose(Axis.YP.rotationDegrees(dynamicRotation));
-            }
-
             int renderCount = getAmount(stack.getCount());
             for (int i = 0; i < renderCount; ++i) {
 
@@ -89,7 +82,12 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
                     }
                 }
 
-
+                if (!NCConfig.stillItems) {
+                    float spinSpeed = 2.0f;
+                    float dynamicRotation = (blockEntity.getLevel().getGameTime() + partialTick) * spinSpeed % 360;
+                    poseStack.translate(0.0, (Math.sin((blockEntity.getLevel().getGameTime() + partialTick) / 8.0) / 16.0), 0.0);
+                    poseStack.mulPose(Axis.YP.rotationDegrees(dynamicRotation));
+                }
 
                 Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
 
