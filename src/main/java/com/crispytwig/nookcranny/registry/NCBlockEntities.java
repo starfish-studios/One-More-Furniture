@@ -13,7 +13,19 @@ import static com.crispytwig.nookcranny.NookAndCranny.MOD_ID;
 
 public class NCBlockEntities {
 
-    public static final BlockEntityType<MailboxBlockEntity> MAILBOX = register("mailbox", FabricBlockEntityTypeBuilder.create(MailboxBlockEntity::new, NCBlocks.OAK_MAILBOX).build(null));
+    public static final BlockEntityType<MailboxBlockEntity> MAILBOX = register("mailbox", FabricBlockEntityTypeBuilder.create(MailboxBlockEntity::new,
+            NCBlocks.OAK_MAILBOX,
+            NCBlocks.SPRUCE_MAILBOX,
+            NCBlocks.BIRCH_MAILBOX,
+            NCBlocks.ACACIA_MAILBOX,
+            NCBlocks.DARK_OAK_MAILBOX,
+            NCBlocks.JUNGLE_MAILBOX,
+            NCBlocks.CHERRY_MAILBOX,
+            NCBlocks.MANGROVE_MAILBOX,
+            NCBlocks.BAMBOO_MAILBOX,
+            NCBlocks.CRIMSON_MAILBOX,
+            NCBlocks.WARPED_MAILBOX
+    ).build(null));
 
     public static final BlockEntityType<DrawerBlockEntity> DRAWER = register("drawer", FabricBlockEntityTypeBuilder.create(DrawerBlockEntity::new, NCBlocks.OAK_DRAWER).build(null));
 

@@ -37,7 +37,18 @@ public class NCCreativeModeTab {
                         output.accept(BAMBOO_LAMP);
                         output.accept(CRIMSON_LAMP);
                         output.accept(WARPED_LAMP);
+
                         output.accept(OAK_MAILBOX);
+                        output.accept(SPRUCE_MAILBOX);
+                        output.accept(BIRCH_MAILBOX);
+                        output.accept(JUNGLE_MAILBOX);
+                        output.accept(ACACIA_MAILBOX);
+                        output.accept(CHERRY_MAILBOX);
+                        output.accept(DARK_OAK_MAILBOX);
+                        output.accept(MANGROVE_MAILBOX);
+                        output.accept(BAMBOO_MAILBOX);
+                        output.accept(CRIMSON_MAILBOX);
+                        output.accept(WARPED_MAILBOX);
 
                         output.accept(OAK_NIGHTSTAND);
                         output.accept(SPRUCE_NIGHTSTAND);

@@ -1,6 +1,7 @@
 package com.crispytwig.nookcranny;
 
 import com.crispytwig.nookcranny.blocks.LampBlock;
+import com.crispytwig.nookcranny.blocks.MailboxBlock;
 import com.crispytwig.nookcranny.client.gui.screens.DrawerScreen;
 import com.crispytwig.nookcranny.client.gui.screens.MailboxScreen;
 import com.crispytwig.nookcranny.client.renderer.SeatRenderer;
@@ -63,10 +64,10 @@ public class NCVanillaIntegration {
 
         private static void registerBlockRenderLayers() {
             NCBlocks.BLOCKS.stream().filter(block -> block instanceof LampBlock).forEach(lamp -> BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), lamp));
+            NCBlocks.BLOCKS.stream().filter(block -> block instanceof MailboxBlock).forEach(mailbox -> BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), mailbox));
 
             BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
                     NCBlocks.SPIGOT,
-                    NCBlocks.OAK_MAILBOX,
 //                    NCBlocks.PLATE,
 
                     NCBlocks.OAK_BENCH,

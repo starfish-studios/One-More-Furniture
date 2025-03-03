@@ -85,6 +85,16 @@ public class NCBlocks {
     public static final Block WARPED_LAMP = register("warped_lamp", new LampBlock(copyOf(Blocks.TORCH).noOcclusion().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0)));
 
     public static final Block OAK_MAILBOX = register("oak_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block SPRUCE_MAILBOX = register("spruce_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block BIRCH_MAILBOX = register("birch_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block JUNGLE_MAILBOX = register("jungle_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block ACACIA_MAILBOX = register("acacia_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block CHERRY_MAILBOX = register("cherry_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block DARK_OAK_MAILBOX = register("dark_oak_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block MANGROVE_MAILBOX = register("mangrove_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block BAMBOO_MAILBOX = register("bamboo_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block CRIMSON_MAILBOX = register("crimson_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block WARPED_MAILBOX = register("warped_mailbox", new MailboxBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
 
     public static final Block OAK_SHELF = register("oak_shelf", new ShelfBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
     public static final Block SPRUCE_SHELF = register("spruce_shelf", new ShelfBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));

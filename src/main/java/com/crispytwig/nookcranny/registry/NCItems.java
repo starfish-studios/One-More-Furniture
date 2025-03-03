@@ -41,6 +41,16 @@ public class NCItems {
     public static final Item WARPED_LAMP = register("warped_lamp", new BlockItem(NCBlocks.WARPED_LAMP, new FabricItemSettings()));
 
     public static final Item OAK_MAILBOX = register("oak_mailbox", new BlockItem(NCBlocks.OAK_MAILBOX, new FabricItemSettings()));
+    public static final Item SPRUCE_MAILBOX = register("spruce_mailbox", new BlockItem(NCBlocks.SPRUCE_MAILBOX, new FabricItemSettings()));
+    public static final Item BIRCH_MAILBOX = register("birch_mailbox", new BlockItem(NCBlocks.BIRCH_MAILBOX, new FabricItemSettings()));
+    public static final Item JUNGLE_MAILBOX = register("jungle_mailbox", new BlockItem(NCBlocks.JUNGLE_MAILBOX, new FabricItemSettings()));
+    public static final Item ACACIA_MAILBOX = register("acacia_mailbox", new BlockItem(NCBlocks.ACACIA_MAILBOX, new FabricItemSettings()));
+    public static final Item CHERRY_MAILBOX = register("cherry_mailbox", new BlockItem(NCBlocks.CHERRY_MAILBOX, new FabricItemSettings()));
+    public static final Item DARK_OAK_MAILBOX = register("dark_oak_mailbox", new BlockItem(NCBlocks.DARK_OAK_MAILBOX, new FabricItemSettings()));
+    public static final Item MANGROVE_MAILBOX = register("mangrove_mailbox", new BlockItem(NCBlocks.MANGROVE_MAILBOX, new FabricItemSettings()));
+    public static final Item BAMBOO_MAILBOX = register("bamboo_mailbox", new BlockItem(NCBlocks.BAMBOO_MAILBOX, new FabricItemSettings()));
+    public static final Item CRIMSON_MAILBOX = register("crimson_mailbox", new BlockItem(NCBlocks.CRIMSON_MAILBOX, new FabricItemSettings()));
+    public static final Item WARPED_MAILBOX = register("warped_mailbox", new BlockItem(NCBlocks.WARPED_MAILBOX, new FabricItemSettings()));
 
     public static final Item OAK_NIGHTSTAND = register("oak_nightstand", new BlockItem(NCBlocks.OAK_NIGHTSTAND, new FabricItemSettings()));
     public static final Item SPRUCE_NIGHTSTAND = register("spruce_nightstand", new BlockItem(NCBlocks.SPRUCE_NIGHTSTAND, new FabricItemSettings()));
