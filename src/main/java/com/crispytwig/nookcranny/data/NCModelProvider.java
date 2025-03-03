@@ -140,23 +140,131 @@ public class NCModelProvider extends FabricModelProvider {
         ResourceLocation inner = SOFA_INNER.createWithSuffix(sofa, "_inner", textMap, generators.modelOutput);
         ResourceLocation outer = SOFA_OUTER.createWithSuffix(sofa, "_outer", textMap, generators.modelOutput);
 
-        multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
-
         multiVariant.with(
-                PropertyDispatch.property(SofaBlock.SHAPE)
-                        .select(SofaBlock.SofaShape.SINGLE, Variant.variant().with(VariantProperties.MODEL, single))
-                        .select(SofaBlock.SofaShape.LEFT, Variant.variant().with(VariantProperties.MODEL, left))
-                        .select(SofaBlock.SofaShape.RIGHT, Variant.variant().with(VariantProperties.MODEL, right))
-                        .select(SofaBlock.SofaShape.MIDDLE, Variant.variant().with(VariantProperties.MODEL, middle))
-                        .select(SofaBlock.SofaShape.INNER_LEFT, Variant.variant().with(VariantProperties.MODEL, inner))
-                        .select(SofaBlock.SofaShape.INNER_RIGHT, Variant.variant()
-                                .with(VariantProperties.MODEL, inner)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
-                        .select(SofaBlock.SofaShape.OUTER_LEFT, Variant.variant()
+                PropertyDispatch.properties(SofaBlock.SHAPE, BlockStateProperties.HORIZONTAL_FACING)
+                        //LEFT
+                        .select(SofaBlock.SofaShape.LEFT, Direction.NORTH, Variant.variant()
+                                .with(VariantProperties.MODEL, left))
+
+                        .select(SofaBlock.SofaShape.LEFT, Direction.EAST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.MODEL, left))
+
+                        .select(SofaBlock.SofaShape.LEFT, Direction.WEST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.MODEL, left))
+
+                        .select(SofaBlock.SofaShape.LEFT, Direction.SOUTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.MODEL, left))
+                        //RIGHT
+                        .select(SofaBlock.SofaShape.RIGHT, Direction.NORTH, Variant.variant()
+                                .with(VariantProperties.MODEL, right))
+
+                        .select(SofaBlock.SofaShape.RIGHT, Direction.EAST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.MODEL, right))
+
+                        .select(SofaBlock.SofaShape.RIGHT, Direction.WEST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.MODEL, right))
+
+                        .select(SofaBlock.SofaShape.RIGHT, Direction.SOUTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.MODEL, right))
+                        //MIDDLE
+                        .select(SofaBlock.SofaShape.MIDDLE, Direction.NORTH, Variant.variant()
+                                .with(VariantProperties.MODEL, middle))
+
+                        .select(SofaBlock.SofaShape.MIDDLE, Direction.EAST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.MODEL, middle))
+
+                        .select(SofaBlock.SofaShape.MIDDLE, Direction.WEST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.MODEL, middle))
+
+                        .select(SofaBlock.SofaShape.MIDDLE, Direction.SOUTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.MODEL, middle))
+                        //SINGLE
+                        .select(SofaBlock.SofaShape.SINGLE, Direction.NORTH, Variant.variant()
+                                .with(VariantProperties.MODEL, single))
+
+                        .select(SofaBlock.SofaShape.SINGLE, Direction.EAST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.MODEL, single))
+
+                        .select(SofaBlock.SofaShape.SINGLE, Direction.WEST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.MODEL, single))
+
+                        .select(SofaBlock.SofaShape.SINGLE, Direction.SOUTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.MODEL, single))
+                        //INNER_LEFT
+                        .select(SofaBlock.SofaShape.INNER_LEFT, Direction.NORTH, Variant.variant()
+                                .with(VariantProperties.MODEL, inner))
+
+                        .select(SofaBlock.SofaShape.INNER_LEFT, Direction.EAST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.MODEL, inner))
+
+                        .select(SofaBlock.SofaShape.INNER_LEFT, Direction.WEST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.MODEL, inner))
+
+                        .select(SofaBlock.SofaShape.INNER_LEFT, Direction.SOUTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.MODEL, inner))
+                        //INNER_RIGHT
+                        .select(SofaBlock.SofaShape.INNER_RIGHT, Direction.NORTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.MODEL, inner))
+
+                        .select(SofaBlock.SofaShape.INNER_RIGHT, Direction.EAST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.MODEL, inner))
+
+                        .select(SofaBlock.SofaShape.INNER_RIGHT, Direction.WEST, Variant.variant()
+                                .with(VariantProperties.MODEL, inner))
+
+                        .select(SofaBlock.SofaShape.INNER_RIGHT, Direction.SOUTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.MODEL, inner))
+
+                        //OUTER_LEFT
+                        .select(SofaBlock.SofaShape.OUTER_LEFT, Direction.NORTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
                                 .with(VariantProperties.MODEL, outer))
-                        .select(SofaBlock.SofaShape.OUTER_RIGHT, Variant.variant()
-                                .with(VariantProperties.MODEL, outer)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+
+                        .select(SofaBlock.SofaShape.OUTER_LEFT, Direction.EAST, Variant.variant()
+                                .with(VariantProperties.MODEL, outer))
+
+                        .select(SofaBlock.SofaShape.OUTER_LEFT, Direction.WEST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.MODEL, outer))
+
+                        .select(SofaBlock.SofaShape.OUTER_LEFT, Direction.SOUTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.MODEL, outer))
+                        //OUTER_RIGHT
+                        .select(SofaBlock.SofaShape.OUTER_RIGHT, Direction.NORTH, Variant.variant()
+                                .with(VariantProperties.MODEL, outer))
+
+                        .select(SofaBlock.SofaShape.OUTER_RIGHT, Direction.EAST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                                .with(VariantProperties.MODEL, outer))
+
+                        .select(SofaBlock.SofaShape.OUTER_RIGHT, Direction.WEST, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                                .with(VariantProperties.MODEL, outer))
+
+                        .select(SofaBlock.SofaShape.OUTER_RIGHT, Direction.SOUTH, Variant.variant()
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                                .with(VariantProperties.MODEL, outer))
+
+
         );
 
         generators.blockStateOutput.accept(multiVariant);

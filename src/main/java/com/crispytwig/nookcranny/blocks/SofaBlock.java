@@ -128,33 +128,38 @@ public class SofaBlock extends SeatBlock implements SimpleWaterloggedBlock {
     public static SofaShape getConnection(BlockState state, Level level, BlockPos pos) {
         Direction facing = state.getValue(FACING);
 
-        Direction dir1;
-        BlockState state1 = level.getBlockState(pos.relative(facing));
-        if (state1.getBlock() instanceof SofaBlock && (dir1 = state1.getValue(FACING)).getAxis() != state.getValue(FACING).getAxis() && isDifferentOrientation(state, level, pos, dir1.getOpposite())) {
-            if (dir1 == facing.getCounterClockWise()) {
-                return SofaShape.INNER_LEFT;
+        BlockState oppositeState = level.getBlockState(pos.relative(facing));
+        if (oppositeState.getBlock() instanceof SofaBlock) {
+            if (oppositeState.getValue(FACING) != state.getValue(FACING)) {
+                if (oppositeState.getValue(FACING) == facing.getClockWise()) {
+                    return SofaShape.INNER_RIGHT;
+                }
+                if (oppositeState.getValue(FACING) == facing.getCounterClockWise()) {
+                    return SofaShape.INNER_LEFT;
+                }
             }
-            return SofaShape.INNER_RIGHT;
         }
 
-        Direction dir2;
-        BlockState state2 = level.getBlockState(pos.relative(facing.getOpposite()));
-        if (state2.getBlock() instanceof SofaBlock && (dir2 = state2.getValue(FACING)).getAxis() != state.getValue(FACING).getAxis() && isDifferentOrientation(state, level, pos, dir2)) {
-            if (dir2 == facing.getCounterClockWise()) {
-                return SofaShape.OUTER_LEFT;
+        BlockState behindState = level.getBlockState(pos.relative(facing.getOpposite()));
+        if (behindState.getBlock() instanceof SofaBlock) {
+            if (behindState.getValue(FACING) != state.getValue(FACING)) {
+                if (behindState.getValue(FACING) == facing.getCounterClockWise()) {
+                    return SofaShape.OUTER_LEFT;
+                }
+                if (behindState.getValue(FACING) == facing.getClockWise()) {
+                    return SofaShape.OUTER_RIGHT;
+                }
             }
-            return SofaShape.OUTER_RIGHT;
         }
+
 
         boolean left = canConnect(level, pos, state.getValue(FACING).getCounterClockWise());
         boolean right = canConnect(level, pos, state.getValue(FACING).getClockWise());
         if (left && right) {
             return SofaShape.MIDDLE;
-        }
-        else if (left) {
+        } else if (left) {
             return SofaShape.LEFT;
-        }
-        else if (right) {
+        } else if (right) {
             return SofaShape.RIGHT;
         }
         return SofaShape.SINGLE;
