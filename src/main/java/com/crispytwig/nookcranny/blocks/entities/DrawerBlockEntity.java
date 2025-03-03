@@ -9,12 +9,15 @@ import com.crispytwig.nookcranny.blocks.DrawerBlock;
 import com.crispytwig.nookcranny.inventory.DrawerMenu;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import com.mojang.datafixers.util.Pair;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -42,12 +45,12 @@ public class DrawerBlockEntity extends RandomizableContainerBlockEntity implemen
     private static final SoundEvent SOUND_OPEN = SoundEvents.BARREL_OPEN;
     private static final SoundEvent SOUND_CLOSE = SoundEvents.BARREL_CLOSE;
 
-    private NonNullList<ItemStack> items;
+    private NonNullList<ItemStack> items = NonNullList.withSize(10, ItemStack.EMPTY);
     private final ContainerOpenersCounter openersCounter;
 
     public DrawerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NCBlockEntities.DRAWER, blockPos, blockState);
-        this.items = NonNullList.withSize(27, ItemStack.EMPTY);
+
         this.openersCounter = new ContainerOpenersCounter() {
             protected void onOpen(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
                 DrawerBlockEntity.this.playSound(blockState, SOUND_OPEN);
@@ -71,34 +74,21 @@ public class DrawerBlockEntity extends RandomizableContainerBlockEntity implemen
         };
     }
 
-    public Component getDrawerName() {
-        return this.getDisplayName();
-    }
-
-
     protected void saveAdditional(@NotNull CompoundTag compoundTag) {
         super.saveAdditional(compoundTag);
-        if (!this.trySaveLootTable(compoundTag)) {
-            ContainerHelper.saveAllItems(compoundTag, this.items);
-        }
-        // Saves items when the inventory is closed or updated
-        System.out.println("Drawer items saved!");
 
+        ContainerHelper.saveAllItems(compoundTag, this.items);
     }
 
     public void load(@NotNull CompoundTag compoundTag) {
         super.load(compoundTag);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        if (!this.tryLoadLootTable(compoundTag)) {
-            ContainerHelper.loadAllItems(compoundTag, this.items);
-        }
-        // Loads the items when the block is placed with saved NBT
-        System.out.println("Drawer items loaded!");
 
+        ContainerHelper.loadAllItems(compoundTag, this.items);
     }
 
     public int getContainerSize() {
-        return 27;
+        return 10;
     }
 
     protected @NotNull NonNullList<ItemStack> getItems() {
@@ -149,9 +139,34 @@ public class DrawerBlockEntity extends RandomizableContainerBlockEntity implemen
                 }
             }
 
-            return new DrawerMenu(i, inventory, this, raycastResult.getFirst() < 7 ? 0 : 5);
+            openScreen((DrawerBlockEntity) blockEntity, player, raycastResult);
+
         }
         return null;
+    }
+
+    private void openScreen(DrawerBlockEntity blockEntity, Player player,  Pair<Integer, Direction> raycastResult){
+        var screen = new ExtendedScreenHandlerFactory() {
+
+            @Nullable
+            @Override
+            public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+                return new DrawerMenu(i, inventory, blockEntity, raycastResult.getFirst() < 7 ? 0 : 5);
+            }
+
+            @Override
+            public Component getDisplayName() {
+                assert blockEntity instanceof DrawerBlockEntity;
+                return blockEntity.getDisplayName();
+            }
+
+            @Override
+            public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
+
+            }
+        };
+
+        player.openMenu(screen);
     }
 
     //UNUSED, SHOULDN'T BE CALLED (?)
@@ -164,7 +179,7 @@ public class DrawerBlockEntity extends RandomizableContainerBlockEntity implemen
         if (!this.remove && !player.isSpectator()) {
             this.openersCounter.incrementOpeners(player, Objects.requireNonNull(this.getLevel()), this.getBlockPos(), this.getBlockState());
         }
-        Pair<Integer, Direction> raycastResult = new Pair<>(0, Direction.UP);
+        Pair<Integer, Direction> raycastResult;
 
         HitResult hitResult = player.pick(10, 1, false);
         if (hitResult.getType() == HitResult.Type.BLOCK) {
@@ -191,7 +206,7 @@ public class DrawerBlockEntity extends RandomizableContainerBlockEntity implemen
             this.openersCounter.decrementOpeners(player, Objects.requireNonNull(this.getLevel()), this.getBlockPos(), this.getBlockState());
         }
 
-        Pair<Integer, Direction> raycastResult = new Pair<>(0, Direction.UP);
+        Pair<Integer, Direction> raycastResult;
 
         HitResult hitResult = player.pick(10, 1, false);
         if (hitResult.getType() == HitResult.Type.BLOCK) {
@@ -211,14 +226,12 @@ public class DrawerBlockEntity extends RandomizableContainerBlockEntity implemen
                 this.updateTopState(this.getBlockState(), false);
             }
         }
-
     }
 
     public void recheckOpen() {
         if (!this.remove) {
             this.openersCounter.recheckOpeners(Objects.requireNonNull(this.getLevel()), this.getBlockPos(), this.getBlockState());
         }
-
     }
 
     void updateTopState(BlockState blockState, boolean bl) {

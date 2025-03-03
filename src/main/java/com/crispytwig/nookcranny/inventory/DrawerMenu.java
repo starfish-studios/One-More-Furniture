@@ -6,6 +6,7 @@
 package com.crispytwig.nookcranny.inventory;
 
 import com.crispytwig.nookcranny.registry.NCMenus;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -18,17 +19,16 @@ public class DrawerMenu extends AbstractContainerMenu {
     private static final int SLOT_COUNT = 5;
     private final Container drawer;
 
-    public DrawerMenu(int i, Inventory inventory) {
+    public DrawerMenu(int i, Inventory inventory, FriendlyByteBuf buf) {
         this(i, inventory, new SimpleContainer(SLOT_COUNT), 0);
     }
-
 
     public Container getContainer() {
         return this.drawer;
     }
 
     public DrawerMenu(int i, Inventory inventory, Container container, int listOffset) {
-        super(NCMenus.GENERIC_1X5, i);
+        super(NCMenus.DRAWER, i);
         checkContainerSize(container, 5);
         this.drawer = container;
         container.startOpen(inventory.player);
