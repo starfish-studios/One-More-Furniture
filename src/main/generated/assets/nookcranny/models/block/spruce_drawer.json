@@ -1,8 +1,8 @@
 {
   "parent": "nookcranny:block/template/drawer",
   "textures": {
-    "front": "nookcranny:block/drawer/spruce_drawer_front",
-    "sides": "nookcranny:block/drawer/spruce_drawer_side",
-    "top": "nookcranny:block/spruce_drawer_top"
+    "front": "nookcranny:block/drawers/spruce_drawer_front",
+    "sides": "nookcranny:block/drawers/spruce_drawer_side",
+    "top": "nookcranny:block/drawers/spruce_drawer_top"
   }
 }

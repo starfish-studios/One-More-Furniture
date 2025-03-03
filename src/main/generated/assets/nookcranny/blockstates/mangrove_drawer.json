@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "nookcranny:block/mangrove_drawer_countertop_oak"
+        "model": "nookcranny:block/drawers/countertop/countertop_oak"
       },
       "when": {
         "countertop": "oak"
@@ -10,7 +10,7 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/mangrove_drawer_countertop_spruce"
+        "model": "nookcranny:block/drawers/countertop/countertop_spruce"
       },
       "when": {
         "countertop": "spruce"
@@ -18,7 +18,7 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/mangrove_drawer_countertop_birch"
+        "model": "nookcranny:block/drawers/countertop/countertop_birch"
       },
       "when": {
         "countertop": "birch"
@@ -26,7 +26,7 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/mangrove_drawer_countertop_jungle"
+        "model": "nookcranny:block/drawers/countertop/countertop_jungle"
       },
       "when": {
         "countertop": "jungle"
@@ -34,7 +34,7 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/mangrove_drawer_countertop_acacia"
+        "model": "nookcranny:block/drawers/countertop/countertop_acacia"
       },
       "when": {
         "countertop": "acacia"
@@ -42,7 +42,7 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/mangrove_drawer_countertop_dark_oak"
+        "model": "nookcranny:block/drawers/countertop/countertop_dark_oak"
       },
       "when": {
         "countertop": "dark_oak"
@@ -50,7 +50,7 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/mangrove_drawer_countertop_crimson"
+        "model": "nookcranny:block/drawers/countertop/countertop_crimson"
       },
       "when": {
         "countertop": "crimson"
@@ -58,7 +58,7 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/mangrove_drawer_countertop_warped"
+        "model": "nookcranny:block/drawers/countertop/countertop_warped"
       },
       "when": {
         "countertop": "warped"
@@ -66,7 +66,7 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/mangrove_drawer_countertop_mangrove"
+        "model": "nookcranny:block/drawers/countertop/countertop_mangrove"
       },
       "when": {
         "countertop": "mangrove"
@@ -74,7 +74,7 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/mangrove_drawer_countertop_bamboo"
+        "model": "nookcranny:block/drawers/countertop/countertop_bamboo"
       },
       "when": {
         "countertop": "bamboo"
@@ -82,7 +82,7 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/mangrove_drawer_countertop_cherry"
+        "model": "nookcranny:block/drawers/countertop/countertop_cherry"
       },
       "when": {
         "countertop": "cherry"
@@ -91,7 +91,7 @@
     {
       "apply": {
         "model": "nookcranny:block/mangrove_drawer",
-        "y": 180
+        "y": 0
       },
       "when": {
         "facing": "north"
@@ -100,7 +100,7 @@
     {
       "apply": {
         "model": "nookcranny:block/mangrove_drawer",
-        "y": 270
+        "y": 90
       },
       "when": {
         "facing": "east"
@@ -109,7 +109,7 @@
     {
       "apply": {
         "model": "nookcranny:block/mangrove_drawer",
-        "y": 0
+        "y": 180
       },
       "when": {
         "facing": "south"
@@ -118,7 +118,7 @@
     {
       "apply": {
         "model": "nookcranny:block/mangrove_drawer",
-        "y": 90
+        "y": 270
       },
       "when": {
         "facing": "west"

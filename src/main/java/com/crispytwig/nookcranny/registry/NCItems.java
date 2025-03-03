@@ -23,6 +23,16 @@ public class NCItems {
     public static final Item COPPER_SAW = register("copper_saw", new Item(new FabricItemSettings().maxCount(1).durability(128)));
 
     public static final Item OAK_DRAWER = register("oak_drawer", new BlockItem(NCBlocks.OAK_DRAWER, new FabricItemSettings()));
+    public static final Item SPRUCE_DRAWER = register("spruce_drawer", new BlockItem(NCBlocks.SPRUCE_DRAWER, new FabricItemSettings()));
+    public static final Item BIRCH_DRAWER = register("birch_drawer", new BlockItem(NCBlocks.BIRCH_DRAWER, new FabricItemSettings()));
+    public static final Item JUNGLE_DRAWER = register("jungle_drawer", new BlockItem(NCBlocks.JUNGLE_DRAWER, new FabricItemSettings()));
+    public static final Item ACACIA_DRAWER = register("acacia_drawer", new BlockItem(NCBlocks.ACACIA_DRAWER, new FabricItemSettings()));
+    public static final Item CHERRY_DRAWER = register("cherry_drawer", new BlockItem(NCBlocks.CHERRY_DRAWER, new FabricItemSettings()));
+    public static final Item DARK_OAK_DRAWER = register("dark_oak_drawer", new BlockItem(NCBlocks.DARK_OAK_DRAWER, new FabricItemSettings()));
+    public static final Item MANGROVE_DRAWER = register("mangrove_drawer", new BlockItem(NCBlocks.MANGROVE_DRAWER, new FabricItemSettings()));
+    public static final Item BAMBOO_DRAWER = register("bamboo_drawer", new BlockItem(NCBlocks.BAMBOO_DRAWER, new FabricItemSettings()));
+    public static final Item CRIMSON_DRAWER = register("crimson_drawer", new BlockItem(NCBlocks.CRIMSON_DRAWER, new FabricItemSettings()));
+    public static final Item WARPED_DRAWER = register("warped_drawer", new BlockItem(NCBlocks.WARPED_DRAWER, new FabricItemSettings()));
 
     public static final Item OAK_TALL_STOOL = register("oak_tall_stool", new BlockItem(NCBlocks.OAK_TALL_STOOL, new FabricItemSettings()));
 

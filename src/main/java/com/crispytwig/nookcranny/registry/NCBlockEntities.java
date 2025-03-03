@@ -27,7 +27,19 @@ public class NCBlockEntities {
             NCBlocks.WARPED_MAILBOX
     ).build(null));
 
-    public static final BlockEntityType<DrawerBlockEntity> DRAWER = register("drawer", FabricBlockEntityTypeBuilder.create(DrawerBlockEntity::new, NCBlocks.OAK_DRAWER).build(null));
+    public static final BlockEntityType<DrawerBlockEntity> DRAWER = register("drawer", FabricBlockEntityTypeBuilder.create(DrawerBlockEntity::new,
+            NCBlocks.OAK_DRAWER,
+            NCBlocks.SPRUCE_DRAWER,
+            NCBlocks.BIRCH_DRAWER,
+            NCBlocks.ACACIA_DRAWER,
+            NCBlocks.DARK_OAK_DRAWER,
+            NCBlocks.JUNGLE_DRAWER,
+            NCBlocks.CHERRY_DRAWER,
+            NCBlocks.MANGROVE_DRAWER,
+            NCBlocks.BAMBOO_DRAWER,
+            NCBlocks.CRIMSON_DRAWER,
+            NCBlocks.WARPED_DRAWER
+    ).build(null));
 
     public static final BlockEntityType<SpigotBlockEntity> SPIGOT = register("spigot", FabricBlockEntityTypeBuilder.create(SpigotBlockEntity::new, NCBlocks.SPIGOT).build(null));
 

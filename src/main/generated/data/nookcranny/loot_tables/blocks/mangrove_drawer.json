@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "nookcranny:mangrove_drawer"
         }
       ],
       "rolls": 1.0

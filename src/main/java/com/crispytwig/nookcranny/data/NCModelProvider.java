@@ -16,16 +16,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.blockstates.*;
-import net.minecraft.data.models.model.ModelTemplate;
-import net.minecraft.data.models.model.ModelTemplates;
-import net.minecraft.data.models.model.TextureMapping;
-import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class NCModelProvider extends FabricModelProvider {
 
@@ -124,6 +122,102 @@ public class NCModelProvider extends FabricModelProvider {
                 type -> LAMP.createWithSuffix(lamp, "_type", textMap, generators.modelOutput),
                 lampId
         ));
+    }
+
+
+
+
+    /**
+     * Creates a reference to our own model templates
+     */
+    public static ModelTemplate createTemplate(String blockModelLocation, TextureSlot... requiredSlots) {
+        return new ModelTemplate(Optional.of(
+                new ResourceLocation(
+                        NookAndCranny.MOD_ID,
+                        "block/template/" + blockModelLocation
+                )
+        ),
+                Optional.empty(),
+                requiredSlots
+        );
+    }
+
+    /**
+     *
+     * @param generators obligatory fabric wrapper
+     * @param block the drawer to generate a model for
+     */
+    public final void createDrawerBlock(BlockModelGenerators generators, Block block) {
+        TextureMapping baseMapping = new TextureMapping()
+                .put(TextureSlot.TOP, getTexture(block, "drawers", "_top"))
+                .put(SIDES, getTexture(block, "drawers", "_side"));
+
+        TextureMapping drawerTextureMapping = baseMapping.put(
+                TextureSlot.FRONT, getTexture(block, "drawers", "_front")
+        );
+
+        ResourceLocation drawerId = DRAWER_CUBE_ORIENTABLE.create(block, drawerTextureMapping, generators.modelOutput);
+
+        generators.blockStateOutput.accept(createDrawerMultipart(
+                block,
+                drawerId
+        ));
+    }
+
+    public static BlockStateGenerator createDrawerMultipart(
+            Block drawerBlock,
+            ResourceLocation drawerId
+    ) {
+        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(drawerBlock);
+
+        for (CountertopType type : CountertopType.values()) {
+            multiPart.with(
+                    Condition.condition().term(DrawerBlock.COUNTERTOP, type),
+                    Variant.variant().with(VariantProperties.MODEL, new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/countertop_"+type.getSerializedName()))
+            );
+        }
+
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            multiPart.with(
+                    Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, direction),
+                    Variant.variant()
+                            .with(VariantProperties.MODEL, drawerId)
+                            .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[((direction.get2DDataValue() * 90 + 180) / 90) % 4])
+            );
+        }
+
+        return multiPart;
+    }
+
+
+    public static BlockStateGenerator createLampMultipart(
+            Block lampBlock,
+            Function<LampBlock.LampType, ResourceLocation> lampModelFunction,
+            ResourceLocation lampId
+    ) {
+        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(lampBlock);
+
+        for (LampBlock.LampType type : LampBlock.LampType.values()) {
+            multiPart.with(
+                    Condition.condition().term(LampBlock.LAMP_TYPE, type),
+                    Variant.variant().with(VariantProperties.MODEL, lampModelFunction.apply(type))
+            );
+        }
+
+        for (ColorList color : ColorList.values()) {
+            multiPart.with(
+                    Condition.condition().term(LampBlock.LAMPSHADE, color),
+                    Variant.variant()
+                            .with(VariantProperties.MODEL, lampId)
+            );
+        }
+
+        return multiPart;
+    }
+
+    public static ResourceLocation getTexture(Block block, String folder, String textureSuffix) {
+        ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
+        return resourceLocation.withPath((string2 -> "block/"+ folder + "/" + string2 + textureSuffix));
     }
 
     private void createSofaBlock(BlockModelGenerators generators, Block sofa) {
@@ -268,105 +362,5 @@ public class NCModelProvider extends FabricModelProvider {
         );
 
         generators.blockStateOutput.accept(multiVariant);
-    }
-
-
-    /**
-     * Creates a reference to our own model templates
-     */
-    public static ModelTemplate createTemplate(String blockModelLocation, TextureSlot... requiredSlots) {
-        return new ModelTemplate(Optional.of(
-                new ResourceLocation(
-                        NookAndCranny.MOD_ID,
-                        "block/template/" + blockModelLocation
-                )
-        ),
-                Optional.empty(),
-                requiredSlots
-        );
-    }
-
-    /**
-     *
-     * @param generators obligatory fabric wrapper
-     * @param block the drawer to generate a model for
-     */
-    public final void createDrawerBlock(BlockModelGenerators generators, Block block) {
-        TextureMapping baseMapping = new TextureMapping()
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
-                .put(SIDES, getTexture(block, "drawer", "_side"));
-
-        TextureMapping drawerTextureMapping = baseMapping.put(
-                TextureSlot.FRONT, getTexture(block, "drawer", "_front")
-        );
-        TextureMapping drawerTextureMapping2 = baseMapping.put(
-                TextureSlot.PARTICLE,  getTexture(block, "drawer", "_side")
-        );
-
-        ResourceLocation drawerId = DRAWER_CUBE_ORIENTABLE.create(block, drawerTextureMapping, generators.modelOutput);
-
-        generators.blockStateOutput.accept(createDrawerMultipart(
-                block,
-                type -> DRAWER_COUNTER_TOP_ORIENTABLE.createWithSuffix(block, "_countertop_" + type.getSerializedName(), drawerTextureMapping2, generators.modelOutput),
-                drawerId
-        ));
-    }
-
-
-    public static BlockStateGenerator createDrawerMultipart(
-            Block drawerBlock,
-            Function<CountertopType, ResourceLocation> counterTopModelFunction,
-            ResourceLocation drawerId
-    ) {
-        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(drawerBlock);
-
-        for (CountertopType type : CountertopType.values()) {
-            multiPart.with(
-                    Condition.condition().term(DrawerBlock.COUNTERTOP, type),
-                    Variant.variant().with(VariantProperties.MODEL, counterTopModelFunction.apply(type))
-            );
-        }
-
-        for (Direction direction : Direction.Plane.HORIZONTAL) {
-            multiPart.with(
-                    Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, direction),
-                    Variant.variant()
-                            .with(VariantProperties.MODEL, drawerId)
-                            .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[direction.get2DDataValue() * 90 / 90])
-            );
-        }
-
-        return multiPart;
-    }
-
-
-    public static BlockStateGenerator createLampMultipart(
-            Block lampBlock,
-            Function<LampBlock.LampType, ResourceLocation> lampModelFunction,
-            ResourceLocation lampId
-    ) {
-        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(lampBlock);
-
-        for (LampBlock.LampType type : LampBlock.LampType.values()) {
-            multiPart.with(
-                    Condition.condition().term(LampBlock.LAMP_TYPE, type),
-                    Variant.variant().with(VariantProperties.MODEL, lampModelFunction.apply(type))
-            );
-        }
-
-        for (ColorList color : ColorList.values()) {
-            multiPart.with(
-                    Condition.condition().term(LampBlock.LAMPSHADE, color),
-                    Variant.variant()
-                            .with(VariantProperties.MODEL, lampId)
-            );
-        }
-
-        return multiPart;
-    }
-
-    public static ResourceLocation getTexture(Block block, String folder, String textureSuffix) {
-        ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
-        return resourceLocation.withPath((string2 -> "block/"+ folder + "/" + string2 + textureSuffix));
     }
 }

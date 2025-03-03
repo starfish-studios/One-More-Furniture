@@ -1,8 +1,0 @@
-{
-  "parent": "nookcranny:block/template/countertop",
-  "textures": {
-    "particle": "nookcranny:block/drawer/dark_oak_drawer_side",
-    "sides": "nookcranny:block/drawer/dark_oak_drawer_side",
-    "top": "nookcranny:block/dark_oak_drawer_top"
-  }
-}
