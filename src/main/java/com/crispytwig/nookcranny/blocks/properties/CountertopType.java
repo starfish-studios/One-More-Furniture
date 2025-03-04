@@ -12,6 +12,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 public enum CountertopType implements StringRepresentable {
@@ -35,6 +36,10 @@ public enum CountertopType implements StringRepresentable {
         this.name = name;
         this.item = item;
         this.drawer = drawer;
+    }
+
+    public static CountertopType getFromBlock(Block drawer) {
+        return Arrays.stream(CountertopType.values()).filter(block -> block.getDrawer() == drawer).findFirst().orElse(null);
     }
 
     @Override

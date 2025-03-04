@@ -82,11 +82,7 @@ public class DrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
                 if (!filtered.isEmpty()) {
                     var newCounterTop = filtered.get(0);
-
-                    var defaultCounterTop = Arrays.stream(CountertopType.values())
-                            .filter(type -> type.getDrawer() == state.getBlock())
-                            .findFirst()
-                            .orElse(null);
+                    var defaultCounterTop = CountertopType.getFromBlock(state.getBlock());
 
                     if (newCounterTop != currentCounterTop) {
                         if (currentCounterTop != defaultCounterTop) {
@@ -137,12 +133,15 @@ public class DrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         boolean waterlogged = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
+
+        var countertop = CountertopType.getFromBlock(this.getStateDefinition().any().getBlock());
+
         return this.getStateDefinition().any()
                 .setValue(FACING, context.getHorizontalDirection().getOpposite())
                 .setValue(WATERLOGGED, waterlogged)
                 .setValue(TOP_OPEN, false)
                 .setValue(BOTTOM_OPEN, false)
-                .setValue(COUNTERTOP, CountertopType.OAK);
+                .setValue(COUNTERTOP, countertop);
     }
 
     @Override
