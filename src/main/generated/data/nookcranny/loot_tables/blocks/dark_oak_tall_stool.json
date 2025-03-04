@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "nookcranny:dark_oak_tall_stool"
         }
       ],
       "rolls": 1.0

@@ -35,6 +35,16 @@ public class NCItems {
     public static final Item WARPED_DRAWER = register("warped_drawer", new BlockItem(NCBlocks.WARPED_DRAWER, new FabricItemSettings()));
 
     public static final Item OAK_TALL_STOOL = register("oak_tall_stool", new BlockItem(NCBlocks.OAK_TALL_STOOL, new FabricItemSettings()));
+    public static final Item SPRUCE_TALL_STOOL = register("spruce_tall_stool", new BlockItem(NCBlocks.SPRUCE_TALL_STOOL, new FabricItemSettings()));
+    public static final Item BIRCH_TALL_STOOL = register("birch_tall_stool", new BlockItem(NCBlocks.BIRCH_TALL_STOOL, new FabricItemSettings()));
+    public static final Item JUNGLE_TALL_STOOL = register("jungle_tall_stool", new BlockItem(NCBlocks.JUNGLE_TALL_STOOL, new FabricItemSettings()));
+    public static final Item ACACIA_TALL_STOOL = register("acacia_tall_stool", new BlockItem(NCBlocks.ACACIA_TALL_STOOL, new FabricItemSettings()));
+    public static final Item CHERRY_TALL_STOOL = register("cherry_tall_stool", new BlockItem(NCBlocks.CHERRY_TALL_STOOL, new FabricItemSettings()));
+    public static final Item DARK_OAK_TALL_STOOL = register("dark_oak_tall_stool", new BlockItem(NCBlocks.DARK_OAK_TALL_STOOL, new FabricItemSettings()));
+    public static final Item MANGROVE_TALL_STOOL = register("mangrove_tall_stool", new BlockItem(NCBlocks.MANGROVE_TALL_STOOL, new FabricItemSettings()));
+    public static final Item BAMBOO_TALL_STOOL = register("bamboo_tall_stool", new BlockItem(NCBlocks.BAMBOO_TALL_STOOL, new FabricItemSettings()));
+    public static final Item CRIMSON_TALL_STOOL = register("crimson_tall_stool", new BlockItem(NCBlocks.CRIMSON_TALL_STOOL, new FabricItemSettings()));
+    public static final Item WARPED_TALL_STOOL = register("warped_tall_stool", new BlockItem(NCBlocks.WARPED_TALL_STOOL, new FabricItemSettings()));
 
     public static final Item OAK_FLOWER_BASKET = register("oak_flower_basket", new BlockItem(NCBlocks.OAK_FLOWER_BASKET, new FabricItemSettings()));
 

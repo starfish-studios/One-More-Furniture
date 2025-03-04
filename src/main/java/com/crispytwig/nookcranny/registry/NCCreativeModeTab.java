@@ -32,6 +32,16 @@ public class NCCreativeModeTab {
                         output.accept(WARPED_DRAWER);
 
                         output.accept(OAK_TALL_STOOL);
+                        output.accept(SPRUCE_TALL_STOOL);
+                        output.accept(BIRCH_TALL_STOOL);
+                        output.accept(JUNGLE_TALL_STOOL);
+                        output.accept(ACACIA_TALL_STOOL);
+                        output.accept(CHERRY_TALL_STOOL);
+                        output.accept(DARK_OAK_TALL_STOOL);
+                        output.accept(MANGROVE_TALL_STOOL);
+                        output.accept(BAMBOO_TALL_STOOL);
+                        output.accept(CRIMSON_TALL_STOOL);
+                        output.accept(WARPED_TALL_STOOL);
 
                         output.accept(SPIGOT);
 //        output.accept(PLATE);

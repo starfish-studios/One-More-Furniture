@@ -82,7 +82,9 @@ public class NCBlockEntities {
             NCBlocks.DARK_OAK_SHELF,
             NCBlocks.MANGROVE_SHELF,
             NCBlocks.BAMBOO_SHELF,
-            NCBlocks.CHERRY_SHELF
+            NCBlocks.CHERRY_SHELF,
+            NCBlocks.WARPED_SHELF,
+            NCBlocks.CRIMSON_SHELF
     ).build(null));
 
     public static <T extends BlockEntityType<?>> T register(String name, T blockEntityType) {
