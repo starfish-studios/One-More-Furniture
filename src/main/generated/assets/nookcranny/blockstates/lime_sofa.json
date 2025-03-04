@@ -17,7 +17,8 @@
       "y": 90
     },
     "facing=east,shape=outer_left": {
-      "model": "nookcranny:block/lime_sofa_outer"
+      "model": "nookcranny:block/lime_sofa_outer",
+      "y": 0
     },
     "facing=east,shape=outer_right": {
       "model": "nookcranny:block/lime_sofa_outer",
@@ -32,30 +33,36 @@
       "y": 90
     },
     "facing=north,shape=inner_left": {
-      "model": "nookcranny:block/lime_sofa_inner"
+      "model": "nookcranny:block/lime_sofa_inner",
+      "y": 0
     },
     "facing=north,shape=inner_right": {
       "model": "nookcranny:block/lime_sofa_inner",
       "y": 90
     },
     "facing=north,shape=left": {
-      "model": "nookcranny:block/lime_sofa_left"
+      "model": "nookcranny:block/lime_sofa_left",
+      "y": 0
     },
     "facing=north,shape=middle": {
-      "model": "nookcranny:block/lime_sofa_middle"
+      "model": "nookcranny:block/lime_sofa_middle",
+      "y": 0
     },
     "facing=north,shape=outer_left": {
       "model": "nookcranny:block/lime_sofa_outer",
       "y": 270
     },
     "facing=north,shape=outer_right": {
-      "model": "nookcranny:block/lime_sofa_outer"
+      "model": "nookcranny:block/lime_sofa_outer",
+      "y": 0
     },
     "facing=north,shape=right": {
-      "model": "nookcranny:block/lime_sofa_right"
+      "model": "nookcranny:block/lime_sofa_right",
+      "y": 0
     },
     "facing=north,shape=single": {
-      "model": "nookcranny:block/lime_sofa"
+      "model": "nookcranny:block/lime_sofa",
+      "y": 0
     },
     "facing=south,shape=inner_left": {
       "model": "nookcranny:block/lime_sofa_inner",
@@ -94,7 +101,8 @@
       "y": 270
     },
     "facing=west,shape=inner_right": {
-      "model": "nookcranny:block/lime_sofa_inner"
+      "model": "nookcranny:block/lime_sofa_inner",
+      "y": 0
     },
     "facing=west,shape=left": {
       "model": "nookcranny:block/lime_sofa_left",

@@ -1,3 +1,9 @@
 {
-  "parent": "nookcranny:block/birch_drawer"
+  "parent": "nookcranny:block/template/drawer_inventory",
+  "textures": {
+    "countertop": "nookcranny:block/drawers/countertop/birch_drawercountertop_sides",
+    "front": "nookcranny:block/drawers/birch_drawer_front",
+    "sides": "nookcranny:block/drawers/birch_drawer_side",
+    "top": "nookcranny:block/drawers/birch_drawer_top"
+  }
 }
