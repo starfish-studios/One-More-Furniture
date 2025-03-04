@@ -11,6 +11,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -30,6 +31,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
 
 public class DrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -55,8 +58,6 @@ public class DrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
         return Shapes.block();
     }
 
-
-
     public BlockState openTop(BlockState blockState, Level level, BlockPos blockPos) {
         blockState = blockState.cycle(TOP_OPEN);
         level.setBlock(blockPos, blockState, 3);
@@ -72,9 +73,41 @@ public class DrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
         if (!level.isClientSide) {
+            var handItem = player.getMainHandItem().getItem();
+            var counterTops = Arrays.stream(CountertopType.values());
+            var filtered = counterTops.filter(type -> type.getItem() == handItem).toList();
+
+            if (state.hasProperty(COUNTERTOP)) {
+                var currentCounterTop = state.getValue(COUNTERTOP);
+
+                if (!filtered.isEmpty()) {
+                    var newCounterTop = filtered.get(0);
+
+                    var defaultCounterTop = Arrays.stream(CountertopType.values())
+                            .filter(type -> type.getDrawer() == state.getBlock())
+                            .findFirst()
+                            .orElse(null);
+
+                    if (newCounterTop != currentCounterTop) {
+                        if (currentCounterTop != defaultCounterTop) {
+                            Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 0.85, pos.getZ() + 0.5, new ItemStack(currentCounterTop.getItem()));
+                        }
+
+                        if (newCounterTop != defaultCounterTop) {
+                            player.getMainHandItem().shrink(1);
+                        }
+
+                        level.setBlockAndUpdate(pos, state.setValue(COUNTERTOP, newCounterTop));
+
+                        return InteractionResult.CONSUME;
+                    }
+                }
+            }
+
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            DrawerBlockEntity drawerBlockEntity = (DrawerBlockEntity) blockEntity;
-            player.openMenu(drawerBlockEntity);
+            if (blockEntity instanceof DrawerBlockEntity drawerBlockEntity) {
+                player.openMenu(drawerBlockEntity);
+            }
             return InteractionResult.CONSUME;
         }
         return InteractionResult.SUCCESS;
@@ -124,6 +157,13 @@ public class DrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
                 Containers.dropContents(level, blockPos, (Container)blockEntity);
                 level.updateNeighbourForOutputSignal(blockPos, this);
             }
+
+            var currentCounterTop = blockState.getValue(COUNTERTOP);
+
+            if (currentCounterTop.getDrawer() != blockState.getBlock()) {
+                Containers.dropItemStack(level, blockPos.getX() + 0.5, blockPos.getY() + 0.85, blockPos.getZ() + 0.5, new ItemStack(currentCounterTop.getItem()));
+            }
+
             super.onRemove(blockState, level, blockPos, blockState2, bl);
         }
     }
