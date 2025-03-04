@@ -90,7 +90,7 @@ public class DrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
                     if (newCounterTop != currentCounterTop) {
                         if (currentCounterTop != defaultCounterTop) {
-                            Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 0.85, pos.getZ() + 0.5, new ItemStack(currentCounterTop.getItem()));
+                            Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, new ItemStack(currentCounterTop.getItem()));
                         }
 
                         if (newCounterTop != defaultCounterTop) {
