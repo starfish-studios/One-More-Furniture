@@ -1,7 +1,0 @@
-{
-    "parent": "nookcranny:block/template/shelf/shelf_double_left",
-    "textures": {
-        "all": "nookcranny:block/shelf/acacia_shelf",
-        "particle": "block/acacia_planks"
-    }
-}

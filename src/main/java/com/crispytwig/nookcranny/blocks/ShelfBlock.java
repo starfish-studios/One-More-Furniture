@@ -33,6 +33,8 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
+    public static final EnumProperty<AttachFace> FACE = BlockStateProperties.ATTACH_FACE;
+
     public static final VoxelShape NORTH_TOP_AAAB = Block.box(0.0, 8.0, 9.0, 16.0, 16.0, 16.0);
     public static final VoxelShape NORTH_BOTTOM_AABB = Block.box(0.0, 0.0, 9.0, 16.0, 8.0, 16.0);
     public static final VoxelShape EAST_TOP_AAAB = Block.box(0.0, 8.0, 0.0, 7.0, 16.0, 16.0);
@@ -48,6 +50,7 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 //                .setValue(TYPE, HorizontalConnectionType.SINGLE)
                 .setValue(HALF, SlabType.BOTTOM)
                 .setValue(FACING, Direction.NORTH)
+                .setValue(FACE, AttachFace.WALL)
                 .setValue(WATERLOGGED, false);
     }
     @Nullable
@@ -192,6 +195,6 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(HALF, FACING, WATERLOGGED/*, TYPE*/);
+        builder.add(HALF, FACING, WATERLOGGED/*, TYPE*/, FACE);
     }
 }

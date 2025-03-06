@@ -1,7 +1,0 @@
-{
-    "parent": "nookcranny:block/template/shelf/shelf_double_middle",
-    "textures": {
-        "all": "nookcranny:block/shelf/warped_shelf",
-        "particle": "block/warped_planks"
-    }
-}

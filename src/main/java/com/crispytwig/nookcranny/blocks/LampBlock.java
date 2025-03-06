@@ -4,6 +4,8 @@ import com.crispytwig.nookcranny.blocks.properties.ColorList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
@@ -87,6 +89,9 @@ public class LampBlock extends Block implements SimpleWaterloggedBlock {
                 while (level.getBlockState(topLampPos.above()).getBlock() instanceof LampBlock) {
                     topLampPos = topLampPos.above();
                 }
+
+                float f = level.getBlockState(topLampPos).getValue(LIT) ? 0.8F : 0.7F;
+                level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
 
                 level.setBlock(topLampPos, level.getBlockState(topLampPos).cycle(LIT), 3);
 
