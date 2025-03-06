@@ -90,6 +90,94 @@
     },
     {
       "apply": {
+        "model": "nookcranny:block/drawers/countertop/countertop_quartz"
+      },
+      "when": {
+        "countertop": "quartz"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/drawers/countertop/countertop_red_sandstone"
+      },
+      "when": {
+        "countertop": "red_sandstone"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/drawers/countertop/countertop_sandstone"
+      },
+      "when": {
+        "countertop": "sandstone"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/drawers/countertop/countertop_prismarine"
+      },
+      "when": {
+        "countertop": "prismarine"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/drawers/countertop/countertop_stone_bricks"
+      },
+      "when": {
+        "countertop": "stone_bricks"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/drawers/countertop/countertop_diorite"
+      },
+      "when": {
+        "countertop": "diorite"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/drawers/countertop/countertop_granite"
+      },
+      "when": {
+        "countertop": "granite"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/drawers/countertop/countertop_andesite"
+      },
+      "when": {
+        "countertop": "andesite"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/drawers/countertop/countertop_deepslate"
+      },
+      "when": {
+        "countertop": "deepslate"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/drawers/countertop/countertop_nether_bricks"
+      },
+      "when": {
+        "countertop": "nether_bricks"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/drawers/countertop/countertop_purpur"
+      },
+      "when": {
+        "countertop": "purpur"
+      }
+    },
+    {
+      "apply": {
         "model": "nookcranny:block/dark_oak_drawer",
         "y": 0
       },

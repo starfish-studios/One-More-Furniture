@@ -26,7 +26,18 @@ public enum CountertopType implements StringRepresentable {
     WARPED("warped", () -> Items.WARPED_PLANKS, () -> NCBlocks.WARPED_DRAWER),
     MANGROVE("mangrove", () -> Items.MANGROVE_PLANKS, () -> NCBlocks.MANGROVE_DRAWER),
     BAMBOO("bamboo", () -> Items.BAMBOO_PLANKS, () -> NCBlocks.BAMBOO_DRAWER),
-    CHERRY("cherry", () -> Items.CHERRY_PLANKS, () -> NCBlocks.CHERRY_DRAWER);
+    CHERRY("cherry", () -> Items.CHERRY_PLANKS, () -> NCBlocks.CHERRY_DRAWER),
+    QUARTZ("quartz", () -> Items.QUARTZ_BLOCK, () -> null),
+    RED_SANDSTONE("red_sandstone", () -> Items.RED_SANDSTONE, () -> null),
+    SANDSTONE("sandstone", () -> Items.SANDSTONE, () -> null),
+    PRISMARINE("prismarine", () -> Items.PRISMARINE, () -> null),
+    STONE_BRICKS("stone_bricks", () -> Items.STONE_BRICKS, () -> null),
+    DIORITE("diorite", () -> Items.DIORITE, () -> null),
+    GRANITE("granite", () -> Items.GRANITE, () -> null),
+    ANDESITE("andesite", () -> Items.ANDESITE, () -> null),
+    DEEPSLATE("deepslate", () -> Items.DEEPSLATE, () -> null),
+    NETHER_BRICKS("nether_bricks", () -> Items.NETHER_BRICKS, () -> null),
+    PURPUR("purpur", () -> Items.PURPUR_BLOCK, () -> null);
 
     private final String name;
     private final Supplier<Item> item;
@@ -39,7 +50,12 @@ public enum CountertopType implements StringRepresentable {
     }
 
     public static CountertopType getFromBlock(Block drawer) {
-        return Arrays.stream(CountertopType.values()).filter(block -> block.getDrawer() == drawer).findFirst().orElse(null);
+        return Arrays.stream(CountertopType.values()).filter(block -> {
+            if (block.getDrawer() != null) {
+                return block.getDrawer() == drawer;
+            }
+            return false;
+        }).findFirst().orElse(null);
     }
 
     @Override
@@ -51,7 +67,7 @@ public enum CountertopType implements StringRepresentable {
         return this.item.get();
     }
 
-    public @NotNull Block getDrawer() {
+    public Block getDrawer() {
         return this.drawer.get();
     }
 }

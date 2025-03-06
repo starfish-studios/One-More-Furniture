@@ -33,6 +33,7 @@ public class NCModelProvider extends FabricModelProvider {
     public static final TextureSlot COUNTERTOP_SIDES = TextureSlot.create("countertop");
     public static final ModelTemplate DRAWER_CUBE_ORIENTABLE = createTemplate("drawer", TextureSlot.TOP, TextureSlot.FRONT, SIDES);
     public static final ModelTemplate DRAWER_CUBE_INVENTORY = createTemplate("drawer_inventory", TextureSlot.TOP, TextureSlot.FRONT, SIDES, COUNTERTOP_SIDES);
+    public static final ModelTemplate COUNTERTOP = createTemplate("countertop", TextureSlot.TOP, SIDES);
     
     public static final TextureSlot CORE = TextureSlot.create("core");
     public static final TextureSlot BITS = TextureSlot.create("bits");
@@ -60,6 +61,9 @@ public class NCModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockModelGenerators generators) {
 
+        for (CountertopType type : CountertopType.values()) {
+            createCountertopType(generators, type);
+        }
 
         for (Block block : NCBlocks.BLOCKS) {
             if (block instanceof SofaBlock) {
@@ -75,6 +79,14 @@ public class NCModelProvider extends FabricModelProvider {
                 //createLampBlock(generators, block);
             }
         }
+    }
+
+    private void createCountertopType(BlockModelGenerators generators, CountertopType type) {
+        TextureMapping baseMapping = new TextureMapping()
+                .put(TextureSlot.TOP, new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/" + type.getSerializedName() + "_drawer_top"))
+                .put(SIDES, new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/" + type.getSerializedName() + "_drawer_countertop_sides"));
+
+        COUNTERTOP.create(new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName()), baseMapping, generators.modelOutput);
     }
 
     @Override
@@ -114,26 +126,6 @@ public class NCModelProvider extends FabricModelProvider {
         generators.blockStateOutput.accept(multiVariant);
     }
 
-    private void createLampBlock(BlockModelGenerators generators, Block lamp) {
-
-        var textMap = new TextureMapping()
-                .put(TextureSlot.ALL, getTexture(lamp, "lamp", ""))
-                .put(TextureSlot.PARTICLE, getTexture(lamp, "lamp", ""));
-
-        ResourceLocation bottom = LAMP_BOTTOM.createWithSuffix(lamp,"_bottom", textMap, generators.modelOutput);
-        ResourceLocation middle = LAMP_MIDDLE.createWithSuffix(lamp, "_middle", textMap, generators.modelOutput);
-        ResourceLocation top = LAMP_TOP.createWithSuffix(lamp, "_top", textMap, generators.modelOutput);
-        ResourceLocation single = LAMP.createWithSuffix(lamp, "", textMap, generators.modelOutput);
-        ResourceLocation shade = LAMPSHADE.createWithSuffix(lamp, "_shade", textMap, generators.modelOutput);
-
-        ResourceLocation lampId = LAMP.create(lamp, textMap, generators.modelOutput);
-
-        generators.blockStateOutput.accept(createLampMultipart(
-                lamp,
-                type -> LAMP.createWithSuffix(lamp, "_type", textMap, generators.modelOutput),
-                lampId
-        ));
-    }
 
     /**
      * Creates a reference to our own model templates
@@ -309,4 +301,26 @@ public class NCModelProvider extends FabricModelProvider {
         }
         return rotation;
     }
+
+    private void createLampBlock(BlockModelGenerators generators, Block lamp) {
+
+        var textMap = new TextureMapping()
+                .put(TextureSlot.ALL, getTexture(lamp, "lamp", ""))
+                .put(TextureSlot.PARTICLE, getTexture(lamp, "lamp", ""));
+
+        ResourceLocation bottom = LAMP_BOTTOM.createWithSuffix(lamp,"_bottom", textMap, generators.modelOutput);
+        ResourceLocation middle = LAMP_MIDDLE.createWithSuffix(lamp, "_middle", textMap, generators.modelOutput);
+        ResourceLocation top = LAMP_TOP.createWithSuffix(lamp, "_top", textMap, generators.modelOutput);
+        ResourceLocation single = LAMP.createWithSuffix(lamp, "", textMap, generators.modelOutput);
+        ResourceLocation shade = LAMPSHADE.createWithSuffix(lamp, "_shade", textMap, generators.modelOutput);
+
+        ResourceLocation lampId = LAMP.create(lamp, textMap, generators.modelOutput);
+
+        generators.blockStateOutput.accept(createLampMultipart(
+                lamp,
+                type -> LAMP.createWithSuffix(lamp, "_type", textMap, generators.modelOutput),
+                lampId
+        ));
+    }
+
 }

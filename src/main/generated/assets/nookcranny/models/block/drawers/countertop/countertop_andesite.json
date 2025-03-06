@@ -1,0 +1,7 @@
+{
+  "parent": "nookcranny:block/template/countertop",
+  "textures": {
+    "sides": "nookcranny:block/drawers/countertop/andesite_drawer_countertop_sides",
+    "top": "nookcranny:block/drawers/andesite_drawer_top"
+  }
+}
