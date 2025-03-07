@@ -1,10 +1,7 @@
 package com.crispytwig.nookcranny.data;
 
 import com.crispytwig.nookcranny.NookAndCranny;
-import com.crispytwig.nookcranny.blocks.DrawerBlock;
-import com.crispytwig.nookcranny.blocks.LampBlock;
-import com.crispytwig.nookcranny.blocks.NightstandBlock;
-import com.crispytwig.nookcranny.blocks.SofaBlock;
+import com.crispytwig.nookcranny.blocks.*;
 import com.crispytwig.nookcranny.blocks.properties.ColorList;
 import com.crispytwig.nookcranny.blocks.properties.CountertopType;
 import com.crispytwig.nookcranny.registry.NCBlocks;
@@ -20,7 +17,9 @@ import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.SlabType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -54,6 +53,16 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate SOFA_INNER = createTemplate("sofa_corner_inner", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate SOFA_OUTER = createTemplate("sofa_corner_outer", TextureSlot.ALL, TextureSlot.PARTICLE);
 
+    public static final ModelTemplate SHELF_BOTTOM_CEILING = createTemplate("shelf/shelf_ceiling_bottom", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate SHELF_DOUBLE_CEILING = createTemplate("shelf/shelf_ceiling_double", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate SHELF_TOP_CEILING = createTemplate("shelf/shelf_ceiling_top", TextureSlot.ALL, TextureSlot.PARTICLE);
+
+    public static final ModelTemplate SHELF_DOUBLE_FLOOR = createTemplate("shelf/shelf_floor_double", TextureSlot.ALL, TextureSlot.PARTICLE);
+
+    public static final ModelTemplate SHELF_BOTTOM_SINGLE = createTemplate("shelf/shelf_wall_bottom", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate SHELF_DOUBLE_SINGLE = createTemplate("shelf/shelf_wall_double", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate SHELF_TOP_SINGLE = createTemplate("shelf/shelf_wall_top", TextureSlot.ALL, TextureSlot.PARTICLE);
+
     public NCModelProvider(FabricDataOutput output) {
         super(output);
     }
@@ -78,7 +87,47 @@ public class NCModelProvider extends FabricModelProvider {
             if (block instanceof LampBlock) {
                 //createLampBlock(generators, block);
             }
+            if (block instanceof ShelfBlock) {
+                createShelfBlock(generators, block);
+            }
         }
+    }
+
+    private void createShelfBlock(BlockModelGenerators generators, Block block) {
+        MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(block);
+
+        var textMap = new TextureMapping()
+                .put(TextureSlot.ALL, getTexture(block, "shelf", ""))
+                .put(TextureSlot.PARTICLE, getTexture(block, "shelf", ""));
+
+        ResourceLocation ceilingBottom = SHELF_BOTTOM_CEILING.createWithSuffix(block, "_ceiling_bottom", textMap, generators.modelOutput);
+        ResourceLocation ceilingDouble = SHELF_DOUBLE_CEILING.createWithSuffix(block, "_ceiling_double", textMap, generators.modelOutput);
+        ResourceLocation ceilingTop = SHELF_TOP_CEILING.createWithSuffix(block, "_ceiling_top", textMap, generators.modelOutput);
+
+        ResourceLocation floorDouble = SHELF_DOUBLE_FLOOR.createWithSuffix(block, "_floor_double", textMap, generators.modelOutput);
+
+        ResourceLocation shelfBottom = SHELF_BOTTOM_SINGLE.createWithSuffix(block, "_wall_bottom", textMap, generators.modelOutput);
+        ResourceLocation shelfDouble = SHELF_DOUBLE_SINGLE.createWithSuffix(block, "_wall_double", textMap, generators.modelOutput);
+        ResourceLocation shelfTop = SHELF_TOP_SINGLE.createWithSuffix(block, "_wall_top", textMap, generators.modelOutput);
+
+        multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
+        multiVariant.with(PropertyDispatch.properties(ShelfBlock.FACE, ShelfBlock.HALF)
+                .select(AttachFace.CEILING, SlabType.TOP, Variant.variant().with(VariantProperties.MODEL, ceilingTop))
+                .select(AttachFace.CEILING, SlabType.BOTTOM, Variant.variant().with(VariantProperties.MODEL, ceilingBottom))
+                .select(AttachFace.CEILING, SlabType.DOUBLE, Variant.variant().with(VariantProperties.MODEL, ceilingDouble))
+
+                .select(AttachFace.FLOOR, SlabType.TOP, Variant.variant().with(VariantProperties.MODEL, floorDouble))
+                .select(AttachFace.FLOOR, SlabType.BOTTOM, Variant.variant().with(VariantProperties.MODEL, floorDouble))
+                .select(AttachFace.FLOOR, SlabType.DOUBLE, Variant.variant().with(VariantProperties.MODEL, floorDouble))
+
+                .select(AttachFace.WALL, SlabType.TOP, Variant.variant().with(VariantProperties.MODEL, shelfTop))
+                .select(AttachFace.WALL, SlabType.BOTTOM, Variant.variant().with(VariantProperties.MODEL, shelfBottom))
+                .select(AttachFace.WALL, SlabType.DOUBLE, Variant.variant().with(VariantProperties.MODEL, shelfDouble))
+        );
+
+        generators.skipAutoItemBlock(block);
+        generators.blockStateOutput.accept(multiVariant);
+
     }
 
     private void createCountertopType(BlockModelGenerators generators, CountertopType type) {

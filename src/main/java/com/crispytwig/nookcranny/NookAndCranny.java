@@ -41,6 +41,7 @@ public class NookAndCranny implements ModInitializer{
 
 		UseBlockCallback.EVENT.register(new DyeSofa());
 		UseBlockCallback.EVENT.register(new ChairInteractions());
+		UseBlockCallback.EVENT.register(new ShelfInteractions());
 		UseBlockCallback.EVENT.register(new TableInteractions());
 		UseBlockCallback.EVENT.register(new LampInteractions());
 //		UseBlockCallback.EVENT.register(new PlateInteractions());

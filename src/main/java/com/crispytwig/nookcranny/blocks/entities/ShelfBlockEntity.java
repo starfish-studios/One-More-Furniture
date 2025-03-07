@@ -9,6 +9,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -90,6 +91,14 @@ public class ShelfBlockEntity extends BlockEntity implements Clearable {
 
         ItemStack item = this.items.get(index).copy();
         player.setItemSlot(EquipmentSlot.MAINHAND, item);
+        this.items.set(index, ItemStack.EMPTY);
+        this.markUpdated();
+        return true;
+    }
+
+    public boolean dropItem(int index, Level level) {
+        ItemStack item = this.items.get(index).copy();
+        Containers.dropItemStack(level, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), item);
         this.items.set(index, ItemStack.EMPTY);
         this.markUpdated();
         return true;

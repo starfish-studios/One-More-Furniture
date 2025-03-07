@@ -1,5 +1,6 @@
 package com.crispytwig.nookcranny.blocks;
 
+import com.crispytwig.nookcranny.registry.NCItems;
 import com.crispytwig.nookcranny.util.block.BlockPart;
 import com.crispytwig.nookcranny.blocks.entities.ShelfBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -80,7 +81,7 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        //if (hit.getDirection() != Direction.UP) return InteractionResult.PASS;
+
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (!(blockentity instanceof ShelfBlockEntity shelfBE)) return InteractionResult.PASS;
 
@@ -182,13 +183,21 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         BlockState stateExisting = context.getLevel().getBlockState(clickedPos);
 
         if (stateExisting.is(this)) return stateExisting.setValue(HALF, SlabType.DOUBLE);
+        BlockState blockState = this.defaultBlockState();
 
         boolean waterlogged = context.getLevel().getFluidState(clickedPos).getType() == Fluids.WATER;
-        BlockState state = this.defaultBlockState()
+        BlockState state = blockState
                 .setValue(HALF, SlabType.BOTTOM)
                 .setValue(FACING, context.getHorizontalDirection().getOpposite())
                 .setValue(WATERLOGGED, waterlogged);
         Direction direction = context.getClickedFace();
+        if (direction == Direction.DOWN) {
+            state = state.setValue(FACE, AttachFace.CEILING);
+        } else if (direction == Direction.UP) {
+            state = state.setValue(FACE, AttachFace.FLOOR);
+        } else {
+            state = state.setValue(FACE, AttachFace.WALL);
+        }
         return direction != Direction.DOWN && (direction == Direction.UP || !(context.getClickLocation().y - (double)clickedPos.getY() > 0.5)) ? state : state.setValue(HALF, SlabType.TOP);
 
     }
