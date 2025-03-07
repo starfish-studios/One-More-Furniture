@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,powered=false": {
+      "model": "nookcranny:block/ceiling_fan/oak_ceiling_fan"
+    },
+    "facing=east,powered=false": {
+      "model": "nookcranny:block/ceiling_fan/oak_ceiling_fan",
+      "y": 90
+    },
+    "facing=south,powered=false": {
+      "model": "nookcranny:block/ceiling_fan/oak_ceiling_fan",
+      "y": 180
+    },
+    "facing=west,powered=false": {
+      "model": "nookcranny:block/ceiling_fan/oak_ceiling_fan",
+      "y": 270
+    },
+    "facing=north,powered=true": {
+      "model": "nookcranny:block/ceiling_fan/oak_ceiling_fan_on"
+    },
+    "facing=east,powered=true": {
+      "model": "nookcranny:block/ceiling_fan/oak_ceiling_fan_on",
+      "y": 90
+    },
+    "facing=south,powered=true": {
+      "model": "nookcranny:block/ceiling_fan/oak_ceiling_fan_on",
+      "y": 180
+    },
+    "facing=west,powered=true": {
+      "model": "nookcranny:block/ceiling_fan/oak_ceiling_fan_on",
+      "y": 270
+    }
+  }
+}
