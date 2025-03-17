@@ -61,7 +61,10 @@ public class DyeSofa implements UseBlockCallback {
         if (item instanceof DyeItem && COLOR_MAP.get(((DyeItem) item).getDyeColor().getId()) != block.defaultBlockState() && block instanceof SofaBlock) {
             DyeColor color = ((DyeItem) item).getDyeColor();
 
-            level.setBlockAndUpdate(pos, COLOR_MAP.get(color.getId()).setValue(BlockStateProperties.HORIZONTAL_FACING, blockState.getValue(BlockStateProperties.HORIZONTAL_FACING)));
+            level.setBlockAndUpdate(pos, COLOR_MAP.get(color.getId())
+                    .setValue(BlockStateProperties.HORIZONTAL_FACING, blockState.getValue(BlockStateProperties.HORIZONTAL_FACING))
+                    .setValue(SofaBlock.SHAPE, blockState.getValue(SofaBlock.SHAPE))
+            );
             level.playSound(null, pos, SoundEvents.DYE_USE, player.getSoundSource(), 1.0F, 1.0F);
             for(int j = 0; j < 10; ++j) {
                 double g = level.random.nextGaussian() * 0.2;
