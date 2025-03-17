@@ -28,7 +28,9 @@ import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,6 +44,15 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     public static final VoxelShape EAST_SHAPE = Block.box(0.0, 6.0, 6.0, 9.0, 12.0, 10.0);
     public static final VoxelShape SOUTH_SHAPE = Block.box(6.0, 6.0, 0.0, 10.0, 12.0, 9.0);
     public static final VoxelShape WEST_SHAPE = Block.box(7.0, 6.0, 6.0, 16.0, 12.0, 10.0);
+
+    public static final VoxelShape SHAFT_FLOOR_SHAPE = Block.box(6.0, 0.0, 6.0, 10.0, 8.0, 10.0);
+
+    public static final VoxelShape SHAFT_CEILING_SHAPE = Block.box(6.0, 4.0, 6.0, 10.0, 16.0, 10.0);
+
+    public static final VoxelShape NORTH_FLOOR_SHAPE = Block.box(6.0, 6.0, 0.0, 10.0, 12.0, 10.0);
+    public static final VoxelShape EAST_FLOOR_SHAPE = Block.box(6.0, 6.0, 6.0, 16.0, 12.0, 10.0);
+    public static final VoxelShape SOUTH_FLOOR_SHAPE = Block.box(6.0, 6.0, 6.0, 10.0, 12.0, 16.0);
+    public static final VoxelShape WEST_FLOOR_SHAPE = Block.box(0.0, 6.0, 6.0, 10.0, 12.0, 10.0);
 
     public SpigotBlock(Properties properties) {
         super(properties);
@@ -60,7 +71,23 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return switch (state.getValue(BlockStateProperties.HORIZONTAL_FACING)) {
+
+        var dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+
+        if (state.getValue(FACE) == AttachFace.CEILING) {
+            return SHAFT_CEILING_SHAPE;
+        }
+
+        if (state.getValue(FACE) == AttachFace.FLOOR) {
+            return switch (dir) {
+                case NORTH -> Shapes.join(SHAFT_FLOOR_SHAPE, NORTH_FLOOR_SHAPE, BooleanOp.OR);
+                case EAST -> Shapes.join(SHAFT_FLOOR_SHAPE, EAST_FLOOR_SHAPE, BooleanOp.OR);
+                case SOUTH -> Shapes.join(SHAFT_FLOOR_SHAPE, SOUTH_FLOOR_SHAPE, BooleanOp.OR);
+                default -> Shapes.join(SHAFT_FLOOR_SHAPE, WEST_FLOOR_SHAPE, BooleanOp.OR);
+            };
+        }
+
+        return switch (dir) {
             case SOUTH -> SOUTH_SHAPE;
             case WEST -> WEST_SHAPE;
             case EAST -> EAST_SHAPE;
