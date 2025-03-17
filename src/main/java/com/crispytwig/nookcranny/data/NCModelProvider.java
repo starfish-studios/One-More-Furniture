@@ -2,6 +2,7 @@ package com.crispytwig.nookcranny.data;
 
 import com.crispytwig.nookcranny.NookAndCranny;
 import com.crispytwig.nookcranny.blocks.*;
+import com.crispytwig.nookcranny.blocks.properties.ChairType;
 import com.crispytwig.nookcranny.blocks.properties.ColorList;
 import com.crispytwig.nookcranny.blocks.properties.CountertopType;
 import com.crispytwig.nookcranny.registry.NCBlocks;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -63,6 +65,9 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate SHELF_DOUBLE_SINGLE = createTemplate("shelf/shelf_wall_double", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate SHELF_TOP_SINGLE = createTemplate("shelf/shelf_wall_top", TextureSlot.ALL, TextureSlot.PARTICLE);
 
+    public static final ModelTemplate CHAIR = createTemplate("chair", TextureSlot.ALL);
+    public static final ModelTemplate CHAIR_BACKLESS = createTemplate("chair_backless", TextureSlot.ALL);
+
     public NCModelProvider(FabricDataOutput output) {
         super(output);
     }
@@ -89,6 +94,9 @@ public class NCModelProvider extends FabricModelProvider {
             }
             if (block instanceof ShelfBlock) {
                 createShelfBlock(generators, block);
+            }
+            if (block instanceof ChairBlock) {
+                createChairBlock(generators, block);
             }
         }
     }
@@ -246,34 +254,77 @@ public class NCModelProvider extends FabricModelProvider {
         return multiPart;
     }
 
-    public static BlockStateGenerator createLampMultipart(
-            Block lampBlock,
-            Function<LampBlock.LampType, ResourceLocation> lampModelFunction,
-            ResourceLocation lampId
-    ) {
-        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(lampBlock);
 
-        for (LampBlock.LampType type : LampBlock.LampType.values()) {
-            multiPart.with(
-                    Condition.condition().term(LampBlock.LAMP_TYPE, type),
-                    Variant.variant().with(VariantProperties.MODEL, lampModelFunction.apply(type))
-            );
+    public static ResourceLocation getTexture(Block block, String folder, String textureSuffix) {
+        ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
+        return resourceLocation.withPath((string2 -> "block/"+ folder + "/" + string2 + textureSuffix));
+    }
+
+    public static BlockStateGenerator createChairMultipart(
+            Block chairBlock,
+            ResourceLocation chairId,
+            ResourceLocation backlessId,
+            Map<ColorList, ResourceLocation> cushionModels
+    ) {
+        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(chairBlock);
+
+        for (boolean back : new boolean[]{true, false}) {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                int yRotation = ((direction.get2DDataValue() * 90 + 180) % 360);
+
+
+
+                ResourceLocation chairModel = back ? chairId : backlessId;
+                if (chairModel != null) {
+                    multiPart.with(
+                            Condition.condition()
+                                    .term(BlockStateProperties.HORIZONTAL_FACING, direction)
+                                    .term(ChairBlock.BACK, back),
+                            Variant.variant()
+                                    .with(VariantProperties.MODEL, chairModel)
+                                    .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[yRotation / 90])
+                    );
+                }
+            }
         }
 
-        for (ColorList color : ColorList.values()) {
-            multiPart.with(
-                    Condition.condition().term(LampBlock.LAMPSHADE, color),
-                    Variant.variant()
-                            .with(VariantProperties.MODEL, lampId)
-            );
+        // Cushion models
+        for (Map.Entry<ColorList, ResourceLocation> entry : cushionModels.entrySet().stream().filter(it -> it.getKey() != ColorList.EMPTY).toList()) {
+            ColorList cushionColor = entry.getKey();
+            ResourceLocation cushionModel = entry.getValue();
+
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                int yRotation = ((direction.get2DDataValue() * 90 + 180) % 360);
+
+
+                multiPart.with(
+                        Condition.condition()
+                                .term(BlockStateProperties.HORIZONTAL_FACING, direction)
+                                .term(ChairBlock.CUSHION, cushionColor),
+                        Variant.variant()
+                                .with(VariantProperties.MODEL, cushionModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[yRotation / 90])
+                );
+            }
         }
 
         return multiPart;
     }
 
-    public static ResourceLocation getTexture(Block block, String folder, String textureSuffix) {
-        ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
-        return resourceLocation.withPath((string2 -> "block/"+ folder + "/" + string2 + textureSuffix));
+    private void createChairBlock(BlockModelGenerators generators, Block chair){
+        TextureMapping baseMapping = new TextureMapping()
+                .put(TextureSlot.ALL, getTexture(chair, "chair", ""));
+
+        ResourceLocation chairId = CHAIR.create(chair, baseMapping, generators.modelOutput);
+        ResourceLocation chairBacklessId = CHAIR_BACKLESS.createWithSuffix(chair,"_backless", baseMapping, generators.modelOutput);
+
+        Map<ColorList, ResourceLocation> cushionModels = new HashMap<>();
+        for (ColorList color : ColorList.values()) {
+            cushionModels.put(color, new ResourceLocation(NookAndCranny.MOD_ID, "block/chair/cushion/" + color + "_cushion"));
+        }
+
+
+        generators.blockStateOutput.accept(createChairMultipart(chair, chairId, chairBacklessId, cushionModels));
     }
 
     private void createSofaBlock(BlockModelGenerators generators, Block sofa) {
@@ -350,6 +401,32 @@ public class NCModelProvider extends FabricModelProvider {
         }
         return rotation;
     }
+
+    public static BlockStateGenerator createLampMultipart(
+            Block lampBlock,
+            Function<LampBlock.LampType, ResourceLocation> lampModelFunction,
+            ResourceLocation lampId
+    ) {
+        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(lampBlock);
+
+        for (LampBlock.LampType type : LampBlock.LampType.values()) {
+            multiPart.with(
+                    Condition.condition().term(LampBlock.LAMP_TYPE, type),
+                    Variant.variant().with(VariantProperties.MODEL, lampModelFunction.apply(type))
+            );
+        }
+
+        for (ColorList color : ColorList.values()) {
+            multiPart.with(
+                    Condition.condition().term(LampBlock.LAMPSHADE, color),
+                    Variant.variant()
+                            .with(VariantProperties.MODEL, lampId)
+            );
+        }
+
+        return multiPart;
+    }
+
 
     private void createLampBlock(BlockModelGenerators generators, Block lamp) {
 

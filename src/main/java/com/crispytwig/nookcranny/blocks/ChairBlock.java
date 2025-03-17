@@ -1,10 +1,11 @@
 package com.crispytwig.nookcranny.blocks;
 
-import com.crispytwig.nookcranny.blocks.properties.ChangeableBlock;
-import com.crispytwig.nookcranny.blocks.properties.ColorList;
-import com.crispytwig.nookcranny.blocks.properties.Cushionable;
+import com.crispytwig.nookcranny.blocks.properties.*;
+import com.crispytwig.nookcranny.registry.NCItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -37,6 +38,8 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final EnumProperty<ColorList> CUSHION = EnumProperty.create("cushion", ColorList.class);
     public static final BooleanProperty BACK = BooleanProperty.create("back");
+    public static final EnumProperty<ChairType> BACK_TYPE = EnumProperty.create("type", ChairType.class);
+
     public static final VoxelShape BOTTOM_AABB = Shapes.or(
             Block.box(1.0D, 8.0D, 1.0D, 15.0D, 10.0D, 15.0D),
             Block.box(3.0D, 6.0D, 3.0D, 13.0D, 8.0D, 13.0D),
@@ -70,6 +73,7 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
                 .setValue(FACING, Direction.NORTH)
                 .setValue(WATERLOGGED, false)
                 .setValue(BACK, true)
+                .setValue(BACK_TYPE, ChairType.TYPE_1)
                 .setValue(CUSHION, ColorList.EMPTY));
     }
 
@@ -93,6 +97,15 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+
+        if (player.isShiftKeyDown() && player.getItemInHand(hand).is(NCItems.COPPER_SAW)) {
+            state = state.cycle(BACK_TYPE);
+
+            level.setBlock(pos, state, 3);
+            level.playSound(null, pos, state.getBlock().getSoundType(state).getPlaceSound(), SoundSource.BLOCKS, 1.0f, 1.0f);
+            return InteractionResult.SUCCESS;
+        }
+
         if (tryChangeBlock(BACK, state, level, pos, player, hand)) return InteractionResult.SUCCESS;
 
         if (hand == InteractionHand.MAIN_HAND) return InteractionResult.FAIL;
@@ -102,7 +115,7 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateDefinition) {
-        stateDefinition.add(FACING, WATERLOGGED, CUSHION, BACK);
+        stateDefinition.add(FACING, WATERLOGGED, CUSHION, BACK, BACK_TYPE);
     }
 
     @Override
@@ -139,8 +152,10 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         boolean waterlogged = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
+
         return this.getStateDefinition().any()
                 .setValue(FACING, context.getHorizontalDirection().getOpposite())
+                .setValue(BACK_TYPE, ChairType.TYPE_1)
                 .setValue(WATERLOGGED, waterlogged);
     }
 
