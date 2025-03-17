@@ -1,0 +1,7 @@
+{
+  "parent": "nookcranny:block/template/shelf/shelf_floor_top",
+  "textures": {
+    "all": "nookcranny:block/shelf/jungle_shelf",
+    "particle": "nookcranny:block/shelf/jungle_shelf"
+  }
+}

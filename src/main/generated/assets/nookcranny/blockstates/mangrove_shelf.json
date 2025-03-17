@@ -54,7 +54,7 @@
       "y": 90
     },
     "face=floor,facing=east,half=top": {
-      "model": "nookcranny:block/mangrove_shelf_floor_double",
+      "model": "nookcranny:block/mangrove_shelf_floor_top",
       "y": 90
     },
     "face=floor,facing=north,half=bottom": {
@@ -64,7 +64,7 @@
       "model": "nookcranny:block/mangrove_shelf_floor_double"
     },
     "face=floor,facing=north,half=top": {
-      "model": "nookcranny:block/mangrove_shelf_floor_double"
+      "model": "nookcranny:block/mangrove_shelf_floor_top"
     },
     "face=floor,facing=south,half=bottom": {
       "model": "nookcranny:block/mangrove_shelf_floor_bottom",
@@ -75,7 +75,7 @@
       "y": 180
     },
     "face=floor,facing=south,half=top": {
-      "model": "nookcranny:block/mangrove_shelf_floor_double",
+      "model": "nookcranny:block/mangrove_shelf_floor_top",
       "y": 180
     },
     "face=floor,facing=west,half=bottom": {
@@ -87,7 +87,7 @@
       "y": 270
     },
     "face=floor,facing=west,half=top": {
-      "model": "nookcranny:block/mangrove_shelf_floor_double",
+      "model": "nookcranny:block/mangrove_shelf_floor_top",
       "y": 270
     },
     "face=wall,facing=east,half=bottom": {
