@@ -45,6 +45,18 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     public static final VoxelShape WEST_TOP_AAAB = Block.box(9.0, 8.0, 0.0, 16.0, 16.0, 16.0);
     public static final VoxelShape WEST_BOTTOM_AABB = Block.box(9.0, 0.0, 0.0, 16.0, 8.0, 16.0);
 
+
+    public static final VoxelShape NORTH_FLOOR_AABB = Block.box(0.0, 0.0, 4.0, 16.0, 16.0, 12.0);
+    public static final VoxelShape WEST_FLOOR_AABB = Block.box(4.0, 0.0, 0.0, 12.0, 16.0, 16.0);
+    public static final VoxelShape SOUTH_FLOOR_AABB = Block.box(0.0, 0.0, 4.0, 16.0, 16.0, 12.0);
+    public static final VoxelShape EAST_FLOOR_AABB = Block.box(4.0, 0.0, 0.0, 12.0, 16.0, 16.0);
+
+
+    public static final VoxelShape NORTH_CEILING_AABB = Block.box(0.0, 8.0, 4.0, 16.0, 16.0, 12.0);
+    public static final VoxelShape WEST_CEILING_AABB = Block.box(4.0, 8.0, 0.0, 12.0, 16.0, 16.0);
+    public static final VoxelShape SOUTH_CEILING_AABB = Block.box(0.0, 8.0, 4.0, 16.0, 16.0, 12.0);
+    public static final VoxelShape EAST_CEILING_AABB = Block.box(4.0, 8.0, 0.0, 12.0, 16.0, 16.0);
+
     public ShelfBlock(Properties properties) {
         super(properties);
         this.defaultBlockState()
@@ -116,6 +128,34 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         Direction direction = state.getValue(FACING);
 
         VoxelShape shape = Shapes.empty();
+
+        if (state.getValue(FACE) == AttachFace.FLOOR) {
+            return switch (direction) {
+                case EAST -> EAST_FLOOR_AABB;
+                case WEST -> WEST_FLOOR_AABB;
+                case NORTH -> NORTH_FLOOR_AABB;
+                default -> SOUTH_FLOOR_AABB;
+            };
+        }
+
+        if (state.getValue(FACE) == AttachFace.CEILING) {
+            if (state.getValue(HALF) == SlabType.TOP) {
+                return switch (direction) {
+                    case EAST -> EAST_CEILING_AABB;
+                    case WEST -> WEST_CEILING_AABB;
+                    case NORTH -> NORTH_CEILING_AABB;
+                    default -> SOUTH_CEILING_AABB;
+                };
+            }
+
+            return switch (direction) {
+                case EAST -> EAST_FLOOR_AABB;
+                case WEST -> WEST_FLOOR_AABB;
+                case NORTH -> NORTH_FLOOR_AABB;
+                default -> SOUTH_FLOOR_AABB;
+            };
+        }
+
         if (state.getValue(HALF) == SlabType.TOP) {
             if (direction == Direction.NORTH) shape = NORTH_TOP_AAAB;
             if (direction == Direction.EAST) shape = EAST_TOP_AAAB;
