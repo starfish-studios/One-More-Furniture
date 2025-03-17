@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -26,7 +27,7 @@ public class ShelfInteractions implements UseBlockCallback {
 
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof ShelfBlockEntity shelfBlockEntity) {
 
-            if (itemStack.is(NCItems.COPPER_SAW) && player.isShiftKeyDown() && blockState.getValue(ShelfBlock.HALF) == SlabType.DOUBLE) {
+            if (itemStack.is(NCItems.COPPER_SAW) && player.isShiftKeyDown() && blockState.getValue(ShelfBlock.HALF) == SlabType.DOUBLE && blockState.getValue(ShelfBlock.FACE) != AttachFace.FLOOR) {
 
                 var loc = blockHitResult.getLocation().y - pos.getY();
 
