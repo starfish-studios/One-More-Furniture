@@ -97,15 +97,6 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-
-        if (player.isShiftKeyDown() && player.getItemInHand(hand).is(NCItems.COPPER_SAW)) {
-            state = state.cycle(BACK_TYPE);
-
-            level.setBlock(pos, state, 3);
-            level.playSound(null, pos, state.getBlock().getSoundType(state).getPlaceSound(), SoundSource.BLOCKS, 1.0f, 1.0f);
-            return InteractionResult.SUCCESS;
-        }
-
         if (tryChangeBlock(BACK, state, level, pos, player, hand)) return InteractionResult.SUCCESS;
 
         if (hand == InteractionHand.MAIN_HAND) return InteractionResult.FAIL;
