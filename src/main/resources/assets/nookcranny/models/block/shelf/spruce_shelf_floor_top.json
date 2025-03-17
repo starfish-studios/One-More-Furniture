@@ -1,0 +1,9 @@
+{
+    "parent": "nookcranny:block/template/shelf/shelf_floor_top",
+    "textures": {
+        "all": "nookcranny:block/shelf/spruce_shelf",
+        "log": "block/spruce_log",
+        "log_top": "block/spruce_log_top",
+        "particle": "block/spruce_planks"
+    }
+}
