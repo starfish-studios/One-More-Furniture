@@ -234,7 +234,9 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         if (direction == Direction.DOWN) {
             state = state.setValue(FACE, AttachFace.CEILING);
         } else if (direction == Direction.UP) {
-            state = state.setValue(FACE, AttachFace.FLOOR);
+            state = state
+                    .setValue(FACE, AttachFace.FLOOR)
+                    .setValue(HALF, SlabType.DOUBLE);
         } else {
             state = state.setValue(FACE, AttachFace.WALL);
         }

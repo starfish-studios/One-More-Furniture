@@ -19,6 +19,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 
 @Environment(value= EnvType.CLIENT)
 public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
@@ -32,6 +33,8 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
     @Override
     public void render(ShelfBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         Direction direction = blockEntity.getBlockState().getValue(ShelfBlock.FACING);
+        var face = blockEntity.getBlockState().getValue(ShelfBlock.FACE);
+        boolean shouldCenter = face == AttachFace.FLOOR || face == AttachFace.CEILING;
         float rotation = -direction.toYRot() + 90f;
         NonNullList<ItemStack> items = blockEntity.getItems();
         poseStack.pushPose();
@@ -58,7 +61,7 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
 //                    poseStack.translate(0.0, (Math.sin((blockEntity.getLevel().getGameTime() + partialTick) / 8.0) / 32.0), 0.0);
 //                }
 
-                poseStack.translate(0.225 + 0.0 * (j % 2), 0.5 * -(j % 2), -0.225 + 0.4 * (j / 2));
+                poseStack.translate(shouldCenter ? 0.0 : 0.225, 0.5 * -(j % 2), -0.225 + 0.4 * (j / 2.0));
                 poseStack.translate(fx, fy + 0.025, fz);
                 poseStack.scale(0.375F, 0.375F, 0.375F);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90f));

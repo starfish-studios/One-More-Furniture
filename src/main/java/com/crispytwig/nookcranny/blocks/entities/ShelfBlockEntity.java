@@ -55,14 +55,6 @@ public class ShelfBlockEntity extends BlockEntity implements Clearable {
         return compoundtag;
     }
 
-//    public boolean placeItem(ItemStack stack, int position) {
-//        ItemStack itemstack = this.items.get(position);
-//        if (!itemstack.isEmpty()) return false;
-//
-//        this.items.set(position, stack.split(stack.getCount()));
-//        this.markUpdated();
-//        return true;
-//    }
 
     public boolean placeItem(ItemStack stack, int position) {
         ItemStack itemstack = this.items.get(position);
