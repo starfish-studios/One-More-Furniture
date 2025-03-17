@@ -1,33 +1,96 @@
 {
     "variants": {
-        "facing=north,powered=false": {
+        "facing=north,powered=false,face=wall": {
             "model": "nookcranny:block/spigot"
         },
-        "facing=east,powered=false": {
+        "facing=east,powered=false,face=wall": {
             "model": "nookcranny:block/spigot",
             "y": 90
         },
-        "facing=south,powered=false": {
+        "facing=south,powered=false,face=wall": {
             "model": "nookcranny:block/spigot",
             "y": 180
         },
-        "facing=west,powered=false": {
+        "facing=west,powered=false,face=wall": {
             "model": "nookcranny:block/spigot",
             "y": 270
         },
-        "facing=north,powered=true": {
+        "facing=north,powered=true,face=wall": {
             "model": "nookcranny:block/spigot_on"
         },
-        "facing=east,powered=true": {
+        "facing=east,powered=true,face=wall": {
             "model": "nookcranny:block/spigot_on",
             "y": 90
         },
-        "facing=south,powered=true": {
+        "facing=south,powered=true,face=wall": {
             "model": "nookcranny:block/spigot_on",
             "y": 180
         },
-        "facing=west,powered=true": {
+        "facing=west,powered=true,face=wall": {
             "model": "nookcranny:block/spigot_on",
+            "y": 270
+        },
+
+
+        "facing=north,powered=false,face=ceiling": {
+            "model": "nookcranny:block/spigot_ceiling"
+        },
+        "facing=east,powered=false,face=ceiling": {
+            "model": "nookcranny:block/spigot_ceiling",
+            "y": 90
+        },
+        "facing=south,powered=false,face=ceiling": {
+            "model": "nookcranny:block/spigot_ceiling",
+            "y": 180
+        },
+        "facing=west,powered=false,face=ceiling": {
+            "model": "nookcranny:block/spigot_ceiling",
+            "y": 270
+        },
+        "facing=north,powered=true,face=ceiling": {
+            "model": "nookcranny:block/spigot_ceiling_on"
+        },
+        "facing=east,powered=true,face=ceiling": {
+            "model": "nookcranny:block/spigot_ceiling_on",
+            "y": 90
+        },
+        "facing=south,powered=true,face=ceiling": {
+            "model": "nookcranny:block/spigot_ceiling_on",
+            "y": 180
+        },
+        "facing=west,powered=true,face=ceiling": {
+            "model": "nookcranny:block/spigot_ceiling_on",
+            "y": 270
+        },
+
+        "facing=north,powered=false,face=floor": {
+            "model": "nookcranny:block/spigot_floor"
+        },
+        "facing=east,powered=false,face=floor": {
+            "model": "nookcranny:block/spigot_floor",
+            "y": 90
+        },
+        "facing=south,powered=false,face=floor": {
+            "model": "nookcranny:block/spigot_floor",
+            "y": 180
+        },
+        "facing=west,powered=false,face=floor": {
+            "model": "nookcranny:block/spigot_floor",
+            "y": 270
+        },
+        "facing=north,powered=true,face=floor": {
+            "model": "nookcranny:block/spigot_floor_on"
+        },
+        "facing=east,powered=true,face=floor": {
+            "model": "nookcranny:block/spigot_floor_on",
+            "y": 90
+        },
+        "facing=south,powered=true,face=floor": {
+            "model": "nookcranny:block/spigot_floor_on",
+            "y": 180
+        },
+        "facing=west,powered=true,face=floor": {
+            "model": "nookcranny:block/spigot_floor_on",
             "y": 270
         }
     }

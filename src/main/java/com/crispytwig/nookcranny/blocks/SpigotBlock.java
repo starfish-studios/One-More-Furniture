@@ -24,9 +24,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -36,6 +34,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final EnumProperty<AttachFace> FACE = BlockStateProperties.ATTACH_FACE;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
@@ -46,7 +45,12 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
     public SpigotBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false).setValue(POWERED, false));
+        this.registerDefaultState(this.getStateDefinition().any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(FACE, AttachFace.WALL)
+                .setValue(WATERLOGGED, false)
+                .setValue(POWERED, false)
+        );
     }
 
     @Override
@@ -184,7 +188,7 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateDefinition) {
-        stateDefinition.add(FACING, WATERLOGGED, POWERED);
+        stateDefinition.add(FACING, WATERLOGGED, POWERED, FACE);
     }
 
     @Override
@@ -206,7 +210,20 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         boolean waterlogged = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
-        return this.getStateDefinition().any()
+
+        var state = this.getStateDefinition().any();
+
+        Direction direction = context.getClickedFace();
+        if (direction == Direction.DOWN) {
+            state = state.setValue(FACE, AttachFace.CEILING);
+        } else if (direction == Direction.UP) {
+            state = state
+                    .setValue(FACE, AttachFace.FLOOR);
+        } else {
+            state = state.setValue(FACE, AttachFace.WALL);
+        }
+
+        return state
                 .setValue(FACING, context.getHorizontalDirection().getOpposite())
                 .setValue(WATERLOGGED, waterlogged)
                 .setValue(POWERED, false);
