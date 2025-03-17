@@ -6,94 +6,6 @@
         "y": 0
       },
       "when": {
-        "type": "2",
-        "back": "true",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/spruce_chair_backless_2",
-        "y": 0
-      },
-      "when": {
-        "type": "2",
-        "back": "false",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/spruce_chair",
-        "y": 90
-      },
-      "when": {
-        "type": "2",
-        "back": "true",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/spruce_chair_backless_2",
-        "y": 90
-      },
-      "when": {
-        "type": "2",
-        "back": "false",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/spruce_chair",
-        "y": 180
-      },
-      "when": {
-        "type": "2",
-        "back": "true",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/spruce_chair_backless_2",
-        "y": 180
-      },
-      "when": {
-        "type": "2",
-        "back": "false",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/spruce_chair",
-        "y": 270
-      },
-      "when": {
-        "type": "2",
-        "back": "true",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/spruce_chair_backless_2",
-        "y": 270
-      },
-      "when": {
-        "type": "2",
-        "back": "false",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/spruce_chair",
-        "y": 0
-      },
-      "when": {
         "type": "1",
         "back": "true",
         "facing": "north"
@@ -178,281 +90,89 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/purple_cushion",
+        "model": "nookcranny:block/spruce_chair",
         "y": 0
       },
       "when": {
-        "cushion": "purple",
+        "type": "2",
+        "back": "true",
         "facing": "north"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/purple_cushion",
+        "model": "nookcranny:block/spruce_chair_backless_2",
+        "y": 0
+      },
+      "when": {
+        "type": "2",
+        "back": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/spruce_chair",
         "y": 90
       },
       "when": {
-        "cushion": "purple",
+        "type": "2",
+        "back": "true",
         "facing": "east"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/purple_cushion",
+        "model": "nookcranny:block/spruce_chair_backless_2",
+        "y": 90
+      },
+      "when": {
+        "type": "2",
+        "back": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/spruce_chair",
         "y": 180
       },
       "when": {
-        "cushion": "purple",
+        "type": "2",
+        "back": "true",
         "facing": "south"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/purple_cushion",
+        "model": "nookcranny:block/spruce_chair_backless_2",
+        "y": 180
+      },
+      "when": {
+        "type": "2",
+        "back": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/spruce_chair",
         "y": 270
       },
       "when": {
-        "cushion": "purple",
+        "type": "2",
+        "back": "true",
         "facing": "west"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/pink_cushion",
-        "y": 0
-      },
-      "when": {
-        "cushion": "pink",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/pink_cushion",
-        "y": 90
-      },
-      "when": {
-        "cushion": "pink",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/pink_cushion",
-        "y": 180
-      },
-      "when": {
-        "cushion": "pink",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/pink_cushion",
+        "model": "nookcranny:block/spruce_chair_backless_2",
         "y": 270
       },
       "when": {
-        "cushion": "pink",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/yellow_cushion",
-        "y": 0
-      },
-      "when": {
-        "cushion": "yellow",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/yellow_cushion",
-        "y": 90
-      },
-      "when": {
-        "cushion": "yellow",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/yellow_cushion",
-        "y": 180
-      },
-      "when": {
-        "cushion": "yellow",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/yellow_cushion",
-        "y": 270
-      },
-      "when": {
-        "cushion": "yellow",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/brown_cushion",
-        "y": 0
-      },
-      "when": {
-        "cushion": "brown",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/brown_cushion",
-        "y": 90
-      },
-      "when": {
-        "cushion": "brown",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/brown_cushion",
-        "y": 180
-      },
-      "when": {
-        "cushion": "brown",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/brown_cushion",
-        "y": 270
-      },
-      "when": {
-        "cushion": "brown",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/lime_cushion",
-        "y": 0
-      },
-      "when": {
-        "cushion": "lime",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/lime_cushion",
-        "y": 90
-      },
-      "when": {
-        "cushion": "lime",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/lime_cushion",
-        "y": 180
-      },
-      "when": {
-        "cushion": "lime",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/lime_cushion",
-        "y": 270
-      },
-      "when": {
-        "cushion": "lime",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/green_cushion",
-        "y": 0
-      },
-      "when": {
-        "cushion": "green",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/green_cushion",
-        "y": 90
-      },
-      "when": {
-        "cushion": "green",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/green_cushion",
-        "y": 180
-      },
-      "when": {
-        "cushion": "green",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/green_cushion",
-        "y": 270
-      },
-      "when": {
-        "cushion": "green",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/black_cushion",
-        "y": 0
-      },
-      "when": {
-        "cushion": "black",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/black_cushion",
-        "y": 90
-      },
-      "when": {
-        "cushion": "black",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/black_cushion",
-        "y": 180
-      },
-      "when": {
-        "cushion": "black",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/black_cushion",
-        "y": 270
-      },
-      "when": {
-        "cushion": "black",
+        "type": "2",
+        "back": "false",
         "facing": "west"
       }
     },
@@ -498,81 +218,41 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/light_blue_cushion",
+        "model": "nookcranny:block/chair/cushion/brown_cushion",
         "y": 0
       },
       "when": {
-        "cushion": "light_blue",
+        "cushion": "brown",
         "facing": "north"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/light_blue_cushion",
+        "model": "nookcranny:block/chair/cushion/brown_cushion",
         "y": 90
       },
       "when": {
-        "cushion": "light_blue",
+        "cushion": "brown",
         "facing": "east"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/light_blue_cushion",
+        "model": "nookcranny:block/chair/cushion/brown_cushion",
         "y": 180
       },
       "when": {
-        "cushion": "light_blue",
+        "cushion": "brown",
         "facing": "south"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/light_blue_cushion",
+        "model": "nookcranny:block/chair/cushion/brown_cushion",
         "y": 270
       },
       "when": {
-        "cushion": "light_blue",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/light_gray_cushion",
-        "y": 0
-      },
-      "when": {
-        "cushion": "light_gray",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/light_gray_cushion",
-        "y": 90
-      },
-      "when": {
-        "cushion": "light_gray",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/light_gray_cushion",
-        "y": 180
-      },
-      "when": {
-        "cushion": "light_gray",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/light_gray_cushion",
-        "y": 270
-      },
-      "when": {
-        "cushion": "light_gray",
+        "cushion": "brown",
         "facing": "west"
       }
     },
@@ -618,41 +298,281 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/blue_cushion",
+        "model": "nookcranny:block/chair/cushion/red_cushion",
         "y": 0
       },
       "when": {
-        "cushion": "blue",
+        "cushion": "red",
         "facing": "north"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/blue_cushion",
+        "model": "nookcranny:block/chair/cushion/red_cushion",
         "y": 90
       },
       "when": {
-        "cushion": "blue",
+        "cushion": "red",
         "facing": "east"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/blue_cushion",
+        "model": "nookcranny:block/chair/cushion/red_cushion",
         "y": 180
       },
       "when": {
-        "cushion": "blue",
+        "cushion": "red",
         "facing": "south"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/blue_cushion",
+        "model": "nookcranny:block/chair/cushion/red_cushion",
         "y": 270
       },
       "when": {
-        "cushion": "blue",
+        "cushion": "red",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/purple_cushion",
+        "y": 0
+      },
+      "when": {
+        "cushion": "purple",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/purple_cushion",
+        "y": 90
+      },
+      "when": {
+        "cushion": "purple",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/purple_cushion",
+        "y": 180
+      },
+      "when": {
+        "cushion": "purple",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/purple_cushion",
+        "y": 270
+      },
+      "when": {
+        "cushion": "purple",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/yellow_cushion",
+        "y": 0
+      },
+      "when": {
+        "cushion": "yellow",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/yellow_cushion",
+        "y": 90
+      },
+      "when": {
+        "cushion": "yellow",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/yellow_cushion",
+        "y": 180
+      },
+      "when": {
+        "cushion": "yellow",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/yellow_cushion",
+        "y": 270
+      },
+      "when": {
+        "cushion": "yellow",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/cyan_cushion",
+        "y": 0
+      },
+      "when": {
+        "cushion": "cyan",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/cyan_cushion",
+        "y": 90
+      },
+      "when": {
+        "cushion": "cyan",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/cyan_cushion",
+        "y": 180
+      },
+      "when": {
+        "cushion": "cyan",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/cyan_cushion",
+        "y": 270
+      },
+      "when": {
+        "cushion": "cyan",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/pink_cushion",
+        "y": 0
+      },
+      "when": {
+        "cushion": "pink",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/pink_cushion",
+        "y": 90
+      },
+      "when": {
+        "cushion": "pink",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/pink_cushion",
+        "y": 180
+      },
+      "when": {
+        "cushion": "pink",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/pink_cushion",
+        "y": 270
+      },
+      "when": {
+        "cushion": "pink",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/lime_cushion",
+        "y": 0
+      },
+      "when": {
+        "cushion": "lime",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/lime_cushion",
+        "y": 90
+      },
+      "when": {
+        "cushion": "lime",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/lime_cushion",
+        "y": 180
+      },
+      "when": {
+        "cushion": "lime",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/lime_cushion",
+        "y": 270
+      },
+      "when": {
+        "cushion": "lime",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/light_blue_cushion",
+        "y": 0
+      },
+      "when": {
+        "cushion": "light_blue",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/light_blue_cushion",
+        "y": 90
+      },
+      "when": {
+        "cushion": "light_blue",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/light_blue_cushion",
+        "y": 180
+      },
+      "when": {
+        "cushion": "light_blue",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/light_blue_cushion",
+        "y": 270
+      },
+      "when": {
+        "cushion": "light_blue",
         "facing": "west"
       }
     },
@@ -698,6 +618,126 @@
     },
     {
       "apply": {
+        "model": "nookcranny:block/chair/cushion/light_gray_cushion",
+        "y": 0
+      },
+      "when": {
+        "cushion": "light_gray",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/light_gray_cushion",
+        "y": 90
+      },
+      "when": {
+        "cushion": "light_gray",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/light_gray_cushion",
+        "y": 180
+      },
+      "when": {
+        "cushion": "light_gray",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/light_gray_cushion",
+        "y": 270
+      },
+      "when": {
+        "cushion": "light_gray",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/green_cushion",
+        "y": 0
+      },
+      "when": {
+        "cushion": "green",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/green_cushion",
+        "y": 90
+      },
+      "when": {
+        "cushion": "green",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/green_cushion",
+        "y": 180
+      },
+      "when": {
+        "cushion": "green",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/green_cushion",
+        "y": 270
+      },
+      "when": {
+        "cushion": "green",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/blue_cushion",
+        "y": 0
+      },
+      "when": {
+        "cushion": "blue",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/blue_cushion",
+        "y": 90
+      },
+      "when": {
+        "cushion": "blue",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/blue_cushion",
+        "y": 180
+      },
+      "when": {
+        "cushion": "blue",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "nookcranny:block/chair/cushion/blue_cushion",
+        "y": 270
+      },
+      "when": {
+        "cushion": "blue",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
         "model": "nookcranny:block/chair/cushion/white_cushion",
         "y": 0
       },
@@ -738,81 +778,41 @@
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/red_cushion",
+        "model": "nookcranny:block/chair/cushion/black_cushion",
         "y": 0
       },
       "when": {
-        "cushion": "red",
+        "cushion": "black",
         "facing": "north"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/red_cushion",
+        "model": "nookcranny:block/chair/cushion/black_cushion",
         "y": 90
       },
       "when": {
-        "cushion": "red",
+        "cushion": "black",
         "facing": "east"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/red_cushion",
+        "model": "nookcranny:block/chair/cushion/black_cushion",
         "y": 180
       },
       "when": {
-        "cushion": "red",
+        "cushion": "black",
         "facing": "south"
       }
     },
     {
       "apply": {
-        "model": "nookcranny:block/chair/cushion/red_cushion",
+        "model": "nookcranny:block/chair/cushion/black_cushion",
         "y": 270
       },
       "when": {
-        "cushion": "red",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/cyan_cushion",
-        "y": 0
-      },
-      "when": {
-        "cushion": "cyan",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/cyan_cushion",
-        "y": 90
-      },
-      "when": {
-        "cushion": "cyan",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/cyan_cushion",
-        "y": 180
-      },
-      "when": {
-        "cushion": "cyan",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "nookcranny:block/chair/cushion/cyan_cushion",
-        "y": 270
-      },
-      "when": {
-        "cushion": "cyan",
+        "cushion": "black",
         "facing": "west"
       }
     }

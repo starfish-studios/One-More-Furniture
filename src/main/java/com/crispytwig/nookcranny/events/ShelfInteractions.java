@@ -27,7 +27,7 @@ public class ShelfInteractions implements UseBlockCallback {
 
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof ShelfBlockEntity shelfBlockEntity) {
 
-            if (itemStack.is(NCItems.COPPER_SAW) && player.isShiftKeyDown() && blockState.getValue(ShelfBlock.HALF) == SlabType.DOUBLE && blockState.getValue(ShelfBlock.FACE) != AttachFace.FLOOR) {
+            if (itemStack.is(NCItems.COPPER_SAW) && player.isShiftKeyDown() && blockState.getValue(ShelfBlock.HALF) == SlabType.DOUBLE) {
 
                 var loc = blockHitResult.getLocation().y - pos.getY();
 

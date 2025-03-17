@@ -46,7 +46,7 @@
       "y": 270
     },
     "face=floor,facing=east,half=bottom": {
-      "model": "nookcranny:block/crimson_shelf_floor_double",
+      "model": "nookcranny:block/crimson_shelf_floor_bottom",
       "y": 90
     },
     "face=floor,facing=east,half=double": {
@@ -58,7 +58,7 @@
       "y": 90
     },
     "face=floor,facing=north,half=bottom": {
-      "model": "nookcranny:block/crimson_shelf_floor_double"
+      "model": "nookcranny:block/crimson_shelf_floor_bottom"
     },
     "face=floor,facing=north,half=double": {
       "model": "nookcranny:block/crimson_shelf_floor_double"
@@ -67,7 +67,7 @@
       "model": "nookcranny:block/crimson_shelf_floor_double"
     },
     "face=floor,facing=south,half=bottom": {
-      "model": "nookcranny:block/crimson_shelf_floor_double",
+      "model": "nookcranny:block/crimson_shelf_floor_bottom",
       "y": 180
     },
     "face=floor,facing=south,half=double": {
@@ -79,7 +79,7 @@
       "y": 180
     },
     "face=floor,facing=west,half=bottom": {
-      "model": "nookcranny:block/crimson_shelf_floor_double",
+      "model": "nookcranny:block/crimson_shelf_floor_bottom",
       "y": 270
     },
     "face=floor,facing=west,half=double": {

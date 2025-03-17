@@ -52,6 +52,11 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     public static final VoxelShape EAST_FLOOR_AABB = Block.box(4.0, 0.0, 0.0, 12.0, 16.0, 16.0);
 
 
+    public static final VoxelShape NORTH_FLOOR_SHORT_AABB = Block.box(0.0, 0.0, 4.0, 16.0, 8.0, 12.0);
+    public static final VoxelShape WEST_FLOOR_SHORT_AABB = Block.box(4.0, 0.0, 0.0, 12.0, 8.0, 16.0);
+    public static final VoxelShape SOUTH_FLOOR_SHORT_AABB = Block.box(0.0, 0.0, 4.0, 16.0, 8.0, 12.0);
+    public static final VoxelShape EAST_FLOOR_SHORT_AABB = Block.box(4.0, 0.0, 0.0, 12.0, 8.0, 16.0);
+
     public static final VoxelShape NORTH_CEILING_AABB = Block.box(0.0, 8.0, 4.0, 16.0, 16.0, 12.0);
     public static final VoxelShape WEST_CEILING_AABB = Block.box(4.0, 8.0, 0.0, 12.0, 16.0, 16.0);
     public static final VoxelShape SOUTH_CEILING_AABB = Block.box(0.0, 8.0, 4.0, 16.0, 16.0, 12.0);
@@ -130,6 +135,15 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         VoxelShape shape = Shapes.empty();
 
         if (state.getValue(FACE) == AttachFace.FLOOR) {
+            if (state.getValue(HALF) == SlabType.BOTTOM) {
+                return switch (direction) {
+                    case EAST -> EAST_FLOOR_SHORT_AABB;
+                    case WEST -> WEST_FLOOR_SHORT_AABB;
+                    case NORTH -> NORTH_FLOOR_SHORT_AABB;
+                    default -> SOUTH_FLOOR_SHORT_AABB;
+                };
+            }
+
             return switch (direction) {
                 case EAST -> EAST_FLOOR_AABB;
                 case WEST -> WEST_FLOOR_AABB;
@@ -236,7 +250,7 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         } else if (direction == Direction.UP) {
             state = state
                     .setValue(FACE, AttachFace.FLOOR)
-                    .setValue(HALF, SlabType.DOUBLE);
+                    .setValue(HALF, SlabType.BOTTOM);
         } else {
             state = state.setValue(FACE, AttachFace.WALL);
         }
