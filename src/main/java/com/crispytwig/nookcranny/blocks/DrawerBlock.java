@@ -101,12 +101,17 @@ public class DrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
             }
 
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof DrawerBlockEntity drawerBlockEntity) {
+
+            Direction facing = state.getValue(FACING);
+            Direction hitLoc =  hit.getDirection();
+
+            if (blockEntity instanceof DrawerBlockEntity drawerBlockEntity && facing == hitLoc) {
                 player.openMenu(drawerBlockEntity);
+                return InteractionResult.CONSUME;
             }
-            return InteractionResult.CONSUME;
+
         }
-        return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
     @Override
