@@ -1,3 +1,6 @@
 {
-  "parent": "nookcranny:block/acacia_chair"
+  "parent": "nookcranny:block/template/chair_1",
+  "textures": {
+    "all": "nookcranny:block/chair/acacia_chair"
+  }
 }

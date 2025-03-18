@@ -2,6 +2,7 @@ package com.crispytwig.nookcranny.blocks;
 
 import com.crispytwig.nookcranny.blocks.entities.DrawerBlockEntity;
 import com.crispytwig.nookcranny.blocks.properties.CountertopType;
+import com.crispytwig.nookcranny.util.block.BlockPart;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -99,18 +100,18 @@ public class DrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
                     }
                 }
             }
-
-            BlockEntity blockEntity = level.getBlockEntity(pos);
-
-            Direction facing = state.getValue(FACING);
-            Direction hitLoc =  hit.getDirection();
-
-            if (blockEntity instanceof DrawerBlockEntity drawerBlockEntity && facing == hitLoc) {
-                player.openMenu(drawerBlockEntity);
-                return InteractionResult.CONSUME;
-            }
-
         }
+
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+
+        Direction facing = state.getValue(FACING);
+        Direction hitLoc =  hit.getDirection();
+
+        if (blockEntity instanceof DrawerBlockEntity drawerBlockEntity && facing == hitLoc) {
+            player.openMenu(drawerBlockEntity);
+            return InteractionResult.CONSUME;
+        }
+
         return InteractionResult.PASS;
     }
 

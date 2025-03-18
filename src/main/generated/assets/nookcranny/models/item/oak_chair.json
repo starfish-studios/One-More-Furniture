@@ -1,3 +1,6 @@
 {
-  "parent": "nookcranny:block/oak_chair"
+  "parent": "nookcranny:block/template/chair_1",
+  "textures": {
+    "all": "nookcranny:block/chair/oak_chair"
+  }
 }

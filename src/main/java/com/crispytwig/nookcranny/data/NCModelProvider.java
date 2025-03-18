@@ -68,6 +68,7 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate SHELF_TOP_SINGLE = createTemplate("shelf/shelf_wall_top", TextureSlot.ALL, TextureSlot.PARTICLE);
 
     public static final ModelTemplate CHAIR_BACKLESS = createTemplate("chair_backless", TextureSlot.ALL);
+    public static final ModelTemplate CHAIR_ITEM = createTemplate("chair_1", TextureSlot.ALL);
 
     public NCModelProvider(FabricDataOutput output) {
         super(output);
@@ -164,6 +165,18 @@ public class NCModelProvider extends FabricModelProvider {
         createDrawerItem(generators, NCItems.BAMBOO_DRAWER, NCBlocks.BAMBOO_DRAWER);
         createDrawerItem(generators, NCItems.WARPED_DRAWER, NCBlocks.WARPED_DRAWER);
         createDrawerItem(generators, NCItems.CHERRY_DRAWER, NCBlocks.CHERRY_DRAWER);
+
+        createChairItem(generators, NCItems.OAK_CHAIR, NCBlocks.OAK_CHAIR);
+        createChairItem(generators, NCItems.SPRUCE_CHAIR, NCBlocks.SPRUCE_CHAIR);
+        createChairItem(generators, NCItems.BIRCH_CHAIR, NCBlocks.BIRCH_CHAIR);
+        createChairItem(generators, NCItems.JUNGLE_CHAIR, NCBlocks.JUNGLE_CHAIR);
+        createChairItem(generators, NCItems.ACACIA_CHAIR, NCBlocks.ACACIA_CHAIR);
+        createChairItem(generators, NCItems.MANGROVE_CHAIR, NCBlocks.MANGROVE_CHAIR);
+        createChairItem(generators, NCItems.CRIMSON_CHAIR, NCBlocks.CRIMSON_CHAIR);
+        createChairItem(generators, NCItems.DARK_OAK_CHAIR, NCBlocks.DARK_OAK_CHAIR);
+        createChairItem(generators, NCItems.BAMBOO_CHAIR, NCBlocks.BAMBOO_CHAIR);
+        createChairItem(generators, NCItems.WARPED_CHAIR, NCBlocks.WARPED_CHAIR);
+        createChairItem(generators, NCItems.CHERRY_CHAIR, NCBlocks.CHERRY_CHAIR);
     }
 
     private void createNightstandBlock(BlockModelGenerators generators, Block nightstand) {
@@ -210,6 +223,15 @@ public class NCModelProvider extends FabricModelProvider {
                 .put(COUNTERTOP_SIDES, getTexture(block, "drawers/countertop", "_countertop_sides"));
 
         DRAWER_CUBE_INVENTORY.create(ModelLocationUtils.getModelLocation(item), baseMapping, generators.output);
+    }
+
+    public final void createChairItem(ItemModelGenerators generators, Item item, Block block) {
+        TextureMapping baseMapping = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "chair", ""));
+
+        ResourceLocation resourceLocation = BuiltInRegistries.ITEM.getKey(item);
+        resourceLocation = resourceLocation.withPrefix("item/");
+
+        CHAIR_ITEM.create(resourceLocation, baseMapping, generators.output);
     }
 
     /**
@@ -351,6 +373,7 @@ public class NCModelProvider extends FabricModelProvider {
 
         ResourceLocation chairBacklessId = CHAIR_BACKLESS.createWithSuffix(chair, "_backless", baseMapping, generators.modelOutput);
 
+        generators.skipAutoItemBlock(chair);
         generators.blockStateOutput.accept(createChairMultipart(chair, chairBacklessId, cushionModels, backTypeModels));
     }
 
