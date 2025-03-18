@@ -32,7 +32,7 @@ public class NCModelProvider extends FabricModelProvider {
 
     public static final TextureSlot SIDES = TextureSlot.create("sides");
     public static final TextureSlot COUNTERTOP_SIDES = TextureSlot.create("countertop");
-    public static final ModelTemplate DRAWER_CUBE_ORIENTABLE = createTemplate("drawer", TextureSlot.TOP, TextureSlot.FRONT, SIDES);
+    public static final ModelTemplate DRAWER_CUBE_ORIENTABLE = createTemplate("drawer", TextureSlot.TOP, TextureSlot.FRONT, SIDES, TextureSlot.PARTICLE);
     public static final ModelTemplate DRAWER_CUBE_INVENTORY = createTemplate("drawer_inventory", TextureSlot.TOP, TextureSlot.FRONT, SIDES, COUNTERTOP_SIDES);
     public static final ModelTemplate COUNTERTOP = createTemplate("countertop", TextureSlot.TOP, SIDES);
     
@@ -67,7 +67,6 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate SHELF_DOUBLE_SINGLE = createTemplate("shelf/shelf_wall_double", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate SHELF_TOP_SINGLE = createTemplate("shelf/shelf_wall_top", TextureSlot.ALL, TextureSlot.PARTICLE);
 
-    public static final ModelTemplate CHAIR = createTemplate("chair", TextureSlot.ALL);
     public static final ModelTemplate CHAIR_BACKLESS = createTemplate("chair_backless", TextureSlot.ALL);
 
     public NCModelProvider(FabricDataOutput output) {
@@ -222,7 +221,8 @@ public class NCModelProvider extends FabricModelProvider {
         TextureMapping baseMapping = new TextureMapping()
                 .put(TextureSlot.TOP, getTexture(block, "drawers", "_top"))
                 .put(SIDES, getTexture(block, "drawers", "_side"))
-                .put(TextureSlot.FRONT, getTexture(block, "drawers", "_front"));
+                .put(TextureSlot.FRONT, getTexture(block, "drawers", "_front"))
+                .put(TextureSlot.PARTICLE, getTexture(block, "drawers", "_front"));
 
         ResourceLocation drawerId = DRAWER_CUBE_ORIENTABLE.create(block, baseMapping, generators.modelOutput);
 
@@ -266,45 +266,48 @@ public class NCModelProvider extends FabricModelProvider {
 
     public static BlockStateGenerator createChairMultipart(
             Block chairBlock,
-            ResourceLocation chairId,
+            ResourceLocation chairBacklessId,
             Map<ColorList, ResourceLocation> cushionModels,
             Map<ChairType, ResourceLocation> backTypeModels
     ) {
         MultiPartGenerator multiPart = MultiPartGenerator.multiPart(chairBlock);
 
-        for (Map.Entry<ChairType, ResourceLocation> entry : backTypeModels.entrySet()) {
-            ChairType type = entry.getKey();
-            ResourceLocation chairModel = entry.getValue();
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            int yRotation = ((direction.get2DDataValue() * 90 + 180) % 360);
 
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
+            for (Map.Entry<ChairType, ResourceLocation> entry : backTypeModels.entrySet()) {
+                ChairType type = entry.getKey();
+                ResourceLocation backModel = entry.getValue();
 
-                int yRotation = ((direction.get2DDataValue() * 90 + 180) % 360);
-
-                for (boolean back : new boolean[]{true, false}) {
-                    ResourceLocation baseModel = back ? chairId : chairModel;
-
-
-                    multiPart.with(
-                            Condition.condition()
-                                    .term(BlockStateProperties.HORIZONTAL_FACING, direction)
-                                    .term(ChairBlock.BACK_TYPE, type)
-                                    .term(ChairBlock.BACK, back),
-                            Variant.variant()
-                                    .with(VariantProperties.MODEL, baseModel)
-                                    .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[yRotation / 90])
-                    );
-                }
+                multiPart.with(
+                        Condition.condition()
+                                .term(BlockStateProperties.HORIZONTAL_FACING, direction)
+                                .term(ChairBlock.BACK, true)
+                                .term(ChairBlock.BACK_TYPE, type),
+                        Variant.variant()
+                                .with(VariantProperties.MODEL, backModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[yRotation / 90])
+                );
             }
+
+            multiPart.with(
+                    Condition.condition()
+                            .term(BlockStateProperties.HORIZONTAL_FACING, direction)
+                            .term(ChairBlock.BACK, false),
+                    Variant.variant()
+                            .with(VariantProperties.MODEL, chairBacklessId)
+                            .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[yRotation / 90])
+            );
         }
 
-        // Cushion models
-        for (Map.Entry<ColorList, ResourceLocation> entry : cushionModels.entrySet().stream().filter(it -> it.getKey() != ColorList.EMPTY).toList()) {
+        for (Map.Entry<ColorList, ResourceLocation> entry : cushionModels.entrySet()) {
+            if (entry.getKey() == ColorList.EMPTY) continue;
+
             ColorList cushionColor = entry.getKey();
             ResourceLocation cushionModel = entry.getValue();
 
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 int yRotation = ((direction.get2DDataValue() * 90 + 180) % 360);
-
 
                 multiPart.with(
                         Condition.condition()
@@ -320,26 +323,35 @@ public class NCModelProvider extends FabricModelProvider {
         return multiPart;
     }
 
-    private void createChairBlock(BlockModelGenerators generators, Block chair){
+
+    private void createChairBlock(BlockModelGenerators generators, Block chair) {
         TextureMapping baseMapping = new TextureMapping()
                 .put(TextureSlot.ALL, getTexture(chair, "chair", ""));
-
-        ResourceLocation chairId = CHAIR.create(chair, baseMapping, generators.modelOutput);
-
 
         Map<ColorList, ResourceLocation> cushionModels = new HashMap<>();
         for (ColorList color : ColorList.values()) {
             cushionModels.put(color, new ResourceLocation(NookAndCranny.MOD_ID, "block/chair/cushion/" + color + "_cushion"));
         }
 
+        String chairBaseName = BuiltInRegistries.BLOCK.getKey(chair).getPath();
+
         Map<ChairType, ResourceLocation> backTypeModels = new HashMap<>();
         for (ChairType type : ChairType.values()) {
-            ResourceLocation chairBacklessId = CHAIR_BACKLESS.createWithSuffix(chair,"_backless_" + type.getSerializedName().toLowerCase(), baseMapping, generators.modelOutput);
-            backTypeModels.put(type, chairBacklessId);
+            ModelTemplate chairTemplate = createTemplate(
+                    "chair_" + type.getSerializedName().toLowerCase(),
+                    TextureSlot.ALL
+            );
+
+            chairTemplate.createWithSuffix(chair, "_" + type.getSerializedName().toLowerCase(), baseMapping, generators.modelOutput);
+
+
+            ResourceLocation chairTypeId = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase());
+            backTypeModels.put(type, chairTypeId);
         }
 
+        ResourceLocation chairBacklessId = CHAIR_BACKLESS.createWithSuffix(chair, "_backless", baseMapping, generators.modelOutput);
 
-        generators.blockStateOutput.accept(createChairMultipart(chair, chairId, cushionModels, backTypeModels));
+        generators.blockStateOutput.accept(createChairMultipart(chair, chairBacklessId, cushionModels, backTypeModels));
     }
 
     private void createSofaBlock(BlockModelGenerators generators, Block sofa) {

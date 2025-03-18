@@ -1,10 +1,5 @@
 {
 	"credit": "Made with Blockbench",
-	"textures": {
-		"top": "nookcranny:block/oak_top",
-		"sides": "nookcranny:block/drawers/oak_side",
-		"front": "nookcranny:block/drawers/oak_front"
-	},
 	"elements": [
 		{
 			"from": [0, 0, 0],

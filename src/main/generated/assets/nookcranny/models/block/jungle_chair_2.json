@@ -1,5 +1,5 @@
 {
-  "parent": "nookcranny:block/template/chair",
+  "parent": "nookcranny:block/template/chair_2",
   "textures": {
     "all": "nookcranny:block/chair/jungle_chair"
   }

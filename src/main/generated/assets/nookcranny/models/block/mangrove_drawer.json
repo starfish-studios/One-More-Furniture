@@ -2,6 +2,7 @@
   "parent": "nookcranny:block/template/drawer",
   "textures": {
     "front": "nookcranny:block/drawers/mangrove_drawer_front",
+    "particle": "nookcranny:block/drawers/mangrove_drawer_front",
     "sides": "nookcranny:block/drawers/mangrove_drawer_side",
     "top": "nookcranny:block/drawers/mangrove_drawer_top"
   }
