@@ -96,7 +96,7 @@ public class DrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
                         level.setBlockAndUpdate(pos, state.setValue(COUNTERTOP, newCounterTop));
 
-                        return InteractionResult.CONSUME;
+                        return InteractionResult.SUCCESS;
                     }
                 }
             }
@@ -109,7 +109,7 @@ public class DrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
         if (blockEntity instanceof DrawerBlockEntity drawerBlockEntity && facing == hitLoc) {
             player.openMenu(drawerBlockEntity);
-            return InteractionResult.CONSUME;
+            return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.PASS;
