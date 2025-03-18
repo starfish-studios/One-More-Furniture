@@ -106,7 +106,7 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         int slot = BlockPart.get2D(pos, hit.getLocation(), Direction.UP, facing.getClockWise(), 2, 2);
 
         ItemStack stack = player.getItemInHand(hand);
-        if (!stack.isEmpty()) {
+        if (!stack.isEmpty() && !stack.is(this.asItem())) {
             if (!level.isClientSide && shelfBE.placeItem(player.getAbilities().instabuild ? stack.copy() : stack, slot)) {
                 level.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
                 return InteractionResult.SUCCESS;
