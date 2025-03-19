@@ -169,6 +169,8 @@ public class NCBlocks {
     public static final Block WHITE_SOFA = register("white_sofa", new SofaBlock(DyeColor.WHITE, copyOf(Blocks.WHITE_WOOL).noOcclusion()));
     public static final Block YELLOW_SOFA = register("yellow_sofa", new SofaBlock(DyeColor.YELLOW, copyOf(Blocks.YELLOW_WOOL).noOcclusion()));
 
+    public static final Block WHITE_CURTAIN = register("white_curtain", new CurtainBlock(copyOf(Blocks.WHITE_WOOL).noOcclusion()));
+
     private static Block register(String id, Block block) {
         BLOCK_NAMES.add(id);
         BLOCKS.add(block);

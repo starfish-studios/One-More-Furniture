@@ -1,0 +1,20 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "curtain_left_corner_closed",
+	"textures": {
+		"0": "nookcranny:block/curtain/white_curtain",
+		"particle": "nookcranny:block/curtain/white_curtain"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 7],
+			"to": [16, 16, 9],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 2, 16], "texture": "#0"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#0"},
+				"up": {"uv": [16, 0, 0, 2], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -118,7 +118,9 @@ public class NCVanillaIntegration {
                     NCBlocks.MANGROVE_CHAIR,
                     NCBlocks.BAMBOO_CHAIR,
                     NCBlocks.CRIMSON_CHAIR,
-                    NCBlocks.WARPED_CHAIR
+                    NCBlocks.WARPED_CHAIR,
+
+                    NCBlocks.WHITE_CURTAIN
             );
         }
 

@@ -151,6 +151,8 @@ public class NCItems {
     public static final Item WHITE_SOFA = register("white_sofa", new BlockItem(NCBlocks.WHITE_SOFA, new FabricItemSettings()));
     public static final Item YELLOW_SOFA = register("yellow_sofa", new BlockItem(NCBlocks.YELLOW_SOFA, new FabricItemSettings()));
 
+    public static final Item WHITE_CURTAIN = register("white_curtain", new BlockItem(NCBlocks.WHITE_CURTAIN, new FabricItemSettings()));
+
     private static Item register(String id, Item item) {
         ITEM_NAMES.add(id);
         return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(NookAndCranny.MOD_ID, id), item);
