@@ -2,6 +2,7 @@ package com.crispytwig.nookcranny.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -22,16 +23,15 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
-
     public static final BooleanProperty OPEN = BooleanProperty.create("open");
     public static final EnumProperty<CurtainShape> SHAPE = EnumProperty.create("shape", CurtainShape.class);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -64,9 +64,11 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
         CURTAIN_TOP_SINGLE("curtain_top_single");
 
         private final String name;
+
         CurtainShape(String name) {
             this.name = name;
         }
+
         @Override
         public String getSerializedName() {
             return this.name;
@@ -90,56 +92,93 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public @NotNull BlockState updateShape(BlockState state, @NotNull Direction direction, @NotNull BlockState neighborState,
-                                           @NotNull LevelAccessor level, @NotNull BlockPos pos, @NotNull BlockPos neighborPos) {
+    public @NotNull BlockState updateShape(BlockState state,
+                                           @NotNull Direction direction,
+                                           @NotNull BlockState neighborState,
+                                           @NotNull LevelAccessor level,
+                                           @NotNull BlockPos pos,
+                                           @NotNull BlockPos neighborPos) {
         if (state.getValue(WATERLOGGED)) {
             level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
         if (direction.getAxis().isHorizontal() || direction == Direction.UP || direction == Direction.DOWN) {
-            return state.setValue(SHAPE, computeShape(state, (Level) level, pos));
+            if (level instanceof Level realLevel) {
+                updateCurtainGroup(realLevel, pos);
+                if (neighborState.getBlock() instanceof CurtainBlock) {
+                    updateCurtainGroup(realLevel, neighborPos);
+                }
+            }
         }
         return state;
     }
 
     @Override
-    public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player,
-                                          @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+    public @NotNull InteractionResult use(@NotNull BlockState state,
+                                          Level level,
+                                          @NotNull BlockPos pos,
+                                          @NotNull Player player,
+                                          @NotNull InteractionHand hand,
+                                          @NotNull BlockHitResult hit) {
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
-        boolean open = state.getValue(OPEN);
+        boolean currentlyOpen = state.getValue(OPEN);
         List<BlockPos> group = new ArrayList<>();
         collectConnectedCurtains(level, pos, state.getValue(FACING), group);
         for (BlockPos p : group) {
             BlockState s = level.getBlockState(p);
             if (s.getBlock() instanceof CurtainBlock) {
-                level.setBlock(p, s.setValue(OPEN, !open), 3);
+                level.setBlock(p, s.setValue(OPEN, !currentlyOpen), 2);
+            }
+        }
+        for (BlockPos p : group) {
+            BlockState s = level.getBlockState(p);
+            if (s.getBlock() instanceof CurtainBlock cBlock) {
+                BlockState newState = s.setValue(SHAPE, cBlock.computeShape(s, level, p));
+                level.setBlock(p, newState, 2);
             }
         }
         return InteractionResult.SUCCESS;
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+    public VoxelShape getShape(BlockState state,
+                               @NotNull BlockGetter worldIn,
+                               @NotNull BlockPos pos,
+                               @NotNull CollisionContext context) {
         Direction facing = state.getValue(FACING);
-        switch (facing) {
-            case NORTH:
-            case SOUTH:
-                return SHAPE_NS;
-            case EAST:
-            case WEST:
-                return SHAPE_EW;
-            default:
-                return SHAPE_NS;
-        }
+        return switch (facing) {
+            case NORTH, SOUTH -> SHAPE_NS;
+            case EAST, WEST -> SHAPE_EW;
+            default -> SHAPE_NS;
+        };
     }
 
     @Override
-    public @NotNull VoxelShape getCollisionShape(BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+    public @NotNull VoxelShape getCollisionShape(BlockState state,
+                                                 @NotNull BlockGetter worldIn,
+                                                 @NotNull BlockPos pos,
+                                                 @NotNull CollisionContext context) {
         if (state.getValue(OPEN)) {
             return Shapes.empty();
         }
         return this.getShape(state, worldIn, pos, context);
+    }
+
+    private void updateCurtainGroup(Level level, BlockPos origin) {
+        BlockState originState = level.getBlockState(origin);
+        if (!(originState.getBlock() instanceof CurtainBlock)) {
+            return;
+        }
+        List<BlockPos> group = new ArrayList<>();
+        collectConnectedCurtains(level, origin, originState.getValue(FACING), group);
+        for (BlockPos p : group) {
+            BlockState oldState = level.getBlockState(p);
+            if (oldState.getBlock() instanceof CurtainBlock cBlock) {
+                BlockState newState = oldState.setValue(SHAPE, cBlock.computeShape(oldState, level, p));
+                level.setBlock(p, newState, 2);
+            }
+        }
     }
 
     private void collectConnectedCurtains(Level level, BlockPos pos, Direction facing, List<BlockPos> group) {
@@ -147,89 +186,93 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
         group.add(pos);
         Direction left = facing.getCounterClockWise();
         Direction right = facing.getClockWise();
-        BlockPos posLeft = pos.relative(left);
-        BlockPos posRight = pos.relative(right);
-        BlockPos posUp = pos.above();
-        BlockPos posDown = pos.below();
-        if (isConnected(level, posLeft, facing)) {
-            collectConnectedCurtains(level, posLeft, facing, group);
+        BlockPos above = pos.above();
+        if (isSameCurtain(level, above, facing)) {
+            collectConnectedCurtains(level, above, facing, group);
         }
-        if (isConnected(level, posRight, facing)) {
-            collectConnectedCurtains(level, posRight, facing, group);
+        BlockPos below = pos.below();
+        if (isSameCurtain(level, below, facing)) {
+            collectConnectedCurtains(level, below, facing, group);
         }
-        if (isConnected(level, posUp, facing)) {
-            collectConnectedCurtains(level, posUp, facing, group);
+        BlockPos leftPos = pos.relative(left);
+        if (isSameCurtain(level, leftPos, facing)) {
+            collectConnectedCurtains(level, leftPos, facing, group);
         }
-        if (isConnected(level, posDown, facing)) {
-            collectConnectedCurtains(level, posDown, facing, group);
+        BlockPos rightPos = pos.relative(right);
+        if (isSameCurtain(level, rightPos, facing)) {
+            collectConnectedCurtains(level, rightPos, facing, group);
         }
     }
 
-    private boolean isConnected(Level level, BlockPos pos, Direction facing) {
+    private boolean isSameCurtain(Level level, BlockPos pos, Direction facing) {
+        if (!level.isLoaded(pos)) return false;
         BlockState s = level.getBlockState(pos);
         return s.getBlock() instanceof CurtainBlock && s.getValue(FACING) == facing;
     }
 
-    private boolean hasCurtainAboveIgnoringHoles(Level level, BlockPos pos, Direction facing) {
-        for (int y = pos.getY() + 1; y <= level.getMaxBuildHeight(); y++) {
-            BlockPos checkPos = new BlockPos(pos.getX(), y, pos.getZ());
-            BlockState bs = level.getBlockState(checkPos);
-            if (bs.getBlock() instanceof CurtainBlock && bs.getValue(FACING) == facing) {
-                return true;
-            }
-            if (!level.isEmptyBlock(checkPos) && !(bs.getBlock() instanceof CurtainBlock)) {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    private boolean hasCurtainBelowIgnoringHoles(Level level, BlockPos pos, Direction facing) {
-        for (int y = pos.getY() - 1; y >= level.getMinBuildHeight(); y--) {
-            BlockPos checkPos = new BlockPos(pos.getX(), y, pos.getZ());
-            BlockState bs = level.getBlockState(checkPos);
-            if (bs.getBlock() instanceof CurtainBlock && bs.getValue(FACING) == facing) {
-                return true;
-            }
-            if (!level.isEmptyBlock(checkPos) && !(bs.getBlock() instanceof CurtainBlock)) {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    private CurtainShape computeShape(BlockState state, Level level, BlockPos pos) {
+    public CurtainShape computeShape(BlockState state, Level level, BlockPos pos) {
         Direction facing = state.getValue(FACING);
         Direction leftDir = facing.getCounterClockWise();
         Direction rightDir = facing.getClockWise();
-        boolean connectedAbove = hasCurtainAboveIgnoringHoles(level, pos, facing);
-        boolean connectedBelow = hasCurtainBelowIgnoringHoles(level, pos, facing);
-        boolean connectedLeft = isConnected(level, pos.relative(leftDir), facing);
-        boolean connectedRight = isConnected(level, pos.relative(rightDir), facing);
+        BlockPos abovePos = pos.above();
+        BlockPos belowPos = pos.below();
+        BlockPos leftPos = pos.relative(leftDir);
+        BlockPos rightPos = pos.relative(rightDir);
+
+        boolean connectedAbove = isSameCurtain(level, abovePos, facing);
+        boolean connectedBelow = isSameCurtain(level, belowPos, facing);
+        boolean connectedLeft  = isSameCurtain(level, leftPos, facing);
+        boolean connectedRight = isSameCurtain(level, rightPos, facing);
+
+        if (!connectedBelow && connectedAbove && connectedLeft && connectedRight) {
+            return CurtainShape.BOTTOM_MIDDLE;
+        }
 
         if (!connectedAbove && connectedBelow && !connectedLeft && !connectedRight) {
             return CurtainShape.CURTAIN_TOP_SINGLE;
         }
         if (!connectedAbove && !connectedBelow) {
+            if (connectedLeft && connectedRight) return CurtainShape.MIDDLE;
             if (!connectedLeft && connectedRight) return CurtainShape.LEFT;
             if (connectedLeft && !connectedRight) return CurtainShape.RIGHT;
-            if (connectedLeft) return CurtainShape.MIDDLE;
             return CurtainShape.SINGLE;
         }
         if (!connectedAbove) {
-            if (!connectedLeft) return CurtainShape.CORNER_LEFT;
-            if (!connectedRight) return CurtainShape.CORNER_RIGHT;
+            if (connectedLeft && connectedRight) return CurtainShape.CURTAIN_TOP;
+            if (!connectedLeft && connectedRight) return CurtainShape.CORNER_LEFT;
+            if (connectedLeft && !connectedRight) return CurtainShape.CORNER_RIGHT;
             return CurtainShape.CURTAIN_TOP;
-        } else if (!connectedBelow) {
-            if (!connectedLeft && connectedRight) return CurtainShape.BOTTOM_LEFT;
-            if (connectedLeft && !connectedRight) return CurtainShape.BOTTOM_RIGHT;
-            if (connectedLeft) return CurtainShape.BOTTOM_MIDDLE;
-            return CurtainShape.BOTTOM_SINGLE;
-        } else {
-            if (!connectedLeft && connectedRight) return CurtainShape.LEFT;
-            if (connectedLeft && !connectedRight) return CurtainShape.RIGHT;
-            if (connectedLeft) return CurtainShape.MIDDLE;
-            return CurtainShape.SINGLE;
         }
+        if (!connectedBelow) {
+            if (connectedLeft && connectedRight) return CurtainShape.BOTTOM_MIDDLE;
+            if (connectedLeft && !connectedRight) {
+                BlockState aboveState = level.getBlockState(abovePos);
+                BlockState leftState = level.getBlockState(leftPos);
+                if (aboveState.getBlock() instanceof CurtainBlock &&
+                        aboveState.getValue(SHAPE) == CurtainShape.MIDDLE &&
+                        leftState.getBlock() instanceof CurtainBlock &&
+                        leftState.getValue(SHAPE) == CurtainShape.BOTTOM_LEFT) {
+                    return CurtainShape.BOTTOM_MIDDLE;
+                }
+                return CurtainShape.BOTTOM_RIGHT;
+            }
+            if (!connectedLeft && connectedRight) {
+                BlockState aboveState = level.getBlockState(abovePos);
+                BlockState rightState = level.getBlockState(rightPos);
+                if (aboveState.getBlock() instanceof CurtainBlock &&
+                        aboveState.getValue(SHAPE) == CurtainShape.MIDDLE &&
+                        rightState.getBlock() instanceof CurtainBlock &&
+                        rightState.getValue(SHAPE) == CurtainShape.BOTTOM_RIGHT) {
+                    return CurtainShape.BOTTOM_MIDDLE;
+                }
+                return CurtainShape.BOTTOM_LEFT;
+            }
+            return CurtainShape.BOTTOM_SINGLE;
+        }
+
+        if (connectedLeft && connectedRight) return CurtainShape.MIDDLE;
+        if (!connectedLeft && connectedRight) return CurtainShape.LEFT;
+        if (connectedLeft && !connectedRight) return CurtainShape.RIGHT;
+        return CurtainShape.SINGLE;
     }
 }
