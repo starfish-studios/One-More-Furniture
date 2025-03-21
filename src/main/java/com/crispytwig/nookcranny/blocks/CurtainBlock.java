@@ -27,6 +27,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -211,6 +213,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     public CurtainShape computeShape(BlockState state, Level level, BlockPos pos) {
+        // Directions
         Direction facing = state.getValue(FACING);
         Direction leftDir = facing.getCounterClockWise();
         Direction rightDir = facing.getClockWise();
@@ -218,6 +221,70 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
         BlockPos belowPos = pos.below();
         BlockPos leftPos = pos.relative(leftDir);
         BlockPos rightPos = pos.relative(rightDir);
+
+        // Values (true)
+        BlockState rightState = level.getBlockState(rightPos);
+        BlockState leftState = level.getBlockState(leftPos);
+        BlockState aboveState = level.getBlockState(abovePos);
+        BlockState belowState = level.getBlockState(belowPos);
+
+        // Values (false)
+        boolean noLeftCurtain = !isSameCurtain(level, leftPos, facing);
+        boolean noRightCurtain = !isSameCurtain(level, rightPos, facing);
+        boolean noBelowCurtain = !isSameCurtain(level, belowPos, facing);
+        boolean noAboveCurtain = !isSameCurtain(level, abovePos, facing);
+
+        // Checker
+        boolean rightIsOpenAndRight = rightState.getBlock() instanceof CurtainBlock &&
+                rightState.getValue(OPEN) &&
+                rightState.getValue(SHAPE) == CurtainShape.RIGHT;
+
+        boolean leftIsOpenAndLeft = leftState.getBlock() instanceof CurtainBlock &&
+                leftState.getValue(OPEN) &&
+                leftState.getValue(SHAPE) == CurtainShape.LEFT;
+
+        boolean aboveIsOpenAndMiddle = aboveState.getBlock() instanceof CurtainBlock &&
+                aboveState.getValue(OPEN) &&
+                aboveState.getValue(SHAPE) == CurtainShape.MIDDLE;
+
+        boolean aboveIsOpenAndLeft = aboveState.getBlock() instanceof CurtainBlock &&
+                aboveState.getValue(OPEN) &&
+                aboveState.getValue(SHAPE) == CurtainShape.LEFT;
+
+        boolean aboveIsOpenAndRight = aboveState.getBlock() instanceof CurtainBlock &&
+                aboveState.getValue(OPEN) &&
+                aboveState.getValue(SHAPE) == CurtainShape.RIGHT;
+
+        boolean rightIsOpenAndTop = rightState.getBlock() instanceof CurtainBlock &&
+                rightState.getValue(OPEN) &&
+                rightState.getValue(SHAPE) == CurtainShape.CURTAIN_TOP;
+
+        boolean leftIsOpenAndCornerLeft = leftState.getBlock() instanceof CurtainBlock &&
+                leftState.getValue(OPEN) &&
+                leftState.getValue(SHAPE) == CurtainShape.CORNER_LEFT;
+
+        // M-Connections
+        if (noLeftCurtain && rightIsOpenAndRight && aboveIsOpenAndMiddle && noBelowCurtain) {
+            return CurtainShape.BOTTOM_MIDDLE;
+        }
+
+        if (noRightCurtain && leftIsOpenAndLeft && aboveIsOpenAndMiddle && noBelowCurtain) {
+            return CurtainShape.BOTTOM_MIDDLE;
+        }
+
+        if (noRightCurtain && noLeftCurtain && aboveIsOpenAndLeft && noBelowCurtain) {
+            return CurtainShape.BOTTOM_LEFT;
+        }
+
+        if (noRightCurtain && noLeftCurtain && aboveIsOpenAndRight && noBelowCurtain) {
+            return CurtainShape.BOTTOM_RIGHT;
+        }
+
+        if (rightIsOpenAndTop && leftIsOpenAndCornerLeft && noAboveCurtain && noBelowCurtain) {
+            return CurtainShape.BOTTOM_SINGLE;
+        }
+
+        // Dynamic
 
         boolean connectedAbove = isSameCurtain(level, abovePos, facing);
         boolean connectedBelow = isSameCurtain(level, belowPos, facing);
@@ -246,23 +313,23 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
         if (!connectedBelow) {
             if (connectedLeft && connectedRight) return CurtainShape.BOTTOM_MIDDLE;
             if (connectedLeft && !connectedRight) {
-                BlockState aboveState = level.getBlockState(abovePos);
-                BlockState leftState = level.getBlockState(leftPos);
-                if (aboveState.getBlock() instanceof CurtainBlock &&
-                        aboveState.getValue(SHAPE) == CurtainShape.MIDDLE &&
-                        leftState.getBlock() instanceof CurtainBlock &&
-                        leftState.getValue(SHAPE) == CurtainShape.BOTTOM_LEFT) {
+                BlockState aboveNeighbor = level.getBlockState(abovePos);
+                BlockState leftNeighbor = level.getBlockState(leftPos);
+                if (aboveNeighbor.getBlock() instanceof CurtainBlock &&
+                        aboveNeighbor.getValue(SHAPE) == CurtainShape.MIDDLE &&
+                        leftNeighbor.getBlock() instanceof CurtainBlock &&
+                        leftNeighbor.getValue(SHAPE) == CurtainShape.BOTTOM_LEFT) {
                     return CurtainShape.BOTTOM_MIDDLE;
                 }
                 return CurtainShape.BOTTOM_RIGHT;
             }
             if (!connectedLeft && connectedRight) {
-                BlockState aboveState = level.getBlockState(abovePos);
-                BlockState rightState = level.getBlockState(rightPos);
-                if (aboveState.getBlock() instanceof CurtainBlock &&
-                        aboveState.getValue(SHAPE) == CurtainShape.MIDDLE &&
-                        rightState.getBlock() instanceof CurtainBlock &&
-                        rightState.getValue(SHAPE) == CurtainShape.BOTTOM_RIGHT) {
+                BlockState aboveNeighbor = level.getBlockState(abovePos);
+                BlockState rightNeighbor = level.getBlockState(rightPos);
+                if (aboveNeighbor.getBlock() instanceof CurtainBlock &&
+                        aboveNeighbor.getValue(SHAPE) == CurtainShape.MIDDLE &&
+                        rightNeighbor.getBlock() instanceof CurtainBlock &&
+                        rightNeighbor.getValue(SHAPE) == CurtainShape.BOTTOM_RIGHT) {
                     return CurtainShape.BOTTOM_MIDDLE;
                 }
                 return CurtainShape.BOTTOM_LEFT;
