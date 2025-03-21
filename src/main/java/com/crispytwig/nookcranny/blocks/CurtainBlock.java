@@ -2,7 +2,6 @@ package com.crispytwig.nookcranny.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -27,8 +26,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +69,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
         }
 
         @Override
-        public String getSerializedName() {
+        public @NotNull String getSerializedName() {
             return this.name;
         }
     }
@@ -301,18 +298,18 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
         if (!connectedAbove && !connectedBelow) {
             if (connectedLeft && connectedRight) return CurtainShape.MIDDLE;
             if (!connectedLeft && connectedRight) return CurtainShape.LEFT;
-            if (connectedLeft && !connectedRight) return CurtainShape.RIGHT;
+            if (connectedLeft) return CurtainShape.RIGHT;
             return CurtainShape.SINGLE;
         }
         if (!connectedAbove) {
             if (connectedLeft && connectedRight) return CurtainShape.CURTAIN_TOP;
-            if (!connectedLeft && connectedRight) return CurtainShape.CORNER_LEFT;
-            if (connectedLeft && !connectedRight) return CurtainShape.CORNER_RIGHT;
+            if (!connectedLeft) return CurtainShape.CORNER_LEFT;
+            if (!connectedRight) return CurtainShape.CORNER_RIGHT;
             return CurtainShape.CURTAIN_TOP;
         }
         if (!connectedBelow) {
             if (connectedLeft && connectedRight) return CurtainShape.BOTTOM_MIDDLE;
-            if (connectedLeft && !connectedRight) {
+            if (connectedLeft) {
                 BlockState aboveNeighbor = level.getBlockState(abovePos);
                 BlockState leftNeighbor = level.getBlockState(leftPos);
                 if (aboveNeighbor.getBlock() instanceof CurtainBlock &&
@@ -323,7 +320,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
                 }
                 return CurtainShape.BOTTOM_RIGHT;
             }
-            if (!connectedLeft && connectedRight) {
+            if (connectedRight) {
                 BlockState aboveNeighbor = level.getBlockState(abovePos);
                 BlockState rightNeighbor = level.getBlockState(rightPos);
                 if (aboveNeighbor.getBlock() instanceof CurtainBlock &&
@@ -339,7 +336,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
 
         if (connectedLeft && connectedRight) return CurtainShape.MIDDLE;
         if (!connectedLeft && connectedRight) return CurtainShape.LEFT;
-        if (connectedLeft && !connectedRight) return CurtainShape.RIGHT;
+        if (connectedLeft) return CurtainShape.RIGHT;
         return CurtainShape.SINGLE;
     }
 }
