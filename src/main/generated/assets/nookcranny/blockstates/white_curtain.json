@@ -1,6 +1,38 @@
 {
   "multipart": [
     {
+      "when": { "open": "false", "shape": "curtain_default", "facing": "north" },
+      "apply": { "model": "nookcranny:block/white_curtain_default_closed" }
+    },
+    {
+      "when": { "open": "false", "shape": "curtain_default", "facing": "east" },
+      "apply": { "model": "nookcranny:block/white_curtain_default_closed", "y": 90 }
+    },
+    {
+      "when": { "open": "false", "shape": "curtain_default", "facing": "south" },
+      "apply": { "model": "nookcranny:block/white_curtain_default_closed", "y": 180 }
+    },
+    {
+      "when": { "open": "false", "shape": "curtain_default", "facing": "west" },
+      "apply": { "model": "nookcranny:block/white_curtain_default_closed", "y": 270 }
+    },
+    {
+      "when": { "open": "true", "shape": "curtain_default", "facing": "north" },
+      "apply": { "model": "nookcranny:block/white_curtain_default_open" }
+    },
+    {
+      "when": { "open": "true", "shape": "curtain_default", "facing": "east" },
+      "apply": { "model": "nookcranny:block/white_curtain_default_open", "y": 90 }
+    },
+    {
+      "when": { "open": "true", "shape": "curtain_default", "facing": "south" },
+      "apply": { "model": "nookcranny:block/white_curtain_default_open", "y": 180 }
+    },
+    {
+      "when": { "open": "true", "shape": "curtain_default", "facing": "west" },
+      "apply": { "model": "nookcranny:block/white_curtain_default_open", "y": 270 }
+    },
+    {
       "when": { "open": "false", "shape": "single", "facing": "north" },
       "apply": { "model": "nookcranny:block/white_curtain_single_closed" }
     },
