@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "nookcranny:block/bamboo_stripped_wind_chimes",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nookcranny:block/bamboo_stripped_wind_chimes"
+    },
+    "facing=south": {
+      "model": "nookcranny:block/bamboo_stripped_wind_chimes",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nookcranny:block/bamboo_stripped_wind_chimes",
+      "y": 270
+    }
+  }
+}

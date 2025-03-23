@@ -17,7 +17,9 @@ import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.SlabType;
@@ -30,6 +32,7 @@ import java.util.function.Function;
 
 public class NCModelProvider extends FabricModelProvider {
 
+    public static final TextureSlot ONE = TextureSlot.create("1");
     public static final TextureSlot SIDES = TextureSlot.create("sides");
     public static final TextureSlot COUNTERTOP_SIDES = TextureSlot.create("countertop");
     public static final ModelTemplate DRAWER_CUBE_ORIENTABLE = createTemplate("drawer", TextureSlot.TOP, TextureSlot.FRONT, SIDES, TextureSlot.PARTICLE);
@@ -92,6 +95,9 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate CURTAIN_LEFT_CORNER_OPEN = createTemplate("curtain_left_corner_open", TextureSlot.TEXTURE);
     public static final ModelTemplate CURTAIN_RIGHT_CORNER_OPEN = createTemplate("curtain_right_corner_open", TextureSlot.TEXTURE);
 
+    public static final ModelTemplate WIND_CHIME = createTemplate("chime", ONE);
+
+
     public NCModelProvider(FabricDataOutput output) {
         super(output);
     }
@@ -103,7 +109,7 @@ public class NCModelProvider extends FabricModelProvider {
         }
         for (Block block : NCBlocks.BLOCKS) {
             if (block instanceof CurtainBlock) {
-                createCurtainBlock(generators, block);
+                //TODO createCurtainBlock(generators, block);
             }
             if (block instanceof SofaBlock) {
                 createSofaBlock(generators, block);
@@ -122,6 +128,16 @@ public class NCModelProvider extends FabricModelProvider {
             }
             if (block instanceof ChairBlock) {
                 createChairBlock(generators, block);
+            }
+
+            if (block instanceof WindChimeBlock) {
+                TextureMapping one = new TextureMapping().put(ONE, getTexture(block, "wind_chime", ""));
+
+                var res = WIND_CHIME.create(block, one, generators.modelOutput);
+                MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, res));
+
+                multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
+                generators.blockStateOutput.accept(multiVariant);
             }
         }
     }
