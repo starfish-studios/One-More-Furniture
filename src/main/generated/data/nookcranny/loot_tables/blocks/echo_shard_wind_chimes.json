@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "nookcranny:echo_shard_wind_chimes"
         }
       ],
       "rolls": 1.0

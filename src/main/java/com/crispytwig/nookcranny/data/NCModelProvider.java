@@ -32,7 +32,6 @@ import java.util.function.Function;
 
 public class NCModelProvider extends FabricModelProvider {
 
-    public static final TextureSlot ONE = TextureSlot.create("1");
     public static final TextureSlot SIDES = TextureSlot.create("sides");
     public static final TextureSlot COUNTERTOP_SIDES = TextureSlot.create("countertop");
     public static final ModelTemplate DRAWER_CUBE_ORIENTABLE = createTemplate("drawer", TextureSlot.TOP, TextureSlot.FRONT, SIDES, TextureSlot.PARTICLE);
@@ -95,7 +94,7 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate CURTAIN_LEFT_CORNER_OPEN = createTemplate("curtain_left_corner_open", TextureSlot.TEXTURE);
     public static final ModelTemplate CURTAIN_RIGHT_CORNER_OPEN = createTemplate("curtain_right_corner_open", TextureSlot.TEXTURE);
 
-    public static final ModelTemplate WIND_CHIME = createTemplate("chime", ONE);
+    public static final ModelTemplate WIND_CHIME = createTemplate("chime", TextureSlot.ALL);
 
 
     public NCModelProvider(FabricDataOutput output) {
@@ -131,7 +130,7 @@ public class NCModelProvider extends FabricModelProvider {
             }
 
             if (block instanceof WindChimeBlock) {
-                TextureMapping one = new TextureMapping().put(ONE, getTexture(block, "wind_chime", ""));
+                TextureMapping one = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "wind_chime", ""));
 
                 var res = WIND_CHIME.create(block, one, generators.modelOutput);
                 MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, res));

@@ -1,6 +1,6 @@
 {
   "parent": "nookcranny:block/template/chime",
   "textures": {
-    "1": "nookcranny:block/wind_chime/amethyst_wind_chimes"
+    "all": "nookcranny:block/wind_chime/amethyst_wind_chimes"
   }
 }

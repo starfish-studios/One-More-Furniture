@@ -120,7 +120,14 @@ public class NCVanillaIntegration {
                     NCBlocks.CRIMSON_CHAIR,
                     NCBlocks.WARPED_CHAIR,
 
-                    NCBlocks.WHITE_CURTAIN
+                    NCBlocks.WHITE_CURTAIN,
+
+                    NCBlocks.AMETHYST_WIND_CHIMES,
+                    NCBlocks.BAMBOO_WIND_CHIMES,
+                    NCBlocks.BAMBOO_STRIPPED_WIND_CHIMES,
+                    NCBlocks.BONE_WIND_CHIMES,
+                    NCBlocks.COPPER_WIND_CHIMES,
+                    NCBlocks.ECHO_SHARD_WIND_CHIMES
             );
         }
 
