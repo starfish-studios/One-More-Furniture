@@ -45,8 +45,6 @@ public class WindChimeBlock extends Block {
 
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        LevelAccessor levelAccessor = context.getLevel();
-        BlockPos blockPos = context.getClickedPos();
         return this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection());
     }
 

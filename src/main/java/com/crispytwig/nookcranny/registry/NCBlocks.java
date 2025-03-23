@@ -207,6 +207,19 @@ public class NCBlocks {
             )
     );
 
+    public static final Block OAK_FAN = register("oak_fan", new FanBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block SPRUCE_FAN = register("spruce_fan", new FanBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block BIRCH_FAN = register("birch_fan", new FanBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block JUNGLE_FAN = register("jungle_fan", new FanBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block ACACIA_FAN = register("acacia_fan", new FanBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block CHERRY_FAN = register("cherry_fan", new FanBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block DARK_OAK_FAN = register("dark_oak_fan", new FanBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block MANGROVE_FAN = register("mangrove_fan", new FanBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block BAMBOO_FAN = register("bamboo_fan", new FanBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block CRIMSON_FAN = register("crimson_fan", new FanBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block WARPED_FAN = register("warped_fan", new FanBlock(BlockBehaviour.Properties.of().noOcclusion()));
+
+
     private static Block register(String id, Block block) {
         BLOCK_NAMES.add(id);
         BLOCKS.add(block);

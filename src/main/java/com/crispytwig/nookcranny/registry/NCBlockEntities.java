@@ -87,6 +87,21 @@ public class NCBlockEntities {
             NCBlocks.CRIMSON_SHELF
     ).build(null));
 
+    public static final BlockEntityType<FanBlockEntity> FAN = register("fan", FabricBlockEntityTypeBuilder.create(FanBlockEntity::new,
+            NCBlocks.OAK_FAN,
+            NCBlocks.SPRUCE_FAN,
+            NCBlocks.BIRCH_FAN,
+            NCBlocks.JUNGLE_FAN,
+            NCBlocks.ACACIA_FAN,
+            NCBlocks.CHERRY_FAN,
+            NCBlocks.DARK_OAK_FAN,
+            NCBlocks.BAMBOO_FAN,
+            NCBlocks.MANGROVE_FAN,
+            NCBlocks.CRIMSON_FAN,
+            NCBlocks.WARPED_FAN
+
+    ).build(null));
+
     public static <T extends BlockEntityType<?>> T register(String name, T blockEntityType) {
         return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(MOD_ID, name), blockEntityType);
     }

@@ -95,6 +95,7 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate CURTAIN_RIGHT_CORNER_OPEN = createTemplate("curtain_right_corner_open", TextureSlot.TEXTURE);
 
     public static final ModelTemplate WIND_CHIME = createTemplate("chime", TextureSlot.ALL);
+    public static final ModelTemplate FAN = createTemplate("ceiling_fan", TextureSlot.ALL);
 
 
     public NCModelProvider(FabricDataOutput output) {
@@ -138,7 +139,19 @@ public class NCModelProvider extends FabricModelProvider {
                 multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
                 generators.blockStateOutput.accept(multiVariant);
             }
+
+            if (block instanceof FanBlock) {
+                createFan(generators, block);
+            }
         }
+    }
+
+    private void createFan(BlockModelGenerators generators, Block block) {
+        ResourceLocation r = ModelLocationUtils.getModelLocation(block);
+        ResourceLocation r2 = ModelLocationUtils.getModelLocation(block, "_on");
+        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block)
+                .with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.POWERED, r, r2))
+                .with(BlockModelGenerators.createFacingDispatch()));
     }
 
     private void createCurtainBlock(BlockModelGenerators generators, Block block) {
