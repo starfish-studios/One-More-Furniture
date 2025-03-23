@@ -153,6 +153,14 @@ public class NCItems {
 
     public static final Item WHITE_CURTAIN = register("white_curtain", new BlockItem(NCBlocks.WHITE_CURTAIN, new FabricItemSettings()));
 
+    public static final Item AMETHYST_WIND_CHIMES = register("amethyst_wind_chimes", new BlockItem(NCBlocks.AMETHYST_WIND_CHIMES, new FabricItemSettings()));
+    public static final Item BAMBOO_WIND_CHIMES = register("bamboo_wind_chimes", new BlockItem(NCBlocks.BAMBOO_WIND_CHIMES, new FabricItemSettings()));
+    public static final Item BAMBOO_STRIPPED_WIND_CHIMES = register("bamboo_stripped_wind_chimes", new BlockItem(NCBlocks.BAMBOO_STRIPPED_WIND_CHIMES, new FabricItemSettings()));
+    public static final Item BONE_WIND_CHIMES = register("bone_wind_chimes", new BlockItem(NCBlocks.BONE_WIND_CHIMES, new FabricItemSettings()));
+    public static final Item COPPER_WIND_CHIMES = register("copper_wind_chimes", new BlockItem(NCBlocks.COPPER_WIND_CHIMES, new FabricItemSettings()));
+    public static final Item ECHO_SHARD_WIND_CHIMES = register("echo_shard_wind_chimes", new BlockItem(NCBlocks.ECHO_SHARD_WIND_CHIMES, new FabricItemSettings()));
+
+
     private static Item register(String id, Item item) {
         ITEM_NAMES.add(id);
         return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(NookAndCranny.MOD_ID, id), item);

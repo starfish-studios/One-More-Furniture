@@ -149,6 +149,13 @@ public class NCCreativeModeTab {
                         output.accept(PINK_SOFA);
 
                         output.accept(WHITE_CURTAIN);
+
+                        output.accept(AMETHYST_WIND_CHIMES);
+                        output.accept(BAMBOO_WIND_CHIMES);
+                        output.accept(BAMBOO_STRIPPED_WIND_CHIMES);
+                        output.accept(BONE_WIND_CHIMES);
+                        output.accept(COPPER_WIND_CHIMES);
+                        output.accept(ECHO_SHARD_WIND_CHIMES);
                     }).build()
     );
 
