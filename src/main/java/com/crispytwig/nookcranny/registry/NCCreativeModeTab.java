@@ -156,6 +156,18 @@ public class NCCreativeModeTab {
                         output.accept(BONE_WIND_CHIMES);
                         output.accept(COPPER_WIND_CHIMES);
                         output.accept(ECHO_SHARD_WIND_CHIMES);
+
+                        output.accept(OAK_FAN);
+                        output.accept(SPRUCE_FAN);
+                        output.accept(BIRCH_FAN);
+                        output.accept(JUNGLE_FAN);
+                        output.accept(ACACIA_FAN);
+                        output.accept(CHERRY_FAN);
+                        output.accept(DARK_OAK_FAN);
+                        output.accept(MANGROVE_FAN);
+                        output.accept(BAMBOO_FAN);
+                        output.accept(CRIMSON_FAN);
+                        output.accept(WARPED_FAN);
                     }).build()
     );
 
