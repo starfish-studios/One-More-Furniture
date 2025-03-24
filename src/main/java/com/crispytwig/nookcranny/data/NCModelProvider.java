@@ -141,7 +141,7 @@ public class NCModelProvider extends FabricModelProvider {
             }
 
             if (block instanceof FanBlock) {
-                createFan(generators, block);
+                //createFan(generators, block);
             }
         }
     }

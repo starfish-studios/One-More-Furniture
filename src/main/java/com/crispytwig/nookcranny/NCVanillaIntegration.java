@@ -2,10 +2,13 @@ package com.crispytwig.nookcranny;
 
 import com.crispytwig.nookcranny.blocks.LampBlock;
 import com.crispytwig.nookcranny.blocks.MailboxBlock;
+import com.crispytwig.nookcranny.client.FanLightModel;
+import com.crispytwig.nookcranny.client.FanModel;
 import com.crispytwig.nookcranny.client.gui.screens.DrawerScreen;
 import com.crispytwig.nookcranny.client.gui.screens.MailboxScreen;
 import com.crispytwig.nookcranny.client.renderer.SeatRenderer;
 import com.crispytwig.nookcranny.client.renderer.ShelfRenderer;
+import com.crispytwig.nookcranny.client.renderer.blockentity.FanBlockEntityRenderer;
 import com.crispytwig.nookcranny.client.renderer.blockentity.FlowerBasketRenderer;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import com.crispytwig.nookcranny.registry.NCBlocks;
@@ -15,6 +18,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -45,12 +49,16 @@ public class NCVanillaIntegration {
             registerBlockRenderLayers();
             registerItemModelPredicates();
             registerParticles();
+
+            EntityModelLayerRegistry.registerModelLayer(FanModel.LAYER_LOCATION, FanModel::createBodyLayer);
+            EntityModelLayerRegistry.registerModelLayer(FanLightModel.LAYER_LOCATION, FanLightModel::createBodyLayer);
         }
 
         private static void registerRenderers() {
             registerEntityRenderers(NCEntities.SEAT, SeatRenderer::new);
             BlockEntityRendererRegistry.register(NCBlockEntities.SHELF, ShelfRenderer::new);
             BlockEntityRendererRegistry.register(NCBlockEntities.FLOWER_BASKET, FlowerBasketRenderer::new);
+            BlockEntityRendererRegistry.register(NCBlockEntities.FAN, FanBlockEntityRenderer::new);
 
         }
 
@@ -127,7 +135,10 @@ public class NCVanillaIntegration {
                     NCBlocks.BAMBOO_STRIPPED_WIND_CHIMES,
                     NCBlocks.BONE_WIND_CHIMES,
                     NCBlocks.COPPER_WIND_CHIMES,
-                    NCBlocks.ECHO_SHARD_WIND_CHIMES
+                    NCBlocks.ECHO_SHARD_WIND_CHIMES,
+
+
+                    NCBlocks.OAK_FAN
             );
         }
 

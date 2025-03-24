@@ -7,10 +7,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -18,12 +18,21 @@ import org.jetbrains.annotations.Nullable;
 
 public class FanBlock extends BaseEntityBlock {
 
-    public FanBlock(Properties properties) {
-        super(properties);
+    public String wood;
+
+    public FanBlock(String wood, Properties properties) {
+        super(properties
+                .lightLevel(state -> state.getValue(BlockStateProperties.POWERED) ? 12 : 0)
+                .emissiveRendering((blockState, blockGetter, blockPos) -> blockState.getValue(BlockStateProperties.POWERED)));
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(BlockStateProperties.FACING, Direction.NORTH)
                 .setValue(BlockStateProperties.POWERED, false)
         );
+        this.wood = wood;
+    }
+
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
     }
 
     @Nullable
@@ -45,7 +54,6 @@ public class FanBlock extends BaseEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
     }
-
 
     @Nullable
     @Override
