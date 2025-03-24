@@ -21,12 +21,31 @@ public class FanBlockEntity extends BlockEntity {
     private static final double MIN_FORCE = 0.05;
     private static final double SCALE = 0.2;
 
+    private static final float MAX_SPEED = 20.0f;
+    private static final float ACCELERATION = 0.5f;
+    private static final float DECELERATION = 0.3f;
+
+    private float rotationSpeed = 0.0f;
+    private float currentRotation = 0.0f;
+
     public FanBlockEntity(BlockPos pos, BlockState blockState) {
         super(NCBlockEntities.FAN, pos, blockState);
     }
 
     public void commonTick(Level level, BlockState state) {
+        boolean powered = state.getValue(BlockStateProperties.POWERED);
+
         if (level.isClientSide()) {
+            if (powered) {
+                rotationSpeed = Math.min(rotationSpeed + ACCELERATION, MAX_SPEED);
+            } else {
+                rotationSpeed = Math.max(rotationSpeed - DECELERATION, 0);
+            }
+
+            currentRotation = (currentRotation + rotationSpeed) % 360;
+        }
+
+        if (!powered) {
             return;
         }
 
@@ -55,5 +74,9 @@ public class FanBlockEntity extends BlockEntity {
             entity.setDeltaMovement(newMotion);
             entity.hurtMarked = true;
         }
+    }
+
+    public float getRotationAngle(float partialTick) {
+        return (currentRotation + rotationSpeed * partialTick) % 360;
     }
 }

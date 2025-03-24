@@ -24,9 +24,11 @@ public class FanLightModel extends Model {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-         partdefinition.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 20).addBox(-11.0F, -4.0F, 5.0F, 6.0F, 7.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(8.0F, 24.0F, -8.0F));
+         partdefinition.addOrReplaceChild("bone", CubeListBuilder.create()
+                 .texOffs(0, 0)
+                 .addBox(-11.0F, -4.0F, 5.0F, 6.0F, 7.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(8.0F, 24.0F, -8.0F));
 
-        return LayerDefinition.create(meshdefinition, 64, 64);
+        return LayerDefinition.create(meshdefinition, 32, 32);
     }
 
     @Override

@@ -37,7 +37,7 @@ public class FanBlockEntityRenderer implements BlockEntityRenderer<FanBlockEntit
         var dir = blockEntity.getBlockState().getValue(BlockStateProperties.FACING);
 
         poseStack.translate(0.5, 0.5, 0.5);
-        float rotationAngle = (blockEntity.getLevel().getGameTime() + partialTick) * 10 % 360;
+        float rotationAngle = blockEntity.getRotationAngle(partialTick);
 
         switch (dir) {
             case NORTH -> poseStack.mulPose(Axis.XN.rotationDegrees(90));
@@ -50,18 +50,32 @@ public class FanBlockEntityRenderer implements BlockEntityRenderer<FanBlockEntit
         poseStack.mulPose(Axis.YP.rotationDegrees(rotationAngle));
         poseStack.translate(0.0,-1.0,0.0);
 
+        var bl = blockEntity.getBlockState().getValue(BlockStateProperties.POWERED);
+
+        if (bl) {
+            model.getChild("base").getChild("lit_light").visible = true;
+            model.getChild("base").getChild("not_lit_light").visible = false;
+        } else {
+            model.getChild("base").getChild("lit_light").visible = false;
+            model.getChild("base").getChild("not_lit_light").visible = true;
+        }
+
         model.render(poseStack,
                 buffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(blockEntity))),
                 packedLight,
                 packedOverlay
         );
-        light.render(poseStack,
-                buffer.getBuffer(RenderType.entityTranslucentEmissive(
-                        new ResourceLocation(NookAndCranny.MOD_ID, "textures/block/ceiling_fan/oak_ceiling_fan.png"))
-                ),
-                packedLight,
-                packedOverlay
-        );
+
+        if (bl) {
+            light.render(poseStack,
+                    buffer.getBuffer(RenderType.entityTranslucentEmissive(
+                            new ResourceLocation(NookAndCranny.MOD_ID, "textures/block/ceiling_fan/ceiling_fan_light.png"))
+                    ),
+                    packedLight,
+                    packedOverlay
+            );
+        }
+
         poseStack.popPose();
     }
 }
