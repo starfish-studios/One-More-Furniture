@@ -58,7 +58,7 @@ public class FanBlockEntity extends BlockEntity {
         Vec3 fanPos = Vec3.atCenterOf(pos);
         Vec3 pushDirection = Vec3.atLowerCornerOf(direction.getNormal()).normalize();
 
-        AABB affectedArea = new AABB(pos.relative(direction, 1)).inflate(1.5).expandTowards(pushDirection.scale(MAX_DISTANCE));
+        AABB affectedArea = new AABB(pos.relative(direction, 1)).inflate(1.1).expandTowards(pushDirection.scale(MAX_DISTANCE));
         List<Entity> entities = level.getEntities(null, affectedArea);
 
         for (Entity entity : entities) {

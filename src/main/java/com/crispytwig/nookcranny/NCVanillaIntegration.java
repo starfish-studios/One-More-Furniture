@@ -1,5 +1,6 @@
 package com.crispytwig.nookcranny;
 
+import com.crispytwig.nookcranny.blocks.FanBlock;
 import com.crispytwig.nookcranny.blocks.LampBlock;
 import com.crispytwig.nookcranny.blocks.MailboxBlock;
 import com.crispytwig.nookcranny.client.FanModel;
@@ -71,6 +72,9 @@ public class NCVanillaIntegration {
         private static void registerBlockRenderLayers() {
             NCBlocks.BLOCKS.stream().filter(block -> block instanceof LampBlock).forEach(lamp -> BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), lamp));
             NCBlocks.BLOCKS.stream().filter(block -> block instanceof MailboxBlock).forEach(mailbox -> BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), mailbox));
+            NCBlocks.BLOCKS.stream().filter(block -> block instanceof FanBlock).forEach(lamp -> BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), lamp));
+
+
 
             BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
                     NCBlocks.SPIGOT,
@@ -133,10 +137,7 @@ public class NCVanillaIntegration {
                     NCBlocks.BAMBOO_STRIPPED_WIND_CHIMES,
                     NCBlocks.BONE_WIND_CHIMES,
                     NCBlocks.COPPER_WIND_CHIMES,
-                    NCBlocks.ECHO_SHARD_WIND_CHIMES,
-
-
-                    NCBlocks.OAK_FAN
+                    NCBlocks.ECHO_SHARD_WIND_CHIMES
             );
         }
 

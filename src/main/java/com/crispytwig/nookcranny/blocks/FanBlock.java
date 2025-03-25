@@ -5,19 +5,21 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RedstoneLampBlock;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -71,10 +73,11 @@ public class FanBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (state.getValue(BlockStateProperties.POWERED) && !level.hasNeighborSignal(pos)) {
-            level.setBlock(pos, state.cycle(BlockStateProperties.POWERED), 2);
-        }
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+
+        state = state.cycle(BlockStateProperties.POWERED);
+        level.setBlock(pos, state, 2);
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override
@@ -82,17 +85,13 @@ public class FanBlock extends BaseEntityBlock {
         builder.add(BlockStateProperties.FACING, BlockStateProperties.POWERED);
     }
 
+    @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
         if (!level.isClientSide) {
-            boolean bl = state.getValue(BlockStateProperties.POWERED);
-            if (bl != level.hasNeighborSignal(pos)) {
-                if (bl) {
-                    level.scheduleTick(pos, this, 4);
-                } else {
-                    level.setBlock(pos, state.cycle(BlockStateProperties.POWERED), 2);
-                }
+            boolean bl = level.hasNeighborSignal(pos);
+            if (bl != state.getValue(BlockStateProperties.POWERED)) {
+                level.setBlock(pos, state.setValue(BlockStateProperties.POWERED, bl), 2);
             }
-
         }
     }
 
