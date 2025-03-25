@@ -2,7 +2,6 @@ package com.crispytwig.nookcranny;
 
 import com.crispytwig.nookcranny.blocks.LampBlock;
 import com.crispytwig.nookcranny.blocks.MailboxBlock;
-import com.crispytwig.nookcranny.client.FanLightModel;
 import com.crispytwig.nookcranny.client.FanModel;
 import com.crispytwig.nookcranny.client.gui.screens.DrawerScreen;
 import com.crispytwig.nookcranny.client.gui.screens.MailboxScreen;
@@ -51,7 +50,6 @@ public class NCVanillaIntegration {
             registerParticles();
 
             EntityModelLayerRegistry.registerModelLayer(FanModel.LAYER_LOCATION, FanModel::createBodyLayer);
-            EntityModelLayerRegistry.registerModelLayer(FanLightModel.LAYER_LOCATION, FanLightModel::createBodyLayer);
         }
 
         private static void registerRenderers() {

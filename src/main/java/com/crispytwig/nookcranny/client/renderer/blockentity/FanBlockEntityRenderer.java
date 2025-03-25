@@ -3,7 +3,6 @@ package com.crispytwig.nookcranny.client.renderer.blockentity;
 import com.crispytwig.nookcranny.NookAndCranny;
 import com.crispytwig.nookcranny.blocks.FanBlock;
 import com.crispytwig.nookcranny.blocks.entities.FanBlockEntity;
-import com.crispytwig.nookcranny.client.FanLightModel;
 import com.crispytwig.nookcranny.client.FanModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -18,11 +17,9 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 public class FanBlockEntityRenderer implements BlockEntityRenderer<FanBlockEntity> {
 
     ModelPart model;
-    ModelPart light;
 
     public FanBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         model = context.bakeLayer(FanModel.LAYER_LOCATION);
-        light = context.bakeLayer(FanLightModel.LAYER_LOCATION);
     }
 
     public ResourceLocation getTextureLocation(FanBlockEntity entity) {
@@ -50,31 +47,11 @@ public class FanBlockEntityRenderer implements BlockEntityRenderer<FanBlockEntit
         poseStack.mulPose(Axis.YP.rotationDegrees(rotationAngle));
         poseStack.translate(0.0,-1.0,0.0);
 
-        var bl = blockEntity.getBlockState().getValue(BlockStateProperties.POWERED);
-
-        if (bl) {
-            model.getChild("base").getChild("lit_light").visible = true;
-            model.getChild("base").getChild("not_lit_light").visible = false;
-        } else {
-            model.getChild("base").getChild("lit_light").visible = false;
-            model.getChild("base").getChild("not_lit_light").visible = true;
-        }
-
         model.render(poseStack,
                 buffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(blockEntity))),
                 packedLight,
                 packedOverlay
         );
-
-        if (bl) {
-            light.render(poseStack,
-                    buffer.getBuffer(RenderType.entityTranslucentEmissive(
-                            new ResourceLocation(NookAndCranny.MOD_ID, "textures/block/ceiling_fan/ceiling_fan_light.png"))
-                    ),
-                    packedLight,
-                    packedOverlay
-            );
-        }
 
         poseStack.popPose();
     }
