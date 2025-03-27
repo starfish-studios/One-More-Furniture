@@ -1,16 +1,21 @@
 package com.crispytwig.nookcranny.registry;
 
 import com.crispytwig.nookcranny.NookAndCranny;
+import com.crispytwig.nookcranny.blocks.CabinetBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings.copyOf;
 
 public class NCItems {
 
@@ -171,6 +176,19 @@ public class NCItems {
     public static final Item CHERRY_FAN = register("cherry_ceiling_fan", new BlockItem(NCBlocks.CHERRY_FAN, new FabricItemSettings()));
     public static final Item CRIMSON_FAN = register("crimson_ceiling_fan", new BlockItem(NCBlocks.CRIMSON_FAN, new FabricItemSettings()));
     public static final Item WARPED_FAN = register("warped_ceiling_fan", new BlockItem(NCBlocks.WARPED_FAN, new FabricItemSettings()));
+
+
+    public static final Item OAK_CABINET = register("oak_cabinet", new BlockItem(NCBlocks.OAK_CABINET, new FabricItemSettings()));
+    public static final Item SPRUCE_CABINET = register("spruce_cabinet", new BlockItem(NCBlocks.SPRUCE_CABINET, new FabricItemSettings()));
+    public static final Item BIRCH_CABINET = register("birch_cabinet", new BlockItem(NCBlocks.BIRCH_CABINET, new FabricItemSettings()));
+    public static final Item JUNGLE_CABINET = register("jungle_cabinet", new BlockItem(NCBlocks.JUNGLE_CABINET, new FabricItemSettings()));
+    public static final Item ACACIA_CABINET = register("acacia_cabinet", new BlockItem(NCBlocks.ACACIA_CABINET, new FabricItemSettings()));
+    public static final Item CHERRY_CABINET = register("cherry_cabinet", new BlockItem(NCBlocks.CHERRY_CABINET, new FabricItemSettings()));
+    public static final Item DARK_OAK_CABINET = register("dark_oak_cabinet", new BlockItem(NCBlocks.DARK_OAK_CABINET, new FabricItemSettings()));
+    public static final Item MANGROVE_CABINET = register("mangrove_cabinet", new BlockItem(NCBlocks.MANGROVE_CABINET, new FabricItemSettings()));
+    public static final Item BAMBOO_CABINET = register("bamboo_cabinet", new BlockItem(NCBlocks.BAMBOO_CABINET, new FabricItemSettings()));
+    public static final Item CRIMSON_CABINET = register("crimson_cabinet", new BlockItem(NCBlocks.CRIMSON_CABINET, new FabricItemSettings()));
+    public static final Item WARPED_CABINET = register("warped_cabinet", new BlockItem(NCBlocks.WARPED_CABINET, new FabricItemSettings()));
 
     private static Item register(String id, Item item) {
         ITEM_NAMES.add(id);

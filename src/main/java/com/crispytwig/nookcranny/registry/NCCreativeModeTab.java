@@ -168,6 +168,18 @@ public class NCCreativeModeTab {
                         output.accept(BAMBOO_FAN);
                         output.accept(CRIMSON_FAN);
                         output.accept(WARPED_FAN);
+
+                        output.accept(OAK_CABINET);
+                        output.accept(SPRUCE_CABINET);
+                        output.accept(BIRCH_CABINET);
+                        output.accept(JUNGLE_CABINET);
+                        output.accept(ACACIA_CABINET);
+                        output.accept(CHERRY_CABINET);
+                        output.accept(DARK_OAK_CABINET);
+                        output.accept(MANGROVE_CABINET);
+                        output.accept(BAMBOO_CABINET);
+                        output.accept(CRIMSON_CABINET);
+                        output.accept(WARPED_CABINET);
                     }).build()
     );
 

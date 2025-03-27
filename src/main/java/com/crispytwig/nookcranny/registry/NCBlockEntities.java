@@ -41,6 +41,21 @@ public class NCBlockEntities {
             NCBlocks.WARPED_DRAWER
     ).build(null));
 
+    public static final BlockEntityType<CabinetBlockEntity> CABINET = register("cabinet", FabricBlockEntityTypeBuilder.create(CabinetBlockEntity::new,
+            NCBlocks.OAK_CABINET,
+            NCBlocks.SPRUCE_CABINET,
+            NCBlocks.BIRCH_CABINET,
+            NCBlocks.ACACIA_CABINET,
+            NCBlocks.DARK_OAK_CABINET,
+            NCBlocks.JUNGLE_CABINET,
+            NCBlocks.CHERRY_CABINET,
+            NCBlocks.MANGROVE_CABINET,
+            NCBlocks.BAMBOO_CABINET,
+            NCBlocks.CRIMSON_CABINET,
+            NCBlocks.WARPED_CABINET
+    ).build(null));
+
+
     public static final BlockEntityType<SpigotBlockEntity> SPIGOT = register("spigot", FabricBlockEntityTypeBuilder.create(SpigotBlockEntity::new, NCBlocks.SPIGOT).build(null));
 
 //    public static final Supplier<BlockEntityType<FlowerBoxBlockEntity>> FLOWER_BOX = AFRegistry.registerBlockEntityType("planter_box",

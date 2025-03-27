@@ -219,6 +219,18 @@ public class NCBlocks {
     public static final Block CRIMSON_FAN = register("crimson_ceiling_fan", new FanBlock("crimson", BlockBehaviour.Properties.of().noOcclusion()));
     public static final Block WARPED_FAN = register("warped_ceiling_fan", new FanBlock("warped", BlockBehaviour.Properties.of().noOcclusion()));
 
+    public static final Block OAK_CABINET = register("oak_cabinet", new CabinetBlock(copyOf(Blocks.OAK_PLANKS)));
+    public static final Block SPRUCE_CABINET = register("spruce_cabinet", new CabinetBlock(copyOf(Blocks.SPRUCE_PLANKS)));
+    public static final Block BIRCH_CABINET = register("birch_cabinet", new CabinetBlock(copyOf(Blocks.BIRCH_PLANKS)));
+    public static final Block JUNGLE_CABINET = register("jungle_cabinet", new CabinetBlock(copyOf(Blocks.JUNGLE_PLANKS)));
+    public static final Block ACACIA_CABINET = register("acacia_cabinet", new CabinetBlock(copyOf(Blocks.ACACIA_PLANKS)));
+    public static final Block CHERRY_CABINET = register("cherry_cabinet", new CabinetBlock(copyOf(Blocks.CRIMSON_PLANKS)));
+    public static final Block DARK_OAK_CABINET = register("dark_oak_cabinet", new CabinetBlock(copyOf(Blocks.DARK_OAK_PLANKS)));
+    public static final Block MANGROVE_CABINET = register("mangrove_cabinet", new CabinetBlock(copyOf(Blocks.WARPED_PLANKS)));
+    public static final Block BAMBOO_CABINET = register("bamboo_cabinet", new CabinetBlock(copyOf(Blocks.BAMBOO_PLANKS)));
+    public static final Block CRIMSON_CABINET = register("crimson_cabinet", new CabinetBlock(copyOf(Blocks.CRIMSON_PLANKS)));
+    public static final Block WARPED_CABINET = register("warped_cabinet", new CabinetBlock(copyOf(Blocks.WARPED_PLANKS)));
+
 
     private static Block register(String id, Block block) {
         BLOCK_NAMES.add(id);
