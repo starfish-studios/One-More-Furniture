@@ -286,7 +286,7 @@ public class NCModelProvider extends FabricModelProvider {
                 .put(TextureSlot.TOP, getTexture(block, "drawers", "_top"))
                 .put(SIDES, getTexture(block, "drawers", "_side"))
                 .put(TextureSlot.FRONT, getTexture(block, "drawers", "_front"))
-                .put(COUNTERTOP_SIDES, getTexture(block, "drawers", "_countertop_sides"));
+                .put(COUNTERTOP_SIDES, getTexture(block, "drawers/countertop", "_countertop_sides"));
         DRAWER_CUBE_INVENTORY.create(ModelLocationUtils.getModelLocation(item), baseMapping, generators.output);
     }
 
