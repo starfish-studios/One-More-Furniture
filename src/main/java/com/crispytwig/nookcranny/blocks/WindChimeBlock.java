@@ -53,7 +53,7 @@ public class WindChimeBlock extends Block {
         double d = (double)pos.getX() + 0.5;
         double e = (double)pos.getY();
         double f = (double)pos.getZ() + 0.5;
-        if (random.nextDouble() < 0.05) {
+        if (random.nextDouble() < 0.05) { //TODO!!!!!! change to actual chime sound
             level.playLocalSound(d, e, f, sound.getHitSound(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
         }
     }
