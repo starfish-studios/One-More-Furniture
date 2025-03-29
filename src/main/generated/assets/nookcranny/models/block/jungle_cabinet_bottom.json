@@ -1,0 +1,9 @@
+{
+  "parent": "nookcranny:block/template/cabinet_top",
+  "textures": {
+    "front": "nookcranny:block/cabinet/jungle_cabinet_front_upper",
+    "particle": "nookcranny:block/cabinet/jungle_cabinet_front_upper",
+    "sides": "nookcranny:block/cabinet/jungle_cabinet_sides_upper",
+    "top": "nookcranny:block/drawers/jungle_drawer_front"
+  }
+}

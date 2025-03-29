@@ -37,6 +37,12 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate DRAWER_CUBE_ORIENTABLE = createTemplate("drawer", TextureSlot.TOP, TextureSlot.FRONT, SIDES, TextureSlot.PARTICLE);
     public static final ModelTemplate DRAWER_CUBE_INVENTORY = createTemplate("drawer_inventory", TextureSlot.TOP, TextureSlot.FRONT, SIDES, COUNTERTOP_SIDES);
     public static final ModelTemplate COUNTERTOP = createTemplate("countertop", TextureSlot.TOP, SIDES);
+    public static final ModelTemplate COUNTERTOP_BOTTOM = createTemplate("countertop_bottom", TextureSlot.TOP, SIDES);
+
+    public static final ModelTemplate CABINET = createTemplate("cabinet", TextureSlot.TOP, TextureSlot.FRONT, SIDES, TextureSlot.PARTICLE);
+    public static final ModelTemplate CABINET_TOP = createTemplate("cabinet_top", TextureSlot.TOP, TextureSlot.FRONT, SIDES, TextureSlot.PARTICLE);
+    public static final ModelTemplate CABINET_INVENTORY = createTemplate("cabinet_inventory", TextureSlot.TOP, TextureSlot.FRONT, SIDES, COUNTERTOP_SIDES);
+
 
     public static final TextureSlot CORE = TextureSlot.create("core");
     public static final TextureSlot BITS = TextureSlot.create("bits");
@@ -119,6 +125,9 @@ public class NCModelProvider extends FabricModelProvider {
             }
             if (block instanceof DrawerBlock) {
                 createDrawerBlock(generators, block);
+            }
+            if (block instanceof CabinetBlock) {
+                createCabinetBlock(generators, block);
             }
             if (block instanceof LampBlock) {
                 //createLampBlock(generators, block);
@@ -221,7 +230,10 @@ public class NCModelProvider extends FabricModelProvider {
                 .put(TextureSlot.TOP, new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/" + type.getSerializedName() + "_drawer_top"))
                 .put(SIDES, new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/" + type.getSerializedName() + "_drawer_countertop_sides"));
         COUNTERTOP.create(new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName()), baseMapping, generators.modelOutput);
+
+        COUNTERTOP_BOTTOM.create(new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName() + "_bottom"), baseMapping, generators.modelOutput);
     }
+
 
     @Override
     public void generateItemModels(ItemModelGenerators generators) {
@@ -309,6 +321,65 @@ public class NCModelProvider extends FabricModelProvider {
                 block,
                 drawerId
         ));
+    }
+
+    public final void createCabinetBlock(BlockModelGenerators generators, Block block) {
+        String wood = BuiltInRegistries.BLOCK.getKey(block).getPath();
+        String firstName = wood.split("_cabinet")[0];
+        ResourceLocation loc = new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/" + firstName + "_drawer_front");
+
+        TextureMapping baseMapping = new TextureMapping()
+                .put(TextureSlot.TOP, loc)
+                .put(SIDES, getTexture(block, "cabinet", "_sides"))
+                .put(TextureSlot.FRONT, getTexture(block, "cabinet", "_front"))
+                .put(TextureSlot.PARTICLE, getTexture(block, "cabinet", "_front"));
+
+        TextureMapping upperMapping = new TextureMapping()
+                .put(TextureSlot.TOP, loc)
+                .put(SIDES, getTexture(block, "cabinet", "_sides_upper"))
+                .put(TextureSlot.FRONT, getTexture(block, "cabinet", "_front_upper"))
+                .put(TextureSlot.PARTICLE, getTexture(block, "cabinet", "_front_upper"));
+        ResourceLocation cabinetId = CABINET.create(block, baseMapping, generators.modelOutput);
+        ResourceLocation cabinetTopId = CABINET_TOP.createWithSuffix(block, "_bottom", upperMapping, generators.modelOutput);
+
+        generators.skipAutoItemBlock(block);
+        generators.blockStateOutput.accept(createCabinetMultipart(
+                block,
+                cabinetId,
+                cabinetTopId
+        ));
+    }
+
+    public static BlockStateGenerator createCabinetMultipart(
+            Block drawerBlock,
+            ResourceLocation cabinetId,
+            ResourceLocation cabinetTopId
+    ) {
+        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(drawerBlock);
+
+        for (boolean bl : new boolean[]{true, false}) {
+
+            for (CountertopType type : CountertopType.values()) {
+                var string = bl ? "block/drawers/countertop/countertop_" + type.getSerializedName() :
+                        "block/drawers/countertop/countertop_" + type.getSerializedName() + "_bottom";
+                multiPart.with(
+                        Condition.condition().term(DrawerBlock.COUNTERTOP, type),
+                        Variant.variant().with(VariantProperties.MODEL, new ResourceLocation(NookAndCranny.MOD_ID, string))
+                );
+            }
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                multiPart.with(
+                        Condition.condition()
+                                .term(BlockStateProperties.BOTTOM, bl)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, direction),
+                        Variant.variant()
+                                .with(VariantProperties.MODEL, bl ? cabinetId : cabinetTopId)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[((direction.get2DDataValue() * 90 + 180) / 90) % 4])
+                );
+            }
+        }
+
+        return multiPart;
     }
 
     public static BlockStateGenerator createDrawerMultipart(

@@ -1,0 +1,9 @@
+{
+  "parent": "nookcranny:block/template/cabinet",
+  "textures": {
+    "front": "nookcranny:block/cabinet/warped_cabinet_front",
+    "particle": "nookcranny:block/cabinet/warped_cabinet_front",
+    "sides": "nookcranny:block/cabinet/warped_cabinet_sides",
+    "top": "nookcranny:block/drawers/warped_drawer_front"
+  }
+}
