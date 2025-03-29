@@ -1,6 +1,7 @@
 package com.crispytwig.nookcranny.data;
 
 import com.crispytwig.nookcranny.blocks.ChairBlock;
+import com.crispytwig.nookcranny.blocks.ShelfBlock;
 import com.crispytwig.nookcranny.blocks.TallStoolBlock;
 import com.crispytwig.nookcranny.blocks.properties.ColorList;
 import com.crispytwig.nookcranny.registry.NCBlocks;
@@ -14,11 +15,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
@@ -34,10 +39,12 @@ public class NCBlockLootTableProvider extends FabricBlockLootTableProvider {
     public void generate() {
 
         for (Block block : NCBlocks.BLOCKS) {
-            if (!(block instanceof ChairBlock)) {
-                dropSelf(block);
-            } else {
+            if (block instanceof ChairBlock) {
                 this.add(block, createLootTableForChair(block));
+            } else if (block instanceof ShelfBlock) {
+                this.add(block, createShelfTable(block));
+            } else {
+                dropSelf(block);
             }
         }
     }
@@ -81,5 +88,21 @@ public class NCBlockLootTableProvider extends FabricBlockLootTableProvider {
         }
 
         return builder;
+    }
+
+    public LootTable.Builder createShelfTable(Block block) {
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(this.applyExplosionDecay(block, LootItem.lootTableItem(block)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(ShelfBlock.HALF, SlabType.DOUBLE)
+                                                )
+                                        )
+                                )
+                        ))
+                );
     }
 }
