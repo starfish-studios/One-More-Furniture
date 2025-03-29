@@ -3,8 +3,10 @@ package com.crispytwig.nookcranny.blocks.entities;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,7 +21,6 @@ public class FanBlockEntity extends BlockEntity {
     private static final int MAX_DISTANCE = 8;
     private static final double MAX_FORCE = 0.25;
     private static final double MIN_FORCE = 0.05;
-    private static final double SCALE = 0.2;
 
     private static final float MAX_SPEED = 20.0f;
     private static final float ACCELERATION = 0.5f;
@@ -56,23 +57,29 @@ public class FanBlockEntity extends BlockEntity {
         }
 
         Vec3 fanPos = Vec3.atCenterOf(pos);
-        Vec3 pushDirection = Vec3.atLowerCornerOf(direction.getNormal()).normalize();
+        Vec3i pushDirection = direction.getNormal();
 
-        AABB affectedArea = new AABB(pos.relative(direction, 1)).inflate(1.1).expandTowards(pushDirection.scale(MAX_DISTANCE));
-        List<Entity> entities = level.getEntities(null, affectedArea);
+        AABB affectedArea = new AABB(pos.relative(direction, 1)).inflate(1.05)
+                .expandTowards(
+                        pushDirection.getX() * MAX_DISTANCE,
+                        pushDirection.getY() * MAX_DISTANCE,
+                        pushDirection.getZ() * MAX_DISTANCE
+                );
+
+        List<Entity> entities = level.getEntities(null, affectedArea).stream()
+                .filter(it -> !(it instanceof Player player && player.isCreative() && player.getAbilities().flying)).toList();
 
         for (Entity entity : entities) {
-            Vec3 entityPos = entity.position();
-            double distance = fanPos.distanceTo(entityPos);
 
+            double distance = entity.position().distanceTo(fanPos);
             double force = Mth.lerp(distance / MAX_DISTANCE, MAX_FORCE, MIN_FORCE);
-
             Vec3 currentMotion = entity.getDeltaMovement();
-            Vec3 pushVelocity = pushDirection.scale(force);
-            Vec3 newMotion = currentMotion.add(pushVelocity).scale(1 - SCALE).add(pushVelocity.scale(SCALE));
 
-            entity.setDeltaMovement(newMotion);
-            entity.hurtMarked = true;
+            Vec3 pushVelocity = new Vec3(pushDirection.getX() * force, pushDirection.getY() * force, pushDirection.getZ() * force);
+
+            Vec3 newMotion = currentMotion.add(pushVelocity.subtract(currentMotion)).scale(0.1);
+
+            entity.setDeltaMovement(currentMotion.add(newMotion));
         }
     }
 
