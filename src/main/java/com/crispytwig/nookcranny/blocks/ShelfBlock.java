@@ -89,11 +89,10 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
         if (!useContext.replacingClickedOnBlock()) return true;
 
-        boolean bl = useContext.getClickLocation().y - (double)useContext.getClickedPos().getY() > 0.5;
         Direction direction = useContext.getClickedFace();
-        if (slabType == SlabType.BOTTOM) return direction == Direction.UP || bl && direction.getAxis().isHorizontal();
+        if (slabType == SlabType.BOTTOM) return direction == Direction.UP || direction.getAxis().isHorizontal();
 
-        return direction == Direction.DOWN || !bl && direction.getAxis().isHorizontal();
+        return direction == Direction.DOWN || direction.getAxis().isHorizontal();
     }
 
     @Override
