@@ -7,6 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -28,17 +29,17 @@ public class NCBlocks {
     public static final List<String> BLOCK_NAMES = new ArrayList<>();
     public static final List<Block> BLOCKS = new ArrayList<>();
 
-    public static final Block OAK_DRAWER = register("oak_drawer", new DrawerBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
-    public static final Block SPRUCE_DRAWER = register("spruce_drawer", new DrawerBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
-    public static final Block BIRCH_DRAWER = register("birch_drawer", new DrawerBlock(copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));
-    public static final Block JUNGLE_DRAWER = register("jungle_drawer", new DrawerBlock(copyOf(Blocks.JUNGLE_PLANKS).noOcclusion()));
-    public static final Block ACACIA_DRAWER = register("acacia_drawer", new DrawerBlock(copyOf(Blocks.ACACIA_PLANKS).noOcclusion()));
-    public static final Block CHERRY_DRAWER = register("cherry_drawer", new DrawerBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
-    public static final Block DARK_OAK_DRAWER = register("dark_oak_drawer", new DrawerBlock(copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
-    public static final Block MANGROVE_DRAWER = register("mangrove_drawer", new DrawerBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
-    public static final Block BAMBOO_DRAWER = register("bamboo_drawer", new DrawerBlock(copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
-    public static final Block CRIMSON_DRAWER = register("crimson_drawer", new DrawerBlock(copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
-    public static final Block WARPED_DRAWER = register("warped_drawer", new DrawerBlock(copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
+    public static final Block OAK_DRAWER = register("oak_drawer", new DrawerBlock(Items.OAK_PLANKS, copyOf(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Block SPRUCE_DRAWER = register("spruce_drawer", new DrawerBlock(Items.SPRUCE_PLANKS,copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
+    public static final Block BIRCH_DRAWER = register("birch_drawer", new DrawerBlock(Items.BIRCH_PLANKS,copyOf(Blocks.BIRCH_PLANKS).noOcclusion()));
+    public static final Block JUNGLE_DRAWER = register("jungle_drawer", new DrawerBlock(Items.JUNGLE_PLANKS,copyOf(Blocks.JUNGLE_PLANKS).noOcclusion()));
+    public static final Block ACACIA_DRAWER = register("acacia_drawer", new DrawerBlock(Items.ACACIA_PLANKS,copyOf(Blocks.ACACIA_PLANKS).noOcclusion()));
+    public static final Block CHERRY_DRAWER = register("cherry_drawer", new DrawerBlock(Items.CRIMSON_PLANKS,copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block DARK_OAK_DRAWER = register("dark_oak_drawer", new DrawerBlock(Items.DARK_OAK_PLANKS,copyOf(Blocks.DARK_OAK_PLANKS).noOcclusion()));
+    public static final Block MANGROVE_DRAWER = register("mangrove_drawer", new DrawerBlock(Items.WARPED_PLANKS,copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
+    public static final Block BAMBOO_DRAWER = register("bamboo_drawer", new DrawerBlock(Items.BAMBOO_PLANKS,copyOf(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final Block CRIMSON_DRAWER = register("crimson_drawer", new DrawerBlock(Items.CRIMSON_PLANKS,copyOf(Blocks.CRIMSON_PLANKS).noOcclusion()));
+    public static final Block WARPED_DRAWER = register("warped_drawer", new DrawerBlock(Items.WARPED_PLANKS,copyOf(Blocks.WARPED_PLANKS).noOcclusion()));
 
     public static final Block OAK_TALL_STOOL = register("oak_tall_stool", new TallStoolBlock(copyOf(Blocks.OAK_PLANKS).noOcclusion()));
     public static final Block SPRUCE_TALL_STOOL = register("spruce_tall_stool", new TallStoolBlock(copyOf(Blocks.SPRUCE_PLANKS).noOcclusion()));
@@ -219,17 +220,17 @@ public class NCBlocks {
     public static final Block CRIMSON_FAN = register("crimson_ceiling_fan", new FanBlock("crimson", BlockBehaviour.Properties.of().noOcclusion()));
     public static final Block WARPED_FAN = register("warped_ceiling_fan", new FanBlock("warped", BlockBehaviour.Properties.of().noOcclusion()));
 
-    public static final Block OAK_CABINET = register("oak_cabinet", new CabinetBlock(copyOf(Blocks.OAK_PLANKS)));
-    public static final Block SPRUCE_CABINET = register("spruce_cabinet", new CabinetBlock(copyOf(Blocks.SPRUCE_PLANKS)));
-    public static final Block BIRCH_CABINET = register("birch_cabinet", new CabinetBlock(copyOf(Blocks.BIRCH_PLANKS)));
-    public static final Block JUNGLE_CABINET = register("jungle_cabinet", new CabinetBlock(copyOf(Blocks.JUNGLE_PLANKS)));
-    public static final Block ACACIA_CABINET = register("acacia_cabinet", new CabinetBlock(copyOf(Blocks.ACACIA_PLANKS)));
-    public static final Block CHERRY_CABINET = register("cherry_cabinet", new CabinetBlock(copyOf(Blocks.CRIMSON_PLANKS)));
-    public static final Block DARK_OAK_CABINET = register("dark_oak_cabinet", new CabinetBlock(copyOf(Blocks.DARK_OAK_PLANKS)));
-    public static final Block MANGROVE_CABINET = register("mangrove_cabinet", new CabinetBlock(copyOf(Blocks.WARPED_PLANKS)));
-    public static final Block BAMBOO_CABINET = register("bamboo_cabinet", new CabinetBlock(copyOf(Blocks.BAMBOO_PLANKS)));
-    public static final Block CRIMSON_CABINET = register("crimson_cabinet", new CabinetBlock(copyOf(Blocks.CRIMSON_PLANKS)));
-    public static final Block WARPED_CABINET = register("warped_cabinet", new CabinetBlock(copyOf(Blocks.WARPED_PLANKS)));
+    public static final Block OAK_CABINET = register("oak_cabinet", new CabinetBlock(Items.OAK_PLANKS, copyOf(Blocks.OAK_PLANKS)));
+    public static final Block SPRUCE_CABINET = register("spruce_cabinet", new CabinetBlock(Items.SPRUCE_PLANKS,copyOf(Blocks.SPRUCE_PLANKS)));
+    public static final Block BIRCH_CABINET = register("birch_cabinet", new CabinetBlock(Items.BIRCH_PLANKS,copyOf(Blocks.BIRCH_PLANKS)));
+    public static final Block JUNGLE_CABINET = register("jungle_cabinet", new CabinetBlock(Items.JUNGLE_PLANKS,copyOf(Blocks.JUNGLE_PLANKS)));
+    public static final Block ACACIA_CABINET = register("acacia_cabinet", new CabinetBlock(Items.ACACIA_PLANKS,copyOf(Blocks.ACACIA_PLANKS)));
+    public static final Block CHERRY_CABINET = register("cherry_cabinet", new CabinetBlock(Items.CRIMSON_PLANKS,copyOf(Blocks.CRIMSON_PLANKS)));
+    public static final Block DARK_OAK_CABINET = register("dark_oak_cabinet", new CabinetBlock(Items.DARK_OAK_PLANKS,copyOf(Blocks.DARK_OAK_PLANKS)));
+    public static final Block MANGROVE_CABINET = register("mangrove_cabinet", new CabinetBlock(Items.WARPED_PLANKS,copyOf(Blocks.WARPED_PLANKS)));
+    public static final Block BAMBOO_CABINET = register("bamboo_cabinet", new CabinetBlock(Items.BAMBOO_PLANKS,copyOf(Blocks.BAMBOO_PLANKS)));
+    public static final Block CRIMSON_CABINET = register("crimson_cabinet", new CabinetBlock(Items.CRIMSON_PLANKS,copyOf(Blocks.CRIMSON_PLANKS)));
+    public static final Block WARPED_CABINET = register("warped_cabinet", new CabinetBlock(Items.WARPED_PLANKS,copyOf(Blocks.WARPED_PLANKS)));
 
 
     private static Block register(String id, Block block) {

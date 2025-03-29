@@ -16,45 +16,41 @@ import java.util.Arrays;
 import java.util.function.Supplier;
 
 public enum CountertopType implements StringRepresentable {
-    OAK("oak", () -> Items.OAK_PLANKS, () -> NCBlocks.OAK_DRAWER),
-    SPRUCE("spruce", () -> Items.SPRUCE_PLANKS, () -> NCBlocks.SPRUCE_DRAWER),
-    BIRCH("birch", () -> Items.BIRCH_PLANKS, () -> NCBlocks.BIRCH_DRAWER),
-    JUNGLE("jungle", () -> Items.JUNGLE_PLANKS, () -> NCBlocks.JUNGLE_DRAWER),
-    ACACIA("acacia", () -> Items.ACACIA_PLANKS, () -> NCBlocks.ACACIA_DRAWER),
-    DARK_OAK("dark_oak", () -> Items.DARK_OAK_PLANKS, () -> NCBlocks.DARK_OAK_DRAWER),
-    CRIMSON("crimson", () -> Items.CRIMSON_PLANKS, () -> NCBlocks.CRIMSON_DRAWER),
-    WARPED("warped", () -> Items.WARPED_PLANKS, () -> NCBlocks.WARPED_DRAWER),
-    MANGROVE("mangrove", () -> Items.MANGROVE_PLANKS, () -> NCBlocks.MANGROVE_DRAWER),
-    BAMBOO("bamboo", () -> Items.BAMBOO_PLANKS, () -> NCBlocks.BAMBOO_DRAWER),
-    CHERRY("cherry", () -> Items.CHERRY_PLANKS, () -> NCBlocks.CHERRY_DRAWER),
-    QUARTZ("quartz", () -> Items.QUARTZ_BLOCK, () -> null),
-    RED_SANDSTONE("red_sandstone", () -> Items.RED_SANDSTONE, () -> null),
-    SANDSTONE("sandstone", () -> Items.SANDSTONE, () -> null),
-    PRISMARINE("prismarine", () -> Items.PRISMARINE, () -> null),
-    STONE_BRICKS("stone_bricks", () -> Items.STONE_BRICKS, () -> null),
-    DIORITE("diorite", () -> Items.DIORITE, () -> null),
-    GRANITE("granite", () -> Items.GRANITE, () -> null),
-    ANDESITE("andesite", () -> Items.ANDESITE, () -> null),
-    DEEPSLATE("deepslate", () -> Items.DEEPSLATE, () -> null),
-    NETHER_BRICKS("nether_bricks", () -> Items.NETHER_BRICKS, () -> null),
-    PURPUR("purpur", () -> Items.PURPUR_BLOCK, () -> null);
+    OAK("oak", () -> Items.OAK_PLANKS),
+    SPRUCE("spruce", () -> Items.SPRUCE_PLANKS),
+    BIRCH("birch", () -> Items.BIRCH_PLANKS),
+    JUNGLE("jungle", () -> Items.JUNGLE_PLANKS),
+    ACACIA("acacia", () -> Items.ACACIA_PLANKS),
+    DARK_OAK("dark_oak", () -> Items.DARK_OAK_PLANKS),
+    CRIMSON("crimson", () -> Items.CRIMSON_PLANKS),
+    WARPED("warped", () -> Items.WARPED_PLANKS),
+    MANGROVE("mangrove", () -> Items.MANGROVE_PLANKS),
+    BAMBOO("bamboo", () -> Items.BAMBOO_PLANKS),
+    CHERRY("cherry", () -> Items.CHERRY_PLANKS),
+    QUARTZ("quartz", () -> Items.QUARTZ_BLOCK),
+    RED_SANDSTONE("red_sandstone", () -> Items.RED_SANDSTONE),
+    SANDSTONE("sandstone", () -> Items.SANDSTONE),
+    PRISMARINE("prismarine", () -> Items.PRISMARINE),
+    STONE_BRICKS("stone_bricks", () -> Items.STONE_BRICKS),
+    DIORITE("diorite", () -> Items.DIORITE),
+    GRANITE("granite", () -> Items.GRANITE),
+    ANDESITE("andesite", () -> Items.ANDESITE),
+    DEEPSLATE("deepslate", () -> Items.DEEPSLATE),
+    NETHER_BRICKS("nether_bricks", () -> Items.NETHER_BRICKS),
+    PURPUR("purpur", () -> Items.PURPUR_BLOCK);
 
     private final String name;
     private final Supplier<Item> item;
-    private final Supplier<Block> drawer;
 
-    CountertopType(String name, Supplier<Item> item, Supplier<Block> drawer) {
+    CountertopType(String name, Supplier<Item> item) {
         this.name = name;
         this.item = item;
-        this.drawer = drawer;
     }
 
-    public static CountertopType getFromBlock(Block drawer) {
-        return Arrays.stream(CountertopType.values()).filter(block -> {
-            if (block.getDrawer() != null) {
-                return block.getDrawer() == drawer;
-            }
-            return false;
+    public static CountertopType getFromBlock(Item drawer) {
+        return Arrays.stream(CountertopType.values()).filter(plank -> {
+            plank.getItem();
+            return plank.getItem() == drawer;
         }).findFirst().orElse(null);
     }
 
@@ -65,9 +61,5 @@ public enum CountertopType implements StringRepresentable {
 
     public @NotNull Item getItem() {
         return this.item.get();
-    }
-
-    public Block getDrawer() {
-        return this.drawer.get();
     }
 }

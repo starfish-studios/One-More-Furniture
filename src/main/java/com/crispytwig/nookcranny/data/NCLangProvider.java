@@ -45,6 +45,9 @@ public class NCLangProvider extends FabricLanguageProvider {
         builder.add( "container.mailbox.send", "Send to Mailbox:");
         builder.add( "container.mailbox.error", "Cannot send!");
 
+        builder.add("container.cabinet_left", "Left Cabinet");
+        builder.add("container.cabinet_right", "Right Cabinet");
+
         builder.add( "nookcranny.mailbox.sending", "Sending item(s) from %s at %s");
         builder.add( "nookcranny.mailbox.receiving", "Receiving item(s) from %s at %s");
         builder.add( "nookcranny.mailbox.at", "at");

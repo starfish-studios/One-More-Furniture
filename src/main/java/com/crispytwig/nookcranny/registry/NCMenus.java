@@ -20,10 +20,6 @@ public class NCMenus {
 
     public static final MenuType<DrawerMenu> DRAWER = registerExtended("drawer", new ExtendedScreenHandlerType(DrawerMenu::new));
 
-    private static <T extends AbstractContainerMenu> MenuType register(String id, MenuType.MenuSupplier<T> menuSupplier) {
-        return Registry.register(BuiltInRegistries.MENU, new ResourceLocation(NookAndCranny.MOD_ID, id), new MenuType(menuSupplier, FeatureFlags.VANILLA_SET));
-    }
-
     private static <T extends AbstractContainerMenu> MenuType registerExtended(String id, ExtendedScreenHandlerType menuSupplier) {
         return Registry.register(BuiltInRegistries.MENU, new ResourceLocation(NookAndCranny.MOD_ID, id), menuSupplier);
     }

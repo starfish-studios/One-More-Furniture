@@ -7,8 +7,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-import java.util.function.Supplier;
-
 import static com.crispytwig.nookcranny.NookAndCranny.MOD_ID;
 
 public class NCBlockEntities {
@@ -54,7 +52,6 @@ public class NCBlockEntities {
             NCBlocks.CRIMSON_CABINET,
             NCBlocks.WARPED_CABINET
     ).build(null));
-
 
     public static final BlockEntityType<SpigotBlockEntity> SPIGOT = register("spigot", FabricBlockEntityTypeBuilder.create(SpigotBlockEntity::new, NCBlocks.SPIGOT).build(null));
 

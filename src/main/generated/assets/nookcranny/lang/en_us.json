@@ -161,6 +161,8 @@
   "block_type.nookcranny.nightstand": "%s Nightstand",
   "block_type.nookcranny.shelf": "%s Shelf",
   "block_type.nookcranny.table": "%s Table",
+  "container.cabinet_left": "Left Cabinet",
+  "container.cabinet_right": "Right Cabinet",
   "container.drawer": "Drawer",
   "container.drawer_bottom": "Bottom Drawer",
   "container.drawer_top": "Top Drawer",
