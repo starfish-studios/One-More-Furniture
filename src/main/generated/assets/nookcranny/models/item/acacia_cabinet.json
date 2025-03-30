@@ -1,0 +1,9 @@
+{
+  "parent": "nookcranny:block/template/cabinet_inventory",
+  "textures": {
+    "countertop": "nookcranny:block/drawers/countertop/acacia_drawer_countertop_sides",
+    "front": "nookcranny:block/cabinet/acacia_cabinet_front",
+    "sides": "nookcranny:block/cabinet/acacia_cabinet_sides",
+    "top": "nookcranny:block/drawers/acacia_drawer_top"
+  }
+}

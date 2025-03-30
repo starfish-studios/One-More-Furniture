@@ -1,0 +1,9 @@
+{
+  "parent": "nookcranny:block/template/cabinet_inventory",
+  "textures": {
+    "countertop": "nookcranny:block/drawers/countertop/crimson_drawer_countertop_sides",
+    "front": "nookcranny:block/cabinet/crimson_cabinet_front",
+    "sides": "nookcranny:block/cabinet/crimson_cabinet_sides",
+    "top": "nookcranny:block/drawers/crimson_drawer_top"
+  }
+}

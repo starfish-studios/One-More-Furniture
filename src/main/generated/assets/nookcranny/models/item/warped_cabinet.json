@@ -1,0 +1,9 @@
+{
+  "parent": "nookcranny:block/template/cabinet_inventory",
+  "textures": {
+    "countertop": "nookcranny:block/drawers/countertop/warped_drawer_countertop_sides",
+    "front": "nookcranny:block/cabinet/warped_cabinet_front",
+    "sides": "nookcranny:block/cabinet/warped_cabinet_sides",
+    "top": "nookcranny:block/drawers/warped_drawer_top"
+  }
+}
