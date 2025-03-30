@@ -1,5 +1,6 @@
 package com.crispytwig.nookcranny.blocks;
 
+import com.crispytwig.nookcranny.blocks.entities.WindChimeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
@@ -11,8 +12,10 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -21,7 +24,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class WindChimeBlock extends Block {
+public class WindChimeBlock extends BaseEntityBlock {
 
     private SoundEvent sound;
 
@@ -57,5 +60,11 @@ public class WindChimeBlock extends Block {
         if (random.nextDouble() < 0.05) {
             level.playLocalSound(d, e, f, sound, SoundSource.BLOCKS, 1.0F, 1.0F, false);
         }
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new WindChimeBlockEntity(pos, state);
     }
 }

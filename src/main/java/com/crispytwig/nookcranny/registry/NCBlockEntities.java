@@ -114,6 +114,16 @@ public class NCBlockEntities {
 
     ).build(null));
 
+    public static final BlockEntityType<WindChimeBlockEntity> CHIME = register("chime", FabricBlockEntityTypeBuilder.create(WindChimeBlockEntity::new,
+            NCBlocks.AMETHYST_WIND_CHIMES,
+            NCBlocks.BAMBOO_WIND_CHIMES,
+            NCBlocks.BAMBOO_STRIPPED_WIND_CHIMES,
+            NCBlocks.BONE_WIND_CHIMES,
+            NCBlocks.COPPER_WIND_CHIMES,
+            NCBlocks.ECHO_SHARD_WIND_CHIMES
+
+    ).build(null));
+
     public static <T extends BlockEntityType<?>> T register(String name, T blockEntityType) {
         return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(MOD_ID, name), blockEntityType);
     }

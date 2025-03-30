@@ -3,11 +3,13 @@ package com.crispytwig.nookcranny;
 import com.crispytwig.nookcranny.blocks.FanBlock;
 import com.crispytwig.nookcranny.blocks.LampBlock;
 import com.crispytwig.nookcranny.blocks.MailboxBlock;
+import com.crispytwig.nookcranny.client.ChimeModel;
 import com.crispytwig.nookcranny.client.FanModel;
 import com.crispytwig.nookcranny.client.gui.screens.DrawerScreen;
 import com.crispytwig.nookcranny.client.gui.screens.MailboxScreen;
 import com.crispytwig.nookcranny.client.renderer.SeatRenderer;
 import com.crispytwig.nookcranny.client.renderer.ShelfRenderer;
+import com.crispytwig.nookcranny.client.renderer.blockentity.ChimeBlockEntityRenderer;
 import com.crispytwig.nookcranny.client.renderer.blockentity.FanBlockEntityRenderer;
 import com.crispytwig.nookcranny.client.renderer.blockentity.FlowerBasketRenderer;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
@@ -51,6 +53,7 @@ public class NCVanillaIntegration {
             registerParticles();
 
             EntityModelLayerRegistry.registerModelLayer(FanModel.LAYER_LOCATION, FanModel::createBodyLayer);
+            EntityModelLayerRegistry.registerModelLayer(ChimeModel.LAYER_LOCATION, ChimeModel::createBodyLayer);
         }
 
         private static void registerRenderers() {
@@ -58,6 +61,7 @@ public class NCVanillaIntegration {
             BlockEntityRendererRegistry.register(NCBlockEntities.SHELF, ShelfRenderer::new);
             BlockEntityRendererRegistry.register(NCBlockEntities.FLOWER_BASKET, FlowerBasketRenderer::new);
             BlockEntityRendererRegistry.register(NCBlockEntities.FAN, FanBlockEntityRenderer::new);
+            BlockEntityRendererRegistry.register(NCBlockEntities.CHIME, ChimeBlockEntityRenderer::new);
 
         }
 
