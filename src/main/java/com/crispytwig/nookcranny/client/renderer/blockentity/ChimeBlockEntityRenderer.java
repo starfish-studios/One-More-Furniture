@@ -3,7 +3,6 @@ package com.crispytwig.nookcranny.client.renderer.blockentity;
 import com.crispytwig.nookcranny.NookAndCranny;
 import com.crispytwig.nookcranny.blocks.FanBlock;
 import com.crispytwig.nookcranny.blocks.WindChimeBlock;
-import com.crispytwig.nookcranny.blocks.entities.FanBlockEntity;
 import com.crispytwig.nookcranny.blocks.entities.WindChimeBlockEntity;
 import com.crispytwig.nookcranny.client.ChimeModel;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -15,6 +14,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 
 public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBlockEntity> {
 
@@ -38,7 +39,7 @@ public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBl
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(blockEntity)));
 
         float baseRotationAxis = blockEntity.hashCode() % 2 == 0 ? 1.0f : 0.5f;
-        poseStack.mulPose(Axis.of(baseRotationAxis, 0.0f, 1.0f).rotationDegrees(swingAngle * 0.3f));
+        poseStack.mulPose(Axis.of(new Vector3f(baseRotationAxis, 0.0f, 1.0f)).rotationDegrees(swingAngle * 0.3f));
 
         model.base.render(poseStack, vertexConsumer, packedLight, packedOverlay);
 
@@ -49,7 +50,7 @@ public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBl
             float axisX = (i % 2 == 0) ? 1.0f : 0.0f;
             float axisZ = (i % 2 == 0) ? 0.0f : 1.0f;
 
-            poseStack.mulPose(Axis.of(axisX, 0.0f, axisZ).rotationDegrees(swingAngle * boundSwingFactor));
+            poseStack.mulPose(Axis.of(new Vector3f(axisX, 0.0f, axisZ)).rotationDegrees(swingAngle * boundSwingFactor));
 
             model.getChimeBound(i).render(poseStack, vertexConsumer, packedLight, packedOverlay);
             model.getChime(i).render(poseStack, vertexConsumer, packedLight, packedOverlay);

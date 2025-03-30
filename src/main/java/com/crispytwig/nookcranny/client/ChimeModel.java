@@ -22,7 +22,7 @@ public class ChimeModel extends Model {
     public final ModelPart chime_bound_2;
     public final ModelPart chime_2;
     public final ModelPart chime_bound_3;
-    public final ModelPart chine_3;
+    public final ModelPart chime_3;
     public final ModelPart chime_bound_4;
     public final ModelPart chime_4;
 
@@ -34,7 +34,7 @@ public class ChimeModel extends Model {
         this.chime_bound_2 = base.getChild("chime_bound_2");
         this.chime_2 = chime_bound_2.getChild("chime_2");
         this.chime_bound_3 = base.getChild("chime_bound_3");
-        this.chine_3 = chime_bound_3.getChild("chine_3");
+        this.chime_3 = chime_bound_3.getChild("chime_3");
         this.chime_bound_4 = base.getChild("chime_bound_4");
         this.chime_4 = chime_bound_4.getChild("chime_4");
     }
@@ -51,7 +51,7 @@ public class ChimeModel extends Model {
         PartDefinition chime_bound_2 = base.addOrReplaceChild("chime_bound_2", CubeListBuilder.create().texOffs(4, 0).addBox(0.0F, 0.0F, -0.5F, 0.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 7.0F, -2.0F));
         PartDefinition chime_2 = chime_bound_2.addOrReplaceChild("chime_2", CubeListBuilder.create().texOffs(0, 19).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 4.0F, 0.0F));
         PartDefinition chime_bound_3 = base.addOrReplaceChild("chime_bound_3", CubeListBuilder.create().texOffs(2, 0).addBox(0.0F, 0.0F, -0.5F, 0.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 7.0F, 2.0F));
-        PartDefinition chine_3 = chime_bound_3.addOrReplaceChild("chine_3", CubeListBuilder.create().texOffs(0, 19).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 4.0F, 0.0F));
+        PartDefinition chime_3 = chime_bound_3.addOrReplaceChild("chime_3", CubeListBuilder.create().texOffs(0, 19).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 4.0F, 0.0F));
         PartDefinition chime_bound_4 = base.addOrReplaceChild("chime_bound_4", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 0.0F, -0.5F, 0.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 7.0F, -2.0F));
         PartDefinition chime_4 = chime_bound_4.addOrReplaceChild("chime_4", CubeListBuilder.create().texOffs(0, 19).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 6.0F, 0.0F));
 
