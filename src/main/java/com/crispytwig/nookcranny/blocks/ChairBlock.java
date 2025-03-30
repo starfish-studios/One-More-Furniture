@@ -2,6 +2,7 @@ package com.crispytwig.nookcranny.blocks;
 
 import com.crispytwig.nookcranny.blocks.properties.*;
 import com.crispytwig.nookcranny.registry.NCItems;
+import com.crispytwig.nookcranny.util.block.TuckableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -33,7 +34,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cushionable, ChangeableBlock {
+public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cushionable, ChangeableBlock, TuckableBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final EnumProperty<ColorList> CUSHION = EnumProperty.create("cushion", ColorList.class);

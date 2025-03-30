@@ -16,6 +16,7 @@ public interface NCTags {
         public static final TagKey<Block> ABOVE_BYPASSES_SEAT_CHECK = tag("above_bypasses_seat_check");
         public static final TagKey<Block> TABLES = tag("tables_connectable");
         public static final TagKey<Block> TABLES_CONNECTABLE = tag("tables_connectable");
+        public static final TagKey<Block> CHAIRS_TUCKABLE_UNDER = tag("chairs_tuckable");
 
         private static TagKey<Block> tag(String name) {
             return TagKey.create(BuiltInRegistries.BLOCK.key(), new ResourceLocation(NookAndCranny.MOD_ID, name));

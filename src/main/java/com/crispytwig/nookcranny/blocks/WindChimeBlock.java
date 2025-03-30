@@ -2,6 +2,7 @@ package com.crispytwig.nookcranny.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -22,16 +23,16 @@ import org.jetbrains.annotations.Nullable;
 
 public class WindChimeBlock extends Block {
 
-    private SoundType sound;
+    private SoundEvent sound;
 
-    public WindChimeBlock(SoundType soundType, Properties properties) {
+    public WindChimeBlock(SoundEvent sound, Properties properties) {
         super(properties);
-        this.sound = soundType;
+        this.sound = sound;
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
     }
 
-    private static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 5.0D, 11.0D);
+    private static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 12.0D, 16.0D, 12.0D);
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -53,8 +54,8 @@ public class WindChimeBlock extends Block {
         double d = (double)pos.getX() + 0.5;
         double e = (double)pos.getY();
         double f = (double)pos.getZ() + 0.5;
-        if (random.nextDouble() < 0.05) { //TODO!!!!!! change to actual chime sound
-            level.playLocalSound(d, e, f, sound.getHitSound(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
+        if (random.nextDouble() < 0.05) {
+            level.playLocalSound(d, e, f, sound, SoundSource.BLOCKS, 1.0F, 1.0F, false);
         }
     }
 }
