@@ -149,6 +149,7 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
         return this.getStateDefinition().any()
                 .setValue(FACING, context.getHorizontalDirection().getOpposite())
                 .setValue(BACK_TYPE, ChairType.TYPE_1)
+                .setValue(TUCKED, false)
                 .setValue(WATERLOGGED, waterlogged);
     }
 
