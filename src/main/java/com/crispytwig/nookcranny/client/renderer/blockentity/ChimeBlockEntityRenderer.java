@@ -37,8 +37,7 @@ public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBl
 
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(blockEntity)));
 
-        // Base swings slightly, randomized between Z and X axis
-        float baseRotationAxis = blockEntity.hashCode() % 2 == 0 ? 1.0f : 0.5f; // Randomized rotation axis
+        float baseRotationAxis = blockEntity.hashCode() % 2 == 0 ? 1.0f : 0.5f;
         poseStack.mulPose(Axis.of(baseRotationAxis, 0.0f, 1.0f).rotationDegrees(swingAngle * 0.3f));
 
         model.base.render(poseStack, vertexConsumer, packedLight, packedOverlay);
@@ -46,8 +45,8 @@ public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBl
         for (int i = 1; i <= 4; i++) {
             poseStack.pushPose();
 
-            float boundSwingFactor = 0.6f + (i * 0.15f); // Progressive swing
-            float axisX = (i % 2 == 0) ? 1.0f : 0.0f; // Alternate rotation axis
+            float boundSwingFactor = 0.6f + (i * 0.15f);
+            float axisX = (i % 2 == 0) ? 1.0f : 0.0f;
             float axisZ = (i % 2 == 0) ? 0.0f : 1.0f;
 
             poseStack.mulPose(Axis.of(axisX, 0.0f, axisZ).rotationDegrees(swingAngle * boundSwingFactor));
