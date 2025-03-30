@@ -7,15 +7,11 @@ import com.crispytwig.nookcranny.blocks.entities.WindChimeBlockEntity;
 import com.crispytwig.nookcranny.client.ChimeModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.phys.Vec3;
-import org.joml.Vector3f;
 
 public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBlockEntity> {
 
@@ -27,37 +23,35 @@ public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBl
 
     public ResourceLocation getTextureLocation(WindChimeBlockEntity entity) {
         var material = ((WindChimeBlock) entity.getBlockState().getBlock()).material;
-        return new ResourceLocation(NookAndCranny.MOD_ID, "textures/block/wind_chime/" + material + "_windchime.png");
+        return new ResourceLocation(NookAndCranny.MOD_ID, "textures/block/wind_chime/" + material + "_wind_chimes_world.png");
     }
 
     @Override
     public void render(WindChimeBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         poseStack.pushPose();
+        poseStack.translate(0.5D, 1.5D, 0.5D);
+        poseStack.scale(-1.0F, -1.0F, 1.0F);
 
-        float swingAngle = blockEntity.getSwingAngle(partialTick);
-
+        float baseSwingAngleX = blockEntity.getBaseSwingAngleX(partialTick);
+        float baseSwingAngleZ = blockEntity.getBaseSwingAngleZ(partialTick);
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(blockEntity)));
 
-        float baseRotationAxis = blockEntity.hashCode() % 2 == 0 ? 1.0f : 0.5f;
-        poseStack.mulPose(Axis.of(new Vector3f(baseRotationAxis, 0.0f, 1.0f)).rotationDegrees(swingAngle * 0.3f));
+        // Apply smooth base rotation
+        model.base.xRot = (float) Math.toRadians(baseSwingAngleX * 0.3f);
+        model.base.zRot = (float) Math.toRadians(baseSwingAngleZ * 0.3f);
 
-        model.base.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+        for (int i = 0; i < 4; i++) {
+            float chimeAngle = blockEntity.getChimeSwingAngleX(i, partialTick);
+            model.getChimeBound(i + 1).xRot = (float) Math.toRadians(chimeAngle);
+            model.getChime(i + 1).xRot = (float) Math.toRadians(chimeAngle);
 
-        for (int i = 1; i <= 4; i++) {
-            poseStack.pushPose();
-
-            float boundSwingFactor = 0.6f + (i * 0.15f);
-            float axisX = (i % 2 == 0) ? 1.0f : 0.0f;
-            float axisZ = (i % 2 == 0) ? 0.0f : 1.0f;
-
-            poseStack.mulPose(Axis.of(new Vector3f(axisX, 0.0f, axisZ)).rotationDegrees(swingAngle * boundSwingFactor));
-
-            model.getChimeBound(i).render(poseStack, vertexConsumer, packedLight, packedOverlay);
-            model.getChime(i).render(poseStack, vertexConsumer, packedLight, packedOverlay);
-
-            poseStack.popPose();
+            float chimeAngleZ = blockEntity.getChimeSwingAngleZ(i, partialTick);
+            model.getChimeBound(i + 1).zRot = (float) Math.toRadians(chimeAngleZ);
+            model.getChime(i + 1).zRot = (float) Math.toRadians(chimeAngleZ);
         }
 
+        model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
         poseStack.popPose();
     }
+
 }

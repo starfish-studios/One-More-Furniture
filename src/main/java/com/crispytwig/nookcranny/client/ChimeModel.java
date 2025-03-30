@@ -9,9 +9,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class ChimeModel extends Model {
 
@@ -44,16 +42,16 @@ public class ChimeModel extends Model {
         PartDefinition partdefinition = meshdefinition.getRoot();
 
         PartDefinition base = partdefinition.addOrReplaceChild("base", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, 4.0F, -4.0F, 8.0F, 3.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 8.0F, 0.0F));
-        PartDefinition cube_r1 = base.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 1).addBox(0.0F, -3.5F, -5.0F, 0.0F, 4.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 3.5F, 0.0F, 0.0F, -0.7854F, 0.0F));
-        PartDefinition cube_r2 = base.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 5).addBox(0.0F, -3.5F, -5.0F, 0.0F, 4.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 3.5F, 0.0F, 0.0F, 0.7854F, 0.0F));
-        PartDefinition chime_bound_1 = base.addOrReplaceChild("chime_bound_1", CubeListBuilder.create().texOffs(11, 10).addBox(0.0F, -2.0F, -0.5F, 0.0F, 9.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 7.0F, 2.0F));
-        PartDefinition chime_1 = chime_bound_1.addOrReplaceChild("chime_1", CubeListBuilder.create().texOffs(0, 19).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 7.0F, 0.0F));
+        base.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 1).addBox(0.0F, -3.5F, -5.0F, 0.0F, 4.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 3.5F, 0.0F, 0.0F, -0.7854F, 0.0F));
+        base.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 5).addBox(0.0F, -3.5F, -5.0F, 0.0F, 4.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 3.5F, 0.0F, 0.0F, 0.7854F, 0.0F));
+        PartDefinition chime_bound_1 = base.addOrReplaceChild("chime_bound_1", CubeListBuilder.create().texOffs(23, 10).addBox(0.0F, -2.0F, -0.5F, 0.0F, 9.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 7.0F, 2.0F));
+        chime_bound_1.addOrReplaceChild("chime_1", CubeListBuilder.create().texOffs(0, 19).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 7.0F, 0.0F));
         PartDefinition chime_bound_2 = base.addOrReplaceChild("chime_bound_2", CubeListBuilder.create().texOffs(4, 0).addBox(0.0F, 0.0F, -0.5F, 0.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 7.0F, -2.0F));
-        PartDefinition chime_2 = chime_bound_2.addOrReplaceChild("chime_2", CubeListBuilder.create().texOffs(0, 19).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 4.0F, 0.0F));
+        chime_bound_2.addOrReplaceChild("chime_2", CubeListBuilder.create().texOffs(16, 19).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 4.0F, 0.0F));
         PartDefinition chime_bound_3 = base.addOrReplaceChild("chime_bound_3", CubeListBuilder.create().texOffs(2, 0).addBox(0.0F, 0.0F, -0.5F, 0.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 7.0F, 2.0F));
-        PartDefinition chime_3 = chime_bound_3.addOrReplaceChild("chime_3", CubeListBuilder.create().texOffs(0, 19).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 4.0F, 0.0F));
+        chime_bound_3.addOrReplaceChild("chime_3", CubeListBuilder.create().texOffs(24, 19).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 4.0F, 0.0F));
         PartDefinition chime_bound_4 = base.addOrReplaceChild("chime_bound_4", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 0.0F, -0.5F, 0.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 7.0F, -2.0F));
-        PartDefinition chime_4 = chime_bound_4.addOrReplaceChild("chime_4", CubeListBuilder.create().texOffs(0, 19).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 6.0F, 0.0F));
+        chime_bound_4.addOrReplaceChild("chime_4", CubeListBuilder.create().texOffs(8, 19).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 6.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 32, 32);
     }
