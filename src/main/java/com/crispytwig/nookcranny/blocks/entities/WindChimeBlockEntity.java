@@ -70,6 +70,10 @@ public class WindChimeBlockEntity extends BlockEntity {
     }
 
     private static class SwingData {
+        private static final float BASE_SPEED = 0.085f;
+        private static final int RANDOM_TICK_INTERVAL = 200;
+        private static final float DEGREE_MOD = 4.0f;
+
         private float currentAngle = 0;
         private float previousAngle = 0;
         private float swingSpeed;
@@ -78,7 +82,7 @@ public class WindChimeBlockEntity extends BlockEntity {
         private float targetOffset;
 
         void randomizeBase(Random random) {
-            swingSpeed = 0.02f + random.nextFloat() * 0.02f;
+            swingSpeed = BASE_SPEED + random.nextFloat() * BASE_SPEED;
             swingOffset = random.nextFloat() * Mth.TWO_PI;
             targetSpeed = swingSpeed;
             targetOffset = swingOffset;
@@ -92,15 +96,15 @@ public class WindChimeBlockEntity extends BlockEntity {
         }
 
         void update(int tickCounter, float boundFactor) {
-            if (tickCounter % 200 == 0) {
-                targetSpeed = 0.02f + new Random().nextFloat() * 0.02f;
+            if (tickCounter % RANDOM_TICK_INTERVAL == 0) {
+                targetSpeed = BASE_SPEED + new Random().nextFloat() * BASE_SPEED;
                 targetOffset = new Random().nextFloat() * Mth.TWO_PI;
             }
 
             swingSpeed = Mth.lerp(0.005f, swingSpeed, targetSpeed);
             swingOffset = Mth.lerp(0.005f, swingOffset, targetOffset);
 
-            float targetAngle = Mth.sin(tickCounter * swingSpeed + swingOffset) * (5.0f * boundFactor);
+            float targetAngle = Mth.sin(tickCounter * swingSpeed + swingOffset) * (DEGREE_MOD * boundFactor);
             previousAngle = currentAngle;
             currentAngle = targetAngle;
         }
