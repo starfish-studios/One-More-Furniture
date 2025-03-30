@@ -33,6 +33,12 @@ public class NCBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             if (block instanceof DrawerBlock) {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
             }
+            if (block instanceof CabinetBlock) {
+                getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
+            }
+            if (block instanceof FanBlock) {
+                getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
+            }
             if (block instanceof TallStoolBlock) {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
             }

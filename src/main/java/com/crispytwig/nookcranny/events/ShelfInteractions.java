@@ -50,7 +50,7 @@ public class ShelfInteractions implements UseBlockCallback {
                 itemStack.hurtAndBreak(1, player, livingEntity -> livingEntity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
 
                 level.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                return InteractionResult.CONSUME;
+                return InteractionResult.SUCCESS;
             }
         }
 

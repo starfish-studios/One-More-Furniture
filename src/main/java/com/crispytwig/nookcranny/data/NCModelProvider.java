@@ -155,14 +155,6 @@ public class NCModelProvider extends FabricModelProvider {
         }
     }
 
-    private void createFan(BlockModelGenerators generators, Block block) {
-        ResourceLocation r = ModelLocationUtils.getModelLocation(block);
-        ResourceLocation r2 = ModelLocationUtils.getModelLocation(block, "_on");
-        generators.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block)
-                .with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.POWERED, r, r2))
-                .with(BlockModelGenerators.createFacingDispatch()));
-    }
-
     private void createCurtainBlock(BlockModelGenerators generators, Block block) {
         TextureMapping closedMapping = new TextureMapping()
                 .put(TextureSlot.ALL, new ResourceLocation("nookcranny", "block/curtain/white_curtain"))
@@ -234,7 +226,6 @@ public class NCModelProvider extends FabricModelProvider {
         COUNTERTOP_BOTTOM.create(new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName() + "_bottom"), baseMapping, generators.modelOutput);
     }
 
-
     @Override
     public void generateItemModels(ItemModelGenerators generators) {
         generators.generateFlatItem(NCItems.COPPER_SAW, ModelTemplates.FLAT_HANDHELD_ITEM);
@@ -288,7 +279,6 @@ public class NCModelProvider extends FabricModelProvider {
                 .select(false, Variant.variant().with(VariantProperties.MODEL, closed)));
         generators.blockStateOutput.accept(multiVariant);
     }
-
 
     /**
      * Creates a reference to our own model templates
