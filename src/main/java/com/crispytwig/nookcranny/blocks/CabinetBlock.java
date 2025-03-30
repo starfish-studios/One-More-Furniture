@@ -36,6 +36,9 @@ public class CabinetBlock extends AbstractDrawerBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty BOTTOM = BlockStateProperties.BOTTOM;
 
+    public static final BooleanProperty LEFT_OPEN = BooleanProperty.create("left_open");
+    public static final BooleanProperty RIGHT_OPEN = BooleanProperty.create("right_open");
+
     public CabinetBlock(Item plank, BlockBehaviour.Properties properties) {
         super(plank, properties);
         this.registerDefaultState(this.stateDefinition.any()
@@ -66,11 +69,14 @@ public class CabinetBlock extends AbstractDrawerBlock {
         BlockState blockState2 = this.defaultBlockState()
                 .setValue(BOTTOM, true)
                 .setValue(COUNTERTOP, countertop)
-                .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+                .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER)
+                .setValue(FACING, context.getHorizontalDirection().getOpposite());
+
         Direction upOrDown = context.getNearestLookingVerticalDirection();
         if (upOrDown == Direction.UP) {
             blockState2 = blockState2.setValue(BOTTOM, false);
         }
         return blockState2;
     }
+
 }

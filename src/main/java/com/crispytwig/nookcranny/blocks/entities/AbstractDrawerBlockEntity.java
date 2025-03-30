@@ -5,11 +5,9 @@
 
 package com.crispytwig.nookcranny.blocks.entities;
 
-import com.crispytwig.nookcranny.blocks.AbstractDrawerBlock;
 import com.crispytwig.nookcranny.blocks.CabinetBlock;
 import com.crispytwig.nookcranny.blocks.DrawerBlock;
 import com.crispytwig.nookcranny.inventory.DrawerMenu;
-import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.core.BlockPos;
@@ -68,7 +66,7 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
 
             protected boolean isOwnContainer(@NotNull Player player) {
                 if (player.containerMenu instanceof DrawerMenu) {
-                    Container container = ((DrawerMenu)player.containerMenu).getContainer();
+                    Container container = ((DrawerMenu) player.containerMenu).getContainer();
                     return container == AbstractDrawerBlockEntity.this;
                 } else {
                     return false;
@@ -79,14 +77,12 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
 
     protected void saveAdditional(@NotNull CompoundTag compoundTag) {
         super.saveAdditional(compoundTag);
-
         ContainerHelper.saveAllItems(compoundTag, this.items);
     }
 
     public void load(@NotNull CompoundTag compoundTag) {
         super.load(compoundTag);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-
         ContainerHelper.loadAllItems(compoundTag, this.items);
     }
 
@@ -108,32 +104,28 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+    public AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory, Player player) {
         Pair<Integer, Direction> raycastResult = new Pair<>(0, Direction.UP);
 
         assert level != null;
         BlockPos blockPos = this.getBlockPos();
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
 
-        //do a raycast from player's POV
         HitResult hitResult = player.pick(10, 1, false);
         if (hitResult.getType() == HitResult.Type.BLOCK) {
             BlockHitResult blockHitResult = (BlockHitResult) hitResult;
-            //get the local hit pos result by subtracting the center point from the raycast result
             Vec3 localHitPos = blockHitResult.getLocation().subtract(Vec3.atCenterOf(blockHitResult.getBlockPos()));
 
-            //convert depending on which face was raycasted to
-            var bl = this.getBlockState().getBlock() instanceof CabinetBlock;
-            int relativePos = getRelativeDrawerPos(blockHitResult.getDirection(), localHitPos, bl);
-
+            boolean isCabinet = this.getBlockState().getBlock() instanceof CabinetBlock;
+            int relativePos = getRelativeDrawerPos(blockHitResult.getDirection(), localHitPos, isCabinet);
             raycastResult = new Pair<>(relativePos, blockHitResult.getDirection());
         }
 
         if (raycastResult.getSecond() == this.getBlockState().getValue(DrawerBlock.FACING)) {
-
             if (blockEntity instanceof AbstractDrawerBlockEntity abstractDrawerBlockEntity) {
                 if (abstractDrawerBlockEntity instanceof CabinetBlockEntity) {
-                    if (raycastResult.getFirst() > -7) {
+                    // Swap left/right naming: positive dot now means right side.
+                    if (raycastResult.getFirst() > 0) {
                         abstractDrawerBlockEntity.setCustomName(Component.translatable("container.cabinet_right"));
                     } else {
                         abstractDrawerBlockEntity.setCustomName(Component.translatable("container.cabinet_left"));
@@ -152,44 +144,60 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
         return null;
     }
 
-    private void openScreen(AbstractDrawerBlockEntity blockEntity, Player player, Pair<Integer, Direction> raycastResult){
+    private void openScreen(AbstractDrawerBlockEntity blockEntity, Player player, Pair<Integer, Direction> raycastResult) {
         var screen = new ExtendedScreenHandlerFactory() {
 
-            @Nullable
             @Override
-            public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-                return new DrawerMenu(i, inventory, blockEntity, raycastResult.getFirst() < 7 ? 0 : 5);
+            public @NotNull AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory, @NotNull Player player) {
+                int drawerIndex = (blockEntity instanceof CabinetBlockEntity)
+                        ? (raycastResult.getFirst() > 0 ? 5 : 0)  // Right side gets index 5, left side gets 0.
+                        : (raycastResult.getFirst() < 7 ? 0 : 5);
+                return new DrawerMenu(i, inventory, blockEntity, drawerIndex);
             }
 
             @Override
-            public Component getDisplayName() {
-                assert blockEntity instanceof AbstractDrawerBlockEntity;
+            public @NotNull Component getDisplayName() {
                 return blockEntity.getDisplayName();
             }
 
             @Override
             public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
-
             }
         };
 
         player.openMenu(screen);
     }
 
-    //UNUSED, SHOULDN'T BE CALLED (?)
+    // UNUSED, SHOULDN'T BE CALLED (?)
     @Override
-    protected @NotNull AbstractContainerMenu createMenu(int i, Inventory inventory) {
+    protected @NotNull AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory) {
         return new DrawerMenu(i, inventory, this, 0);
     }
 
     public int getRelativeDrawerPos(Direction direction, Vec3 localHitPos, boolean isCabinet) {
-        return -switch (direction) {
-            case NORTH, SOUTH, EAST, WEST -> isCabinet
-                    ? (int) Math.floor((localHitPos.x() + 0.5) * 16)
-                    : (int) Math.floor(1.0 - (localHitPos.y() + 0.5) * 16);
-            case UP -> (int) Math.floor((localHitPos.z() + 0.5) * 16);
-            case DOWN -> (int) Math.floor(1.0 - (localHitPos.z() + 0.5) * 16);
-        };
+        if (isCabinet) {
+            Direction facing = this.getBlockState().getValue(DrawerBlock.FACING);
+            double dot = getDot(localHitPos, facing);
+            return (int) Math.floor(dot * 16);
+        } else {
+            return -switch (direction) {
+                case NORTH, SOUTH, EAST, WEST -> (int) Math.floor(1.0 - (localHitPos.y() + 0.5) * 16);
+                case UP -> (int) Math.floor((localHitPos.z() + 0.5) * 16);
+                case DOWN -> (int) Math.floor(1.0 - (localHitPos.z() + 0.5) * 16);
+            };
+        }
+    }
+
+    private static double getDot(Vec3 localHitPos, Direction facing) {
+        int leftX = 0, leftZ = 0;
+        switch (facing) {
+            case NORTH -> leftX = -1;
+            case SOUTH -> leftX = 1;
+            case EAST  -> leftZ = -1;
+            case WEST  -> leftZ = 1;
+            default -> { }
+        }
+        return localHitPos.x() * leftX + localHitPos.z() * leftZ;
     }
 
     public void recheckOpen() {
@@ -199,11 +207,20 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
     }
 
     void playSound(BlockState blockState, SoundEvent soundEvent) {
-        Vec3i vec3i = blockState.getValue(DrawerBlock.FACING).getNormal();
-        double d = (double)this.worldPosition.getX() + 0.5 + (double)vec3i.getX() / 2.0;
-        double e = (double)this.worldPosition.getY() + 0.5 + (double)vec3i.getY() / 2.0;
-        double f = (double)this.worldPosition.getZ() + 0.5 + (double)vec3i.getZ() / 2.0;
-        assert this.level != null;
-        this.level.playSound(null, d, e, f, soundEvent, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
+        // For cabinets, play sound from the center of the block.
+        if (blockState.getBlock() instanceof CabinetBlock) {
+            double d = this.worldPosition.getX() + 0.5;
+            double e = this.worldPosition.getY() + 0.5;
+            double f = this.worldPosition.getZ() + 0.5;
+            assert this.level != null;
+            this.level.playSound(null, d, e, f, soundEvent, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
+        } else {
+            Vec3i vec3i = blockState.getValue(DrawerBlock.FACING).getNormal();
+            double d = this.worldPosition.getX() + 0.5 + (double) vec3i.getX() / 2.0;
+            double e = this.worldPosition.getY() + 0.5 + (double) vec3i.getY() / 2.0;
+            double f = this.worldPosition.getZ() + 0.5 + (double) vec3i.getZ() / 2.0;
+            assert this.level != null;
+            this.level.playSound(null, d, e, f, soundEvent, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
+        }
     }
 }
