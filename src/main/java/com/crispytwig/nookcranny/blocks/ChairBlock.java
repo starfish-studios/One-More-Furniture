@@ -75,6 +75,7 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
                 .setValue(WATERLOGGED, false)
                 .setValue(BACK, true)
                 .setValue(BACK_TYPE, ChairType.TYPE_1)
+                .setValue(TuckableBlock.TUCKED, false)
                 .setValue(CUSHION, ColorList.EMPTY));
     }
 
@@ -107,7 +108,7 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateDefinition) {
-        stateDefinition.add(FACING, WATERLOGGED, CUSHION, BACK, BACK_TYPE);
+        stateDefinition.add(FACING, WATERLOGGED, CUSHION, BACK, BACK_TYPE, TUCKED);
     }
 
     @Override

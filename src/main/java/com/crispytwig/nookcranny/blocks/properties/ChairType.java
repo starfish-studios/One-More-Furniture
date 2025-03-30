@@ -7,14 +7,14 @@ public enum ChairType implements StringRepresentable {
     TYPE_1("1"),
     TYPE_2("2");
 
-    private final String name;
+    private final String id;
 
-    ChairType(String name) {
-        this.name = name;
+    ChairType(String id) {
+        this.id = id;
     }
 
     @Override
     public @NotNull String getSerializedName() {
-        return this.name;
+        return this.id;
     }
 }

@@ -7,6 +7,7 @@ import com.crispytwig.nookcranny.blocks.properties.ColorList;
 import com.crispytwig.nookcranny.blocks.properties.CountertopType;
 import com.crispytwig.nookcranny.registry.NCBlocks;
 import com.crispytwig.nookcranny.registry.NCItems;
+import com.crispytwig.nookcranny.util.block.TuckableBlock;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.core.Direction;
@@ -17,17 +18,13 @@ import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
 public class NCModelProvider extends FabricModelProvider {
@@ -430,34 +427,67 @@ public class NCModelProvider extends FabricModelProvider {
             Map<ChairType, ResourceLocation> backTypeModels
     ) {
         MultiPartGenerator multiPart = MultiPartGenerator.multiPart(chairBlock);
+
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             int yRotation = ((direction.get2DDataValue() * 90 + 180) % 360);
+
             for (Map.Entry<ChairType, ResourceLocation> entry : backTypeModels.entrySet()) {
                 ChairType type = entry.getKey();
                 ResourceLocation backModel = entry.getValue();
+
+                ResourceLocation tuckedModel = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + "acacia_chair_" + type.getSerializedName().toLowerCase() + "_tucked");
+
                 multiPart.with(
                         Condition.condition()
                                 .term(BlockStateProperties.HORIZONTAL_FACING, direction)
                                 .term(ChairBlock.BACK, true)
-                                .term(ChairBlock.BACK_TYPE, type),
+                                .term(ChairBlock.BACK_TYPE, type)
+                                .term(TuckableBlock.TUCKED, false),
                         Variant.variant()
                                 .with(VariantProperties.MODEL, backModel)
                                 .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[yRotation / 90])
                 );
+
+                multiPart.with(
+                        Condition.condition()
+                                .term(BlockStateProperties.HORIZONTAL_FACING, direction)
+                                .term(ChairBlock.BACK, true)
+                                .term(ChairBlock.BACK_TYPE, type)
+                                .term(TuckableBlock.TUCKED, true),
+                        Variant.variant()
+                                .with(VariantProperties.MODEL, tuckedModel)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[yRotation / 90])
+                );
             }
+
             multiPart.with(
                     Condition.condition()
                             .term(BlockStateProperties.HORIZONTAL_FACING, direction)
-                            .term(ChairBlock.BACK, false),
+                            .term(ChairBlock.BACK, false)
+                            .term(TuckableBlock.TUCKED, false),
                     Variant.variant()
                             .with(VariantProperties.MODEL, chairBacklessId)
                             .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[yRotation / 90])
             );
+
+            ResourceLocation backlessTuckedModel = new ResourceLocation(chairBacklessId.getNamespace(), chairBacklessId.getPath() + "_tucked");
+
+            multiPart.with(
+                    Condition.condition()
+                            .term(BlockStateProperties.HORIZONTAL_FACING, direction)
+                            .term(ChairBlock.BACK, false)
+                            .term(TuckableBlock.TUCKED, true),
+                    Variant.variant()
+                            .with(VariantProperties.MODEL, backlessTuckedModel)
+                            .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[yRotation / 90])
+            );
         }
+
         for (Map.Entry<ColorList, ResourceLocation> entry : cushionModels.entrySet()) {
             if (entry.getKey() == ColorList.EMPTY) continue;
             ColorList cushionColor = entry.getKey();
             ResourceLocation cushionModel = entry.getValue();
+
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 int yRotation = ((direction.get2DDataValue() * 90 + 180) % 360);
                 multiPart.with(
@@ -482,16 +512,55 @@ public class NCModelProvider extends FabricModelProvider {
         }
         String chairBaseName = BuiltInRegistries.BLOCK.getKey(chair).getPath();
         Map<ChairType, ResourceLocation> backTypeModels = new HashMap<>();
+
+        Set<ResourceLocation> generatedModels = new HashSet<>();
+
         for (ChairType type : ChairType.values()) {
-            ModelTemplate chairTemplate = createTemplate(
-                    "chair_" + type.getSerializedName().toLowerCase(),
-                    TextureSlot.ALL
-            );
-            chairTemplate.createWithSuffix(chair, "_" + type.getSerializedName().toLowerCase(), baseMapping, generators.modelOutput);
             ResourceLocation chairTypeId = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase());
+
+            if (!generatedModels.contains(chairTypeId)) {
+                ModelTemplate chairTemplate = createTemplate(
+                        "chair_" + type.getSerializedName().toLowerCase(),
+                        TextureSlot.ALL
+                );
+                chairTemplate.createWithSuffix(chair, "_" + type.getSerializedName().toLowerCase(), baseMapping, generators.modelOutput);
+                generatedModels.add(chairTypeId);
+            }
+
+            ResourceLocation chairTypeTuckedId = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase() + "_tucked");
+            if (!generatedModels.contains(chairTypeTuckedId)) {
+                ModelTemplate chairTemplateTucked = createTemplate(
+                        "chair_" + type.getSerializedName().toLowerCase() + "_tucked",
+                        TextureSlot.ALL
+                );
+                chairTemplateTucked.createWithSuffix(chair, "_" + type.getSerializedName().toLowerCase() + "_tucked", baseMapping, generators.modelOutput);
+                generatedModels.add(chairTypeTuckedId);
+            }
+
             backTypeModels.put(type, chairTypeId);
         }
-        ResourceLocation chairBacklessId = CHAIR_BACKLESS.createWithSuffix(chair, "_backless", baseMapping, generators.modelOutput);
+
+        ResourceLocation chairBacklessId = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_backless");
+        if (!generatedModels.contains(chairBacklessId)) {
+            CHAIR_BACKLESS.createWithSuffix(chair, "_backless", baseMapping, generators.modelOutput);
+            generatedModels.add(chairBacklessId);
+        }
+
+        ResourceLocation chairBacklessTuckedId = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_backless_tucked");
+        if (!generatedModels.contains(chairBacklessTuckedId)) {
+            CHAIR_BACKLESS.createWithSuffix(chair, "_backless_tucked", baseMapping, generators.modelOutput);
+            generatedModels.add(chairBacklessTuckedId);
+        }
+
+        for (ChairType type : ChairType.values()) {
+            ResourceLocation chairBackTypeTuckedId = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase() + "_tucked");
+
+            if (!generatedModels.contains(chairBackTypeTuckedId)) {
+                backTypeModels.put(type, new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase() + "_tucked"));
+                generatedModels.add(chairBackTypeTuckedId);
+            }
+        }
+
         generators.skipAutoItemBlock(chair);
         generators.blockStateOutput.accept(createChairMultipart(chair, chairBacklessId, cushionModels, backTypeModels));
     }
