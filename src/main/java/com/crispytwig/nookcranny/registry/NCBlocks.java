@@ -173,36 +173,42 @@ public class NCBlocks {
     public static final Block WHITE_CURTAIN = register("white_curtain", new CurtainBlock(copyOf(Blocks.WHITE_WOOL).noOcclusion()));
 
     public static final Block AMETHYST_WIND_CHIMES = register("amethyst_wind_chimes", new WindChimeBlock(
+            "amethyst",
             NCSoundEvents.WINDCHIME_AMETHYST,
             BlockBehaviour.Properties.of().noOcclusion()
             )
     );
 
     public static final Block BAMBOO_WIND_CHIMES = register("bamboo_wind_chimes", new WindChimeBlock(
+            "bamboo",
             NCSoundEvents.WINDCHIME_BAMBOO,
             BlockBehaviour.Properties.of().noOcclusion()
             )
     );
 
     public static final Block BAMBOO_STRIPPED_WIND_CHIMES = register("bamboo_stripped_wind_chimes", new WindChimeBlock(
+            "bamboo_stripped",
             NCSoundEvents.WINDCHIME_BAMBOO,
             BlockBehaviour.Properties.of().noOcclusion()
             )
     );
 
     public static final Block BONE_WIND_CHIMES = register("bone_wind_chimes", new WindChimeBlock(
+            "bone",
             NCSoundEvents.WINDCHIME_BONE,
             BlockBehaviour.Properties.of().noOcclusion()
             )
     );
 
     public static final Block COPPER_WIND_CHIMES = register("copper_wind_chimes", new WindChimeBlock(
+            "copper",
             NCSoundEvents.WINDCHIME_COPPER,
             BlockBehaviour.Properties.of().noOcclusion()
             )
     );
 
     public static final Block ECHO_SHARD_WIND_CHIMES = register("echo_shard_wind_chimes", new WindChimeBlock(
+            "echo_shard",
             NCSoundEvents.WINDCHIME_ECHO_SHARD,
             BlockBehaviour.Properties.of().noOcclusion()
             )

@@ -1,5 +1,6 @@
 package com.crispytwig.nookcranny.blocks;
 
+import com.crispytwig.nookcranny.blocks.entities.FanBlockEntity;
 import com.crispytwig.nookcranny.blocks.entities.WindChimeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,6 +17,8 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -27,12 +30,14 @@ import org.jetbrains.annotations.Nullable;
 public class WindChimeBlock extends BaseEntityBlock {
 
     private SoundEvent sound;
+    public String material;
 
-    public WindChimeBlock(SoundEvent sound, Properties properties) {
+    public WindChimeBlock(String material, SoundEvent sound, Properties properties) {
         super(properties);
         this.sound = sound;
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
+        this.material = material;
     }
 
     private static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 12.0D, 16.0D, 12.0D);
@@ -40,6 +45,17 @@ public class WindChimeBlock extends BaseEntityBlock {
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
+    }
+
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return (level1, pos, state1, blockEntity) -> {
+            if (blockEntity instanceof WindChimeBlockEntity windChimeBlockEntity) {
+                windChimeBlockEntity.commonTick(level, state);
+            }
+        };
     }
 
     @Override

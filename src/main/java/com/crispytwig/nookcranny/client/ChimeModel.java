@@ -9,7 +9,9 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class ChimeModel extends Model {
 
@@ -60,5 +62,13 @@ public class ChimeModel extends Model {
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         base.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+    }
+
+    public ModelPart getChimeBound(int i) {
+        return base.getChild("chime_bound_" + i);
+    }
+
+    public ModelPart getChime(int i) {
+        return getChimeBound(i).getChild("chime_" + i);
     }
 }
