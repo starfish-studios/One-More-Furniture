@@ -260,6 +260,18 @@ public class NCModelProvider extends FabricModelProvider {
         createChairItem(generators, NCItems.BAMBOO_CHAIR, NCBlocks.BAMBOO_CHAIR);
         createChairItem(generators, NCItems.WARPED_CHAIR, NCBlocks.WARPED_CHAIR);
         createChairItem(generators, NCItems.CHERRY_CHAIR, NCBlocks.CHERRY_CHAIR);
+
+        createCabinetItem(generators, NCItems.OAK_CABINET, NCBlocks.OAK_CABINET);
+        createCabinetItem(generators, NCItems.SPRUCE_CABINET, NCBlocks.SPRUCE_CABINET);
+        createCabinetItem(generators, NCItems.BIRCH_CABINET, NCBlocks.BIRCH_CABINET);
+        createCabinetItem(generators, NCItems.JUNGLE_CABINET, NCBlocks.JUNGLE_CABINET);
+        createCabinetItem(generators, NCItems.ACACIA_CABINET, NCBlocks.ACACIA_CABINET);
+        createCabinetItem(generators, NCItems.MANGROVE_CABINET, NCBlocks.MANGROVE_CABINET);
+        createCabinetItem(generators, NCItems.CRIMSON_CABINET, NCBlocks.CRIMSON_CABINET);
+        createCabinetItem(generators, NCItems.DARK_OAK_CABINET, NCBlocks.DARK_OAK_CABINET);
+        createCabinetItem(generators, NCItems.BAMBOO_CABINET, NCBlocks.BAMBOO_CABINET);
+        createCabinetItem(generators, NCItems.WARPED_CABINET, NCBlocks.WARPED_CABINET);
+        createCabinetItem(generators, NCItems.CHERRY_CABINET, NCBlocks.CHERRY_CABINET);
     }
 
     private void createNightstandBlock(BlockModelGenerators generators, Block nightstand) {
@@ -323,10 +335,24 @@ public class NCModelProvider extends FabricModelProvider {
         ));
     }
 
+    public final void createCabinetItem(ItemModelGenerators generators, Item item, Block block) {
+        String wood = BuiltInRegistries.BLOCK.getKey(block).getPath();
+        String firstName = wood.split("_cabinet")[0];
+        ResourceLocation loc = new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/" + firstName + "_drawer_top");
+        ResourceLocation countertopLoc = new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/" + firstName + "_drawer_countertop_sides");
+
+        TextureMapping baseMapping = new TextureMapping()
+                .put(TextureSlot.TOP, loc)
+                .put(SIDES, getTexture(block, "cabinet", "_sides"))
+                .put(TextureSlot.FRONT, getTexture(block, "cabinet", "_front"))
+                .put(COUNTERTOP_SIDES, countertopLoc);
+        CABINET_INVENTORY.create(ModelLocationUtils.getModelLocation(item), baseMapping, generators.output);
+    }
+
     public final void createCabinetBlock(BlockModelGenerators generators, Block block) {
         String wood = BuiltInRegistries.BLOCK.getKey(block).getPath();
         String firstName = wood.split("_cabinet")[0];
-        ResourceLocation loc = new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/" + firstName + "_drawer_front");
+        ResourceLocation loc = new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/" + firstName + "_drawer_top");
 
         TextureMapping baseMapping = new TextureMapping()
                 .put(TextureSlot.TOP, loc)
@@ -363,8 +389,11 @@ public class NCModelProvider extends FabricModelProvider {
                 var string = bl ? "block/drawers/countertop/countertop_" + type.getSerializedName() :
                         "block/drawers/countertop/countertop_" + type.getSerializedName() + "_bottom";
                 multiPart.with(
-                        Condition.condition().term(DrawerBlock.COUNTERTOP, type),
-                        Variant.variant().with(VariantProperties.MODEL, new ResourceLocation(NookAndCranny.MOD_ID, string))
+                        Condition.condition()
+                                .term(DrawerBlock.COUNTERTOP, type)
+                                .term(CabinetBlock.BOTTOM, bl),
+                        Variant.variant()
+                                .with(VariantProperties.MODEL, new ResourceLocation(NookAndCranny.MOD_ID, string))
                 );
             }
             for (Direction direction : Direction.Plane.HORIZONTAL) {

@@ -5,6 +5,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_oak"
       },
       "when": {
+        "bottom": "true",
         "countertop": "oak"
       }
     },
@@ -13,6 +14,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_spruce"
       },
       "when": {
+        "bottom": "true",
         "countertop": "spruce"
       }
     },
@@ -21,6 +23,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_birch"
       },
       "when": {
+        "bottom": "true",
         "countertop": "birch"
       }
     },
@@ -29,6 +32,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_jungle"
       },
       "when": {
+        "bottom": "true",
         "countertop": "jungle"
       }
     },
@@ -37,6 +41,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_acacia"
       },
       "when": {
+        "bottom": "true",
         "countertop": "acacia"
       }
     },
@@ -45,6 +50,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_dark_oak"
       },
       "when": {
+        "bottom": "true",
         "countertop": "dark_oak"
       }
     },
@@ -53,6 +59,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_crimson"
       },
       "when": {
+        "bottom": "true",
         "countertop": "crimson"
       }
     },
@@ -61,6 +68,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_warped"
       },
       "when": {
+        "bottom": "true",
         "countertop": "warped"
       }
     },
@@ -69,6 +77,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_mangrove"
       },
       "when": {
+        "bottom": "true",
         "countertop": "mangrove"
       }
     },
@@ -77,6 +86,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_bamboo"
       },
       "when": {
+        "bottom": "true",
         "countertop": "bamboo"
       }
     },
@@ -85,6 +95,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_cherry"
       },
       "when": {
+        "bottom": "true",
         "countertop": "cherry"
       }
     },
@@ -93,6 +104,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_quartz"
       },
       "when": {
+        "bottom": "true",
         "countertop": "quartz"
       }
     },
@@ -101,6 +113,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_red_sandstone"
       },
       "when": {
+        "bottom": "true",
         "countertop": "red_sandstone"
       }
     },
@@ -109,6 +122,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_sandstone"
       },
       "when": {
+        "bottom": "true",
         "countertop": "sandstone"
       }
     },
@@ -117,6 +131,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_prismarine"
       },
       "when": {
+        "bottom": "true",
         "countertop": "prismarine"
       }
     },
@@ -125,6 +140,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_stone_bricks"
       },
       "when": {
+        "bottom": "true",
         "countertop": "stone_bricks"
       }
     },
@@ -133,6 +149,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_diorite"
       },
       "when": {
+        "bottom": "true",
         "countertop": "diorite"
       }
     },
@@ -141,6 +158,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_granite"
       },
       "when": {
+        "bottom": "true",
         "countertop": "granite"
       }
     },
@@ -149,6 +167,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_andesite"
       },
       "when": {
+        "bottom": "true",
         "countertop": "andesite"
       }
     },
@@ -157,6 +176,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_deepslate"
       },
       "when": {
+        "bottom": "true",
         "countertop": "deepslate"
       }
     },
@@ -165,6 +185,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_nether_bricks"
       },
       "when": {
+        "bottom": "true",
         "countertop": "nether_bricks"
       }
     },
@@ -173,6 +194,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_purpur"
       },
       "when": {
+        "bottom": "true",
         "countertop": "purpur"
       }
     },
@@ -221,6 +243,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_oak_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "oak"
       }
     },
@@ -229,6 +252,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_spruce_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "spruce"
       }
     },
@@ -237,6 +261,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_birch_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "birch"
       }
     },
@@ -245,6 +270,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_jungle_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "jungle"
       }
     },
@@ -253,6 +279,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_acacia_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "acacia"
       }
     },
@@ -261,6 +288,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_dark_oak_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "dark_oak"
       }
     },
@@ -269,6 +297,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_crimson_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "crimson"
       }
     },
@@ -277,6 +306,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_warped_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "warped"
       }
     },
@@ -285,6 +315,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_mangrove_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "mangrove"
       }
     },
@@ -293,6 +324,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_bamboo_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "bamboo"
       }
     },
@@ -301,6 +333,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_cherry_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "cherry"
       }
     },
@@ -309,6 +342,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_quartz_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "quartz"
       }
     },
@@ -317,6 +351,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_red_sandstone_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "red_sandstone"
       }
     },
@@ -325,6 +360,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_sandstone_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "sandstone"
       }
     },
@@ -333,6 +369,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_prismarine_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "prismarine"
       }
     },
@@ -341,6 +378,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_stone_bricks_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "stone_bricks"
       }
     },
@@ -349,6 +387,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_diorite_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "diorite"
       }
     },
@@ -357,6 +396,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_granite_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "granite"
       }
     },
@@ -365,6 +405,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_andesite_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "andesite"
       }
     },
@@ -373,6 +414,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_deepslate_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "deepslate"
       }
     },
@@ -381,6 +423,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_nether_bricks_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "nether_bricks"
       }
     },
@@ -389,6 +432,7 @@
         "model": "nookcranny:block/drawers/countertop/countertop_purpur_bottom"
       },
       "when": {
+        "bottom": "false",
         "countertop": "purpur"
       }
     },

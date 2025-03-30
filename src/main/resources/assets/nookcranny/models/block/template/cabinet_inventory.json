@@ -1,20 +1,29 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"front": "nookcranny:block/cabinet/oak_cabinet_front_upper",
-		"sides": "nookcranny:block/cabinet/oak_cabinet_sides_upper",
-		"top": "nookcranny:block/drawers/oak_drawer_top"
+		"particle": "nookcranny:block/drawers/oak_drawer_top"
 	},
 	"elements": [
 		{
-			"from": [0, 4, 0],
+			"from": [0, 12, 0],
 			"to": [16, 16, 16],
 			"faces": {
-				"north": {"uv": [0, 0, 16, 12], "texture": "#front"},
-				"east": {"uv": [0, 0, 16, 12], "texture": "#sides"},
-				"south": {"uv": [0, 0, 16, 12], "texture": "#sides"},
-				"west": {"uv": [0, 0, 16, 12], "texture": "#sides"},
+				"north": {"uv": [0, 0, 16, 4], "texture": "#countertop"},
+				"east": {"uv": [0, 4, 16, 8], "texture": "#countertop"},
+				"south": {"uv": [0, 0, 16, 4], "texture": "#countertop"},
+				"west": {"uv": [16, 4, 0, 8], "texture": "#countertop"},
 				"up": {"uv": [0, 0, 16, 16], "texture": "#top"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 12, 16],
+			"faces": {
+				"north": {"uv": [0, 4, 16, 16], "texture": "#front"},
+				"east": {"uv": [0, 4, 16, 16], "texture": "#sides"},
+				"south": {"uv": [0, 4, 16, 16], "texture": "#sides"},
+				"west": {"uv": [0, 4, 16, 16], "texture": "#sides"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#top"}
 			}
 		}
 	],

@@ -182,8 +182,6 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
         return new DrawerMenu(i, inventory, this, 0);
     }
 
-
-
     public int getRelativeDrawerPos(Direction direction, Vec3 localHitPos, boolean isCabinet) {
         return -switch (direction) {
             case NORTH, SOUTH, EAST, WEST -> isCabinet

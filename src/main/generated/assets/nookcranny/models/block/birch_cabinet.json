@@ -4,6 +4,6 @@
     "front": "nookcranny:block/cabinet/birch_cabinet_front",
     "particle": "nookcranny:block/cabinet/birch_cabinet_front",
     "sides": "nookcranny:block/cabinet/birch_cabinet_sides",
-    "top": "nookcranny:block/drawers/birch_drawer_front"
+    "top": "nookcranny:block/drawers/birch_drawer_top"
   }
 }

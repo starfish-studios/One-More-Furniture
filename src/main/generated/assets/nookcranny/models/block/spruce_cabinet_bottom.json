@@ -4,6 +4,6 @@
     "front": "nookcranny:block/cabinet/spruce_cabinet_front_upper",
     "particle": "nookcranny:block/cabinet/spruce_cabinet_front_upper",
     "sides": "nookcranny:block/cabinet/spruce_cabinet_sides_upper",
-    "top": "nookcranny:block/drawers/spruce_drawer_front"
+    "top": "nookcranny:block/drawers/spruce_drawer_top"
   }
 }
