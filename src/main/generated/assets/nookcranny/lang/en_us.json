@@ -321,5 +321,8 @@
   "itemGroup.nookcranny.tab": "Nook and Cranny",
   "nookcranny.mailbox.at": "at",
   "nookcranny.mailbox.receiving": "Receiving item(s) from %s at %s",
-  "nookcranny.mailbox.sending": "Sending item(s) from %s at %s"
+  "nookcranny.mailbox.sending": "Sending item(s) from %s at %s",
+
+  "nookcranny.subtitles.block.spigot.on": "Spigot turns on",
+  "nookcranny.subtitles.block.spigot.off": "Spigot turns off"
 }

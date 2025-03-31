@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package com.crispytwig.nookcranny.blocks.entities;
 
 import com.crispytwig.nookcranny.NookAndCranny;
@@ -35,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -211,9 +207,11 @@ public class MailboxBlockEntity extends BlockEntity
             ItemStack toSendStack = this.items.get(o).copy();
 
             if (!toSendStack.isEmpty()) {
+                toSendStack.getOrCreateTag().putString("mailboxTooltip", "From: " + this.getMailboxName().getString());
+                toSendStack.getOrCreateTag().putInt("mailboxTooltipTimer", -1);
+
                 boolean merged = false;
 
-                // Try to merge into an existing stack
                 for (int i = 0; i < targetMailbox.items.size(); i++) {
                     ItemStack targetStack = targetMailbox.items.get(i);
 
@@ -223,6 +221,9 @@ public class MailboxBlockEntity extends BlockEntity
 
                         if (transferAmount > 0) {
                             targetStack.grow(transferAmount);
+                            targetStack.getOrCreateTag().putString("mailboxTooltip", "From: " + this.getMailboxName().getString());
+                            targetStack.getOrCreateTag().putInt("mailboxTooltipTimer", -1);
+
                             toSendStack.shrink(transferAmount);
                             sentMail = true;
 
@@ -234,8 +235,6 @@ public class MailboxBlockEntity extends BlockEntity
                         }
                     }
                 }
-
-                // If we couldn't merge, find an empty slot to insert into
                 if (!merged) {
                     for (int i = 0; i < targetMailbox.items.size(); i++) {
                         if (targetMailbox.items.get(i).isEmpty()) {
@@ -248,7 +247,6 @@ public class MailboxBlockEntity extends BlockEntity
                 }
             }
         }
-
         return sentMail;
     }
 
@@ -269,10 +267,6 @@ public class MailboxBlockEntity extends BlockEntity
         return null;
     }
 
-    /**
-     * @param name name of the mailbox
-     * @return a GlobalPos if the level saved state has a mailbox name present
-     */
     private GlobalPos checkMailboxName(String name) {
         if (level instanceof ServerLevel serverLevel) {
             var data = NCSavedData.getMailboxes(serverLevel);
@@ -283,14 +277,9 @@ public class MailboxBlockEntity extends BlockEntity
                     .findFirst()
                     .orElse(null);
         }
-
         return null;
     }
 
-    /**
-     * @param name name of the item's target mailbox
-     * @return a GlobalPos if the level saved state has a player name matching the name param
-     */
     private GlobalPos checkPlayerName(String name) {
         if (level instanceof ServerLevel serverLevel) {
             var data = NCSavedData.getMailboxes(serverLevel);
@@ -301,14 +290,9 @@ public class MailboxBlockEntity extends BlockEntity
                     .findFirst()
                     .orElse(null);
         }
-
         return null;
     }
 
-    /**
-     * @param name name of the item's target mailbox in coordinates.
-     * @return a GlobalPos if the param name can be translated to a valid BlockPos
-     */
     private GlobalPos checkCoordinates(String name) {
         if (name.matches("-?\\d+ -?\\d+ -?\\d+")) {
             String[] coords = name.split(" ");
@@ -319,6 +303,7 @@ public class MailboxBlockEntity extends BlockEntity
                     int y = Integer.parseInt(coords[1]);
                     int z = Integer.parseInt(coords[2]);
 
+                    assert this.level != null;
                     return GlobalPos.of(this.level.dimension(), new BlockPos(x, y, z));
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid coordinate format: " + name);
@@ -345,12 +330,12 @@ public class MailboxBlockEntity extends BlockEntity
     }
 
     @Override
-    public ItemStack getItem(int slot) {
+    public @NotNull ItemStack getItem(int slot) {
         return items.get(slot);
     }
 
     @Override
-    public ItemStack removeItem(int slot, int amount) {
+    public @NotNull ItemStack removeItem(int slot, int amount) {
         ItemStack itemStack = ContainerHelper.removeItem(this.items, slot, amount);
         if (!itemStack.isEmpty()) {
             this.setChanged();
@@ -359,12 +344,12 @@ public class MailboxBlockEntity extends BlockEntity
     }
 
     @Override
-    public ItemStack removeItemNoUpdate(int slot) {
+    public @NotNull ItemStack removeItemNoUpdate(int slot) {
         return ContainerHelper.takeItem(this.items, slot);
     }
 
     @Override
-    public void setItem(int slot, ItemStack stack) {
+    public void setItem(int slot, @NotNull ItemStack stack) {
         this.items.set(slot, stack);
         if (stack.getCount() > this.getMaxStackSize()) {
             stack.setCount(this.getMaxStackSize());
@@ -373,31 +358,32 @@ public class MailboxBlockEntity extends BlockEntity
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@NotNull Player player) {
         return Container.stillValidBlockEntity(this, player);
     }
 
-    public void startOpen(Player player) {
+    public void startOpen(@NotNull Player player) {
         if (!this.remove && !player.isSpectator()) {
-            this.openersCounter.incrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+            this.openersCounter.incrementOpeners(player, Objects.requireNonNull(this.getLevel()), this.getBlockPos(), this.getBlockState());
         }
     }
 
-    public void stopOpen(Player player) {
+    public void stopOpen(@NotNull Player player) {
         if (!this.remove && !player.isSpectator()) {
-            this.openersCounter.decrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+            this.openersCounter.decrementOpeners(player, Objects.requireNonNull(this.getLevel()), this.getBlockPos(), this.getBlockState());
         }
 
     }
 
     public void recheckOpen() {
         if (!this.remove) {
-            this.openersCounter.recheckOpeners(this.getLevel(), this.getBlockPos(), this.getBlockState());
+            this.openersCounter.recheckOpeners(Objects.requireNonNull(this.getLevel()), this.getBlockPos(), this.getBlockState());
         }
 
     }
 
     void updateBlockState(BlockState blockState, boolean bl) {
+        assert this.level != null;
         this.level.setBlock(this.getBlockPos(), blockState.setValue(MailboxBlock.OPEN, bl), 3);
     }
 
@@ -406,6 +392,7 @@ public class MailboxBlockEntity extends BlockEntity
         double d = (double)this.worldPosition.getX() + 0.5 + (double)vec3i.getX() / 2.0;
         double e = (double)this.worldPosition.getY() + 0.5 + (double)vec3i.getY() / 2.0;
         double f = (double)this.worldPosition.getZ() + 0.5 + (double)vec3i.getZ() / 2.0;
+        assert this.level != null;
         this.level.playSound(null, d, e, f, soundEvent, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
     }
 
@@ -421,7 +408,8 @@ public class MailboxBlockEntity extends BlockEntity
     }
 
     @Override
-    public Component getName() {
+    public @NotNull Component getName() {
+        assert name != null;
         return name;
     }
 

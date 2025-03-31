@@ -2,6 +2,7 @@ package com.crispytwig.nookcranny.blocks;
 
 import com.crispytwig.nookcranny.blocks.entities.SpigotBlockEntity;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
+import com.crispytwig.nookcranny.registry.NCSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -116,7 +117,10 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
         } else {
             blockState2 = this.pull(blockState, level, blockPos);
             float f = blockState2.getValue(POWERED) ? 0.6F : 0.5F;
-            level.playSound(null, blockPos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
+            level.playSound(null, blockPos,
+                    waterOn ? NCSoundEvents.SPIGOT_ON : NCSoundEvents.SPIGOT_OFF,
+                    SoundSource.BLOCKS, f,
+                    1.0f);
         }
         return InteractionResult.SUCCESS;
     }
