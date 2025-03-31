@@ -52,7 +52,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
         CURTAIN_DEFAULT("curtain_default"),
         SINGLE("single"),
         LEFT("left"),
-        MIDDLE("middle"),
+        CENTER("center"),
         RIGHT("right"),
         BOTTOM_SINGLE("bottom_single"),
         BOTTOM_LEFT("bottom_left"),
@@ -60,8 +60,8 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
         BOTTOM_RIGHT("bottom_right"),
         CORNER_LEFT("corner_left"),
         CORNER_RIGHT("corner_right"),
-        CURTAIN_TOP("curtain_top"),
-        CURTAIN_TOP_SINGLE("curtain_top_single");
+        TOP("curtain_top"),
+        TOP_SINGLE("curtain_top_single");
 
         private final String name;
 
@@ -256,7 +256,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
 
         boolean aboveIsOpenAndMiddle = aboveState.getBlock() instanceof CurtainBlock &&
                 aboveState.getValue(OPEN) &&
-                aboveState.getValue(SHAPE) == CurtainShape.MIDDLE;
+                aboveState.getValue(SHAPE) == CurtainShape.CENTER;
 
         boolean aboveIsOpenAndLeft = aboveState.getBlock() instanceof CurtainBlock &&
                 aboveState.getValue(OPEN) &&
@@ -276,15 +276,15 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
 
         boolean aboveIsOpenAndTop = aboveState.getBlock() instanceof CurtainBlock &&
                 aboveState.getValue(OPEN) &&
-                aboveState.getValue(SHAPE) == CurtainShape.CURTAIN_TOP;
+                aboveState.getValue(SHAPE) == CurtainShape.TOP;
 
         boolean rightIsOpenAndTop = rightState.getBlock() instanceof CurtainBlock &&
                 rightState.getValue(OPEN) &&
-                rightState.getValue(SHAPE) == CurtainShape.CURTAIN_TOP;
+                rightState.getValue(SHAPE) == CurtainShape.TOP;
 
         boolean leftIsOpenAndTop = leftState.getBlock() instanceof CurtainBlock &&
                 leftState.getValue(OPEN) &&
-                leftState.getValue(SHAPE) == CurtainShape.CURTAIN_TOP;
+                leftState.getValue(SHAPE) == CurtainShape.TOP;
 
         boolean rightIsOpenAndCorner = rightState.getBlock() instanceof CurtainBlock &&
                 rightState.getValue(OPEN) &&
@@ -296,11 +296,11 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
 
         boolean rightIsOpenAndMiddle = rightState.getBlock() instanceof CurtainBlock &&
                 rightState.getValue(OPEN) &&
-                rightState.getValue(SHAPE) == CurtainShape.MIDDLE;
+                rightState.getValue(SHAPE) == CurtainShape.CENTER;
 
         boolean leftIsOpenAndMiddle = leftState.getBlock() instanceof CurtainBlock &&
                 leftState.getValue(OPEN) &&
-                leftState.getValue(SHAPE) == CurtainShape.MIDDLE;
+                leftState.getValue(SHAPE) == CurtainShape.CENTER;
 
         // Connections M
         if (noLeftCurtain && rightIsOpenAndRight && aboveIsOpenAndMiddle && noBelowCurtain) {
@@ -322,40 +322,40 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
             return CurtainShape.LEFT;
         }
         if (rightIsOpenAndTop && leftIsOpenAndTop && noAboveCurtain && noBelowCurtain) {
-            return CurtainShape.CURTAIN_TOP;
+            return CurtainShape.TOP;
         }
         if (rightIsOpenAndCorner && leftIsOpenAndCorner && noAboveCurtain && noBelowCurtain) {
-            return CurtainShape.CURTAIN_TOP;
+            return CurtainShape.TOP;
         }
         if (rightIsOpenAndRight && noLeftCurtain && aboveIsOpenAndTop && noBelowCurtain) {
-            return CurtainShape.MIDDLE;
+            return CurtainShape.CENTER;
         }
         if (noRightCurtain && leftIsOpenAndLeft && aboveIsOpenAndTop && noBelowCurtain) {
-            return CurtainShape.MIDDLE;
+            return CurtainShape.CENTER;
         }
 
         if (rightIsOpenAndMiddle && noLeftCurtain && aboveIsOpenAndTop && noBelowCurtain) {
-            return CurtainShape.MIDDLE;
+            return CurtainShape.CENTER;
         }
 
         if (noRightCurtain && leftIsOpenAndMiddle && aboveIsOpenAndTop && noBelowCurtain) {
-            return CurtainShape.MIDDLE;
+            return CurtainShape.CENTER;
         }
 
         if (rightIsOpenAndRight && noLeftCurtain && aboveIsOpenAndLeft && noBelowCurtain) {
-            return CurtainShape.MIDDLE;
+            return CurtainShape.CENTER;
         }
 
         if (noRightCurtain && leftIsOpenAndLeft && aboveIsOpenAndRight && noBelowCurtain) {
-            return CurtainShape.MIDDLE;
+            return CurtainShape.CENTER;
         }
 
         if (rightIsOpenAndRight && noLeftCurtain && aboveIsOpenAndMiddle && belowIsOpenAndLeft) {
-            return CurtainShape.MIDDLE;
+            return CurtainShape.CENTER;
         }
 
         if (noRightCurtain && leftIsOpenAndLeft && aboveIsOpenAndMiddle && belowIsOpenAndRight) {
-            return CurtainShape.MIDDLE;
+            return CurtainShape.CENTER;
         }
 
         // Dynamic connections
@@ -363,7 +363,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
             return CurtainShape.BOTTOM_MIDDLE;
         }
         if (!connectedAbove && connectedBelow && !connectedLeft && !connectedRight) {
-            return CurtainShape.CURTAIN_TOP_SINGLE;
+            return CurtainShape.TOP_SINGLE;
         }
         if (!connectedAbove && !connectedBelow) {
             if (connectedLeft || connectedRight) {
@@ -372,10 +372,10 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
             return CurtainShape.CURTAIN_DEFAULT;
         }
         if (!connectedAbove) {
-            if (connectedLeft && connectedRight) return CurtainShape.CURTAIN_TOP;
+            if (connectedLeft && connectedRight) return CurtainShape.TOP;
             if (!connectedLeft) return CurtainShape.CORNER_LEFT;
             if (!connectedRight) return CurtainShape.CORNER_RIGHT;
-            return CurtainShape.CURTAIN_TOP;
+            return CurtainShape.TOP;
         }
         if (!connectedBelow) {
             if (connectedLeft && connectedRight) return CurtainShape.BOTTOM_MIDDLE;
@@ -383,7 +383,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
                 BlockState aboveNeighbor = level.getBlockState(abovePos);
                 BlockState leftNeighbor = level.getBlockState(leftPos);
                 if (aboveNeighbor.getBlock() instanceof CurtainBlock &&
-                        aboveNeighbor.getValue(SHAPE) == CurtainShape.MIDDLE &&
+                        aboveNeighbor.getValue(SHAPE) == CurtainShape.CENTER &&
                         leftNeighbor.getBlock() instanceof CurtainBlock &&
                         leftNeighbor.getValue(SHAPE) == CurtainShape.BOTTOM_LEFT) {
                     return CurtainShape.BOTTOM_MIDDLE;
@@ -394,7 +394,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
                 BlockState aboveNeighbor = level.getBlockState(abovePos);
                 BlockState rightNeighbor = level.getBlockState(rightPos);
                 if (aboveNeighbor.getBlock() instanceof CurtainBlock &&
-                        aboveNeighbor.getValue(SHAPE) == CurtainShape.MIDDLE &&
+                        aboveNeighbor.getValue(SHAPE) == CurtainShape.CENTER &&
                         rightNeighbor.getBlock() instanceof CurtainBlock &&
                         rightNeighbor.getValue(SHAPE) == CurtainShape.BOTTOM_RIGHT) {
                     return CurtainShape.BOTTOM_MIDDLE;
@@ -403,7 +403,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
             }
             return CurtainShape.BOTTOM_SINGLE;
         }
-        if (connectedLeft && connectedRight) return CurtainShape.MIDDLE;
+        if (connectedLeft && connectedRight) return CurtainShape.CENTER;
         if (!connectedLeft && connectedRight) return CurtainShape.LEFT;
         if (connectedLeft) return CurtainShape.RIGHT;
         return CurtainShape.SINGLE;

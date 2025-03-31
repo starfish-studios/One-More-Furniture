@@ -1,8 +1,7 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "curtain_left_open",
 	"textures": {
-		"0": "nookcranny:block/curtain/white_curtain_side_open",
+		"all": "nookcranny:block/curtain/white_curtain_side_open",
 		"particle": "nookcranny:block/curtain/white_curtain_side_open"
 	},
 	"elements": [
@@ -11,8 +10,8 @@
 			"to": [16, 16, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 7]},
 			"faces": {
-				"north": {"uv": [16, 0, 0, 16], "texture": "#0"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#0"}
+				"north": {"uv": [16, 0, 0, 16], "texture": "#all"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#all"}
 			}
 		}
 	]
