@@ -3,6 +3,6 @@
   "textures": {
     "bits": "nookcranny:block/nightstand/dark_oak_nightstand_bits",
     "core": "nookcranny:block/nightstand/dark_oak_nightstand_core",
-    "particle": "nookcranny:block/nightstand/dark_oak_nightstand"
+    "particle": "nookcranny:block/nightstand/dark_oak_nightstand_core"
   }
 }

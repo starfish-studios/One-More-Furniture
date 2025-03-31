@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "nookcranny:block/warped_flower_basket",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nookcranny:block/warped_flower_basket"
+    },
+    "facing=south": {
+      "model": "nookcranny:block/warped_flower_basket",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nookcranny:block/warped_flower_basket",
+      "y": 270
+    }
+  }
+}

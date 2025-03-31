@@ -170,7 +170,7 @@ public class NCBlocks {
     public static final Block WHITE_SOFA = register("white_sofa", new SofaBlock(DyeColor.WHITE, copyOf(Blocks.WHITE_WOOL).noOcclusion()));
     public static final Block YELLOW_SOFA = register("yellow_sofa", new SofaBlock(DyeColor.YELLOW, copyOf(Blocks.YELLOW_WOOL).noOcclusion()));
 
-    public static final Block WHITE_CURTAIN = register("white_curtain", new CurtainBlock(copyOf(Blocks.WHITE_WOOL).noOcclusion()));
+    //TODO public static final Block WHITE_CURTAIN = register("white_curtain", new CurtainBlock(copyOf(Blocks.WHITE_WOOL).noOcclusion()));
 
     public static final Block AMETHYST_WIND_CHIMES = register("amethyst_wind_chimes", new WindChimeBlock(
             "amethyst",
@@ -214,17 +214,17 @@ public class NCBlocks {
             )
     );
 
-    public static final Block OAK_FAN = register("oak_ceiling_fan", new FanBlock("oak", BlockBehaviour.Properties.of().noOcclusion()));
-    public static final Block SPRUCE_FAN = register("spruce_ceiling_fan", new FanBlock("spruce", BlockBehaviour.Properties.of().noOcclusion()));
-    public static final Block BIRCH_FAN = register("birch_ceiling_fan", new FanBlock("birch", BlockBehaviour.Properties.of().noOcclusion()));
-    public static final Block JUNGLE_FAN = register("jungle_ceiling_fan", new FanBlock("jungle", BlockBehaviour.Properties.of().noOcclusion()));
-    public static final Block ACACIA_FAN = register("acacia_ceiling_fan", new FanBlock("acacia", BlockBehaviour.Properties.of().noOcclusion()));
-    public static final Block CHERRY_FAN = register("cherry_ceiling_fan", new FanBlock("cherry", BlockBehaviour.Properties.of().noOcclusion()));
-    public static final Block DARK_OAK_FAN = register("dark_oak_ceiling_fan", new FanBlock("dark_oak", BlockBehaviour.Properties.of().noOcclusion()));
-    public static final Block MANGROVE_FAN = register("mangrove_ceiling_fan", new FanBlock("mangrove", BlockBehaviour.Properties.of().noOcclusion()));
-    public static final Block BAMBOO_FAN = register("bamboo_ceiling_fan", new FanBlock("bamboo", BlockBehaviour.Properties.of().noOcclusion()));
-    public static final Block CRIMSON_FAN = register("crimson_ceiling_fan", new FanBlock("crimson", BlockBehaviour.Properties.of().noOcclusion()));
-    public static final Block WARPED_FAN = register("warped_ceiling_fan", new FanBlock("warped", BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block OAK_FAN = register("oak_fan", new FanBlock("oak", BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block SPRUCE_FAN = register("spruce_fan", new FanBlock("spruce", BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block BIRCH_FAN = register("birch_fan", new FanBlock("birch", BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block JUNGLE_FAN = register("jungle_fan", new FanBlock("jungle", BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block ACACIA_FAN = register("acacia_fan", new FanBlock("acacia", BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block CHERRY_FAN = register("cherry_fan", new FanBlock("cherry", BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block DARK_OAK_FAN = register("dark_oak_fan", new FanBlock("dark_oak", BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block MANGROVE_FAN = register("mangrove_fan", new FanBlock("mangrove", BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block BAMBOO_FAN = register("bamboo_fan", new FanBlock("bamboo", BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block CRIMSON_FAN = register("crimson_fan", new FanBlock("crimson", BlockBehaviour.Properties.of().noOcclusion()));
+    public static final Block WARPED_FAN = register("warped_fan", new FanBlock("warped", BlockBehaviour.Properties.of().noOcclusion()));
 
     public static final Block OAK_CABINET = register("oak_cabinet", new CabinetBlock(Items.OAK_PLANKS, copyOf(Blocks.OAK_PLANKS)));
     public static final Block SPRUCE_CABINET = register("spruce_cabinet", new CabinetBlock(Items.SPRUCE_PLANKS,copyOf(Blocks.SPRUCE_PLANKS)));

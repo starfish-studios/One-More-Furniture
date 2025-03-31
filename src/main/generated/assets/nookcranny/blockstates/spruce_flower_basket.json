@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "nookcranny:block/spruce_flower_basket",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nookcranny:block/spruce_flower_basket"
+    },
+    "facing=south": {
+      "model": "nookcranny:block/spruce_flower_basket",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nookcranny:block/spruce_flower_basket",
+      "y": 270
+    }
+  }
+}

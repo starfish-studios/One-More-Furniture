@@ -1,7 +1,0 @@
-{
-  "parent": "nookcranny:block/template/curtain_center_closed",
-  "textures": {
-    "all": "nookcranny:block/curtain/white_curtain_center_closed",
-    "particle": "nookcranny:block/curtain/white_curtain_center_closed"
-  }
-}

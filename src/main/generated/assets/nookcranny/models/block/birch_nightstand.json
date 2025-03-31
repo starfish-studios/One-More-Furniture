@@ -3,6 +3,6 @@
   "textures": {
     "bits": "nookcranny:block/nightstand/birch_nightstand_bits",
     "core": "nookcranny:block/nightstand/birch_nightstand_core",
-    "particle": "nookcranny:block/nightstand/birch_nightstand"
+    "particle": "nookcranny:block/nightstand/birch_nightstand_core"
   }
 }

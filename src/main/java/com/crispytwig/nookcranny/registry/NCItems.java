@@ -156,7 +156,7 @@ public class NCItems {
     public static final Item WHITE_SOFA = register("white_sofa", new BlockItem(NCBlocks.WHITE_SOFA, new FabricItemSettings()));
     public static final Item YELLOW_SOFA = register("yellow_sofa", new BlockItem(NCBlocks.YELLOW_SOFA, new FabricItemSettings()));
 
-    public static final Item WHITE_CURTAIN = register("white_curtain", new BlockItem(NCBlocks.WHITE_CURTAIN, new FabricItemSettings()));
+    //TODO public static final Item WHITE_CURTAIN = register("white_curtain", new BlockItem(NCBlocks.WHITE_CURTAIN, new FabricItemSettings()));
 
     public static final Item AMETHYST_WIND_CHIMES = register("amethyst_wind_chimes", new BlockItem(NCBlocks.AMETHYST_WIND_CHIMES, new FabricItemSettings()));
     public static final Item BAMBOO_WIND_CHIMES = register("bamboo_wind_chimes", new BlockItem(NCBlocks.BAMBOO_WIND_CHIMES, new FabricItemSettings()));
@@ -165,17 +165,17 @@ public class NCItems {
     public static final Item COPPER_WIND_CHIMES = register("copper_wind_chimes", new BlockItem(NCBlocks.COPPER_WIND_CHIMES, new FabricItemSettings()));
     public static final Item ECHO_SHARD_WIND_CHIMES = register("echo_shard_wind_chimes", new BlockItem(NCBlocks.ECHO_SHARD_WIND_CHIMES, new FabricItemSettings()));
 
-    public static final Item OAK_FAN = register("oak_ceiling_fan", new BlockItem(NCBlocks.OAK_FAN, new FabricItemSettings()));
-    public static final Item SPRUCE_FAN = register("spruce_ceiling_fan", new BlockItem(NCBlocks.SPRUCE_FAN, new FabricItemSettings()));
-    public static final Item BIRCH_FAN = register("birch_ceiling_fan", new BlockItem(NCBlocks.BIRCH_FAN, new FabricItemSettings()));
-    public static final Item JUNGLE_FAN = register("jungle_ceiling_fan", new BlockItem(NCBlocks.JUNGLE_FAN, new FabricItemSettings()));
-    public static final Item ACACIA_FAN = register("acacia_ceiling_fan", new BlockItem(NCBlocks.ACACIA_FAN, new FabricItemSettings()));
-    public static final Item DARK_OAK_FAN = register("dark_oak_ceiling_fan", new BlockItem(NCBlocks.DARK_OAK_FAN, new FabricItemSettings()));
-    public static final Item MANGROVE_FAN = register("mangrove_ceiling_fan", new BlockItem(NCBlocks.MANGROVE_FAN, new FabricItemSettings()));
-    public static final Item BAMBOO_FAN = register("bamboo_ceiling_fan", new BlockItem(NCBlocks.BAMBOO_FAN, new FabricItemSettings()));
-    public static final Item CHERRY_FAN = register("cherry_ceiling_fan", new BlockItem(NCBlocks.CHERRY_FAN, new FabricItemSettings()));
-    public static final Item CRIMSON_FAN = register("crimson_ceiling_fan", new BlockItem(NCBlocks.CRIMSON_FAN, new FabricItemSettings()));
-    public static final Item WARPED_FAN = register("warped_ceiling_fan", new BlockItem(NCBlocks.WARPED_FAN, new FabricItemSettings()));
+    public static final Item OAK_FAN = register("oak_fan", new BlockItem(NCBlocks.OAK_FAN, new FabricItemSettings()));
+    public static final Item SPRUCE_FAN = register("spruce_fan", new BlockItem(NCBlocks.SPRUCE_FAN, new FabricItemSettings()));
+    public static final Item BIRCH_FAN = register("birch_fan", new BlockItem(NCBlocks.BIRCH_FAN, new FabricItemSettings()));
+    public static final Item JUNGLE_FAN = register("jungle_fan", new BlockItem(NCBlocks.JUNGLE_FAN, new FabricItemSettings()));
+    public static final Item ACACIA_FAN = register("acacia_fan", new BlockItem(NCBlocks.ACACIA_FAN, new FabricItemSettings()));
+    public static final Item DARK_OAK_FAN = register("dark_oak_fan", new BlockItem(NCBlocks.DARK_OAK_FAN, new FabricItemSettings()));
+    public static final Item MANGROVE_FAN = register("mangrove_fan", new BlockItem(NCBlocks.MANGROVE_FAN, new FabricItemSettings()));
+    public static final Item BAMBOO_FAN = register("bamboo_fan", new BlockItem(NCBlocks.BAMBOO_FAN, new FabricItemSettings()));
+    public static final Item CHERRY_FAN = register("cherry_fan", new BlockItem(NCBlocks.CHERRY_FAN, new FabricItemSettings()));
+    public static final Item CRIMSON_FAN = register("crimson_fan", new BlockItem(NCBlocks.CRIMSON_FAN, new FabricItemSettings()));
+    public static final Item WARPED_FAN = register("warped_fan", new BlockItem(NCBlocks.WARPED_FAN, new FabricItemSettings()));
 
 
     public static final Item OAK_CABINET = register("oak_cabinet", new BlockItem(NCBlocks.OAK_CABINET, new FabricItemSettings()));

@@ -101,6 +101,7 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate CURTAIN_TOP_SINGLE_CLOSED = createTemplate("curtain_top_single_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
 
     public static final ModelTemplate WIND_CHIME = createTemplate("chime", TextureSlot.ALL);
+    public static final ModelTemplate FLOWER_BASKET = createTemplate("flower_basket", TextureSlot.ALL, TextureSlot.DIRT, TextureSlot.PARTICLE);
     public static final ModelTemplate FAN = createTemplate("ceiling_fan", TextureSlot.ALL);
 
 
@@ -114,6 +115,9 @@ public class NCModelProvider extends FabricModelProvider {
             createCountertopType(generators, type);
         }
         for (Block block : NCBlocks.BLOCKS) {
+            if (block instanceof FlowerBasketBlock) {
+                createFlowerBasket(generators, block);
+            }
             if (block instanceof CurtainBlock) {
                 createCurtainBlock(generators, block);
             }
@@ -153,6 +157,19 @@ public class NCModelProvider extends FabricModelProvider {
                 //createFan(generators, block);
             }
         }
+    }
+
+    private void createFlowerBasket(BlockModelGenerators generators, Block block) {
+        TextureMapping one = new TextureMapping()
+                .put(TextureSlot.ALL, getTexture(block, "flower_basket", ""))
+                .put(TextureSlot.PARTICLE, getTexture(block, "flower_basket", ""))
+                .put(TextureSlot.DIRT, new ResourceLocation("block/dirt"));
+
+        var res = FLOWER_BASKET.create(block, one, generators.modelOutput);
+        MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, res));
+
+        multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
+        generators.blockStateOutput.accept(multiVariant);
     }
 
     public record OpenClosed(ResourceLocation open, ResourceLocation closed){}
@@ -283,6 +300,18 @@ public class NCModelProvider extends FabricModelProvider {
         createCabinetItem(generators, NCItems.BAMBOO_CABINET, NCBlocks.BAMBOO_CABINET);
         createCabinetItem(generators, NCItems.WARPED_CABINET, NCBlocks.WARPED_CABINET);
         createCabinetItem(generators, NCItems.CHERRY_CABINET, NCBlocks.CHERRY_CABINET);
+
+        generators.generateFlatItem(NCItems.ACACIA_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(NCItems.BIRCH_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(NCItems.OAK_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(NCItems.SPRUCE_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(NCItems.MANGROVE_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(NCItems.JUNGLE_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(NCItems.CHERRY_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(NCItems.BAMBOO_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(NCItems.DARK_OAK_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(NCItems.WARPED_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(NCItems.CRIMSON_FAN, ModelTemplates.FLAT_ITEM);
     }
 
     private void createNightstandBlock(BlockModelGenerators generators, Block nightstand) {
@@ -290,7 +319,7 @@ public class NCModelProvider extends FabricModelProvider {
         var textMap = new TextureMapping()
                 .put(CORE, getTexture(nightstand, "nightstand", "_core"))
                 .put(BITS, getTexture(nightstand, "nightstand", "_bits"))
-                .put(TextureSlot.PARTICLE, getTexture(nightstand, "nightstand", ""));
+                .put(TextureSlot.PARTICLE, getTexture(nightstand, "nightstand", "_core"));
         ResourceLocation closed = NIGHTSTAND.create(nightstand, textMap, generators.modelOutput);
         ResourceLocation open = NIGHTSTAND_OPEN.createWithSuffix(nightstand, "_open", textMap, generators.modelOutput);
         multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());

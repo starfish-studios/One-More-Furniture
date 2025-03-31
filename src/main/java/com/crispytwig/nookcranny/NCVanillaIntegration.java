@@ -134,7 +134,7 @@ public class NCVanillaIntegration {
                     NCBlocks.CRIMSON_CHAIR,
                     NCBlocks.WARPED_CHAIR,
 
-                    NCBlocks.WHITE_CURTAIN,
+                    //TODO NCBlocks.WHITE_CURTAIN,
 
                     NCBlocks.AMETHYST_WIND_CHIMES,
                     NCBlocks.BAMBOO_WIND_CHIMES,
