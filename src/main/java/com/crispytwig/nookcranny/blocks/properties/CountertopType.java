@@ -27,17 +27,7 @@ public enum CountertopType implements StringRepresentable {
     MANGROVE("mangrove", () -> Items.MANGROVE_PLANKS),
     BAMBOO("bamboo", () -> Items.BAMBOO_PLANKS),
     CHERRY("cherry", () -> Items.CHERRY_PLANKS),
-    QUARTZ("quartz", () -> Items.QUARTZ_BLOCK),
-    RED_SANDSTONE("red_sandstone", () -> Items.RED_SANDSTONE),
-    SANDSTONE("sandstone", () -> Items.SANDSTONE),
-    PRISMARINE("prismarine", () -> Items.PRISMARINE),
-    STONE_BRICKS("stone_bricks", () -> Items.STONE_BRICKS),
-    DIORITE("diorite", () -> Items.DIORITE),
-    GRANITE("granite", () -> Items.GRANITE),
-    ANDESITE("andesite", () -> Items.ANDESITE),
-    DEEPSLATE("deepslate", () -> Items.DEEPSLATE),
-    NETHER_BRICKS("nether_bricks", () -> Items.NETHER_BRICKS),
-    PURPUR("purpur", () -> Items.PURPUR_BLOCK);
+    QUARTZ("quartz", () -> Items.QUARTZ_BLOCK);
 
     private final String name;
     private final Supplier<Item> item;

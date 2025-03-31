@@ -1,4 +1,17 @@
 {
+  "block.spigot.on": {
+    "sounds": [
+      "nookcranny:block/spigot/on"
+    ],
+    "subtitle": "nookcranny.subtitles.block.spigot.on"
+  },
+  "block.spigot.off": {
+      "sounds": [
+      "nookcranny:block/spigot/off"
+      ],
+      "subtitle": "nookcranny.subtitles.block.spigot.off"
+  },
+
   "block.windchimes.amethyst": {
     "sounds": [
       "nookcranny:block/windchimes/amethyst/idle_1",

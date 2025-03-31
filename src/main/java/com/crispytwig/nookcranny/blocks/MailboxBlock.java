@@ -197,6 +197,21 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         return true;
     }
 
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+        if (!level.isClientSide) {
+            boolean isPowered = level.hasNeighborSignal(pos);
+            FlagStatus newStatus = isPowered ? FlagStatus.UP : FlagStatus.DOWN;
+            if (state.getValue(FLAG_STATUS) != newStatus) {
+                level.setBlock(pos, state.setValue(FLAG_STATUS, newStatus), 3);
+                float pitch = newStatus == FlagStatus.UP ? 0.6F : 0.5F;
+                level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, pitch);
+            }
+        }
+        super.neighborChanged(state, level, pos, blockIn, fromPos, isMoving);
+    }
+
+
     public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
         if (!blockState.is(blockState2.getBlock())) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);

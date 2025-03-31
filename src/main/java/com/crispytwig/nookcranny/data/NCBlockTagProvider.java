@@ -51,6 +51,9 @@ public class NCBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             if (block instanceof FlowerBasketBlock) {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
             }
+            if (block instanceof CabinetBlock) {
+                getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
+            }
 
             if (block instanceof LampBlock) {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
@@ -58,6 +61,7 @@ public class NCBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             if (block instanceof SpigotBlock) {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(block);
             }
+
 
             if (block instanceof TableBlock) {
                 getOrCreateTagBuilder(NCTags.BlockTags.TABLES_CONNECTABLE).add(block);
