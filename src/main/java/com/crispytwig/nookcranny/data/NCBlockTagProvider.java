@@ -27,6 +27,9 @@ public class NCBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             if (block instanceof BenchBlock) {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
             }
+            if (block instanceof SofaBlock) {
+                getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
+            }
             if (block instanceof ShelfBlock) {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
             }
@@ -49,9 +52,6 @@ public class NCBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
             }
             if (block instanceof FlowerBasketBlock) {
-                getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
-            }
-            if (block instanceof CabinetBlock) {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
             }
 
