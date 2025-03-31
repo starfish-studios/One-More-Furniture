@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "minecraft:stick"
+    },
+    "N": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "NI",
+    "NI",
+    " I"
+  ],
+  "result": {
+    "item": "nookcranny:copper_saw"
+  },
+  "show_notification": true
+}

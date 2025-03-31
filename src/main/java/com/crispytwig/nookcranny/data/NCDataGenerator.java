@@ -13,5 +13,6 @@ public class NCDataGenerator implements DataGeneratorEntrypoint  {
         pack.addProvider(NCLangProvider::new);
         pack.addProvider(NCBlockLootTableProvider::new);
         pack.addProvider(NCBlockTagProvider::new);
+        pack.addProvider(NCRecipeProvider::new);
     }
 }

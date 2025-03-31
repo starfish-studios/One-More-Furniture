@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "W": {
+      "item": "minecraft:acacia_planks"
+    }
+  },
+  "pattern": [
+    " W ",
+    "WIW",
+    " W "
+  ],
+  "result": {
+    "item": "nookcranny:acacia_fan"
+  },
+  "show_notification": true
+}

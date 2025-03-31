@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_nugget"
+    },
+    "P": {
+      "item": "minecraft:warped_planks"
+    },
+    "S": {
+      "item": "minecraft:warped_slab"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "SIS",
+    "PPP"
+  ],
+  "result": {
+    "item": "nookcranny:warped_cabinet"
+  },
+  "show_notification": true
+}

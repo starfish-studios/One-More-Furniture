@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:jungle_slab"
+    }
+  },
+  "pattern": [
+    "W ",
+    "WW",
+    "SS"
+  ],
+  "result": {
+    "count": 2,
+    "item": "nookcranny:jungle_chair"
+  },
+  "show_notification": true
+}

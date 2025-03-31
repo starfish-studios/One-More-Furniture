@@ -32,7 +32,7 @@ import java.util.Map;
 
 public class DyeSofa implements UseBlockCallback {
 
-    private static final Map<Integer, BlockState> COLOR_MAP = Util.make(new HashMap<>(), (map) -> {
+    public static final Map<Integer, BlockState> COLOR_MAP = Util.make(new HashMap<>(), (map) -> {
         map.put(DyeColor.WHITE.getId(), NCBlocks.WHITE_SOFA.defaultBlockState());
         map.put(DyeColor.ORANGE.getId(), NCBlocks.ORANGE_SOFA.defaultBlockState());
         map.put(DyeColor.MAGENTA.getId(), NCBlocks.MAGENTA_SOFA.defaultBlockState());

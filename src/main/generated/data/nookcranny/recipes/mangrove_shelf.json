@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:mangrove_slab"
+    }
+  },
+  "pattern": [
+    "WW",
+    "S "
+  ],
+  "result": {
+    "count": 4,
+    "item": "nookcranny:mangrove_shelf"
+  },
+  "show_notification": true
+}

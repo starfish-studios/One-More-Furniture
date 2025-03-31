@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:spruce_slab"
+    }
+  },
+  "pattern": [
+    "WW",
+    "SS"
+  ],
+  "result": {
+    "item": "nookcranny:spruce_table"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_nugget"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "SIS",
+    "PPP"
+  ],
+  "result": {
+    "item": "nookcranny:dark_oak_cabinet"
+  },
+  "show_notification": true
+}

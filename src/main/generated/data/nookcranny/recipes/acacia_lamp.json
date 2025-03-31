@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "minecraft:acacia_planks"
+    },
+    "T": {
+      "item": "minecraft:torch"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "W",
+    "T",
+    "S"
+  ],
+  "result": {
+    "count": 2,
+    "item": "nookcranny:acacia_lamp"
+  },
+  "show_notification": true
+}

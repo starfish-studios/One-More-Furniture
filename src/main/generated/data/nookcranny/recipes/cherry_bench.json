@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "W": {
+      "item": "minecraft:cherry_planks"
+    }
+  },
+  "pattern": [
+    "NW ",
+    "NWW"
+  ],
+  "result": {
+    "count": 2,
+    "item": "nookcranny:cherry_bench"
+  },
+  "show_notification": true
+}
