@@ -1,6 +1,0 @@
-{
-  "parent": "nookcranny:block/template/chair_2_tucked",
-  "textures": {
-    "all": "nookcranny:block/chair/birch_chair"
-  }
-}

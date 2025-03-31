@@ -1,18 +1,12 @@
 package com.crispytwig.nookcranny.blocks;
 
 import com.crispytwig.nookcranny.blocks.properties.*;
-import com.crispytwig.nookcranny.registry.NCItems;
-import com.crispytwig.nookcranny.util.block.TuckableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeItem;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -34,7 +28,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cushionable, ChangeableBlock, TuckableBlock {
+public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cushionable, ChangeableBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final EnumProperty<ColorList> CUSHION = EnumProperty.create("cushion", ColorList.class);
@@ -75,7 +69,6 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
                 .setValue(WATERLOGGED, false)
                 .setValue(BACK, true)
                 .setValue(BACK_TYPE, ChairType.TYPE_1)
-                .setValue(TuckableBlock.TUCKED, false)
                 .setValue(CUSHION, ColorList.EMPTY));
     }
 
@@ -108,7 +101,7 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateDefinition) {
-        stateDefinition.add(FACING, WATERLOGGED, CUSHION, BACK, BACK_TYPE, TUCKED);
+        stateDefinition.add(FACING, WATERLOGGED, CUSHION, BACK, BACK_TYPE);
     }
 
     @Override
@@ -149,7 +142,6 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
         return this.getStateDefinition().any()
                 .setValue(FACING, context.getHorizontalDirection().getOpposite())
                 .setValue(BACK_TYPE, ChairType.TYPE_1)
-                .setValue(TUCKED, false)
                 .setValue(WATERLOGGED, waterlogged);
     }
 
