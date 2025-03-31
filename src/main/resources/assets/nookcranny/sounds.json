@@ -20,7 +20,9 @@
   "block.windchimes.bone": {
     "sounds": [
       "nookcranny:block/windchimes/bone/idle_1",
-      "nookcranny:block/windchimes/bone/idle_2"
+      "nookcranny:block/windchimes/bone/idle_2",
+      "nookcranny:block/windchimes/bone/idle_3",
+      "nookcranny:block/windchimes/bone/idle_4"
     ],
     "subtitle": "nookcranny.subtitles.block.windchimes.bone"
   },

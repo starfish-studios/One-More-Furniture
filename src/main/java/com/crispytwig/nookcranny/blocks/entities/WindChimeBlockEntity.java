@@ -2,6 +2,7 @@ package com.crispytwig.nookcranny.blocks.entities;
 import com.crispytwig.nookcranny.registry.NCBlockEntities;
 import net.minecraft.util.Mth;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -35,21 +36,21 @@ public class WindChimeBlockEntity extends BlockEntity {
     }
 
     public void commonTick(Level level, BlockState state) {
-        if (level instanceof ClientLevel) {
-            clientTick();
+        if (level instanceof ClientLevel clientLevel) {
+            clientTick(clientLevel);
         }
     }
 
-    public void clientTick() {
+    public void clientTick(ClientLevel clientLevel) {
         tickCounter++;
 
-        baseSwingX.update(tickCounter, 0.01f);
-        baseSwingZ.update(tickCounter, 0.01f);
+        baseSwingX.update(tickCounter, 0.01f, clientLevel.random);
+        baseSwingZ.update(tickCounter, 0.01f, clientLevel.random);
 
         for (int i = 0; i < 4; i++) {
             float boundFactor = 0.7f + (i * 0.1f);
-            chimeSwingsX[i].update(tickCounter, boundFactor);
-            chimeSwingsZ[i].update(tickCounter, boundFactor);
+            chimeSwingsX[i].update(tickCounter, boundFactor, clientLevel.random);
+            chimeSwingsZ[i].update(tickCounter, boundFactor, clientLevel.random);
         }
     }
 
@@ -70,9 +71,9 @@ public class WindChimeBlockEntity extends BlockEntity {
     }
 
     private static class SwingData {
-        private static final float BASE_SPEED = 0.085f;
+        private static final float BASE_SPEED = 0.065f;
         private static final int RANDOM_TICK_INTERVAL = 200;
-        private static final float DEGREE_MOD = 4.0f;
+        private static final float DEGREE_MOD = 3.0f;
 
         private float currentAngle = 0;
         private float previousAngle = 0;
@@ -89,16 +90,16 @@ public class WindChimeBlockEntity extends BlockEntity {
         }
 
         void randomizeChime(Random random, SwingData base) {
-            swingSpeed = base.swingSpeed + (random.nextFloat() * 0.01f);
+            swingSpeed = base.swingSpeed + (random.nextFloat() * 0.0075f);
             swingOffset = random.nextFloat() * Mth.TWO_PI;
             targetSpeed = swingSpeed;
             targetOffset = swingOffset;
         }
 
-        void update(int tickCounter, float boundFactor) {
+        void update(int tickCounter, float boundFactor, RandomSource random) {
             if (tickCounter % RANDOM_TICK_INTERVAL == 0) {
-                targetSpeed = BASE_SPEED + new Random().nextFloat() * BASE_SPEED;
-                targetOffset = new Random().nextFloat() * Mth.TWO_PI;
+                targetSpeed = BASE_SPEED + random.nextFloat() * BASE_SPEED;
+                targetOffset = random.nextFloat() * Mth.TWO_PI;
             }
 
             swingSpeed = Mth.lerp(0.005f, swingSpeed, targetSpeed);

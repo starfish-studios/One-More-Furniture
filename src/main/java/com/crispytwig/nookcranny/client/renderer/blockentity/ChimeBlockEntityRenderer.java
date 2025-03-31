@@ -1,7 +1,6 @@
 package com.crispytwig.nookcranny.client.renderer.blockentity;
 
 import com.crispytwig.nookcranny.NookAndCranny;
-import com.crispytwig.nookcranny.blocks.FanBlock;
 import com.crispytwig.nookcranny.blocks.WindChimeBlock;
 import com.crispytwig.nookcranny.blocks.entities.WindChimeBlockEntity;
 import com.crispytwig.nookcranny.client.ChimeModel;
@@ -37,8 +36,8 @@ public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBl
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(blockEntity)));
 
         // Apply smooth base rotation
-        model.base.xRot = (float) Math.toRadians(baseSwingAngleX * 0.3f);
-        model.base.zRot = (float) Math.toRadians(baseSwingAngleZ * 0.3f);
+        model.base.xRot = (float) Math.toRadians(baseSwingAngleX * 12.5f);
+        model.base.zRot = (float) Math.toRadians(baseSwingAngleZ * 12.5f);
 
         for (int i = 0; i < 4; i++) {
             float chimeAngle = blockEntity.getChimeSwingAngleX(i, partialTick);
