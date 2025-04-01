@@ -17,7 +17,7 @@
       "y": 90
     },
     "facing=east,open=false,shape=center": {
-      "model": "nookcranny:block/white_curtain_center_closed",
+      "model": "nookcranny:block/white_curtain_single_closed",
       "y": 90
     },
     "facing=east,open=false,shape=corner_left": {
@@ -109,7 +109,7 @@
       "model": "nookcranny:block/white_curtain_bottom_single_closed"
     },
     "facing=north,open=false,shape=center": {
-      "model": "nookcranny:block/white_curtain_center_closed"
+      "model": "nookcranny:block/white_curtain_single_closed"
     },
     "facing=north,open=false,shape=corner_left": {
       "model": "nookcranny:block/white_curtain_single_closed"
@@ -185,7 +185,7 @@
       "y": 180
     },
     "facing=south,open=false,shape=center": {
-      "model": "nookcranny:block/white_curtain_center_closed",
+      "model": "nookcranny:block/white_curtain_single_closed",
       "y": 180
     },
     "facing=south,open=false,shape=corner_left": {
@@ -281,7 +281,7 @@
       "y": 270
     },
     "facing=west,open=false,shape=center": {
-      "model": "nookcranny:block/white_curtain_center_closed",
+      "model": "nookcranny:block/white_curtain_single_closed",
       "y": 270
     },
     "facing=west,open=false,shape=corner_left": {

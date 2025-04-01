@@ -75,20 +75,13 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate CHAIR_ITEM = createTemplate("chair_1", TextureSlot.ALL);
 
     public static final ModelTemplate CURTAIN_SINGLE_CLOSED = createTemplate("curtain_single_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_LEFT_CLOSED = createTemplate("curtain_left_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_RIGHT_CLOSED = createTemplate("curtain_right_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_CENTER_CLOSED = createTemplate("curtain_center_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_BOTTOM_SINGLE_CLOSED = createTemplate("curtain_bottom_single_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_BOTTOM_LEFT_CLOSED = createTemplate("curtain_bottom_left_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_BOTTOM_RIGHT_CLOSED = createTemplate("curtain_bottom_right_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_BOTTOM_MIDDLE_CLOSED = createTemplate("curtain_bottom_middle_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_LEFT_CORNER_CLOSED = createTemplate("curtain_left_corner_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_RIGHT_CORNER_CLOSED = createTemplate("curtain_right_corner_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
 
     public static final ModelTemplate CURTAIN_SINGLE_OPEN = createTemplate("curtain_single_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_LEFT_OPEN = createTemplate("curtain_left_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_RIGHT_OPEN = createTemplate("curtain_right_open", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_EMPTY = createTemplate("curtain_empty", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate CURTAIN_CENTER_OPEN = createTemplate("curtain_center_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_BOTTOM_SINGLE_OPEN = createTemplate("curtain_bottom_single_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_BOTTOM_LEFT_OPEN = createTemplate("curtain_bottom_left_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_BOTTOM_RIGHT_OPEN = createTemplate("curtain_bottom_right_open", TextureSlot.ALL, TextureSlot.PARTICLE);
@@ -225,12 +218,13 @@ public class NCModelProvider extends FabricModelProvider {
         curtainMappings.put(CurtainBlock.CurtainShape.SINGLE, singleClosed);
         curtainMappings.put(CurtainBlock.CurtainShape.TOP, new OpenClosed(makeCurtainLocation(generators, block, CURTAIN_TOP_OPEN, null, "_top").open, singleClosed.closed));
         curtainMappings.put(CurtainBlock.CurtainShape.TOP_SINGLE, new OpenClosed(makeCurtainLocation(generators, block, CURTAIN_TOP_SINGLE_OPEN, null, "_top_single").open, singleClosed.closed));
-        curtainMappings.put(CurtainBlock.CurtainShape.CENTER, makeCurtainLocation(generators, block, CURTAIN_EMPTY, CURTAIN_CENTER_CLOSED, "_center"));
+        curtainMappings.put(CurtainBlock.CurtainShape.CENTER, new OpenClosed(makeCurtainLocation(generators, block, CURTAIN_CENTER_OPEN, null, "_center").open, singleClosed.closed));
 
         MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(block);
         multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
         multiVariant.with(createCurtainPropertyDispatch(curtainMappings));
 
+        generators.skipAutoItemBlock(block);
         generators.blockStateOutput.accept(multiVariant);
     }
 
