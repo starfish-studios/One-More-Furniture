@@ -148,7 +148,7 @@ public class NCCreativeModeTab {
                         output.accept(MAGENTA_SOFA);
                         output.accept(PINK_SOFA);
 
-                        //output.accept(WHITE_CURTAIN);
+                        output.accept(WHITE_CURTAIN);
 
                         output.accept(AMETHYST_WIND_CHIMES);
                         output.accept(BAMBOO_WIND_CHIMES);

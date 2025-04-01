@@ -44,12 +44,11 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(WATERLOGGED, false)
-                .setValue(SHAPE, CurtainShape.CURTAIN_DEFAULT)
+                .setValue(SHAPE, CurtainShape.SINGLE)
                 .setValue(OPEN, false));
     }
 
     public enum CurtainShape implements StringRepresentable {
-        CURTAIN_DEFAULT("curtain_default"),
         SINGLE("single"),
         LEFT("left"),
         CENTER("center"),
@@ -233,7 +232,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
         boolean connectedRight = isSameCurtain(level, rightPos, facing);
 
         if (!connectedAbove && !connectedBelow && !connectedLeft && !connectedRight) {
-            return CurtainShape.CURTAIN_DEFAULT;
+            return CurtainShape.SINGLE;
         }
 
         BlockState rightState = level.getBlockState(rightPos);
@@ -369,7 +368,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
             if (connectedLeft || connectedRight) {
                 return CurtainShape.SINGLE;
             }
-            return CurtainShape.CURTAIN_DEFAULT;
+            return CurtainShape.SINGLE;
         }
         if (!connectedAbove) {
             if (connectedLeft && connectedRight) return CurtainShape.TOP;
