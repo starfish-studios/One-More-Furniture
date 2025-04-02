@@ -149,6 +149,21 @@ public class NCCreativeModeTab {
                         output.accept(PINK_SOFA);
 
                         output.accept(WHITE_CURTAIN);
+                        output.accept(LIGHT_GRAY_CURTAIN);
+                        output.accept(GRAY_CURTAIN);
+                        output.accept(BLACK_CURTAIN);
+                        output.accept(BROWN_CURTAIN);
+                        output.accept(RED_CURTAIN);
+                        output.accept(ORANGE_CURTAIN);
+                        output.accept(YELLOW_CURTAIN);
+                        output.accept(LIME_CURTAIN);
+                        output.accept(GREEN_CURTAIN);
+                        output.accept(CYAN_CURTAIN);
+                        output.accept(LIGHT_BLUE_CURTAIN);
+                        output.accept(BLUE_CURTAIN);
+                        output.accept(PURPLE_CURTAIN);
+                        output.accept(MAGENTA_CURTAIN);
+                        output.accept(PINK_CURTAIN);
 
                         output.accept(AMETHYST_WIND_CHIMES);
                         output.accept(BAMBOO_WIND_CHIMES);

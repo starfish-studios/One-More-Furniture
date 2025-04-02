@@ -1,0 +1,7 @@
+{
+  "parent": "nookcranny:block/template/curtain_right_corner_open",
+  "textures": {
+    "all": "nookcranny:block/curtain/purple_curtain_corner_open",
+    "particle": "nookcranny:block/curtain/purple_curtain_corner_open"
+  }
+}

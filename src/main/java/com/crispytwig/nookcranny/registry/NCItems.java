@@ -156,7 +156,22 @@ public class NCItems {
     public static final Item WHITE_SOFA = register("white_sofa", new BlockItem(NCBlocks.WHITE_SOFA, new FabricItemSettings()));
     public static final Item YELLOW_SOFA = register("yellow_sofa", new BlockItem(NCBlocks.YELLOW_SOFA, new FabricItemSettings()));
 
+    public static final Item BLACK_CURTAIN = register("black_curtain", new BlockItem(NCBlocks.BLACK_CURTAIN, new FabricItemSettings()));
+    public static final Item BLUE_CURTAIN = register("blue_curtain", new BlockItem(NCBlocks.BLUE_CURTAIN, new FabricItemSettings()));
+    public static final Item BROWN_CURTAIN = register("brown_curtain", new BlockItem(NCBlocks.BROWN_CURTAIN, new FabricItemSettings()));
+    public static final Item CYAN_CURTAIN = register("cyan_curtain", new BlockItem(NCBlocks.CYAN_CURTAIN, new FabricItemSettings()));
+    public static final Item GRAY_CURTAIN = register("gray_curtain", new BlockItem(NCBlocks.GRAY_CURTAIN, new FabricItemSettings()));
+    public static final Item GREEN_CURTAIN = register("green_curtain", new BlockItem(NCBlocks.GREEN_CURTAIN, new FabricItemSettings()));
+    public static final Item LIGHT_BLUE_CURTAIN = register("light_blue_curtain", new BlockItem(NCBlocks.LIGHT_BLUE_CURTAIN, new FabricItemSettings()));
+    public static final Item LIGHT_GRAY_CURTAIN = register("light_gray_curtain", new BlockItem(NCBlocks.LIGHT_GRAY_CURTAIN, new FabricItemSettings()));
+    public static final Item LIME_CURTAIN = register("lime_curtain", new BlockItem(NCBlocks.LIME_CURTAIN, new FabricItemSettings()));
+    public static final Item MAGENTA_CURTAIN = register("magenta_curtain", new BlockItem(NCBlocks.MAGENTA_CURTAIN, new FabricItemSettings()));
+    public static final Item ORANGE_CURTAIN = register("orange_curtain", new BlockItem(NCBlocks.ORANGE_CURTAIN, new FabricItemSettings()));
+    public static final Item PINK_CURTAIN = register("pink_curtain", new BlockItem(NCBlocks.PINK_CURTAIN, new FabricItemSettings()));
+    public static final Item PURPLE_CURTAIN = register("purple_curtain", new BlockItem(NCBlocks.PURPLE_CURTAIN, new FabricItemSettings()));
+    public static final Item RED_CURTAIN = register("red_curtain", new BlockItem(NCBlocks.RED_CURTAIN, new FabricItemSettings()));
     public static final Item WHITE_CURTAIN = register("white_curtain", new BlockItem(NCBlocks.WHITE_CURTAIN, new FabricItemSettings()));
+    public static final Item YELLOW_CURTAIN = register("yellow_curtain", new BlockItem(NCBlocks.YELLOW_CURTAIN, new FabricItemSettings()));
 
     public static final Item AMETHYST_WIND_CHIMES = register("amethyst_wind_chimes", new BlockItem(NCBlocks.AMETHYST_WIND_CHIMES, new FabricItemSettings()));
     public static final Item BAMBOO_WIND_CHIMES = register("bamboo_wind_chimes", new BlockItem(NCBlocks.BAMBOO_WIND_CHIMES, new FabricItemSettings()));

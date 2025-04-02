@@ -1,5 +1,6 @@
 package com.crispytwig.nookcranny;
 
+import com.crispytwig.nookcranny.blocks.CurtainBlock;
 import com.crispytwig.nookcranny.blocks.FanBlock;
 import com.crispytwig.nookcranny.blocks.LampBlock;
 import com.crispytwig.nookcranny.blocks.MailboxBlock;
@@ -20,15 +21,18 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.DyeColor;
 
 import java.util.function.Supplier;
 
@@ -54,6 +58,15 @@ public class NCVanillaIntegration {
 
             EntityModelLayerRegistry.registerModelLayer(FanModel.LAYER_LOCATION, FanModel::createBodyLayer);
             EntityModelLayerRegistry.registerModelLayer(ChimeModel.LAYER_LOCATION, ChimeModel::createBodyLayer);
+
+            /*
+            ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
+                        //BiomeColors.getAverageFoliageColor()
+                    return DyeColor.RED.getFireworkColor();
+                    }
+            , NCBlocks.WHITE_CURTAIN);
+
+             */
         }
 
         private static void registerRenderers() {
@@ -77,6 +90,7 @@ public class NCVanillaIntegration {
             NCBlocks.BLOCKS.stream().filter(block -> block instanceof LampBlock).forEach(lamp -> BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), lamp));
             NCBlocks.BLOCKS.stream().filter(block -> block instanceof MailboxBlock).forEach(mailbox -> BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), mailbox));
             NCBlocks.BLOCKS.stream().filter(block -> block instanceof FanBlock).forEach(lamp -> BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(), lamp));
+            NCBlocks.BLOCKS.stream().filter(block -> block instanceof CurtainBlock).forEach(lamp -> BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), lamp));
 
 
 
@@ -133,8 +147,6 @@ public class NCVanillaIntegration {
                     NCBlocks.BAMBOO_CHAIR,
                     NCBlocks.CRIMSON_CHAIR,
                     NCBlocks.WARPED_CHAIR,
-
-                    NCBlocks.WHITE_CURTAIN,
 
                     NCBlocks.AMETHYST_WIND_CHIMES,
                     NCBlocks.BAMBOO_WIND_CHIMES,

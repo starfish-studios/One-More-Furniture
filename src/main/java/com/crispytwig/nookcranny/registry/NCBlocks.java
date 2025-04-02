@@ -170,7 +170,23 @@ public class NCBlocks {
     public static final Block WHITE_SOFA = register("white_sofa", new SofaBlock(DyeColor.WHITE, copyOf(Blocks.WHITE_WOOL).noOcclusion()));
     public static final Block YELLOW_SOFA = register("yellow_sofa", new SofaBlock(DyeColor.YELLOW, copyOf(Blocks.YELLOW_WOOL).noOcclusion()));
 
+    public static final Block BLACK_CURTAIN = register("black_curtain", new CurtainBlock(copyOf(Blocks.BLACK_WOOL).noOcclusion()));
+    public static final Block BLUE_CURTAIN = register("blue_curtain", new CurtainBlock(copyOf(Blocks.BLUE_WOOL).noOcclusion()));
+    public static final Block BROWN_CURTAIN = register("brown_curtain", new CurtainBlock(copyOf(Blocks.BROWN_WOOL).noOcclusion()));
+    public static final Block CYAN_CURTAIN = register("cyan_curtain", new CurtainBlock(copyOf(Blocks.CYAN_WOOL).noOcclusion()));
+    public static final Block GRAY_CURTAIN = register("gray_curtain", new CurtainBlock(copyOf(Blocks.GRAY_WOOL).noOcclusion()));
+    public static final Block GREEN_CURTAIN = register("green_curtain", new CurtainBlock(copyOf(Blocks.GREEN_WOOL).noOcclusion()));
+    public static final Block LIGHT_BLUE_CURTAIN = register("light_blue_curtain", new CurtainBlock(copyOf(Blocks.LIGHT_BLUE_WOOL).noOcclusion()));
+    public static final Block LIGHT_GRAY_CURTAIN = register("light_gray_curtain", new CurtainBlock(copyOf(Blocks.LIGHT_GRAY_WOOL).noOcclusion()));
+    public static final Block LIME_CURTAIN = register("lime_curtain", new CurtainBlock(copyOf(Blocks.LIME_WOOL).noOcclusion()));
+    public static final Block MAGENTA_CURTAIN = register("magenta_curtain", new CurtainBlock(copyOf(Blocks.MAGENTA_WOOL).noOcclusion()));
+    public static final Block ORANGE_CURTAIN = register("orange_curtain", new CurtainBlock(copyOf(Blocks.ORANGE_WOOL).noOcclusion()));
+    public static final Block PINK_CURTAIN = register("pink_curtain", new CurtainBlock(copyOf(Blocks.PINK_WOOL).noOcclusion()));
+    public static final Block PURPLE_CURTAIN = register("purple_curtain", new CurtainBlock(copyOf(Blocks.PURPLE_WOOL).noOcclusion()));
+    public static final Block RED_CURTAIN = register("red_curtain", new CurtainBlock(copyOf(Blocks.RED_WOOL).noOcclusion()));
     public static final Block WHITE_CURTAIN = register("white_curtain", new CurtainBlock(copyOf(Blocks.WHITE_WOOL).noOcclusion()));
+    public static final Block YELLOW_CURTAIN = register("yellow_curtain", new CurtainBlock(copyOf(Blocks.YELLOW_WOOL).noOcclusion()));
+
 
     public static final Block AMETHYST_WIND_CHIMES = register("amethyst_wind_chimes", new WindChimeBlock(
             "amethyst",
