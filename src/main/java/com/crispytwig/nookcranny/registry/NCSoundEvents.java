@@ -16,6 +16,8 @@ public interface NCSoundEvents {
     SoundEvent WINDCHIME_ECHO_SHARD = register("block.windchimes.echo_shard");
     SoundEvent SPIGOT_ON = register("block.spigot.on");
     SoundEvent SPIGOT_OFF = register("block.spigot.off");
+    SoundEvent CABINET_OPEN = register("block.cabinet.open");
+    SoundEvent CABINET_CLOSE = register("block.cabinet.close");
 
     private static SoundType register(String name, float volume, float pitch) {
         return new SoundType(volume, pitch, register("block." + name + ".break"), register("block." + name + ".step"), register("block." + name + ".place"), register("block." + name + ".hit"), register("block." + name + ".fall"));

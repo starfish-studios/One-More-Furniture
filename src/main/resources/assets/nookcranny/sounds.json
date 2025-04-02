@@ -1,4 +1,21 @@
 {
+  "block.cabinet.open": {
+    "sounds": [
+      "nookcranny:block/cabinet/open_1",
+      "nookcranny:block/cabinet/open_2",
+      "nookcranny:block/cabinet/open_3"
+    ],
+    "subtitle": "nookcranny.subtitles.block.cabinet.open"
+  },
+  "block.cabinet.close": {
+      "sounds": [
+      "nookcranny:block/cabinet/close_1",
+      "nookcranny:block/cabinet/close_2",
+      "nookcranny:block/cabinet/close_3"
+      ],
+      "subtitle": "nookcranny.subtitles.block.cabinet.close"
+  },
+
   "block.spigot.on": {
     "sounds": [
       "nookcranny:block/spigot/on"
