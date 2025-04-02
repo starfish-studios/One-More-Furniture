@@ -1,7 +1,5 @@
 package com.crispytwig.omf.fabric.data;
 
-import com.crispytwig.nookcranny.registry.NCBlocks;
-import com.crispytwig.nookcranny.registry.NCItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 
@@ -17,7 +15,7 @@ public class NCLangProvider extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(TranslationBuilder builder) {
-
+/*
         for (String item : NCItems.ITEM_NAMES) {
             String prepend = "item.nookcranny." + (item);
             builder.add(prepend, formatString(item));
@@ -27,6 +25,8 @@ public class NCLangProvider extends FabricLanguageProvider {
             String prepend = "block.nookcranny." + (item);
             builder.add(prepend, formatString(item));
         }
+
+ */
 
         builder.add("itemGroup.nookcranny.tab", "Nook and Cranny");
         builder.add( "block_type.nookcranny.table", "%s Table");

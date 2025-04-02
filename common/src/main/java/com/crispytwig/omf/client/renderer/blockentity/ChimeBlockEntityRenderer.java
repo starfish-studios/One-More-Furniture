@@ -1,9 +1,9 @@
 package com.crispytwig.omf.client.renderer.blockentity;
 
-import com.crispytwig.nookcranny.NookAndCranny;
-import com.crispytwig.nookcranny.blocks.WindChimeBlock;
-import com.crispytwig.nookcranny.blocks.entities.WindChimeBlockEntity;
-import com.crispytwig.nookcranny.client.ChimeModel;
+import com.crispytwig.omf.OneMoreFurniture;
+import com.crispytwig.omf.block.WindChimeBlock;
+import com.crispytwig.omf.block.entity.WindChimeBlockEntity;
+import com.crispytwig.omf.client.ChimeModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -22,7 +22,7 @@ public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBl
 
     public ResourceLocation getTextureLocation(WindChimeBlockEntity entity) {
         var material = ((WindChimeBlock) entity.getBlockState().getBlock()).material;
-        return new ResourceLocation(NookAndCranny.MOD_ID, "textures/block/wind_chime/" + material + "_wind_chimes_world.png");
+        return new ResourceLocation(OneMoreFurniture.MOD_ID, "textures/block/wind_chime/" + material + "_wind_chimes_world.png");
     }
 
     @Override

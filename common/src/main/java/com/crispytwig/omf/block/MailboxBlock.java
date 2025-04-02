@@ -1,8 +1,12 @@
 package com.crispytwig.omf.block;
 
+import com.crispytwig.omf.OMFConfig;
 import com.crispytwig.omf.block.entity.MailboxBlockEntity;
 import com.crispytwig.omf.block.properties.FlagStatus;
+import com.crispytwig.omf.inventory.MailboxMenu;
 import com.crispytwig.omf.registry.OMFBlockEntities;
+import com.crispytwig.omf.world.OMFSavedData;
+import dev.architectury.registry.menu.MenuRegistry;
 import io.netty.buffer.Unpooled;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -16,10 +20,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -122,29 +123,21 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 level.setBlock(pos, state.cycle(FLAG_STATUS), 3);
             } else if (blockEntity instanceof MailboxBlockEntity mailboxBlockEntity1) {
 
-                var factory = new ExtendedScreenHandlerFactory() {
-
-                    @Nullable
-                    @Override
-                    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-                        var buf = new FriendlyByteBuf(Unpooled.buffer());
-                        if (player instanceof ServerPlayer serverPlayer) {
-                            writeScreenOpeningData(serverPlayer, buf);
+                if (player instanceof ServerPlayer serverPlayer) {
+                    MenuRegistry.openMenu(serverPlayer, new MenuProvider() {
+                        @Override
+                        public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+                            var buf = new FriendlyByteBuf(Unpooled.buffer());
+                            buf.writeBlockPos(pos.immutable());
+                            return new MailboxMenu(id, inventory, buf);
                         }
-                        return new MailboxMenu(i, inventory, buf);
-                    }
 
-                    @Override
-                    public Component getDisplayName() {
-                        return mailboxBlockEntity1.getDisplayName();
-                    }
-
-                    @Override
-                    public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buf) {
-                        buf.writeBlockPos(pos.immutable());
-                    }
-                };
-                player.openMenu(factory);
+                        @Override
+                        public Component getDisplayName() {
+                            return mailboxBlockEntity1.getDisplayName();
+                        }
+                    });
+                }
 
                 return InteractionResult.CONSUME;
             }
@@ -218,7 +211,7 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
             }
 
             if (level instanceof ServerLevel serverLevel) {
-                var mailboxes = NCSavedData.getMailboxes(serverLevel);
+                var mailboxes = OMFSavedData.getMailboxes(serverLevel);
                 var globalPos = GlobalPos.of(level.dimension(), blockPos);
 
                 mailboxes.mailboxes.removeIf(entry -> entry.globalPos().equals(globalPos));
@@ -241,10 +234,10 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
             }
 
             if (level instanceof ServerLevel serverLevel) {
-                var mailboxes = NCSavedData.getMailboxes(serverLevel);
+                var mailboxes = OMFSavedData.getMailboxes(serverLevel);
                 var globalPos = GlobalPos.of(level.dimension(), blockPos);
 
-                mailboxes.mailboxes.add(new NCSavedData.MailboxData(
+                mailboxes.mailboxes.add(new OMFSavedData.MailboxData(
                         player != null ? player.getDisplayName().getString() : "PlayerName",
                         itemStack.hasCustomHoverName() ? itemStack.getHoverName().getString() : "PlayerMailbox",
                         globalPos

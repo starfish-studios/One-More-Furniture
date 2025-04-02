@@ -1,12 +1,12 @@
 package com.crispytwig.omf.fabric.data;
 
-import com.crispytwig.nookcranny.NookAndCranny;
-import com.crispytwig.nookcranny.blocks.*;
-import com.crispytwig.nookcranny.blocks.properties.ChairType;
-import com.crispytwig.nookcranny.blocks.properties.ColorList;
-import com.crispytwig.nookcranny.blocks.properties.CountertopType;
-import com.crispytwig.nookcranny.registry.NCBlocks;
-import com.crispytwig.nookcranny.registry.NCItems;
+import com.crispytwig.omf.OneMoreFurniture;
+import com.crispytwig.omf.block.*;
+import com.crispytwig.omf.block.properties.ChairType;
+import com.crispytwig.omf.block.properties.ColorList;
+import com.crispytwig.omf.block.properties.CountertopType;
+import com.crispytwig.omf.registry.OMFBlocks;
+import com.crispytwig.omf.registry.OMFItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.core.Direction;
@@ -102,7 +102,8 @@ public class NCModelProvider extends FabricModelProvider {
         for (CountertopType type : CountertopType.values()) {
             createCountertopType(generators, type);
         }
-        for (Block block : NCBlocks.BLOCKS) {
+        /*
+        for (Block block : OMFBlocks.BLOCKS) {
             if (block instanceof FlowerBasketBlock) {
                 createFlowerBasket(generators, block);
             }
@@ -144,7 +145,11 @@ public class NCModelProvider extends FabricModelProvider {
             if (block instanceof FanBlock) {
                 //createFan(generators, block);
             }
+
+
         }
+
+         */
     }
 
     private void createFlowerBasket(BlockModelGenerators generators, Block block) {
@@ -262,62 +267,65 @@ public class NCModelProvider extends FabricModelProvider {
 
     private void createCountertopType(BlockModelGenerators generators, CountertopType type) {
         TextureMapping baseMapping = new TextureMapping()
-                .put(TextureSlot.TOP, new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/" + type.getSerializedName() + "_drawer_top"))
-                .put(SIDES, new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/" + type.getSerializedName() + "_drawer_countertop_sides"));
-        COUNTERTOP.create(new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName()), baseMapping, generators.modelOutput);
+                .put(TextureSlot.TOP, new ResourceLocation(OneMoreFurniture.MOD_ID, "block/drawers/" + type.getSerializedName() + "_drawer_top"))
+                .put(SIDES, new ResourceLocation(OneMoreFurniture.MOD_ID, "block/drawers/countertop/" + type.getSerializedName() + "_drawer_countertop_sides"));
+        COUNTERTOP.create(new ResourceLocation(OneMoreFurniture.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName()), baseMapping, generators.modelOutput);
 
-        COUNTERTOP_BOTTOM.create(new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName() + "_bottom"), baseMapping, generators.modelOutput);
+        COUNTERTOP_BOTTOM.create(new ResourceLocation(OneMoreFurniture.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName() + "_bottom"), baseMapping, generators.modelOutput);
     }
 
     @Override
     public void generateItemModels(ItemModelGenerators generators) {
-        generators.generateFlatItem(NCItems.COPPER_SAW, ModelTemplates.FLAT_HANDHELD_ITEM);
-        createDrawerItem(generators, NCItems.OAK_DRAWER, NCBlocks.OAK_DRAWER);
-        createDrawerItem(generators, NCItems.SPRUCE_DRAWER, NCBlocks.SPRUCE_DRAWER);
-        createDrawerItem(generators, NCItems.BIRCH_DRAWER, NCBlocks.BIRCH_DRAWER);
-        createDrawerItem(generators, NCItems.JUNGLE_DRAWER, NCBlocks.JUNGLE_DRAWER);
-        createDrawerItem(generators, NCItems.ACACIA_DRAWER, NCBlocks.ACACIA_DRAWER);
-        createDrawerItem(generators, NCItems.MANGROVE_DRAWER, NCBlocks.MANGROVE_DRAWER);
-        createDrawerItem(generators, NCItems.CRIMSON_DRAWER, NCBlocks.CRIMSON_DRAWER);
-        createDrawerItem(generators, NCItems.DARK_OAK_DRAWER, NCBlocks.DARK_OAK_DRAWER);
-        createDrawerItem(generators, NCItems.BAMBOO_DRAWER, NCBlocks.BAMBOO_DRAWER);
-        createDrawerItem(generators, NCItems.WARPED_DRAWER, NCBlocks.WARPED_DRAWER);
-        createDrawerItem(generators, NCItems.CHERRY_DRAWER, NCBlocks.CHERRY_DRAWER);
-        createChairItem(generators, NCItems.OAK_CHAIR, NCBlocks.OAK_CHAIR);
-        createChairItem(generators, NCItems.SPRUCE_CHAIR, NCBlocks.SPRUCE_CHAIR);
-        createChairItem(generators, NCItems.BIRCH_CHAIR, NCBlocks.BIRCH_CHAIR);
-        createChairItem(generators, NCItems.JUNGLE_CHAIR, NCBlocks.JUNGLE_CHAIR);
-        createChairItem(generators, NCItems.ACACIA_CHAIR, NCBlocks.ACACIA_CHAIR);
-        createChairItem(generators, NCItems.MANGROVE_CHAIR, NCBlocks.MANGROVE_CHAIR);
-        createChairItem(generators, NCItems.CRIMSON_CHAIR, NCBlocks.CRIMSON_CHAIR);
-        createChairItem(generators, NCItems.DARK_OAK_CHAIR, NCBlocks.DARK_OAK_CHAIR);
-        createChairItem(generators, NCItems.BAMBOO_CHAIR, NCBlocks.BAMBOO_CHAIR);
-        createChairItem(generators, NCItems.WARPED_CHAIR, NCBlocks.WARPED_CHAIR);
-        createChairItem(generators, NCItems.CHERRY_CHAIR, NCBlocks.CHERRY_CHAIR);
+        /*
+        generators.generateFlatItem(OMFItems.COPPER_SAW, ModelTemplates.FLAT_HANDHELD_ITEM);
+        createDrawerItem(generators, OMFItems.OAK_DRAWER, OMFBlocks.OAK_DRAWER);
+        createDrawerItem(generators, OMFItems.SPRUCE_DRAWER, OMFBlocks.SPRUCE_DRAWER);
+        createDrawerItem(generators, OMFItems.BIRCH_DRAWER, OMFBlocks.BIRCH_DRAWER);
+        createDrawerItem(generators, OMFItems.JUNGLE_DRAWER, OMFBlocks.JUNGLE_DRAWER);
+        createDrawerItem(generators, OMFItems.ACACIA_DRAWER, OMFBlocks.ACACIA_DRAWER);
+        createDrawerItem(generators, OMFItems.MANGROVE_DRAWER, OMFBlocks.MANGROVE_DRAWER);
+        createDrawerItem(generators, OMFItems.CRIMSON_DRAWER, OMFBlocks.CRIMSON_DRAWER);
+        createDrawerItem(generators, OMFItems.DARK_OAK_DRAWER, OMFBlocks.DARK_OAK_DRAWER);
+        createDrawerItem(generators, OMFItems.BAMBOO_DRAWER, OMFBlocks.BAMBOO_DRAWER);
+        createDrawerItem(generators, OMFItems.WARPED_DRAWER, OMFBlocks.WARPED_DRAWER);
+        createDrawerItem(generators, OMFItems.CHERRY_DRAWER, OMFBlocks.CHERRY_DRAWER);
+        createChairItem(generators, OMFItems.OAK_CHAIR, OMFBlocks.OAK_CHAIR);
+        createChairItem(generators, OMFItems.SPRUCE_CHAIR, OMFBlocks.SPRUCE_CHAIR);
+        createChairItem(generators, OMFItems.BIRCH_CHAIR, OMFBlocks.BIRCH_CHAIR);
+        createChairItem(generators, OMFItems.JUNGLE_CHAIR, OMFBlocks.JUNGLE_CHAIR);
+        createChairItem(generators, OMFItems.ACACIA_CHAIR, OMFBlocks.ACACIA_CHAIR);
+        createChairItem(generators, OMFItems.MANGROVE_CHAIR, OMFBlocks.MANGROVE_CHAIR);
+        createChairItem(generators, OMFItems.CRIMSON_CHAIR, OMFBlocks.CRIMSON_CHAIR);
+        createChairItem(generators, OMFItems.DARK_OAK_CHAIR, OMFBlocks.DARK_OAK_CHAIR);
+        createChairItem(generators, OMFItems.BAMBOO_CHAIR, OMFBlocks.BAMBOO_CHAIR);
+        createChairItem(generators, OMFItems.WARPED_CHAIR, OMFBlocks.WARPED_CHAIR);
+        createChairItem(generators, OMFItems.CHERRY_CHAIR, OMFBlocks.CHERRY_CHAIR);
 
-        createCabinetItem(generators, NCItems.OAK_CABINET, NCBlocks.OAK_CABINET);
-        createCabinetItem(generators, NCItems.SPRUCE_CABINET, NCBlocks.SPRUCE_CABINET);
-        createCabinetItem(generators, NCItems.BIRCH_CABINET, NCBlocks.BIRCH_CABINET);
-        createCabinetItem(generators, NCItems.JUNGLE_CABINET, NCBlocks.JUNGLE_CABINET);
-        createCabinetItem(generators, NCItems.ACACIA_CABINET, NCBlocks.ACACIA_CABINET);
-        createCabinetItem(generators, NCItems.MANGROVE_CABINET, NCBlocks.MANGROVE_CABINET);
-        createCabinetItem(generators, NCItems.CRIMSON_CABINET, NCBlocks.CRIMSON_CABINET);
-        createCabinetItem(generators, NCItems.DARK_OAK_CABINET, NCBlocks.DARK_OAK_CABINET);
-        createCabinetItem(generators, NCItems.BAMBOO_CABINET, NCBlocks.BAMBOO_CABINET);
-        createCabinetItem(generators, NCItems.WARPED_CABINET, NCBlocks.WARPED_CABINET);
-        createCabinetItem(generators, NCItems.CHERRY_CABINET, NCBlocks.CHERRY_CABINET);
+        createCabinetItem(generators, OMFItems.OAK_CABINET, OMFBlocks.OAK_CABINET);
+        createCabinetItem(generators, OMFItems.SPRUCE_CABINET, OMFBlocks.SPRUCE_CABINET);
+        createCabinetItem(generators, OMFItems.BIRCH_CABINET, OMFBlocks.BIRCH_CABINET);
+        createCabinetItem(generators, OMFItems.JUNGLE_CABINET, OMFBlocks.JUNGLE_CABINET);
+        createCabinetItem(generators, OMFItems.ACACIA_CABINET, OMFBlocks.ACACIA_CABINET);
+        createCabinetItem(generators, OMFItems.MANGROVE_CABINET, OMFBlocks.MANGROVE_CABINET);
+        createCabinetItem(generators, OMFItems.CRIMSON_CABINET, OMFBlocks.CRIMSON_CABINET);
+        createCabinetItem(generators, OMFItems.DARK_OAK_CABINET, OMFBlocks.DARK_OAK_CABINET);
+        createCabinetItem(generators, OMFItems.BAMBOO_CABINET, OMFBlocks.BAMBOO_CABINET);
+        createCabinetItem(generators, OMFItems.WARPED_CABINET, OMFBlocks.WARPED_CABINET);
+        createCabinetItem(generators, OMFItems.CHERRY_CABINET, OMFBlocks.CHERRY_CABINET);
 
-        generators.generateFlatItem(NCItems.ACACIA_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(NCItems.BIRCH_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(NCItems.OAK_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(NCItems.SPRUCE_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(NCItems.MANGROVE_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(NCItems.JUNGLE_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(NCItems.CHERRY_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(NCItems.BAMBOO_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(NCItems.DARK_OAK_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(NCItems.WARPED_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(NCItems.CRIMSON_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(OMFItems.ACACIA_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(OMFItems.BIRCH_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(OMFItems.OAK_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(OMFItems.SPRUCE_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(OMFItems.MANGROVE_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(OMFItems.JUNGLE_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(OMFItems.CHERRY_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(OMFItems.BAMBOO_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(OMFItems.DARK_OAK_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(OMFItems.WARPED_FAN, ModelTemplates.FLAT_ITEM);
+        generators.generateFlatItem(OMFItems.CRIMSON_FAN, ModelTemplates.FLAT_ITEM);
+
+         */
     }
 
     private void createNightstandBlock(BlockModelGenerators generators, Block nightstand) {
@@ -341,7 +349,7 @@ public class NCModelProvider extends FabricModelProvider {
     public static ModelTemplate createTemplate(String blockModelLocation, TextureSlot... requiredSlots) {
         return new ModelTemplate(Optional.of(
                 new ResourceLocation(
-                        NookAndCranny.MOD_ID,
+                        OneMoreFurniture.MOD_ID,
                         "block/template/" + blockModelLocation
                 )
         ),
@@ -383,8 +391,8 @@ public class NCModelProvider extends FabricModelProvider {
     public final void createCabinetItem(ItemModelGenerators generators, Item item, Block block) {
         String wood = BuiltInRegistries.BLOCK.getKey(block).getPath();
         String firstName = wood.split("_cabinet")[0];
-        ResourceLocation loc = new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/" + firstName + "_drawer_top");
-        ResourceLocation countertopLoc = new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/" + firstName + "_drawer_countertop_sides");
+        ResourceLocation loc = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/drawers/" + firstName + "_drawer_top");
+        ResourceLocation countertopLoc = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/drawers/countertop/" + firstName + "_drawer_countertop_sides");
 
         TextureMapping baseMapping = new TextureMapping()
                 .put(TextureSlot.TOP, loc)
@@ -397,7 +405,7 @@ public class NCModelProvider extends FabricModelProvider {
     public final void createCabinetBlock(BlockModelGenerators generators, Block block) {
         String wood = BuiltInRegistries.BLOCK.getKey(block).getPath();
         String firstName = wood.split("_cabinet")[0];
-        ResourceLocation loc = new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/" + firstName + "_drawer_top");
+        ResourceLocation loc = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/drawers/" + firstName + "_drawer_top");
 
         TextureMapping baseMapping = new TextureMapping()
                 .put(TextureSlot.TOP, loc)
@@ -438,7 +446,7 @@ public class NCModelProvider extends FabricModelProvider {
                                 .term(DrawerBlock.COUNTERTOP, type)
                                 .term(CabinetBlock.BOTTOM, bl),
                         Variant.variant()
-                                .with(VariantProperties.MODEL, new ResourceLocation(NookAndCranny.MOD_ID, string))
+                                .with(VariantProperties.MODEL, new ResourceLocation(OneMoreFurniture.MOD_ID, string))
                 );
             }
             for (Direction direction : Direction.Plane.HORIZONTAL) {
@@ -464,7 +472,7 @@ public class NCModelProvider extends FabricModelProvider {
         for (CountertopType type : CountertopType.values()) {
             multiPart.with(
                     Condition.condition().term(DrawerBlock.COUNTERTOP, type),
-                    Variant.variant().with(VariantProperties.MODEL, new ResourceLocation(NookAndCranny.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName()))
+                    Variant.variant().with(VariantProperties.MODEL, new ResourceLocation(OneMoreFurniture.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName()))
             );
         }
         for (Direction direction : Direction.Plane.HORIZONTAL) {
@@ -494,7 +502,7 @@ public class NCModelProvider extends FabricModelProvider {
                 ChairType type = entry.getKey();
                 ResourceLocation backModel = entry.getValue();
 
-                ResourceLocation tuckedModel = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + "acacia_chair_" + type.getSerializedName().toLowerCase() + "_tucked");
+                ResourceLocation tuckedModel = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/" + "acacia_chair_" + type.getSerializedName().toLowerCase() + "_tucked");
 
                 multiPart.with(
                         Condition.condition()
@@ -618,7 +626,7 @@ public class NCModelProvider extends FabricModelProvider {
                 .put(TextureSlot.ALL, getTexture(chair, "chair", ""));
         Map<ColorList, ResourceLocation> cushionModels = new HashMap<>();
         for (ColorList color : ColorList.values()) {
-            cushionModels.put(color, new ResourceLocation(NookAndCranny.MOD_ID, "block/chair/cushion/" + color + "_cushion"));
+            cushionModels.put(color, new ResourceLocation(OneMoreFurniture.MOD_ID, "block/chair/cushion/" + color + "_cushion"));
         }
         String chairBaseName = BuiltInRegistries.BLOCK.getKey(chair).getPath();
         Map<ChairType, ResourceLocation> backTypeModels = new HashMap<>();
@@ -628,7 +636,7 @@ public class NCModelProvider extends FabricModelProvider {
                     TextureSlot.ALL
             );
             chairTemplate.createWithSuffix(chair, "_" + type.getSerializedName().toLowerCase(), baseMapping, generators.modelOutput);
-            ResourceLocation chairTypeId = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase());
+            ResourceLocation chairTypeId = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase());
             backTypeModels.put(type, chairTypeId);
         }
         ResourceLocation chairBacklessId = CHAIR_BACKLESS.createWithSuffix(chair, "_backless", baseMapping, generators.modelOutput);
@@ -642,7 +650,7 @@ public class NCModelProvider extends FabricModelProvider {
                 .put(TextureSlot.ALL, getTexture(chair, "chair", ""));
         Map<ColorList, ResourceLocation> cushionModels = new HashMap<>();
         for (ColorList color : ColorList.values()) {
-            cushionModels.put(color, new ResourceLocation(NookAndCranny.MOD_ID, "block/chair/cushion/" + color + "_cushion"));
+            cushionModels.put(color, new ResourceLocation(OneMoreFurniture.MOD_ID, "block/chair/cushion/" + color + "_cushion"));
         }
         String chairBaseName = BuiltInRegistries.BLOCK.getKey(chair).getPath();
         Map<ChairType, ResourceLocation> backTypeModels = new HashMap<>();
@@ -650,7 +658,7 @@ public class NCModelProvider extends FabricModelProvider {
         Set<ResourceLocation> generatedModels = new HashSet<>();
 
         for (ChairType type : ChairType.values()) {
-            ResourceLocation chairTypeId = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase());
+            ResourceLocation chairTypeId = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase());
 
             if (!generatedModels.contains(chairTypeId)) {
                 ModelTemplate chairTemplate = createTemplate(
@@ -661,7 +669,7 @@ public class NCModelProvider extends FabricModelProvider {
                 generatedModels.add(chairTypeId);
             }
 
-            ResourceLocation chairTypeTuckedId = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase() + "_tucked");
+            ResourceLocation chairTypeTuckedId = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase() + "_tucked");
             if (!generatedModels.contains(chairTypeTuckedId)) {
                 ModelTemplate chairTemplateTucked = createTemplate(
                         "chair_" + type.getSerializedName().toLowerCase() + "_tucked",
@@ -674,23 +682,23 @@ public class NCModelProvider extends FabricModelProvider {
             backTypeModels.put(type, chairTypeId);
         }
 
-        ResourceLocation chairBacklessId = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_backless");
+        ResourceLocation chairBacklessId = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/" + chairBaseName + "_backless");
         if (!generatedModels.contains(chairBacklessId)) {
             CHAIR_BACKLESS.createWithSuffix(chair, "_backless", baseMapping, generators.modelOutput);
             generatedModels.add(chairBacklessId);
         }
 
-        ResourceLocation chairBacklessTuckedId = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_backless_tucked");
+        ResourceLocation chairBacklessTuckedId = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/" + chairBaseName + "_backless_tucked");
         if (!generatedModels.contains(chairBacklessTuckedId)) {
             CHAIR_BACKLESS.createWithSuffix(chair, "_backless_tucked", baseMapping, generators.modelOutput);
             generatedModels.add(chairBacklessTuckedId);
         }
 
         for (ChairType type : ChairType.values()) {
-            ResourceLocation chairBackTypeTuckedId = new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase() + "_tucked");
+            ResourceLocation chairBackTypeTuckedId = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase() + "_tucked");
 
             if (!generatedModels.contains(chairBackTypeTuckedId)) {
-                backTypeModels.put(type, new ResourceLocation(NookAndCranny.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase() + "_tucked"));
+                backTypeModels.put(type, new ResourceLocation(OneMoreFurniture.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase() + "_tucked"));
                 generatedModels.add(chairBackTypeTuckedId);
             }
         }

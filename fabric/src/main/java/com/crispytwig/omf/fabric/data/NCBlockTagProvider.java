@@ -1,8 +1,5 @@
 package com.crispytwig.omf.fabric.data;
 
-import com.crispytwig.nookcranny.blocks.*;
-import com.crispytwig.nookcranny.registry.NCBlocks;
-import com.crispytwig.nookcranny.registry.NCTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
@@ -19,7 +16,7 @@ public class NCBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-
+/*
         for (Block block : NCBlocks.BLOCKS) {
             if (block instanceof ChairBlock) {
                 getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(block);
@@ -75,5 +72,8 @@ public class NCBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(NCTags.BlockTags.TABLES_CONNECTABLE)
                 .add(Blocks.SCAFFOLDING);
+    }
+
+ */
     }
 }

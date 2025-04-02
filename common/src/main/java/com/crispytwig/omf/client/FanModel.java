@@ -1,6 +1,6 @@
 package com.crispytwig.omf.client;
 
-import com.crispytwig.nookcranny.NookAndCranny;
+import com.crispytwig.omf.OneMoreFurniture;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
 public class FanModel extends Model {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(NookAndCranny.MOD_ID, "ceiling_fan_oak_head"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(OneMoreFurniture.MOD_ID, "ceiling_fan_oak_head"), "main");
     private final ModelPart wings;
 
     public FanModel(ModelPart root) {

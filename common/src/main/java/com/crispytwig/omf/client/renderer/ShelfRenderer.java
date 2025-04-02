@@ -1,8 +1,8 @@
 package com.crispytwig.omf.client.renderer;
 
-import com.crispytwig.nookcranny.NCConfig;
-import com.crispytwig.nookcranny.blocks.ShelfBlock;
-import com.crispytwig.nookcranny.blocks.entities.ShelfBlockEntity;
+import com.crispytwig.omf.OMFConfig;
+import com.crispytwig.omf.block.ShelfBlock;
+import com.crispytwig.omf.block.entity.ShelfBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
@@ -67,10 +67,10 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
                 poseStack.mulPose(Axis.YP.rotationDegrees(90f));
 
                 boolean shouldRender = Minecraft.getInstance().player != null && Minecraft.getInstance().player.isShiftKeyDown();
-                if (NCConfig.constantStackCount) {
+                if (OMFConfig.constantStackCount) {
                     shouldRender = true;
                 }
-                if (NCConfig.noStackCount) {
+                if (OMFConfig.noStackCount) {
                     shouldRender = false;
                 }
 
@@ -85,7 +85,7 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
                     }
                 }
 
-                if (!NCConfig.stillItems) {
+                if (!OMFConfig.stillItems) {
                     float spinSpeed = 2.0f;
                     float dynamicRotation = (blockEntity.getLevel().getGameTime() + partialTick) * spinSpeed % 360;
                     poseStack.translate(0.0, (Math.sin((blockEntity.getLevel().getGameTime() + partialTick) / 8.0) / 16.0), 0.0);

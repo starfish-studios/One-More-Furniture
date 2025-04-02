@@ -1,6 +1,6 @@
 package com.crispytwig.omf.client;
 
-import com.crispytwig.nookcranny.NookAndCranny;
+import com.crispytwig.omf.OneMoreFurniture;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ChimeModel extends Model {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(NookAndCranny.MOD_ID, "chime"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(OneMoreFurniture.MOD_ID, "chime"), "main");
     public final ModelPart base;
     public final ModelPart chime_bound_1;
     public final ModelPart chime_1;

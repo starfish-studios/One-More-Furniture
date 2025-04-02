@@ -35,11 +35,12 @@ public class OneMoreFurniture {
 
     public static void init() {
         TABS.register();
-        OMFItems.ITEMS.register();
+        OMFSoundEvents.SOUNDS.register();
         OMFBlocks.BLOCKS.register();
+        OMFItems.ITEMS.register();
         OMFBlockEntities.BLOCK_ENTITY_TYPES.register();
         OMFMenus.MENUS.register();
-        OMFSoundEvents.SOUNDS.register();
+
         OMFEntities.ENTITY_TYPES.register();
 
     }

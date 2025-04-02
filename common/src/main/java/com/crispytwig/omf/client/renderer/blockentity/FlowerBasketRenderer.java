@@ -1,7 +1,7 @@
 package com.crispytwig.omf.client.renderer.blockentity;
 
-import com.crispytwig.nookcranny.blocks.FlowerBasketBlock;
-import com.crispytwig.nookcranny.blocks.entities.FlowerBasketBlockEntity;
+import com.crispytwig.omf.block.FlowerBasketBlock;
+import com.crispytwig.omf.block.entity.FlowerBasketBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;

@@ -1,12 +1,7 @@
 package com.crispytwig.omf.fabric.data;
 
-import com.crispytwig.nookcranny.NookAndCranny;
-import com.crispytwig.nookcranny.blocks.LampBlock;
-import com.crispytwig.nookcranny.blocks.properties.ColorList;
-import com.crispytwig.nookcranny.events.DyeSofa;
-import com.crispytwig.nookcranny.registry.NCBlocks;
-import com.crispytwig.nookcranny.registry.NCItems;
-import com.crispytwig.nookcranny.registry.NCTags;
+import com.crispytwig.omf.registry.OMFDyeColor;
+import com.crispytwig.omf.registry.OMFItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.Util;
@@ -19,8 +14,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.WoolCarpetBlock;
-import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +26,7 @@ public class NCRecipeProvider extends FabricRecipeProvider {
     
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> consumer) {
+        /*
         createDrawer(consumer, NCItems.OAK_DRAWER, Items.OAK_PLANKS, Items.OAK_SLAB);
         createDrawer(consumer, NCItems.SPRUCE_DRAWER, Items.SPRUCE_PLANKS, Items.SPRUCE_SLAB);
         createDrawer(consumer, NCItems.BIRCH_DRAWER, Items.BIRCH_PLANKS, Items.BIRCH_SLAB);
@@ -183,6 +177,8 @@ public class NCRecipeProvider extends FabricRecipeProvider {
         createWindchime(consumer, NCItems.BONE_WIND_CHIMES, Items.BONE);
         createWindchime(consumer, NCItems.COPPER_WIND_CHIMES, Items.COPPER_INGOT);
         createWindchime(consumer, NCItems.ECHO_SHARD_WIND_CHIMES, Items.ECHO_SHARD);
+
+         */
     }
 
     private void createWindchime(Consumer<FinishedRecipe> consumer, Item chime, Item material){
@@ -318,21 +314,21 @@ public class NCRecipeProvider extends FabricRecipeProvider {
     }
 
     private static final Map<Item, Item> WOOL_MAP = Util.make(new HashMap<>(), (map) -> {
-        map.put(Items.WHITE_WOOL, NCItems.WHITE_SOFA);
-        map.put(Items.LIGHT_GRAY_WOOL, NCItems.LIGHT_GRAY_SOFA);
-        map.put(Items.GRAY_WOOL, NCItems.GRAY_SOFA);
-        map.put(Items.BLACK_WOOL, NCItems.BLACK_SOFA);
-        map.put(Items.BROWN_WOOL, NCItems.BROWN_SOFA);
-        map.put(Items.RED_WOOL, NCItems.RED_SOFA);
-        map.put(Items.ORANGE_WOOL, NCItems.ORANGE_SOFA);
-        map.put(Items.YELLOW_WOOL, NCItems.YELLOW_SOFA);
-        map.put(Items.LIME_WOOL, NCItems.LIME_SOFA);
-        map.put(Items.GREEN_WOOL, NCItems.GREEN_SOFA);
-        map.put(Items.CYAN_WOOL, NCItems.CYAN_SOFA);
-        map.put(Items.LIGHT_BLUE_WOOL, NCItems.LIGHT_BLUE_SOFA);
-        map.put(Items.BLUE_WOOL, NCItems.BLUE_SOFA);
-        map.put(Items.PURPLE_WOOL, NCItems.PURPLE_SOFA);
-        map.put(Items.MAGENTA_WOOL, NCItems.MAGENTA_SOFA);
-        map.put(Items.PINK_WOOL, NCItems.PINK_SOFA);
+        map.put(Items.WHITE_WOOL, OMFItems.SOFAS.get(OMFDyeColor.WHITE).get());
+        map.put(Items.LIGHT_GRAY_WOOL, OMFItems.SOFAS.get(OMFDyeColor.LIGHT_GRAY).get());
+        map.put(Items.GRAY_WOOL, OMFItems.SOFAS.get(OMFDyeColor.GREEN).get());
+        map.put(Items.BLACK_WOOL, OMFItems.SOFAS.get(OMFDyeColor.BLACK).get());
+        map.put(Items.BROWN_WOOL, OMFItems.SOFAS.get(OMFDyeColor.BROWN).get());
+        map.put(Items.RED_WOOL, OMFItems.SOFAS.get(OMFDyeColor.RED).get());
+        map.put(Items.ORANGE_WOOL, OMFItems.SOFAS.get(OMFDyeColor.ORANGE).get());
+        map.put(Items.YELLOW_WOOL, OMFItems.SOFAS.get(OMFDyeColor.YELLOW).get());
+        map.put(Items.LIME_WOOL, OMFItems.SOFAS.get(OMFDyeColor.LIME).get());
+        map.put(Items.GREEN_WOOL, OMFItems.SOFAS.get(OMFDyeColor.GREEN).get());
+        map.put(Items.CYAN_WOOL, OMFItems.SOFAS.get(OMFDyeColor.CYAN).get());
+        map.put(Items.LIGHT_BLUE_WOOL, OMFItems.SOFAS.get(OMFDyeColor.LIGHT_BLUE).get());
+        map.put(Items.BLUE_WOOL, OMFItems.SOFAS.get(OMFDyeColor.BLUE).get());
+        map.put(Items.PURPLE_WOOL, OMFItems.SOFAS.get(OMFDyeColor.PURPLE).get());
+        map.put(Items.MAGENTA_WOOL, OMFItems.SOFAS.get(OMFDyeColor.MAGENTA).get());
+        map.put(Items.PINK_WOOL, OMFItems.SOFAS.get(OMFDyeColor.PINK).get());
     });
 }

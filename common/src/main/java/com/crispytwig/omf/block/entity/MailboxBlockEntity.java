@@ -26,6 +26,7 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Nameable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -136,10 +137,13 @@ public class MailboxBlockEntity extends BlockEntity
                         this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(MailboxBlock.FLAG_STATUS, FlagStatus.DOWN), 3);
                         if (!lockTarget) {
                             targetString = "";
-                            for (ServerPlayer serverPlayer : PlayerLookup.tracking(this)) {
-                                FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-                                buf.writeBlockPos(getBlockPos());
-                                NetworkManager.sendToPlayer(serverPlayer, packetChannel2, buf);
+                            if (level instanceof ServerLevel serverLevel) {
+                                var list = serverLevel.getChunkSource().chunkMap.getPlayers(new ChunkPos(getBlockPos()), false);
+                                for (ServerPlayer serverPlayer : list) {
+                                    FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+                                    buf.writeBlockPos(getBlockPos());
+                                    NetworkManager.sendToPlayer(serverPlayer, packetChannel2, buf);
+                                }
                             }
                             setChanged();
                         }
@@ -156,11 +160,15 @@ public class MailboxBlockEntity extends BlockEntity
     }
 
     private void sendMessageState(boolean fail){
-        for (ServerPlayer serverPlayer : PlayerLookup.tracking(this)) {
-            FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-            buf.writeBlockPos(getBlockPos());
-            buf.writeBoolean(fail);
-            NetworkManager.sendToPlayer(serverPlayer, packetChannel, buf);
+
+        if (level instanceof ServerLevel serverLevel) {
+            var list = serverLevel.getChunkSource().chunkMap.getPlayers(new ChunkPos(getBlockPos()), false);
+            for (ServerPlayer serverPlayer : list) {
+                FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+                buf.writeBlockPos(getBlockPos());
+                buf.writeBoolean(fail);
+                NetworkManager.sendToPlayer(serverPlayer, packetChannel, buf);
+            }
         }
     }
 

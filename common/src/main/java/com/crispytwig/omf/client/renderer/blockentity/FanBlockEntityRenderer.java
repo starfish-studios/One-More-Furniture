@@ -1,9 +1,9 @@
 package com.crispytwig.omf.client.renderer.blockentity;
 
-import com.crispytwig.nookcranny.NookAndCranny;
-import com.crispytwig.nookcranny.blocks.FanBlock;
-import com.crispytwig.nookcranny.blocks.entities.FanBlockEntity;
-import com.crispytwig.nookcranny.client.FanModel;
+import com.crispytwig.omf.OneMoreFurniture;
+import com.crispytwig.omf.block.FanBlock;
+import com.crispytwig.omf.block.entity.FanBlockEntity;
+import com.crispytwig.omf.client.FanModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.geom.ModelPart;
@@ -24,7 +24,7 @@ public class FanBlockEntityRenderer implements BlockEntityRenderer<FanBlockEntit
 
     public ResourceLocation getTextureLocation(FanBlockEntity entity) {
         var wood = ((FanBlock) entity.getBlockState().getBlock()).wood;
-        return new ResourceLocation(NookAndCranny.MOD_ID, "textures/block/fan/" + wood + "_fan.png");
+        return new ResourceLocation(OneMoreFurniture.MOD_ID, "textures/block/fan/" + wood + "_fan.png");
     }
 
     @Override

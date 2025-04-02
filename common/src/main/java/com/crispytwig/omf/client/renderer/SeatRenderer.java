@@ -1,6 +1,6 @@
 package com.crispytwig.omf.client.renderer;
 
-import com.crispytwig.nookcranny.entities.SeatEntity;
+import com.crispytwig.omf.entities.SeatEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

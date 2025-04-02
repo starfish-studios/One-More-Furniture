@@ -1,10 +1,8 @@
 package com.crispytwig.omf.fabric.data;
 
-import com.crispytwig.nookcranny.blocks.ChairBlock;
-import com.crispytwig.nookcranny.blocks.ShelfBlock;
-import com.crispytwig.nookcranny.blocks.TallStoolBlock;
-import com.crispytwig.nookcranny.blocks.properties.ColorList;
-import com.crispytwig.nookcranny.registry.NCBlocks;
+import com.crispytwig.omf.block.ShelfBlock;
+import com.crispytwig.omf.block.TallStoolBlock;
+import com.crispytwig.omf.block.properties.ColorList;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -37,7 +35,7 @@ public class NCBlockLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-
+/*
         for (Block block : NCBlocks.BLOCKS) {
             if (block instanceof ChairBlock) {
                 this.add(block, createLootTableForChair(block));
@@ -47,6 +45,8 @@ public class NCBlockLootTableProvider extends FabricBlockLootTableProvider {
                 dropSelf(block);
             }
         }
+
+ */
     }
 
     public Map<ColorList, Item> cushionToCarpetMap = Map.ofEntries(

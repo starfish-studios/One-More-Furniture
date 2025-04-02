@@ -2,6 +2,7 @@ package com.crispytwig.omf.client.gui.screens.widget;
 
 import com.crispytwig.omf.OneMoreFurniture;
 import com.crispytwig.omf.inventory.MailboxMenu;
+import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -45,7 +46,7 @@ public class LockTargetMailboxWidget extends AbstractWidget {
         FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
         buf.writeBlockPos(this.mailboxMenu.pos);
         buf.writeBoolean(locked);
-        ClientPlayNetworking.send(packetChannel, buf);
+        NetworkManager.sendToServer(packetChannel, buf);
         this.mailboxMenu.mailboxBlockEntity.lockTarget = locked;
     }
 

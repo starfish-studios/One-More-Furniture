@@ -19,6 +19,6 @@ public class OMFEntities {
                     SeatEntity::new,
                     MobCategory.MISC)
                     .sized(0f,0f
-                    ).build(null));
+                    ).build("seat"));
 
 }
