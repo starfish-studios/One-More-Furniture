@@ -1,0 +1,6 @@
+{
+    "parent": "nookcranny:block/template/table_leg",
+    "textures": {
+        "all": "nookcranny:block/table/spruce_table"
+    }
+}

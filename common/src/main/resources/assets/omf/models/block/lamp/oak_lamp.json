@@ -1,0 +1,7 @@
+{
+  "parent": "nookcranny:block/template/lamp",
+  "textures": {
+    "all": "nookcranny:block/lamp/oak_lamp",
+    "particle": "block/oak_planks"
+  }
+}

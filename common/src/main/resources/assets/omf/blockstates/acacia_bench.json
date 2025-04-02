@@ -1,0 +1,332 @@
+{
+    "multipart": [
+        {
+            "when": {
+                "facing": "north",
+                "main_type": "single"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_single"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "main_type": "single"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_single",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "main_type": "single"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_single",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "main_type": "single"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_single",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "facing": "north",
+                "main_type": "left"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_left"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "main_type": "left"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_left",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "main_type": "left"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_left",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "main_type": "left"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_left",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "facing": "north",
+                "main_type": "right"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_right"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "main_type": "right"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_right",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "main_type": "right"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_right",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "main_type": "right"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_right",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "facing": "north",
+                "main_type": "middle"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_middle"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "main_type": "middle"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_middle",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "main_type": "middle"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_middle",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "main_type": "middle"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_middle",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "facing": "north",
+                "back_type": "single",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_single"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "back_type": "single",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_single",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "back_type": "single",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_single",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "back_type": "single",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_single",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "facing": "north",
+                "back_type": "left",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_left"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "back_type": "left",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_left",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "back_type": "left",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_left",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "back_type": "left",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_left",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "facing": "north",
+                "back_type": "right",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_right"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "back_type": "right",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_right",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "back_type": "right",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_right",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "back_type": "right",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_right",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "facing": "north",
+                "back_type": "middle",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_middle"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "back_type": "middle",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_middle",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "back_type": "middle",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_middle",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "back_type": "middle",
+                "back": "true"
+            },
+            "apply": {
+                "model": "nookcranny:block/bench/acacia_back_middle",
+                "y": 270
+            }
+        }
+    ]
+}

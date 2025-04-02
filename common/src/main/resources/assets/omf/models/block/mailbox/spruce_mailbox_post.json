@@ -1,0 +1,7 @@
+{
+    "parent": "nookcranny:block/template/mailbox/mailbox_post",
+    "textures": {
+        "post": "nookcranny:block/mailbox/post/spruce_post",
+        "particle": "block/spruce_planks"
+    }
+}

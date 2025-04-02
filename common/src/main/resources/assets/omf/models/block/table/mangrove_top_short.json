@@ -1,0 +1,6 @@
+{
+    "parent": "nookcranny:block/template/table_top_short",
+    "textures": {
+        "all": "nookcranny:block/table/mangrove_table"
+    }
+}

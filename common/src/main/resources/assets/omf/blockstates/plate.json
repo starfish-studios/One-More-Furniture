@@ -1,0 +1,65 @@
+{
+    "multipart": [
+        {
+            "apply": {
+                "model": "nookcranny:block/plate"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/foods/apple"
+            },
+            "when": {
+                "food": "apple"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/foods/baked_potato"
+            },
+            "when": {
+                "food": "baked_potato"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/foods/beetroot"
+            },
+            "when": {
+                "food": "beetroot"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/foods/bread"
+            },
+            "when": {
+                "food": "bread"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/foods/carrot"
+            },
+            "when": {
+                "food": "carrot"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/foods/cookie"
+            },
+            "when": {
+                "food": "cookie"
+            }
+        },
+        {
+            "apply": {
+                "model": "nookcranny:block/foods/potato"
+            },
+            "when": {
+                "food": "potato"
+            }
+        }
+    ]
+}

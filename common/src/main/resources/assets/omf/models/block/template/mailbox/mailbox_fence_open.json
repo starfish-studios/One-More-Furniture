@@ -1,0 +1,35 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"mailbox": "nookcranny:block/mailbox/mailbox"
+	},
+	"elements": [
+		{
+			"from": [4, 2, -5],
+			"to": [12, 10, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, -2, -4]},
+			"faces": {
+				"north": {"uv": [0, 12, 4, 16], "texture": "#mailbox"},
+				"east": {"uv": [0, 0, 5.5, 4], "texture": "#mailbox"},
+				"south": {"uv": [10.5, 0, 14.5, 4], "texture": "#mailbox"},
+				"west": {"uv": [1, 4, 6.5, 8], "texture": "#mailbox"},
+				"up": {"uv": [10.5, 5.5, 6.5, 0], "texture": "#mailbox"},
+				"down": {"uv": [10.5, 6.5, 6.5, 12], "texture": "#mailbox"}
+			}
+		},
+		{
+			"from": [4, 0, -13],
+			"to": [12, 2, -5],
+			"rotation": {"angle": 0, "axis": "x", "origin": [7, 2, -5]},
+			"faces": {
+				"north": {"uv": [10.5, 6.5, 6.5, 5.5], "rotation": 180, "texture": "#mailbox"},
+				"east": {"uv": [5.5, 0, 6.5, 4], "rotation": 90, "texture": "#mailbox"},
+				"south": {"uv": [10.5, 6.5, 6.5, 7.5], "texture": "#mailbox"},
+				"west": {"uv": [0, 4, 1, 8], "rotation": 270, "texture": "#mailbox"},
+				"up": {"uv": [0, 12, 4, 16], "texture": "#mailbox"},
+				"down": {"uv": [0, 8, 4, 12], "rotation": 180, "texture": "#mailbox"}
+			}
+		}
+	]
+}

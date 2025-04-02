@@ -61,11 +61,9 @@ public class NCVanillaIntegration {
 
             /*
             ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
-                        //BiomeColors.getAverageFoliageColor()
                     return DyeColor.RED.getFireworkColor();
                     }
             , NCBlocks.WHITE_CURTAIN);
-
              */
         }
 

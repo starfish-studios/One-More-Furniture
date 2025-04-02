@@ -1,0 +1,65 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"all": "nookcranny:block/foods/apple"
+	},
+	"elements": [
+		{
+			"from": [5.5, 4, 8],
+			"to": [10.5, 6, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 4, 7]},
+			"faces": {
+				"north": {"uv": [0, 8, 5, 10], "texture": "#all"},
+				"east": {"uv": [0, 8, 0, 10], "texture": "#all"},
+				"south": {"uv": [5, 8, 10, 10], "texture": "#all"},
+				"west": {"uv": [5, 8, 5, 10], "texture": "#all"},
+				"up": {"uv": [5, 8, 0, 8], "texture": "#all"},
+				"down": {"uv": [10, 8, 5, 8], "texture": "#all"}
+			}
+		},
+		{
+			"from": [6, 0, 6],
+			"to": [10, 4, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
+			"faces": {
+				"north": {"uv": [4, 4, 8, 8], "texture": "#all"},
+				"east": {"uv": [4, 4, 8, 8], "texture": "#all"},
+				"south": {"uv": [4, 4, 8, 8], "texture": "#all"},
+				"west": {"uv": [4, 4, 8, 8], "texture": "#all"},
+				"up": {"uv": [8, 4, 4, 0], "texture": "#all"},
+				"down": {"uv": [12, 0, 8, 4], "texture": "#all"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 225, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"gui": {
+			"rotation": [30, 225, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"fixed": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "nookcranny:block/template/table_full",
+    "textures": {
+        "all": "nookcranny:block/table/dark_oak_table"
+    }
+}

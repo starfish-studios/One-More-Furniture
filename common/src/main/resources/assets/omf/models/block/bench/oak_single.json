@@ -1,0 +1,7 @@
+{
+  "parent": "nookcranny:block/template/bench_single",
+  "textures": {
+    "all": "nookcranny:block/bench/oak_bench",
+    "particle": "block/oak_planks"
+  }
+}
