@@ -47,7 +47,7 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
     private static final SoundEvent SOUND_CLOSE = SoundEvents.BARREL_CLOSE;
 
     private NonNullList<ItemStack> items = NonNullList.withSize(10, ItemStack.EMPTY);
-    public final ContainerOpenersCounter openersCounter;
+    public ContainerOpenersCounter openersCounter;
 
     public AbstractDrawerBlockEntity(BlockEntityType<?> be, BlockPos blockPos, BlockState blockState) {
         super(be, blockPos, blockState);
