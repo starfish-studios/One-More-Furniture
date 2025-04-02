@@ -1,19 +1,19 @@
 {
   "variants": {
     "facing=east,open=false,shape=bottom_left": {
-      "model": "nookcranny:block/white_curtain_bottom_left_closed",
+      "model": "nookcranny:block/white_curtain_closed",
       "y": 90
     },
     "facing=east,open=false,shape=bottom_middle": {
-      "model": "nookcranny:block/white_curtain_bottom_middle_closed",
+      "model": "nookcranny:block/white_curtain_closed",
       "y": 90
     },
     "facing=east,open=false,shape=bottom_right": {
-      "model": "nookcranny:block/white_curtain_bottom_right_closed",
+      "model": "nookcranny:block/white_curtain_closed",
       "y": 90
     },
     "facing=east,open=false,shape=bottom_single": {
-      "model": "nookcranny:block/white_curtain_bottom_single_closed",
+      "model": "nookcranny:block/white_curtain_closed",
       "y": 90
     },
     "facing=east,open=false,shape=center": {
@@ -45,7 +45,7 @@
       "y": 90
     },
     "facing=east,open=false,shape=single": {
-      "model": "nookcranny:block/white_curtain_bottom_single_closed",
+      "model": "nookcranny:block/white_curtain_single_closed",
       "y": 90
     },
     "facing=east,open=true,shape=bottom_left": {
@@ -53,7 +53,7 @@
       "y": 90
     },
     "facing=east,open=true,shape=bottom_middle": {
-      "model": "nookcranny:block/white_curtain_bottom_middle_open",
+      "model": "nookcranny:block/white_curtain_open",
       "y": 90
     },
     "facing=east,open=true,shape=bottom_right": {
@@ -61,19 +61,19 @@
       "y": 90
     },
     "facing=east,open=true,shape=bottom_single": {
-      "model": "nookcranny:block/white_curtain_bottom_single_open",
+      "model": "nookcranny:block/white_curtain_single_open",
       "y": 90
     },
     "facing=east,open=true,shape=center": {
-      "model": "nookcranny:block/white_curtain_center_open",
+      "model": "nookcranny:block/white_curtain_open",
       "y": 90
     },
     "facing=east,open=true,shape=corner_left": {
-      "model": "nookcranny:block/white_curtain_left_corner_open",
+      "model": "nookcranny:block/white_curtainleft_corner_open",
       "y": 90
     },
     "facing=east,open=true,shape=corner_right": {
-      "model": "nookcranny:block/white_curtain_right_corner_open",
+      "model": "nookcranny:block/white_curtainright_corner_open",
       "y": 90
     },
     "facing=east,open=true,shape=curtain_top": {
@@ -93,20 +93,20 @@
       "y": 90
     },
     "facing=east,open=true,shape=single": {
-      "model": "nookcranny:block/white_curtain_single_open",
+      "model": "nookcranny:block/white_curtain_top_single_open",
       "y": 90
     },
     "facing=north,open=false,shape=bottom_left": {
-      "model": "nookcranny:block/white_curtain_bottom_left_closed"
+      "model": "nookcranny:block/white_curtain_closed"
     },
     "facing=north,open=false,shape=bottom_middle": {
-      "model": "nookcranny:block/white_curtain_bottom_middle_closed"
+      "model": "nookcranny:block/white_curtain_closed"
     },
     "facing=north,open=false,shape=bottom_right": {
-      "model": "nookcranny:block/white_curtain_bottom_right_closed"
+      "model": "nookcranny:block/white_curtain_closed"
     },
     "facing=north,open=false,shape=bottom_single": {
-      "model": "nookcranny:block/white_curtain_bottom_single_closed"
+      "model": "nookcranny:block/white_curtain_closed"
     },
     "facing=north,open=false,shape=center": {
       "model": "nookcranny:block/white_curtain_single_closed"
@@ -130,28 +130,28 @@
       "model": "nookcranny:block/white_curtain_single_closed"
     },
     "facing=north,open=false,shape=single": {
-      "model": "nookcranny:block/white_curtain_bottom_single_closed"
+      "model": "nookcranny:block/white_curtain_single_closed"
     },
     "facing=north,open=true,shape=bottom_left": {
       "model": "nookcranny:block/white_curtain_bottom_left_open"
     },
     "facing=north,open=true,shape=bottom_middle": {
-      "model": "nookcranny:block/white_curtain_bottom_middle_open"
+      "model": "nookcranny:block/white_curtain_open"
     },
     "facing=north,open=true,shape=bottom_right": {
       "model": "nookcranny:block/white_curtain_bottom_right_open"
     },
     "facing=north,open=true,shape=bottom_single": {
-      "model": "nookcranny:block/white_curtain_bottom_single_open"
+      "model": "nookcranny:block/white_curtain_single_open"
     },
     "facing=north,open=true,shape=center": {
-      "model": "nookcranny:block/white_curtain_center_open"
+      "model": "nookcranny:block/white_curtain_open"
     },
     "facing=north,open=true,shape=corner_left": {
-      "model": "nookcranny:block/white_curtain_left_corner_open"
+      "model": "nookcranny:block/white_curtainleft_corner_open"
     },
     "facing=north,open=true,shape=corner_right": {
-      "model": "nookcranny:block/white_curtain_right_corner_open"
+      "model": "nookcranny:block/white_curtainright_corner_open"
     },
     "facing=north,open=true,shape=curtain_top": {
       "model": "nookcranny:block/white_curtain_top_open"
@@ -166,22 +166,22 @@
       "model": "nookcranny:block/white_curtain_right_open"
     },
     "facing=north,open=true,shape=single": {
-      "model": "nookcranny:block/white_curtain_single_open"
+      "model": "nookcranny:block/white_curtain_top_single_open"
     },
     "facing=south,open=false,shape=bottom_left": {
-      "model": "nookcranny:block/white_curtain_bottom_left_closed",
+      "model": "nookcranny:block/white_curtain_closed",
       "y": 180
     },
     "facing=south,open=false,shape=bottom_middle": {
-      "model": "nookcranny:block/white_curtain_bottom_middle_closed",
+      "model": "nookcranny:block/white_curtain_closed",
       "y": 180
     },
     "facing=south,open=false,shape=bottom_right": {
-      "model": "nookcranny:block/white_curtain_bottom_right_closed",
+      "model": "nookcranny:block/white_curtain_closed",
       "y": 180
     },
     "facing=south,open=false,shape=bottom_single": {
-      "model": "nookcranny:block/white_curtain_bottom_single_closed",
+      "model": "nookcranny:block/white_curtain_closed",
       "y": 180
     },
     "facing=south,open=false,shape=center": {
@@ -213,7 +213,7 @@
       "y": 180
     },
     "facing=south,open=false,shape=single": {
-      "model": "nookcranny:block/white_curtain_bottom_single_closed",
+      "model": "nookcranny:block/white_curtain_single_closed",
       "y": 180
     },
     "facing=south,open=true,shape=bottom_left": {
@@ -221,7 +221,7 @@
       "y": 180
     },
     "facing=south,open=true,shape=bottom_middle": {
-      "model": "nookcranny:block/white_curtain_bottom_middle_open",
+      "model": "nookcranny:block/white_curtain_open",
       "y": 180
     },
     "facing=south,open=true,shape=bottom_right": {
@@ -229,19 +229,19 @@
       "y": 180
     },
     "facing=south,open=true,shape=bottom_single": {
-      "model": "nookcranny:block/white_curtain_bottom_single_open",
+      "model": "nookcranny:block/white_curtain_single_open",
       "y": 180
     },
     "facing=south,open=true,shape=center": {
-      "model": "nookcranny:block/white_curtain_center_open",
+      "model": "nookcranny:block/white_curtain_open",
       "y": 180
     },
     "facing=south,open=true,shape=corner_left": {
-      "model": "nookcranny:block/white_curtain_left_corner_open",
+      "model": "nookcranny:block/white_curtainleft_corner_open",
       "y": 180
     },
     "facing=south,open=true,shape=corner_right": {
-      "model": "nookcranny:block/white_curtain_right_corner_open",
+      "model": "nookcranny:block/white_curtainright_corner_open",
       "y": 180
     },
     "facing=south,open=true,shape=curtain_top": {
@@ -261,23 +261,23 @@
       "y": 180
     },
     "facing=south,open=true,shape=single": {
-      "model": "nookcranny:block/white_curtain_single_open",
+      "model": "nookcranny:block/white_curtain_top_single_open",
       "y": 180
     },
     "facing=west,open=false,shape=bottom_left": {
-      "model": "nookcranny:block/white_curtain_bottom_left_closed",
+      "model": "nookcranny:block/white_curtain_closed",
       "y": 270
     },
     "facing=west,open=false,shape=bottom_middle": {
-      "model": "nookcranny:block/white_curtain_bottom_middle_closed",
+      "model": "nookcranny:block/white_curtain_closed",
       "y": 270
     },
     "facing=west,open=false,shape=bottom_right": {
-      "model": "nookcranny:block/white_curtain_bottom_right_closed",
+      "model": "nookcranny:block/white_curtain_closed",
       "y": 270
     },
     "facing=west,open=false,shape=bottom_single": {
-      "model": "nookcranny:block/white_curtain_bottom_single_closed",
+      "model": "nookcranny:block/white_curtain_closed",
       "y": 270
     },
     "facing=west,open=false,shape=center": {
@@ -309,7 +309,7 @@
       "y": 270
     },
     "facing=west,open=false,shape=single": {
-      "model": "nookcranny:block/white_curtain_bottom_single_closed",
+      "model": "nookcranny:block/white_curtain_single_closed",
       "y": 270
     },
     "facing=west,open=true,shape=bottom_left": {
@@ -317,7 +317,7 @@
       "y": 270
     },
     "facing=west,open=true,shape=bottom_middle": {
-      "model": "nookcranny:block/white_curtain_bottom_middle_open",
+      "model": "nookcranny:block/white_curtain_open",
       "y": 270
     },
     "facing=west,open=true,shape=bottom_right": {
@@ -325,19 +325,19 @@
       "y": 270
     },
     "facing=west,open=true,shape=bottom_single": {
-      "model": "nookcranny:block/white_curtain_bottom_single_open",
+      "model": "nookcranny:block/white_curtain_single_open",
       "y": 270
     },
     "facing=west,open=true,shape=center": {
-      "model": "nookcranny:block/white_curtain_center_open",
+      "model": "nookcranny:block/white_curtain_open",
       "y": 270
     },
     "facing=west,open=true,shape=corner_left": {
-      "model": "nookcranny:block/white_curtain_left_corner_open",
+      "model": "nookcranny:block/white_curtainleft_corner_open",
       "y": 270
     },
     "facing=west,open=true,shape=corner_right": {
-      "model": "nookcranny:block/white_curtain_right_corner_open",
+      "model": "nookcranny:block/white_curtainright_corner_open",
       "y": 270
     },
     "facing=west,open=true,shape=curtain_top": {
@@ -357,7 +357,7 @@
       "y": 270
     },
     "facing=west,open=true,shape=single": {
-      "model": "nookcranny:block/white_curtain_single_open",
+      "model": "nookcranny:block/white_curtain_top_single_open",
       "y": 270
     }
   }

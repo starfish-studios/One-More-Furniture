@@ -75,26 +75,18 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate CHAIR_ITEM = createTemplate("chair_1", TextureSlot.ALL);
 
     public static final ModelTemplate CURTAIN_SINGLE_CLOSED = createTemplate("curtain_single_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_CENTER_CLOSED = createTemplate("curtain_center_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_BOTTOM_SINGLE_CLOSED = createTemplate("curtain_bottom_single_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_BOTTOM_LEFT_CLOSED = createTemplate("curtain_bottom_left_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_BOTTOM_RIGHT_CLOSED = createTemplate("curtain_bottom_right_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_BOTTOM_MIDDLE_CLOSED = createTemplate("curtain_bottom_middle_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
 
     public static final ModelTemplate CURTAIN_SINGLE_OPEN = createTemplate("curtain_single_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_LEFT_OPEN = createTemplate("curtain_left_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_RIGHT_OPEN = createTemplate("curtain_right_open", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_CENTER_OPEN = createTemplate("curtain_center_open", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_BOTTOM_SINGLE_OPEN = createTemplate("curtain_bottom_single_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_BOTTOM_LEFT_OPEN = createTemplate("curtain_bottom_left_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_BOTTOM_RIGHT_OPEN = createTemplate("curtain_bottom_right_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_BOTTOM_MIDDLE_OPEN = createTemplate("curtain_bottom_middle_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_LEFT_CORNER_OPEN = createTemplate("curtain_left_corner_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_RIGHT_CORNER_OPEN = createTemplate("curtain_right_corner_open", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_TOP_OPEN = createTemplate("curtain_top_open", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_TOP_CLOSED = createTemplate("curtain_top_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_TOP_SINGLE_OPEN = createTemplate("curtain_top_single_open", TextureSlot.ALL, TextureSlot.PARTICLE);
-    public static final ModelTemplate CURTAIN_TOP_SINGLE_CLOSED = createTemplate("curtain_top_single_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
 
     public static final ModelTemplate WIND_CHIME = createTemplate("chime", TextureSlot.ALL);
     public static final ModelTemplate FLOWER_BASKET = createTemplate("flower_basket", TextureSlot.ALL, TextureSlot.DIRT, TextureSlot.PARTICLE);
@@ -184,78 +176,50 @@ public class NCModelProvider extends FabricModelProvider {
         return dispatch;
     }
 
-    private OpenClosed makeCurtainLocation(BlockModelGenerators generators, Block block, ModelTemplate openTemplate, ModelTemplate closedTemplate, String suffix) {
-        return makeCurtainLocation(generators, block, openTemplate, closedTemplate, suffix, suffix);
-    }
-
-    private OpenClosed makeCurtainLocation(BlockModelGenerators generators, Block block, ModelTemplate openTemplate, ModelTemplate closedTemplate, String openSuffix, String closedSuffix) {
-        openSuffix = openSuffix + "_open";
-        closedSuffix = closedSuffix + "_closed";
-
-        TextureMapping openTexture = new TextureMapping()
-                .put(TextureSlot.ALL, getTexture(block, "curtain", openSuffix));
-
-        ResourceLocation open = openTemplate.createWithSuffix(block, openSuffix, openTexture, generators.modelOutput);
-
-        ResourceLocation closed = (closedTemplate != null) ?
-                closedTemplate.createWithSuffix(block, closedSuffix, new TextureMapping()
-                        .put(TextureSlot.ALL, getTexture(block, "curtain", closedSuffix)), generators.modelOutput)
-                : null;
-
-        return new OpenClosed(open, closed);
-    }
-
-    private OpenClosed makeBottomCurtainLocation(BlockModelGenerators generators, Block block, ModelTemplate openTemplate, ModelTemplate closedTemplate, String openSuffix) {
-        String uniqueOpenSuffix = openSuffix + "_open";
-        String uniqueClosedSuffix = openSuffix + "_closed";
-
-        TextureMapping openTexture = new TextureMapping()
-                .put(TextureSlot.ALL, getTexture(block, "curtain", uniqueOpenSuffix));
-
-        ResourceLocation open = openTemplate.createWithSuffix(block, uniqueOpenSuffix, openTexture, generators.modelOutput);
-
-        TextureMapping closedTexture = new TextureMapping()
-                .put(TextureSlot.ALL, getTexture(block, "curtain", "_bottom_single_closed"));
-
-        ResourceLocation closed = closedTemplate.createWithSuffix(block, uniqueClosedSuffix, closedTexture, generators.modelOutput);
-
-        return new OpenClosed(open, closed);
-    }
-
-    private OpenClosed makeBottomCurtainLocation(BlockModelGenerators generators, Block block, ModelTemplate openTemplate, ResourceLocation closed, String openSuffix) {
-        String uniqueOpenSuffix = openSuffix + "_open";
-        TextureMapping openTexture = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", uniqueOpenSuffix));
-        ResourceLocation open = openTemplate.createWithSuffix(block, uniqueOpenSuffix, openTexture, generators.modelOutput);
-        return new OpenClosed(open, closed);
-    }
-
-
     private void createCurtainBlock(BlockModelGenerators generators, Block block) {
         Map<CurtainBlock.CurtainShape, OpenClosed> curtainMappings = new HashMap<>();
 
-        var closedSuffix = "_single_closed";
-        var closedSuffix2 = "_bottom_single_closed";
+        var bottomMiddleAndCenterOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_center_open"));
+        var bottomRightAndBottomLeftOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_bottom_open"));
+        var cornerRightAndCornerLeftOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_corner_open"));
+        var rightAndLeftOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_open"));
+        var topAndBottomSingleOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_top_single_open"));
 
-        ResourceLocation centerClosed = CURTAIN_SINGLE_CLOSED.createWithSuffix(block, closedSuffix, new TextureMapping()
-                .put(TextureSlot.ALL, getTexture(block, "curtain", closedSuffix)), generators.modelOutput);
+        var singleClosed = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_single_closed"));
+        var singleOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_single_open"));
+        var bottomClosedAndTopOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_top_open"));
 
-        ResourceLocation closed = CURTAIN_BOTTOM_SINGLE_CLOSED.createWithSuffix(block, closedSuffix2, new TextureMapping()
-                .put(TextureSlot.ALL, getTexture(block, "curtain", closedSuffix2)), generators.modelOutput);
+        ResourceLocation bottomMiddleOpenResource = CURTAIN_BOTTOM_MIDDLE_OPEN.createWithSuffix(block, "_open", bottomMiddleAndCenterOpen, generators.modelOutput);
+        ResourceLocation bottomMiddleClosedResource = CURTAIN_BOTTOM_MIDDLE_CLOSED.createWithSuffix(block, "_closed", bottomClosedAndTopOpen, generators.modelOutput);
 
-        curtainMappings.put(CurtainBlock.CurtainShape.BOTTOM_LEFT, makeBottomCurtainLocation(generators, block, CURTAIN_BOTTOM_LEFT_OPEN, CURTAIN_BOTTOM_LEFT_CLOSED, "_bottom_left"));
-        curtainMappings.put(CurtainBlock.CurtainShape.BOTTOM_MIDDLE, makeBottomCurtainLocation(generators, block, CURTAIN_BOTTOM_MIDDLE_OPEN, CURTAIN_BOTTOM_MIDDLE_CLOSED, "_bottom_middle"));
-        curtainMappings.put(CurtainBlock.CurtainShape.BOTTOM_RIGHT, makeBottomCurtainLocation(generators, block, CURTAIN_BOTTOM_RIGHT_OPEN, CURTAIN_BOTTOM_RIGHT_CLOSED, "_bottom_right"));
-        curtainMappings.put(CurtainBlock.CurtainShape.BOTTOM_SINGLE, makeBottomCurtainLocation(generators, block, CURTAIN_BOTTOM_SINGLE_OPEN, closed, "_bottom_single"));
-        curtainMappings.put(CurtainBlock.CurtainShape.SINGLE, makeBottomCurtainLocation(generators, block, CURTAIN_SINGLE_OPEN, closed, "_single"));
+        ResourceLocation bottomLeftOpenResource = CURTAIN_BOTTOM_LEFT_OPEN.createWithSuffix(block, "_bottom_left_open", bottomRightAndBottomLeftOpen, generators.modelOutput);
+        ResourceLocation bottomRightOpenResource = CURTAIN_BOTTOM_RIGHT_OPEN.createWithSuffix(block, "_bottom_right_open", bottomRightAndBottomLeftOpen, generators.modelOutput);
 
-        curtainMappings.put(CurtainBlock.CurtainShape.LEFT, new OpenClosed(makeCurtainLocation(generators, block, CURTAIN_LEFT_OPEN, null, "_left").open, centerClosed));
-        curtainMappings.put(CurtainBlock.CurtainShape.CORNER_LEFT, new OpenClosed(makeCurtainLocation(generators, block, CURTAIN_LEFT_CORNER_OPEN, null, "_left_corner").open, centerClosed));
-        curtainMappings.put(CurtainBlock.CurtainShape.RIGHT, new OpenClosed(makeCurtainLocation(generators, block, CURTAIN_RIGHT_OPEN, null, "_right").open, centerClosed));
-        curtainMappings.put(CurtainBlock.CurtainShape.CORNER_RIGHT, new OpenClosed(makeCurtainLocation(generators, block, CURTAIN_RIGHT_CORNER_OPEN, null, "_right_corner").open, centerClosed));
+        ResourceLocation cornerLeftOpenResource = CURTAIN_LEFT_CORNER_OPEN.createWithSuffix(block, "left_corner_open", cornerRightAndCornerLeftOpen, generators.modelOutput);
+        ResourceLocation cornerRightOpenResource = CURTAIN_RIGHT_CORNER_OPEN.createWithSuffix(block, "right_corner_open", cornerRightAndCornerLeftOpen, generators.modelOutput);
+        ResourceLocation defaultClosed = CURTAIN_SINGLE_CLOSED.createWithSuffix(block, "_single_closed", singleClosed, generators.modelOutput);
+        ResourceLocation singleOpenResource = CURTAIN_SINGLE_OPEN.createWithSuffix(block, "_single_open", singleOpen, generators.modelOutput);
 
-        curtainMappings.put(CurtainBlock.CurtainShape.TOP, new OpenClosed(makeCurtainLocation(generators, block, CURTAIN_TOP_OPEN, null, "_top").open, centerClosed));
-        curtainMappings.put(CurtainBlock.CurtainShape.TOP_SINGLE, new OpenClosed(makeCurtainLocation(generators, block, CURTAIN_TOP_SINGLE_OPEN, null, "_top_single").open, centerClosed));
-        curtainMappings.put(CurtainBlock.CurtainShape.CENTER, new OpenClosed(makeCurtainLocation(generators, block, CURTAIN_CENTER_OPEN, null, "_center").open, centerClosed));
+        ResourceLocation topOpenResource = CURTAIN_TOP_OPEN.createWithSuffix(block, "_top_open", bottomClosedAndTopOpen, generators.modelOutput);
+        ResourceLocation topSingleOpenResource = CURTAIN_TOP_SINGLE_OPEN.createWithSuffix(block, "_top_single_open", topAndBottomSingleOpen, generators.modelOutput);
+
+        ResourceLocation leftOpenResource = CURTAIN_LEFT_OPEN.createWithSuffix(block, "_left_open", rightAndLeftOpen, generators.modelOutput);
+        ResourceLocation rightOpenResource = CURTAIN_RIGHT_OPEN.createWithSuffix(block, "_right_open", rightAndLeftOpen, generators.modelOutput);
+
+
+        curtainMappings.put(CurtainBlock.CurtainShape.BOTTOM_MIDDLE, new OpenClosed(bottomMiddleOpenResource, bottomMiddleClosedResource));
+        curtainMappings.put(CurtainBlock.CurtainShape.BOTTOM_LEFT, new OpenClosed(bottomLeftOpenResource, bottomMiddleClosedResource));
+        curtainMappings.put(CurtainBlock.CurtainShape.BOTTOM_RIGHT, new OpenClosed(bottomRightOpenResource, bottomMiddleClosedResource));
+        curtainMappings.put(CurtainBlock.CurtainShape.CORNER_RIGHT, new OpenClosed(cornerRightOpenResource, defaultClosed));
+        curtainMappings.put(CurtainBlock.CurtainShape.CORNER_LEFT, new OpenClosed(cornerLeftOpenResource, defaultClosed));
+        curtainMappings.put(CurtainBlock.CurtainShape.TOP, new OpenClosed(topOpenResource, defaultClosed));
+        curtainMappings.put(CurtainBlock.CurtainShape.TOP_SINGLE, new OpenClosed(topSingleOpenResource, defaultClosed));
+        curtainMappings.put(CurtainBlock.CurtainShape.LEFT, new OpenClosed(leftOpenResource, defaultClosed));
+        curtainMappings.put(CurtainBlock.CurtainShape.RIGHT, new OpenClosed(rightOpenResource, defaultClosed));
+        curtainMappings.put(CurtainBlock.CurtainShape.CENTER, new OpenClosed(bottomMiddleOpenResource, defaultClosed));
+        curtainMappings.put(CurtainBlock.CurtainShape.SINGLE, new OpenClosed(topSingleOpenResource, defaultClosed));
+        curtainMappings.put(CurtainBlock.CurtainShape.BOTTOM_SINGLE, new OpenClosed(singleOpenResource, bottomMiddleClosedResource));
+
 
         MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(block);
         multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
