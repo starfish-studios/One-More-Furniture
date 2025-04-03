@@ -162,7 +162,7 @@ public class OMFModelProvider extends FabricModelProvider {
     private void createCurtainBlock(BlockModelGenerators generators, Block block) {
         Map<CurtainBlock.CurtainShape, OpenClosed> curtainMappings = new HashMap<>();
 
-        var bottomMiddleAndCenterOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_center_open"));
+        var bottomMiddleAndMiddleOpen = new TextureMapping().put(TextureSlot.ALL, new ResourceLocation(OneMoreFurniture.MOD_ID, "block/curtain/empty"));
         var bottomRightAndBottomLeftOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_bottom_open"));
         var cornerRightAndCornerLeftOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_corner_open"));
         var rightAndLeftOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_open"));
@@ -172,14 +172,14 @@ public class OMFModelProvider extends FabricModelProvider {
         var singleOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_single_open"));
         var bottomClosedAndTopOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_top_open"));
 
-        ResourceLocation bottomMiddleOpenResource = CURTAIN_BOTTOM_MIDDLE_OPEN.createWithSuffix(block, "_open", bottomMiddleAndCenterOpen, generators.modelOutput);
+        ResourceLocation bottomMiddleOpenResource = CURTAIN_BOTTOM_MIDDLE_OPEN.createWithSuffix(block, "_middle_open", bottomMiddleAndMiddleOpen, generators.modelOutput);
         ResourceLocation bottomMiddleClosedResource = CURTAIN_BOTTOM_MIDDLE_CLOSED.createWithSuffix(block, "_closed", bottomClosedAndTopOpen, generators.modelOutput);
 
         ResourceLocation bottomLeftOpenResource = CURTAIN_BOTTOM_LEFT_OPEN.createWithSuffix(block, "_bottom_left_open", bottomRightAndBottomLeftOpen, generators.modelOutput);
         ResourceLocation bottomRightOpenResource = CURTAIN_BOTTOM_RIGHT_OPEN.createWithSuffix(block, "_bottom_right_open", bottomRightAndBottomLeftOpen, generators.modelOutput);
 
-        ResourceLocation cornerLeftOpenResource = CURTAIN_LEFT_CORNER_OPEN.createWithSuffix(block, "left_corner_open", cornerRightAndCornerLeftOpen, generators.modelOutput);
-        ResourceLocation cornerRightOpenResource = CURTAIN_RIGHT_CORNER_OPEN.createWithSuffix(block, "right_corner_open", cornerRightAndCornerLeftOpen, generators.modelOutput);
+        ResourceLocation cornerLeftOpenResource = CURTAIN_LEFT_CORNER_OPEN.createWithSuffix(block, "_left_corner_open", cornerRightAndCornerLeftOpen, generators.modelOutput);
+        ResourceLocation cornerRightOpenResource = CURTAIN_RIGHT_CORNER_OPEN.createWithSuffix(block, "_right_corner_open", cornerRightAndCornerLeftOpen, generators.modelOutput);
         ResourceLocation defaultClosed = CURTAIN_SINGLE_CLOSED.createWithSuffix(block, "_single_closed", singleClosed, generators.modelOutput);
         ResourceLocation singleOpenResource = CURTAIN_SINGLE_OPEN.createWithSuffix(block, "_single_open", singleOpen, generators.modelOutput);
 
@@ -199,7 +199,7 @@ public class OMFModelProvider extends FabricModelProvider {
         curtainMappings.put(CurtainBlock.CurtainShape.TOP_SINGLE, new OpenClosed(topSingleOpenResource, defaultClosed));
         curtainMappings.put(CurtainBlock.CurtainShape.LEFT, new OpenClosed(leftOpenResource, defaultClosed));
         curtainMappings.put(CurtainBlock.CurtainShape.RIGHT, new OpenClosed(rightOpenResource, defaultClosed));
-        curtainMappings.put(CurtainBlock.CurtainShape.CENTER, new OpenClosed(bottomMiddleOpenResource, defaultClosed));
+        curtainMappings.put(CurtainBlock.CurtainShape.MIDDLE, new OpenClosed(bottomMiddleOpenResource, defaultClosed));
         curtainMappings.put(CurtainBlock.CurtainShape.SINGLE, new OpenClosed(topSingleOpenResource, defaultClosed));
         curtainMappings.put(CurtainBlock.CurtainShape.BOTTOM_SINGLE, new OpenClosed(singleOpenResource, bottomMiddleClosedResource));
 

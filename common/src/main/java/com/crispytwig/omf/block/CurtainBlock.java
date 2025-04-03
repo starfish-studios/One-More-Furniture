@@ -36,8 +36,10 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    private static final VoxelShape SHAPE_NS = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 2.0);
-    private static final VoxelShape SHAPE_EW = Block.box(0.0, 0.0, 0.0, 2.0, 16.0, 16.0);
+    private static final VoxelShape SHAPE_S = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 2.0);
+    private static final VoxelShape SHAPE_E = Block.box(0.0, 0.0, 0.0, 2.0, 16.0, 16.0);
+    private static final VoxelShape SHAPE_N = Block.box(0.0, 0.0, 14.0, 16.0, 16.0, 16.0);
+    private static final VoxelShape SHAPE_W = Block.box(14.0, 0.0, 0.0, 16.0, 16.0, 16.0);
 
     public CurtainBlock(Properties properties) {
         super(properties);
@@ -51,7 +53,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
     public enum CurtainShape implements StringRepresentable {
         SINGLE("single"),
         LEFT("left"),
-        CENTER("center"),
+        MIDDLE("middle"),
         RIGHT("right"),
         BOTTOM_SINGLE("bottom_single"),
         BOTTOM_LEFT("bottom_left"),
@@ -152,9 +154,10 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
                                @NotNull CollisionContext context) {
         Direction facing = state.getValue(FACING);
         return switch (facing) {
-            case NORTH, SOUTH -> SHAPE_NS;
-            case EAST, WEST -> SHAPE_EW;
-            default -> SHAPE_NS;
+            case NORTH  -> SHAPE_N;
+            case EAST -> SHAPE_E;
+            case WEST -> SHAPE_W;
+            default -> SHAPE_S;
         };
     }
 
@@ -255,7 +258,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
 
         boolean aboveIsOpenAndMiddle = aboveState.getBlock() instanceof CurtainBlock &&
                 aboveState.getValue(OPEN) &&
-                aboveState.getValue(SHAPE) == CurtainShape.CENTER;
+                aboveState.getValue(SHAPE) == CurtainShape.MIDDLE;
 
         boolean aboveIsOpenAndLeft = aboveState.getBlock() instanceof CurtainBlock &&
                 aboveState.getValue(OPEN) &&
@@ -295,11 +298,11 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
 
         boolean rightIsOpenAndMiddle = rightState.getBlock() instanceof CurtainBlock &&
                 rightState.getValue(OPEN) &&
-                rightState.getValue(SHAPE) == CurtainShape.CENTER;
+                rightState.getValue(SHAPE) == CurtainShape.MIDDLE;
 
         boolean leftIsOpenAndMiddle = leftState.getBlock() instanceof CurtainBlock &&
                 leftState.getValue(OPEN) &&
-                leftState.getValue(SHAPE) == CurtainShape.CENTER;
+                leftState.getValue(SHAPE) == CurtainShape.MIDDLE;
 
         // Connections M
         if (noLeftCurtain && rightIsOpenAndRight && aboveIsOpenAndMiddle && noBelowCurtain) {
@@ -327,34 +330,34 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
             return CurtainShape.TOP;
         }
         if (rightIsOpenAndRight && noLeftCurtain && aboveIsOpenAndTop && noBelowCurtain) {
-            return CurtainShape.CENTER;
+            return CurtainShape.MIDDLE;
         }
         if (noRightCurtain && leftIsOpenAndLeft && aboveIsOpenAndTop && noBelowCurtain) {
-            return CurtainShape.CENTER;
+            return CurtainShape.MIDDLE;
         }
 
         if (rightIsOpenAndMiddle && noLeftCurtain && aboveIsOpenAndTop && noBelowCurtain) {
-            return CurtainShape.CENTER;
+            return CurtainShape.MIDDLE;
         }
 
         if (noRightCurtain && leftIsOpenAndMiddle && aboveIsOpenAndTop && noBelowCurtain) {
-            return CurtainShape.CENTER;
+            return CurtainShape.MIDDLE;
         }
 
         if (rightIsOpenAndRight && noLeftCurtain && aboveIsOpenAndLeft && noBelowCurtain) {
-            return CurtainShape.CENTER;
+            return CurtainShape.MIDDLE;
         }
 
         if (noRightCurtain && leftIsOpenAndLeft && aboveIsOpenAndRight && noBelowCurtain) {
-            return CurtainShape.CENTER;
+            return CurtainShape.MIDDLE;
         }
 
         if (rightIsOpenAndRight && noLeftCurtain && aboveIsOpenAndMiddle && belowIsOpenAndLeft) {
-            return CurtainShape.CENTER;
+            return CurtainShape.MIDDLE;
         }
 
         if (noRightCurtain && leftIsOpenAndLeft && aboveIsOpenAndMiddle && belowIsOpenAndRight) {
-            return CurtainShape.CENTER;
+            return CurtainShape.MIDDLE;
         }
 
         // Dynamic connections
@@ -382,7 +385,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
                 BlockState aboveNeighbor = level.getBlockState(abovePos);
                 BlockState leftNeighbor = level.getBlockState(leftPos);
                 if (aboveNeighbor.getBlock() instanceof CurtainBlock &&
-                        aboveNeighbor.getValue(SHAPE) == CurtainShape.CENTER &&
+                        aboveNeighbor.getValue(SHAPE) == CurtainShape.MIDDLE &&
                         leftNeighbor.getBlock() instanceof CurtainBlock &&
                         leftNeighbor.getValue(SHAPE) == CurtainShape.BOTTOM_LEFT) {
                     return CurtainShape.BOTTOM_MIDDLE;
@@ -393,7 +396,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
                 BlockState aboveNeighbor = level.getBlockState(abovePos);
                 BlockState rightNeighbor = level.getBlockState(rightPos);
                 if (aboveNeighbor.getBlock() instanceof CurtainBlock &&
-                        aboveNeighbor.getValue(SHAPE) == CurtainShape.CENTER &&
+                        aboveNeighbor.getValue(SHAPE) == CurtainShape.MIDDLE &&
                         rightNeighbor.getBlock() instanceof CurtainBlock &&
                         rightNeighbor.getValue(SHAPE) == CurtainShape.BOTTOM_RIGHT) {
                     return CurtainShape.BOTTOM_MIDDLE;
@@ -402,7 +405,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
             }
             return CurtainShape.BOTTOM_SINGLE;
         }
-        if (connectedLeft && connectedRight) return CurtainShape.CENTER;
+        if (connectedLeft && connectedRight) return CurtainShape.MIDDLE;
         if (!connectedLeft && connectedRight) return CurtainShape.LEFT;
         if (connectedLeft) return CurtainShape.RIGHT;
         return CurtainShape.SINGLE;

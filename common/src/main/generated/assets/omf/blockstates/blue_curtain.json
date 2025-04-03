@@ -16,10 +16,6 @@
       "model": "omf:block/blue_curtain_closed",
       "y": 90
     },
-    "facing=east,open=false,shape=center": {
-      "model": "omf:block/blue_curtain_single_closed",
-      "y": 90
-    },
     "facing=east,open=false,shape=corner_left": {
       "model": "omf:block/blue_curtain_single_closed",
       "y": 90
@@ -40,6 +36,10 @@
       "model": "omf:block/blue_curtain_single_closed",
       "y": 90
     },
+    "facing=east,open=false,shape=middle": {
+      "model": "omf:block/blue_curtain_single_closed",
+      "y": 90
+    },
     "facing=east,open=false,shape=right": {
       "model": "omf:block/blue_curtain_single_closed",
       "y": 90
@@ -53,7 +53,7 @@
       "y": 90
     },
     "facing=east,open=true,shape=bottom_middle": {
-      "model": "omf:block/blue_curtain_open",
+      "model": "omf:block/blue_curtain_middle_open",
       "y": 90
     },
     "facing=east,open=true,shape=bottom_right": {
@@ -64,16 +64,12 @@
       "model": "omf:block/blue_curtain_single_open",
       "y": 90
     },
-    "facing=east,open=true,shape=center": {
-      "model": "omf:block/blue_curtain_open",
-      "y": 90
-    },
     "facing=east,open=true,shape=corner_left": {
-      "model": "omf:block/blue_curtainleft_corner_open",
+      "model": "omf:block/blue_curtain_left_corner_open",
       "y": 90
     },
     "facing=east,open=true,shape=corner_right": {
-      "model": "omf:block/blue_curtainright_corner_open",
+      "model": "omf:block/blue_curtain_right_corner_open",
       "y": 90
     },
     "facing=east,open=true,shape=curtain_top": {
@@ -86,6 +82,10 @@
     },
     "facing=east,open=true,shape=left": {
       "model": "omf:block/blue_curtain_left_open",
+      "y": 90
+    },
+    "facing=east,open=true,shape=middle": {
+      "model": "omf:block/blue_curtain_middle_open",
       "y": 90
     },
     "facing=east,open=true,shape=right": {
@@ -108,9 +108,6 @@
     "facing=north,open=false,shape=bottom_single": {
       "model": "omf:block/blue_curtain_closed"
     },
-    "facing=north,open=false,shape=center": {
-      "model": "omf:block/blue_curtain_single_closed"
-    },
     "facing=north,open=false,shape=corner_left": {
       "model": "omf:block/blue_curtain_single_closed"
     },
@@ -126,6 +123,9 @@
     "facing=north,open=false,shape=left": {
       "model": "omf:block/blue_curtain_single_closed"
     },
+    "facing=north,open=false,shape=middle": {
+      "model": "omf:block/blue_curtain_single_closed"
+    },
     "facing=north,open=false,shape=right": {
       "model": "omf:block/blue_curtain_single_closed"
     },
@@ -136,7 +136,7 @@
       "model": "omf:block/blue_curtain_bottom_left_open"
     },
     "facing=north,open=true,shape=bottom_middle": {
-      "model": "omf:block/blue_curtain_open"
+      "model": "omf:block/blue_curtain_middle_open"
     },
     "facing=north,open=true,shape=bottom_right": {
       "model": "omf:block/blue_curtain_bottom_right_open"
@@ -144,14 +144,11 @@
     "facing=north,open=true,shape=bottom_single": {
       "model": "omf:block/blue_curtain_single_open"
     },
-    "facing=north,open=true,shape=center": {
-      "model": "omf:block/blue_curtain_open"
-    },
     "facing=north,open=true,shape=corner_left": {
-      "model": "omf:block/blue_curtainleft_corner_open"
+      "model": "omf:block/blue_curtain_left_corner_open"
     },
     "facing=north,open=true,shape=corner_right": {
-      "model": "omf:block/blue_curtainright_corner_open"
+      "model": "omf:block/blue_curtain_right_corner_open"
     },
     "facing=north,open=true,shape=curtain_top": {
       "model": "omf:block/blue_curtain_top_open"
@@ -161,6 +158,9 @@
     },
     "facing=north,open=true,shape=left": {
       "model": "omf:block/blue_curtain_left_open"
+    },
+    "facing=north,open=true,shape=middle": {
+      "model": "omf:block/blue_curtain_middle_open"
     },
     "facing=north,open=true,shape=right": {
       "model": "omf:block/blue_curtain_right_open"
@@ -184,10 +184,6 @@
       "model": "omf:block/blue_curtain_closed",
       "y": 180
     },
-    "facing=south,open=false,shape=center": {
-      "model": "omf:block/blue_curtain_single_closed",
-      "y": 180
-    },
     "facing=south,open=false,shape=corner_left": {
       "model": "omf:block/blue_curtain_single_closed",
       "y": 180
@@ -208,6 +204,10 @@
       "model": "omf:block/blue_curtain_single_closed",
       "y": 180
     },
+    "facing=south,open=false,shape=middle": {
+      "model": "omf:block/blue_curtain_single_closed",
+      "y": 180
+    },
     "facing=south,open=false,shape=right": {
       "model": "omf:block/blue_curtain_single_closed",
       "y": 180
@@ -221,7 +221,7 @@
       "y": 180
     },
     "facing=south,open=true,shape=bottom_middle": {
-      "model": "omf:block/blue_curtain_open",
+      "model": "omf:block/blue_curtain_middle_open",
       "y": 180
     },
     "facing=south,open=true,shape=bottom_right": {
@@ -232,16 +232,12 @@
       "model": "omf:block/blue_curtain_single_open",
       "y": 180
     },
-    "facing=south,open=true,shape=center": {
-      "model": "omf:block/blue_curtain_open",
-      "y": 180
-    },
     "facing=south,open=true,shape=corner_left": {
-      "model": "omf:block/blue_curtainleft_corner_open",
+      "model": "omf:block/blue_curtain_left_corner_open",
       "y": 180
     },
     "facing=south,open=true,shape=corner_right": {
-      "model": "omf:block/blue_curtainright_corner_open",
+      "model": "omf:block/blue_curtain_right_corner_open",
       "y": 180
     },
     "facing=south,open=true,shape=curtain_top": {
@@ -254,6 +250,10 @@
     },
     "facing=south,open=true,shape=left": {
       "model": "omf:block/blue_curtain_left_open",
+      "y": 180
+    },
+    "facing=south,open=true,shape=middle": {
+      "model": "omf:block/blue_curtain_middle_open",
       "y": 180
     },
     "facing=south,open=true,shape=right": {
@@ -280,10 +280,6 @@
       "model": "omf:block/blue_curtain_closed",
       "y": 270
     },
-    "facing=west,open=false,shape=center": {
-      "model": "omf:block/blue_curtain_single_closed",
-      "y": 270
-    },
     "facing=west,open=false,shape=corner_left": {
       "model": "omf:block/blue_curtain_single_closed",
       "y": 270
@@ -304,6 +300,10 @@
       "model": "omf:block/blue_curtain_single_closed",
       "y": 270
     },
+    "facing=west,open=false,shape=middle": {
+      "model": "omf:block/blue_curtain_single_closed",
+      "y": 270
+    },
     "facing=west,open=false,shape=right": {
       "model": "omf:block/blue_curtain_single_closed",
       "y": 270
@@ -317,7 +317,7 @@
       "y": 270
     },
     "facing=west,open=true,shape=bottom_middle": {
-      "model": "omf:block/blue_curtain_open",
+      "model": "omf:block/blue_curtain_middle_open",
       "y": 270
     },
     "facing=west,open=true,shape=bottom_right": {
@@ -328,16 +328,12 @@
       "model": "omf:block/blue_curtain_single_open",
       "y": 270
     },
-    "facing=west,open=true,shape=center": {
-      "model": "omf:block/blue_curtain_open",
-      "y": 270
-    },
     "facing=west,open=true,shape=corner_left": {
-      "model": "omf:block/blue_curtainleft_corner_open",
+      "model": "omf:block/blue_curtain_left_corner_open",
       "y": 270
     },
     "facing=west,open=true,shape=corner_right": {
-      "model": "omf:block/blue_curtainright_corner_open",
+      "model": "omf:block/blue_curtain_right_corner_open",
       "y": 270
     },
     "facing=west,open=true,shape=curtain_top": {
@@ -350,6 +346,10 @@
     },
     "facing=west,open=true,shape=left": {
       "model": "omf:block/blue_curtain_left_open",
+      "y": 270
+    },
+    "facing=west,open=true,shape=middle": {
+      "model": "omf:block/blue_curtain_middle_open",
       "y": 270
     },
     "facing=west,open=true,shape=right": {
