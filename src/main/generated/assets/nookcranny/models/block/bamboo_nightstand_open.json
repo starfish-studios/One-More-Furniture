@@ -1,8 +1,0 @@
-{
-  "parent": "nookcranny:block/template/nightstand_open",
-  "textures": {
-    "bits": "nookcranny:block/nightstand/bamboo_nightstand_bits",
-    "core": "nookcranny:block/nightstand/bamboo_nightstand_core",
-    "particle": "nookcranny:block/nightstand/bamboo_nightstand_core"
-  }
-}

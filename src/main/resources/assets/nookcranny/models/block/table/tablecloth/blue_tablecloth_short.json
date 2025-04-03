@@ -1,8 +1,0 @@
-{
-    "parent": "omf:block/template/tablecloth_short",
-    "textures": {
-        "top": "omf:block/table/tablecloth/blue_tablecloth_top",
-        "side": "omf:block/table/tablecloth/blue_tablecloth_side",
-        "particle": "block/blue_wool"
-    }
-}

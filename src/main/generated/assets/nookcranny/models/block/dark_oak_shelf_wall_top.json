@@ -1,7 +1,0 @@
-{
-  "parent": "nookcranny:block/template/shelf/shelf_wall_top",
-  "textures": {
-    "all": "nookcranny:block/shelf/dark_oak_shelf",
-    "particle": "nookcranny:block/shelf/dark_oak_shelf"
-  }
-}

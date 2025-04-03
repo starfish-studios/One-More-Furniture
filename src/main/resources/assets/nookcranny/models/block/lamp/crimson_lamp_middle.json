@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/lamp_middle",
-  "textures": {
-    "all": "omf:block/lamp/crimson_lamp",
-    "particle": "block/crimson_planks"
-  }
-}

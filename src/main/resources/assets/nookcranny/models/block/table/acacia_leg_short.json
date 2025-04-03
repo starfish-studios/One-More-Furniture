@@ -1,6 +1,0 @@
-{
-    "parent": "omf:block/template/table_leg_short",
-    "textures": {
-        "all": "omf:block/table/acacia_table"
-    }
-}

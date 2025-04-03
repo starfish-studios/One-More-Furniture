@@ -1,7 +1,0 @@
-{
-  "parent": "nookcranny:block/template/shelf/shelf_floor_double",
-  "textures": {
-    "all": "nookcranny:block/shelf/warped_shelf",
-    "particle": "nookcranny:block/shelf/warped_shelf"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "nookcranny:block/template/chime",
-  "textures": {
-    "all": "nookcranny:block/wind_chime/copper_wind_chimes"
-  }
-}

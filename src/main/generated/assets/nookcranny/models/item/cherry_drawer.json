@@ -1,9 +1,0 @@
-{
-  "parent": "nookcranny:block/template/drawer_inventory",
-  "textures": {
-    "countertop": "nookcranny:block/drawers/countertop/cherry_drawer_countertop_sides",
-    "front": "nookcranny:block/drawers/cherry_drawer_front",
-    "sides": "nookcranny:block/drawers/cherry_drawer_side",
-    "top": "nookcranny:block/drawers/cherry_drawer_top"
-  }
-}

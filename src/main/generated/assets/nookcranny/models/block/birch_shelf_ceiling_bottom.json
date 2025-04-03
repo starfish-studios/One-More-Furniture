@@ -1,7 +1,0 @@
-{
-  "parent": "nookcranny:block/template/shelf/shelf_ceiling_bottom",
-  "textures": {
-    "all": "nookcranny:block/shelf/birch_shelf",
-    "particle": "nookcranny:block/shelf/birch_shelf"
-  }
-}

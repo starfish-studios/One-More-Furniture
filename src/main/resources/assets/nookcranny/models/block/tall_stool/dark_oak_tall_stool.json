@@ -1,7 +1,0 @@
-{
-    "parent": "omf:block/template/tall_stool",
-    "textures": {
-        "all": "omf:block/tall_stool/dark_oak_tall_stool",
-        "particle": "block/dark_oak_planks"
-    }
-}

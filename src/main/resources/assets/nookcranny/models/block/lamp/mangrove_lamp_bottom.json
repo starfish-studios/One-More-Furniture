@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/lamp_bottom",
-  "textures": {
-    "all": "omf:block/lamp/mangrove_lamp",
-    "particle": "block/mangrove_planks"
-  }
-}

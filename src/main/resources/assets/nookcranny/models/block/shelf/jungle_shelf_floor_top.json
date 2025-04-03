@@ -1,9 +1,0 @@
-{
-    "parent": "omf:block/template/shelf/shelf_floor_top",
-    "textures": {
-        "all": "omf:block/shelf/jungle_shelf",
-        "log": "block/jungle_log",
-        "log_top": "block/jungle_log_top",
-        "particle": "block/jungle_planks"
-    }
-}

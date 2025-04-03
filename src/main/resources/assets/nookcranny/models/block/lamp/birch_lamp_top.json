@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/lamp_top",
-  "textures": {
-    "all": "omf:block/lamp/birch_lamp",
-    "particle": "block/birch_planks"
-  }
-}

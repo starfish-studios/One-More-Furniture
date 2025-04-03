@@ -1,9 +1,0 @@
-{
-  "parent": "nookcranny:block/template/cabinet_top",
-  "textures": {
-    "front": "nookcranny:block/cabinet/acacia_cabinet_front_upper",
-    "particle": "nookcranny:block/cabinet/acacia_cabinet_front_upper",
-    "sides": "nookcranny:block/cabinet/acacia_cabinet_sides_upper",
-    "top": "nookcranny:block/drawers/acacia_drawer_top"
-  }
-}

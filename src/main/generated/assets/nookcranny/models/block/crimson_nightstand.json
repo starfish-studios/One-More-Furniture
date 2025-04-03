@@ -1,8 +1,0 @@
-{
-  "parent": "nookcranny:block/template/nightstand",
-  "textures": {
-    "bits": "nookcranny:block/nightstand/crimson_nightstand_bits",
-    "core": "nookcranny:block/nightstand/crimson_nightstand_core",
-    "particle": "nookcranny:block/nightstand/crimson_nightstand_core"
-  }
-}

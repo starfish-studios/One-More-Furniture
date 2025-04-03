@@ -1,9 +1,0 @@
-{
-  "parent": "nookcranny:block/template/cabinet_inventory",
-  "textures": {
-    "countertop": "nookcranny:block/drawers/countertop/jungle_drawer_countertop_sides",
-    "front": "nookcranny:block/cabinet/jungle_cabinet_front",
-    "sides": "nookcranny:block/cabinet/jungle_cabinet_sides",
-    "top": "nookcranny:block/drawers/jungle_drawer_top"
-  }
-}

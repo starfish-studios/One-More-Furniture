@@ -1,9 +1,0 @@
-{
-  "parent": "nookcranny:block/template/drawer_inventory",
-  "textures": {
-    "countertop": "nookcranny:block/drawers/countertop/mangrove_drawer_countertop_sides",
-    "front": "nookcranny:block/drawers/mangrove_drawer_front",
-    "sides": "nookcranny:block/drawers/mangrove_drawer_side",
-    "top": "nookcranny:block/drawers/mangrove_drawer_top"
-  }
-}

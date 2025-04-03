@@ -1,6 +1,0 @@
-{
-    "parent": "omf:block/template/table_full",
-    "textures": {
-        "all": "omf:block/table/birch_table"
-    }
-}

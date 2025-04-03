@@ -1,7 +1,0 @@
-{
-    "parent": "omf:block/template/bench_back_left",
-    "textures": {
-        "all": "omf:block/bench/dark_oak_bench",
-        "particle": "block/dark_oak_planks"
-    }
-}

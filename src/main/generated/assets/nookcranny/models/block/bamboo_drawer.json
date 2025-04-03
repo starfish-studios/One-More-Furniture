@@ -1,9 +1,0 @@
-{
-  "parent": "nookcranny:block/template/drawer",
-  "textures": {
-    "front": "nookcranny:block/drawers/bamboo_drawer_front",
-    "particle": "nookcranny:block/drawers/bamboo_drawer_front",
-    "sides": "nookcranny:block/drawers/bamboo_drawer_side",
-    "top": "nookcranny:block/drawers/bamboo_drawer_top"
-  }
-}

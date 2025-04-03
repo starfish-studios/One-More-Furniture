@@ -1,7 +1,0 @@
-{
-    "parent": "omf:block/template/lampshade",
-    "textures": {
-        "all": "omf:block/lamp/lampshade/magenta_lampshade",
-        "particle": "block/magenta_wool"
-    }
-}

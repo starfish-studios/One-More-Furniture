@@ -1,7 +1,0 @@
-{
-    "parent": "omf:block/template/chair_cushion",
-    "textures": {
-        "all": "omf:block/chair/cushion/light_blue_cushion",
-        "particle": "block/light_blue_wool"
-    }
-}

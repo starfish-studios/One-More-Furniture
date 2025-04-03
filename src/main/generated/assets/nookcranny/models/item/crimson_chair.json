@@ -1,6 +1,0 @@
-{
-  "parent": "nookcranny:block/template/chair_1",
-  "textures": {
-    "all": "nookcranny:block/chair/crimson_chair"
-  }
-}

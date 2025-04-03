@@ -123,7 +123,6 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
                 level.setBlock(pos, state.cycle(FLAG_STATUS), 3);
             } else if (blockEntity instanceof MailboxBlockEntity mailboxBlockEntity1) {
-
                 if (player instanceof ServerPlayer serverPlayer) {
                     MenuRegistry.openExtendedMenu(serverPlayer, new ExtendedMenuProvider() {
                         @Override
@@ -133,7 +132,9 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
                         @Override
                         public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-                            return new MailboxMenu(id, inventory);
+                            var buf = new FriendlyByteBuf(Unpooled.buffer());
+                            saveExtraData(buf);
+                            return new MailboxMenu(id, inventory, buf);
                         }
 
                         @Override

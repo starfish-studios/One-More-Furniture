@@ -1,7 +1,0 @@
-{
-  "parent": "nookcranny:block/template/countertop",
-  "textures": {
-    "sides": "nookcranny:block/drawers/countertop/quartz_drawer_countertop_sides",
-    "top": "nookcranny:block/drawers/quartz_drawer_top"
-  }
-}

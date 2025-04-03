@@ -1,7 +1,0 @@
-{
-    "parent": "omf:block/template/mailbox/mailbox_inventory",
-    "textures": {
-        "post": "omf:block/mailbox/post/acacia_post",
-        "mailbox": "omf:block/mailbox/mailbox"
-    }
-}
