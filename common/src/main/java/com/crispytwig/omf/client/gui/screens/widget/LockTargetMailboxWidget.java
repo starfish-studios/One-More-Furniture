@@ -14,7 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 
 public class LockTargetMailboxWidget extends AbstractWidget {
 
-    public static ResourceLocation packetChannel = new ResourceLocation(OneMoreFurniture.MOD_ID, "switch_lock");
     public boolean locked = false;
     public MailboxMenu mailboxMenu;
 
@@ -46,7 +45,7 @@ public class LockTargetMailboxWidget extends AbstractWidget {
         FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
         buf.writeBlockPos(this.mailboxMenu.pos);
         buf.writeBoolean(locked);
-        NetworkManager.sendToServer(packetChannel, buf);
+        NetworkManager.sendToServer(OneMoreFurniture.lockTargetId, buf);
         this.mailboxMenu.mailboxBlockEntity.lockTarget = locked;
     }
 

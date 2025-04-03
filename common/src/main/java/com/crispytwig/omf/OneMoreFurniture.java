@@ -13,9 +13,9 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrarManager;
 import dev.architectury.registry.registries.RegistrySupplier;
 import eu.midnightdust.lib.config.MidnightConfig;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 
 import java.util.Map;
@@ -26,6 +26,9 @@ public class OneMoreFurniture {
     public static final Supplier<RegistrarManager> REGISTRIES = Suppliers.memoize(() -> RegistrarManager.get(MOD_ID));
 
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(MOD_ID, Registries.CREATIVE_MODE_TAB);
+
+    //Moved from Client-side only code so it can be registered on server
+    public static ResourceLocation lockTargetId = new ResourceLocation(OneMoreFurniture.MOD_ID, "switch_lock");
 
     public static final RegistrySupplier<CreativeModeTab> MAIN = TABS.register("main",
             () -> CreativeTabRegistry.create(builder -> {
@@ -86,22 +89,26 @@ public class OneMoreFurniture {
             var name =  buf.readUtf();
             var pos = buf.readBlockPos();
             var player = context.getPlayer();
-            var be = player.level().getBlockEntity(pos);
-            if (be instanceof MailboxBlockEntity mailboxBlockEntity) {
-                mailboxBlockEntity.targetString = name;
-                mailboxBlockEntity.setChanged();
-            }
+            context.queue(() -> {
+                var be = player.level().getBlockEntity(pos);
+                if (be instanceof MailboxBlockEntity mailboxBlockEntity) {
+                    mailboxBlockEntity.targetString = name;
+                    mailboxBlockEntity.setChanged();
+                }
+            });
         }));
 
 
-        NetworkManager.registerReceiver(NetworkManager.Side.C2S, LockTargetMailboxWidget.packetChannel, ((buf, context)  -> {
+        NetworkManager.registerReceiver(NetworkManager.Side.C2S, lockTargetId, ((buf, context)  -> {
             var posi = buf.readBlockPos();
             var lockTarget = buf.readBoolean();
-            var be = context.getPlayer().level().getBlockEntity(posi);
-            if (be instanceof MailboxBlockEntity mailboxBlockEntity) {
-                mailboxBlockEntity.lockTarget = lockTarget;
-                mailboxBlockEntity.setChanged();
-            }
+            context.queue(() -> {
+                var be = context.getPlayer().level().getBlockEntity(posi);
+                if (be instanceof MailboxBlockEntity mailboxBlockEntity) {
+                    mailboxBlockEntity.lockTarget = lockTarget;
+                    mailboxBlockEntity.setChanged();
+                }
+            });
         }));
     }
 }
