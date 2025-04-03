@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "nookcranny:block/foods/cookie",
-		"all": "nookcranny:block/foods/cookie"
+		"particle": "omf:block/foods/cookie",
+		"all": "omf:block/foods/cookie"
 	},
 	"elements": [
 		{

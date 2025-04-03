@@ -1,8 +1,8 @@
 {
   "parent": "block/block",
   "textures": {
-    "particle": "nookcranny:block/curtain/planks",
-    "main": "nookcranny:block/curtain/planks"
+    "particle": "omf:block/curtain/planks",
+    "main": "omf:block/curtain/planks"
   },
   "elements": [
     {

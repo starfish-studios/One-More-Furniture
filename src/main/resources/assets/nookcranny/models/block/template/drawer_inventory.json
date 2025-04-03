@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "nookcranny:block/drawers/oak_drawer_top"
+		"particle": "omf:block/drawers/oak_drawer_top"
 	},
 	"elements": [
 		{

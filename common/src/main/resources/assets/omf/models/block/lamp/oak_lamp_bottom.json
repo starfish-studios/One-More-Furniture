@@ -1,7 +1,7 @@
 {
-  "parent": "nookcranny:block/template/lamp_bottom",
+  "parent": "omf:block/template/lamp_bottom",
   "textures": {
-    "all": "nookcranny:block/lamp/oak_lamp",
+    "all": "omf:block/lamp/oak_lamp",
     "particle": "block/oak_planks"
   }
 }

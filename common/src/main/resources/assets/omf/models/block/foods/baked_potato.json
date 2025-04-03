@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "nookcranny:block/foods/baked_potato",
-		"all": "nookcranny:block/foods/baked_potato"
+		"particle": "omf:block/foods/baked_potato",
+		"all": "omf:block/foods/baked_potato"
 	},
 	"elements": [
 		{

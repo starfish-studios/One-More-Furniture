@@ -14,11 +14,9 @@ public class OMFEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(OneMoreFurniture.MOD_ID, Registries.ENTITY_TYPE);
 
 
-    public static final RegistrySupplier<EntityType<?>> SEAT = ENTITY_TYPES.register("seat", () ->
-            EntityType.Builder.of(
-                    SeatEntity::new,
-                    MobCategory.MISC)
-                    .sized(0f,0f
-                    ).build("seat"));
+    public static final RegistrySupplier<EntityType<SeatEntity>> SEAT = ENTITY_TYPES.register("seat", () ->
+            EntityType.Builder.<SeatEntity>of(SeatEntity::new, MobCategory.MISC)
+                    .sized(0f, 0f)
+                    .build("seat"));
 
 }

@@ -1,7 +1,7 @@
 {
-    "parent": "nookcranny:block/template/mailbox/mailbox_post",
+    "parent": "omf:block/template/mailbox/mailbox_post",
     "textures": {
-        "post": "nookcranny:block/mailbox/post/cherry_post",
+        "post": "omf:block/mailbox/post/cherry_post",
         "particle": "block/cherry_planks"
     }
 }

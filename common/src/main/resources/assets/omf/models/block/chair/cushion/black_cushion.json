@@ -1,7 +1,7 @@
 {
-    "parent": "nookcranny:block/template/chair_cushion",
+    "parent": "omf:block/template/chair_cushion",
     "textures": {
-        "all": "nookcranny:block/chair/cushion/black_cushion",
+        "all": "omf:block/chair/cushion/black_cushion",
         "particle": "block/black_wool"
     }
 }

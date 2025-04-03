@@ -1,6 +1,6 @@
 {
-    "parent": "nookcranny:block/template/table_leg",
+    "parent": "omf:block/template/table_leg",
     "textures": {
-        "all": "nookcranny:block/table/spruce_table"
+        "all": "omf:block/table/spruce_table"
     }
 }

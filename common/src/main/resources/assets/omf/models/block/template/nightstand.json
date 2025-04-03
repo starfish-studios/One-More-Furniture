@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"bits": "nookcranny:block/nightstand/oak_nightstand_bits",
-		"core": "nookcranny:block/nightstand/oak_nightstand_core"
+		"bits": "omf:block/nightstand/oak_nightstand_bits",
+		"core": "omf:block/nightstand/oak_nightstand_core"
 	},
 	"elements": [
 		{

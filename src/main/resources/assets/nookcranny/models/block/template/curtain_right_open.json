@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"all": "nookcranny:block/curtain/white_curtain_side_open",
-		"particle": "nookcranny:block/curtain/white_curtain_side_open"
+		"all": "omf:block/curtain/white_curtain_side_open",
+		"particle": "omf:block/curtain/white_curtain_side_open"
 	},
 	"elements": [
 		{

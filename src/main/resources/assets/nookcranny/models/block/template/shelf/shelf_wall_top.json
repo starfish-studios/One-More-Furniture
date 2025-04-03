@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"all": "nookcranny:block/shelf/oak_shelf"
+		"all": "omf:block/shelf/oak_shelf"
 	},
 	"elements": [
 		{

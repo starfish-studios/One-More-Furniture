@@ -1,6 +1,6 @@
 {
-    "parent": "nookcranny:block/template/table_top",
+    "parent": "omf:block/template/table_top",
     "textures": {
-        "all": "nookcranny:block/table/mangrove_table"
+        "all": "omf:block/table/mangrove_table"
     }
 }

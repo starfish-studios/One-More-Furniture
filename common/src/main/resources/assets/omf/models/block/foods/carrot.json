@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "nookcranny:block/foods/carrot",
-		"particle": "nookcranny:block/foods/carrot"
+		"0": "omf:block/foods/carrot",
+		"particle": "omf:block/foods/carrot"
 	},
 	"elements": [
 		{

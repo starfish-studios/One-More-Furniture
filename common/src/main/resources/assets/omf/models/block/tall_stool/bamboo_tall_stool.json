@@ -1,7 +1,7 @@
 {
-    "parent": "nookcranny:block/template/tall_stool",
+    "parent": "omf:block/template/tall_stool",
     "textures": {
-        "all": "nookcranny:block/tall_stool/bamboo_tall_stool",
+        "all": "omf:block/tall_stool/bamboo_tall_stool",
         "particle": "block/bamboo_planks"
     }
 }

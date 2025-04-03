@@ -1,10 +1,10 @@
 {
 	"schemaVersion": 1,
-	"id": "nookcranny",
+	"id": "omf",
 	"version": "${version}",
 	"name": "NC",
 	"description": "This is an example description! Tell everyone what your mod is about!",
-	"accessWidener" : "nookcranny.accesswidener",
+	"accessWidener" : "omf.accesswidener",
 	"authors": [
 		"crispytwig"
 	],
@@ -13,21 +13,21 @@
 		"issues": "https://github.com/crispytwig/Nook-and-Cranny/issues"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/nookcranny/icon.png",
+	"icon": "assets/omf/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.crispytwig.nookcranny.NookAndCranny"
+			"com.crispytwig.omf.NookAndCranny"
 		],
 		"client": [
-			"com.crispytwig.nookcranny.NCClient"
+			"com.crispytwig.omf.NCClient"
 		],
 		"fabric-datagen": [
-			"com.crispytwig.nookcranny.data.NCDataGenerator"
+			"com.crispytwig.omf.data.NCDataGenerator"
 		]
 	},
 	"mixins": [
-		"nookcranny.mixins.json"
+		"omf.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.14.24",

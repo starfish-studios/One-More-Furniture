@@ -1,96 +1,96 @@
 {
     "variants": {
         "facing=north,powered=false,face=wall": {
-            "model": "nookcranny:block/spigot"
+            "model": "omf:block/spigot"
         },
         "facing=east,powered=false,face=wall": {
-            "model": "nookcranny:block/spigot",
+            "model": "omf:block/spigot",
             "y": 90
         },
         "facing=south,powered=false,face=wall": {
-            "model": "nookcranny:block/spigot",
+            "model": "omf:block/spigot",
             "y": 180
         },
         "facing=west,powered=false,face=wall": {
-            "model": "nookcranny:block/spigot",
+            "model": "omf:block/spigot",
             "y": 270
         },
         "facing=north,powered=true,face=wall": {
-            "model": "nookcranny:block/spigot_on"
+            "model": "omf:block/spigot_on"
         },
         "facing=east,powered=true,face=wall": {
-            "model": "nookcranny:block/spigot_on",
+            "model": "omf:block/spigot_on",
             "y": 90
         },
         "facing=south,powered=true,face=wall": {
-            "model": "nookcranny:block/spigot_on",
+            "model": "omf:block/spigot_on",
             "y": 180
         },
         "facing=west,powered=true,face=wall": {
-            "model": "nookcranny:block/spigot_on",
+            "model": "omf:block/spigot_on",
             "y": 270
         },
 
 
         "facing=north,powered=false,face=ceiling": {
-            "model": "nookcranny:block/spigot_ceiling"
+            "model": "omf:block/spigot_ceiling"
         },
         "facing=east,powered=false,face=ceiling": {
-            "model": "nookcranny:block/spigot_ceiling",
+            "model": "omf:block/spigot_ceiling",
             "y": 90
         },
         "facing=south,powered=false,face=ceiling": {
-            "model": "nookcranny:block/spigot_ceiling",
+            "model": "omf:block/spigot_ceiling",
             "y": 180
         },
         "facing=west,powered=false,face=ceiling": {
-            "model": "nookcranny:block/spigot_ceiling",
+            "model": "omf:block/spigot_ceiling",
             "y": 270
         },
         "facing=north,powered=true,face=ceiling": {
-            "model": "nookcranny:block/spigot_ceiling_on"
+            "model": "omf:block/spigot_ceiling_on"
         },
         "facing=east,powered=true,face=ceiling": {
-            "model": "nookcranny:block/spigot_ceiling_on",
+            "model": "omf:block/spigot_ceiling_on",
             "y": 90
         },
         "facing=south,powered=true,face=ceiling": {
-            "model": "nookcranny:block/spigot_ceiling_on",
+            "model": "omf:block/spigot_ceiling_on",
             "y": 180
         },
         "facing=west,powered=true,face=ceiling": {
-            "model": "nookcranny:block/spigot_ceiling_on",
+            "model": "omf:block/spigot_ceiling_on",
             "y": 270
         },
 
         "facing=north,powered=false,face=floor": {
-            "model": "nookcranny:block/spigot_floor"
+            "model": "omf:block/spigot_floor"
         },
         "facing=east,powered=false,face=floor": {
-            "model": "nookcranny:block/spigot_floor",
+            "model": "omf:block/spigot_floor",
             "y": 90
         },
         "facing=south,powered=false,face=floor": {
-            "model": "nookcranny:block/spigot_floor",
+            "model": "omf:block/spigot_floor",
             "y": 180
         },
         "facing=west,powered=false,face=floor": {
-            "model": "nookcranny:block/spigot_floor",
+            "model": "omf:block/spigot_floor",
             "y": 270
         },
         "facing=north,powered=true,face=floor": {
-            "model": "nookcranny:block/spigot_floor_on"
+            "model": "omf:block/spigot_floor_on"
         },
         "facing=east,powered=true,face=floor": {
-            "model": "nookcranny:block/spigot_floor_on",
+            "model": "omf:block/spigot_floor_on",
             "y": 90
         },
         "facing=south,powered=true,face=floor": {
-            "model": "nookcranny:block/spigot_floor_on",
+            "model": "omf:block/spigot_floor_on",
             "y": 180
         },
         "facing=west,powered=true,face=floor": {
-            "model": "nookcranny:block/spigot_floor_on",
+            "model": "omf:block/spigot_floor_on",
             "y": 270
         }
     }

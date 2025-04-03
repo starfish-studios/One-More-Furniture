@@ -3,7 +3,7 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"particle": "#all",
-		"all": "nookcranny:block/chair/cushion/white_cushion"
+		"all": "omf:block/chair/cushion/white_cushion"
 	},
 	"elements": [
 		{

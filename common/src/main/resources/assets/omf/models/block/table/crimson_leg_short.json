@@ -1,6 +1,6 @@
 {
-    "parent": "nookcranny:block/template/table_leg_short",
+    "parent": "omf:block/template/table_leg_short",
     "textures": {
-        "all": "nookcranny:block/table/crimson_table"
+        "all": "omf:block/table/crimson_table"
     }
 }

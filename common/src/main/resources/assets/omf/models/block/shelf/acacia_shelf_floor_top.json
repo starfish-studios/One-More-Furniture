@@ -1,7 +1,7 @@
 {
-    "parent": "nookcranny:block/template/shelf/shelf_floor_top",
+    "parent": "omf:block/template/shelf/shelf_floor_top",
     "textures": {
-        "all": "nookcranny:block/shelf/acacia_shelf",
+        "all": "omf:block/shelf/acacia_shelf",
         "log": "block/acacia_log",
         "log_top": "block/acacia_log_top",
         "particle": "block/acacia_planks"

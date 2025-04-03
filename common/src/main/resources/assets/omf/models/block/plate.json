@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"particle": "nookcranny:block/plate",
-		"all": "nookcranny:block/plate"
+		"particle": "omf:block/plate",
+		"all": "omf:block/plate"
 	},
 	"elements": [
 		{

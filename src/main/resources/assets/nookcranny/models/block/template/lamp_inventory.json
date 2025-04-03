@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"all": "nookcranny:block/lamp/oak_lamp",
-		"particle": "nookcranny:block/lamp/lampshade/white_lampshade",
-		"lampshade": "nookcranny:block/lamp/lampshade/white_lampshade"
+		"all": "omf:block/lamp/oak_lamp",
+		"particle": "omf:block/lamp/lampshade/white_lampshade",
+		"lampshade": "omf:block/lamp/lampshade/white_lampshade"
 	},
 	"elements": [
 		{

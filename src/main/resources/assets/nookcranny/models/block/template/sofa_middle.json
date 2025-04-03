@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [128, 128],
 	"textures": {
-		"all": "nookcranny:block/sofa/white_sofa",
-		"particle": "nookcranny:block/sofa/white_sofa"
+		"all": "omf:block/sofa/white_sofa",
+		"particle": "omf:block/sofa/white_sofa"
 	},
 	"elements": [
 		{

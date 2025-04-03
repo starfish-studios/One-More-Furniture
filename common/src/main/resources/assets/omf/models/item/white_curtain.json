@@ -1,6 +1,6 @@
 {
     "gui_light": "front",
-    "parent": "nookcranny:block/white_curtain_single_closed",
+    "parent": "omf:block/white_curtain_single_closed",
     "display": {
         "gui": {
             "rotation": [ 30, 225, 0 ],

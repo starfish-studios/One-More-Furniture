@@ -1,7 +1,7 @@
 {
-    "parent": "nookcranny:block/template/shelf/shelf_wall_bottom",
+    "parent": "omf:block/template/shelf/shelf_wall_bottom",
     "textures": {
-        "all": "nookcranny:block/shelf/warped_shelf",
+        "all": "omf:block/shelf/warped_shelf",
         "particle": "block/warped_planks"
     }
 }

@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "nookcranny:item/crimson_shelf"
+        "layer0": "omf:item/crimson_shelf"
     }
 }

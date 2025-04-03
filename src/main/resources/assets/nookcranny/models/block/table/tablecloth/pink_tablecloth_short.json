@@ -1,8 +1,8 @@
 {
-    "parent": "nookcranny:block/template/tablecloth_short",
+    "parent": "omf:block/template/tablecloth_short",
     "textures": {
-        "top": "nookcranny:block/table/tablecloth/pink_tablecloth_top",
-        "side": "nookcranny:block/table/tablecloth/pink_tablecloth_side",
+        "top": "omf:block/table/tablecloth/pink_tablecloth_top",
+        "side": "omf:block/table/tablecloth/pink_tablecloth_side",
         "particle": "block/pink_wool"
     }
 }

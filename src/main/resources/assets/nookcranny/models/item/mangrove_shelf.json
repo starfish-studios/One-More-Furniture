@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "nookcranny:item/mangrove_shelf"
+        "layer0": "omf:item/mangrove_shelf"
     }
 }

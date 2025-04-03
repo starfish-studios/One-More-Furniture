@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"mailbox": "nookcranny:block/mailbox/mailbox",
-		"post": "nookcranny:block/mailbox/post/oak_post"
+		"mailbox": "omf:block/mailbox/mailbox",
+		"post": "omf:block/mailbox/post/oak_post"
 	},
 	"elements": [
 		{

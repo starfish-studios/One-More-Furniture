@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "nookcranny:item/dark_oak_shelf"
+        "layer0": "omf:item/dark_oak_shelf"
     }
 }

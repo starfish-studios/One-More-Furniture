@@ -4,7 +4,7 @@
 	"textures": {
 		"particle": "block/chain",
 		"chain": "block/chain",
-		"all": "nookcranny:block/shelf/oak_shelf"
+		"all": "omf:block/shelf/oak_shelf"
 	},
 	"elements": [
 		{

@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "nookcranny:block/foods/potato",
-		"all": "nookcranny:block/foods/potato"
+		"particle": "omf:block/foods/potato",
+		"all": "omf:block/foods/potato"
 	},
 	"elements": [
 		{

@@ -1,7 +1,7 @@
 {
-  "parent": "nookcranny:block/template/lamp",
+  "parent": "omf:block/template/lamp",
   "textures": {
-    "all": "nookcranny:block/lamp/mangrove_lamp",
+    "all": "omf:block/lamp/mangrove_lamp",
     "particle": "block/mangrove_planks"
   }
 }

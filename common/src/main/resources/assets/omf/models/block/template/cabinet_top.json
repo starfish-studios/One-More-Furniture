@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"front": "nookcranny:block/cabinet/oak_cabinet_front_upper",
-		"sides": "nookcranny:block/cabinet/oak_cabinet_sides_upper",
-		"top": "nookcranny:block/drawers/oak_drawer_top"
+		"front": "omf:block/cabinet/oak_cabinet_front_upper",
+		"sides": "omf:block/cabinet/oak_cabinet_sides_upper",
+		"top": "omf:block/drawers/oak_drawer_top"
 	},
 	"elements": [
 		{

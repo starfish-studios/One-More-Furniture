@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"all": "nookcranny:block/bench/spruce_bench"
+		"all": "omf:block/bench/spruce_bench"
 	},
 	"elements": [
 		{

@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"post": "nookcranny:block/mailbox/post/oak_post"
+		"post": "omf:block/mailbox/post/oak_post"
 	},
 	"elements": [
 		{

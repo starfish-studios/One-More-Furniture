@@ -1,7 +1,7 @@
 {
-    "parent": "nookcranny:block/template/shelf/shelf_floor_double",
+    "parent": "omf:block/template/shelf/shelf_floor_double",
     "textures": {
-        "all": "nookcranny:block/shelf/birch_shelf",
+        "all": "omf:block/shelf/birch_shelf",
         "log": "block/birch_log",
         "log_top": "block/birch_log_top",
         "particle": "block/birch_planks"

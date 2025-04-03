@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "nookcranny:block/tall_stool/cushion/white_cushion_bottom",
-		"bottom": "nookcranny:block/tall_stool/cushion/white_cushion_bottom",
-		"top": "nookcranny:block/tall_stool/cushion/white_cushion_top"
+		"particle": "omf:block/tall_stool/cushion/white_cushion_bottom",
+		"bottom": "omf:block/tall_stool/cushion/white_cushion_bottom",
+		"top": "omf:block/tall_stool/cushion/white_cushion_top"
 	},
 	"elements": [
 		{

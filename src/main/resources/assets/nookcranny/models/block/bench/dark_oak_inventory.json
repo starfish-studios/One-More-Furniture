@@ -1,7 +1,7 @@
 {
-    "parent": "nookcranny:block/template/bench_inventory",
+    "parent": "omf:block/template/bench_inventory",
     "textures": {
-        "all": "nookcranny:block/bench/dark_oak_bench",
+        "all": "omf:block/bench/dark_oak_bench",
         "particle": "block/dark_oak_planks"
     }
 }

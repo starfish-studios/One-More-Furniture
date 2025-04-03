@@ -1,7 +1,7 @@
 {
-    "parent": "nookcranny:block/template/lampshade",
+    "parent": "omf:block/template/lampshade",
     "textures": {
-        "all": "nookcranny:block/lamp/lampshade/cyan_lampshade",
+        "all": "omf:block/lamp/lampshade/cyan_lampshade",
         "particle": "block/cyan_wool"
     }
 }

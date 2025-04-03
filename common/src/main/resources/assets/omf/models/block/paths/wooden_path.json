@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "wooden_path",
 	"textures": {
-		"0": "nookcranny:block/paths/wooden_path_1",
-		"particle": "nookcranny:block/paths/wooden_path_1"
+		"0": "omf:block/paths/wooden_path_1",
+		"particle": "omf:block/paths/wooden_path_1"
 	},
 	"elements": [
 		{

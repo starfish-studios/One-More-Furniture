@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "stone_path",
 	"textures": {
-		"0": "nookcranny:block/paths/stone_path",
-		"particle": "nookcranny:block/paths/stone_path"
+		"0": "omf:block/paths/stone_path",
+		"particle": "omf:block/paths/stone_path"
 	},
 	"elements": [
 		{

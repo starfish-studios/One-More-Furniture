@@ -1,7 +1,7 @@
 {
-    "parent": "nookcranny:block/template/shelf/shelf_floor_bottom",
+    "parent": "omf:block/template/shelf/shelf_floor_bottom",
     "textures": {
-        "all": "nookcranny:block/shelf/bamboo_shelf",
+        "all": "omf:block/shelf/bamboo_shelf",
         "log": "block/bamboo_log",
         "log_top": "block/bamboo_log_top",
         "particle": "block/bamboo_planks"

@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"top": "nookcranny:block/table/tablecloth/white_tablecloth_top",
-		"side": "nookcranny:block/table/tablecloth/white_tablecloth_side"
+		"top": "omf:block/table/tablecloth/white_tablecloth_top",
+		"side": "omf:block/table/tablecloth/white_tablecloth_side"
 	},
 	"elements": [
 		{

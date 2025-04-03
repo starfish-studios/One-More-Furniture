@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "nookcranny:block/drawers/countertop/oak_drawer_countertop_sides",
-		"sides": "nookcranny:block/drawers/countertop/oak_drawer_countertop_sides",
-		"top": "nookcranny:block/drawers/oak_drawer_top"
+		"particle": "omf:block/drawers/countertop/oak_drawer_countertop_sides",
+		"sides": "omf:block/drawers/countertop/oak_drawer_countertop_sides",
+		"top": "omf:block/drawers/oak_drawer_top"
 	},
 	"elements": [
 		{

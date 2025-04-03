@@ -2,12 +2,12 @@
     "multipart": [
         {
             "apply": {
-                "model": "nookcranny:block/plate"
+                "model": "omf:block/plate"
             }
         },
         {
             "apply": {
-                "model": "nookcranny:block/foods/apple"
+                "model": "omf:block/foods/apple"
             },
             "when": {
                 "food": "apple"
@@ -15,7 +15,7 @@
         },
         {
             "apply": {
-                "model": "nookcranny:block/foods/baked_potato"
+                "model": "omf:block/foods/baked_potato"
             },
             "when": {
                 "food": "baked_potato"
@@ -23,7 +23,7 @@
         },
         {
             "apply": {
-                "model": "nookcranny:block/foods/beetroot"
+                "model": "omf:block/foods/beetroot"
             },
             "when": {
                 "food": "beetroot"
@@ -31,7 +31,7 @@
         },
         {
             "apply": {
-                "model": "nookcranny:block/foods/bread"
+                "model": "omf:block/foods/bread"
             },
             "when": {
                 "food": "bread"
@@ -39,7 +39,7 @@
         },
         {
             "apply": {
-                "model": "nookcranny:block/foods/carrot"
+                "model": "omf:block/foods/carrot"
             },
             "when": {
                 "food": "carrot"
@@ -47,7 +47,7 @@
         },
         {
             "apply": {
-                "model": "nookcranny:block/foods/cookie"
+                "model": "omf:block/foods/cookie"
             },
             "when": {
                 "food": "cookie"
@@ -55,7 +55,7 @@
         },
         {
             "apply": {
-                "model": "nookcranny:block/foods/potato"
+                "model": "omf:block/foods/potato"
             },
             "when": {
                 "food": "potato"
