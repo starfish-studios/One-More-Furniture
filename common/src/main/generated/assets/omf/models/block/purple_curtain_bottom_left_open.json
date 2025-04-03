@@ -1,0 +1,7 @@
+{
+  "parent": "omf:block/template/curtain_bottom_left_open",
+  "textures": {
+    "all": "omf:block/curtain/purple_curtain_bottom_open",
+    "particle": "omf:block/curtain/purple_curtain_bottom_open"
+  }
+}

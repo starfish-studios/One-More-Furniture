@@ -1,0 +1,6 @@
+{
+  "parent": "omf:block/template/chime",
+  "textures": {
+    "all": "omf:block/wind_chime/echo_shard_wind_chimes"
+  }
+}

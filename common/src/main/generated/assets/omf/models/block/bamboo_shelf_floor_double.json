@@ -1,0 +1,7 @@
+{
+  "parent": "omf:block/template/shelf/shelf_floor_double",
+  "textures": {
+    "all": "omf:block/shelf/bamboo_shelf",
+    "particle": "omf:block/shelf/bamboo_shelf"
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "omf:birch_chair"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "white"
+              }
+            }
+          ],
+          "name": "minecraft:white_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "orange"
+              }
+            }
+          ],
+          "name": "minecraft:orange_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "magenta"
+              }
+            }
+          ],
+          "name": "minecraft:magenta_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "light_blue"
+              }
+            }
+          ],
+          "name": "minecraft:light_blue_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "yellow"
+              }
+            }
+          ],
+          "name": "minecraft:yellow_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "lime"
+              }
+            }
+          ],
+          "name": "minecraft:lime_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "pink"
+              }
+            }
+          ],
+          "name": "minecraft:pink_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "gray"
+              }
+            }
+          ],
+          "name": "minecraft:gray_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "light_gray"
+              }
+            }
+          ],
+          "name": "minecraft:light_gray_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "cyan"
+              }
+            }
+          ],
+          "name": "minecraft:cyan_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "purple"
+              }
+            }
+          ],
+          "name": "minecraft:purple_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "blue"
+              }
+            }
+          ],
+          "name": "minecraft:blue_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "brown"
+              }
+            }
+          ],
+          "name": "minecraft:brown_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "green"
+              }
+            }
+          ],
+          "name": "minecraft:green_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "red"
+              }
+            }
+          ],
+          "name": "minecraft:red_carpet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "omf:birch_chair",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cushion": "black"
+              }
+            }
+          ],
+          "name": "minecraft:black_carpet"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

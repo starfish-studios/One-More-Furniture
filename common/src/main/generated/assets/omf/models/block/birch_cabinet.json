@@ -1,0 +1,9 @@
+{
+  "parent": "omf:block/template/cabinet",
+  "textures": {
+    "front": "omf:block/cabinet/birch_cabinet_front",
+    "particle": "omf:block/cabinet/birch_cabinet_front",
+    "sides": "omf:block/cabinet/birch_cabinet_sides",
+    "top": "omf:block/drawers/birch_drawer_top"
+  }
+}

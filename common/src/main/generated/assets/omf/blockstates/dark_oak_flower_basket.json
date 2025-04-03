@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "omf:block/dark_oak_flower_basket",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "omf:block/dark_oak_flower_basket"
+    },
+    "facing=south": {
+      "model": "omf:block/dark_oak_flower_basket",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "omf:block/dark_oak_flower_basket",
+      "y": 270
+    }
+  }
+}

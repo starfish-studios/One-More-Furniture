@@ -1,0 +1,9 @@
+{
+  "parent": "omf:block/template/drawer",
+  "textures": {
+    "front": "omf:block/drawers/jungle_drawer_front",
+    "particle": "omf:block/drawers/jungle_drawer_front",
+    "sides": "omf:block/drawers/jungle_drawer_side",
+    "top": "omf:block/drawers/jungle_drawer_top"
+  }
+}

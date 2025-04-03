@@ -1,0 +1,9 @@
+{
+  "parent": "omf:block/template/cabinet_top",
+  "textures": {
+    "front": "omf:block/cabinet/crimson_cabinet_front_upper",
+    "particle": "omf:block/cabinet/crimson_cabinet_front_upper",
+    "sides": "omf:block/cabinet/crimson_cabinet_sides_upper",
+    "top": "omf:block/drawers/crimson_drawer_top"
+  }
+}

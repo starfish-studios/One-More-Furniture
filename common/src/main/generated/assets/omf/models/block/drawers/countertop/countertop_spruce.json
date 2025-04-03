@@ -1,0 +1,7 @@
+{
+  "parent": "omf:block/template/countertop",
+  "textures": {
+    "sides": "omf:block/drawers/countertop/spruce_drawer_countertop_sides",
+    "top": "omf:block/drawers/spruce_drawer_top"
+  }
+}

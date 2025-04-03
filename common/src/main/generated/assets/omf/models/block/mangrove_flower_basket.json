@@ -1,0 +1,8 @@
+{
+  "parent": "omf:block/template/flower_basket",
+  "textures": {
+    "all": "omf:block/flower_basket/mangrove_flower_basket",
+    "dirt": "minecraft:block/dirt",
+    "particle": "omf:block/flower_basket/mangrove_flower_basket"
+  }
+}

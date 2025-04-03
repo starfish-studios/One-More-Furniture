@@ -1,0 +1,9 @@
+{
+  "parent": "omf:block/template/cabinet_inventory",
+  "textures": {
+    "countertop": "omf:block/drawers/countertop/spruce_drawer_countertop_sides",
+    "front": "omf:block/cabinet/spruce_cabinet_front",
+    "sides": "omf:block/cabinet/spruce_cabinet_sides",
+    "top": "omf:block/drawers/spruce_drawer_top"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "omf:block/template/drawer_inventory",
+  "textures": {
+    "countertop": "omf:block/drawers/countertop/warped_drawer_countertop_sides",
+    "front": "omf:block/drawers/warped_drawer_front",
+    "sides": "omf:block/drawers/warped_drawer_side",
+    "top": "omf:block/drawers/warped_drawer_top"
+  }
+}

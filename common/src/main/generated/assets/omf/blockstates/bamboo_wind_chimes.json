@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "omf:block/bamboo_wind_chimes",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "omf:block/bamboo_wind_chimes"
+    },
+    "facing=south": {
+      "model": "omf:block/bamboo_wind_chimes",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "omf:block/bamboo_wind_chimes",
+      "y": 270
+    }
+  }
+}

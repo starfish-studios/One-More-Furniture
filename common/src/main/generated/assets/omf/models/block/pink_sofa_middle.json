@@ -1,0 +1,7 @@
+{
+  "parent": "omf:block/template/sofa_middle",
+  "textures": {
+    "all": "omf:block/sofa/pink_sofa",
+    "particle": "omf:block/sofa/pink_sofa"
+  }
+}
