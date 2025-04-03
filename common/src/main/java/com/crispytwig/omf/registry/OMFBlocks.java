@@ -88,7 +88,7 @@ public class OMFBlocks {
 
         for (OMFWoodType woodType : OMFWoodType.values()) {
             DRAWERS.put(woodType, BLOCKS.register(woodType.getName() + "_drawer",
-                    () -> new DrawerBlock(woodType.getPlanksItem(), woodType.getBlockProperties())));
+                    () -> new DrawerBlock(woodType.getPlanks().asItem(), woodType.getBlockProperties())));
 
             TALL_STOOLS.put(woodType, BLOCKS.register(woodType.getName() + "_tall_stool",
                     () -> new TallStoolBlock(woodType.getBlockProperties())));
@@ -99,7 +99,7 @@ public class OMFBlocks {
             FLOWER_BASKETS.put(woodType, BLOCKS.register(woodType.getName() + "_flower_basket",
                     () -> new FlowerBasketBlock(woodType.getBlockProperties())));
 
-            LAMPS.put(woodType, BLOCKS.register(woodType.getName() + "_lamps",
+            LAMPS.put(woodType, BLOCKS.register(woodType.getName() + "_lamp",
                     () -> new LampBlock(lamps)));
 
             MAIL_BOXES.put(woodType, BLOCKS.register(woodType.getName() + "_mailbox",
@@ -118,7 +118,7 @@ public class OMFBlocks {
                     () -> new FanBlock(woodType.getName(), woodType.getBlockProperties())));
 
             CABINET.put(woodType, BLOCKS.register(woodType.getName() + "_cabinet",
-                    () -> new CabinetBlock(woodType.getPlanksItem(), woodType.getBlockProperties())));
+                    () -> new CabinetBlock(woodType.getPlanks().asItem(), woodType.getBlockProperties())));
 
         }
 

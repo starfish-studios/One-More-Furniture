@@ -29,15 +29,15 @@ public class MailboxMenu extends AbstractContainerMenu {
     public static ResourceLocation packetChannel = new ResourceLocation(OneMoreFurniture.MOD_ID, "mailbox_sync");
 
 
-    public MailboxMenu(int i, Inventory inventory, FriendlyByteBuf buf) {
-        this(i, inventory, new SimpleContainer(5), buf);
+    public MailboxMenu(int i, Inventory inventory) {
+        this(i, inventory, new SimpleContainer(5));
     }
 
     public Container getContainer() {
         return this.mailbox;
     }
 
-    public MailboxMenu(int i, Inventory inventory, Container container, FriendlyByteBuf buf) {
+    public MailboxMenu(int i, Inventory inventory, Container container) {
         super(OMFMenus.GENERIC_1X5.get(), i);
 
         pos = buf.readBlockPos();

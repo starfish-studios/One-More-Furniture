@@ -10,3 +10,12 @@ dependencies {
 
     compileOnly ("maven.modrinth:midnightlib:${project.midnightlib_version_fabric}")
 }
+
+sourceSets {
+    main {
+        resources.srcDir 'src/main/generated'
+        resources.srcDir 'src/main/resources/omf'
+        // optional: exclude the datagen cache files from the mod jar
+        resources.exclude '.cache'
+    }
+}

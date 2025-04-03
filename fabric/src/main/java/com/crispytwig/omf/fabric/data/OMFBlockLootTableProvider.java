@@ -1,42 +1,36 @@
 package com.crispytwig.omf.fabric.data;
 
+import com.crispytwig.omf.block.ChairBlock;
 import com.crispytwig.omf.block.ShelfBlock;
 import com.crispytwig.omf.block.TallStoolBlock;
 import com.crispytwig.omf.block.properties.ColorList;
+import com.crispytwig.omf.registry.OMFBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.data.loot.EntityLootSubProvider;
-import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public class NCBlockLootTableProvider extends FabricBlockLootTableProvider {
-    public NCBlockLootTableProvider(FabricDataOutput dataOutput) {
+public class OMFBlockLootTableProvider extends FabricBlockLootTableProvider {
+    public OMFBlockLootTableProvider(FabricDataOutput dataOutput) {
         super(dataOutput);
     }
 
     @Override
     public void generate() {
-/*
-        for (Block block : NCBlocks.BLOCKS) {
+
+        OMFBlocks.BLOCKS.forEach((blockRegistrySupplier -> {
+            var block = blockRegistrySupplier.get();
             if (block instanceof ChairBlock) {
                 this.add(block, createLootTableForChair(block));
             } else if (block instanceof ShelfBlock) {
@@ -44,9 +38,7 @@ public class NCBlockLootTableProvider extends FabricBlockLootTableProvider {
             } else {
                 dropSelf(block);
             }
-        }
-
- */
+        }));
     }
 
     public Map<ColorList, Item> cushionToCarpetMap = Map.ofEntries(

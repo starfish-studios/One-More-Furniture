@@ -20,6 +20,9 @@
     ],
     "client": [
       "com.crispytwig.omf.fabric.OneMoreFurnitureFabricClient"
+    ],
+    "fabric-datagen": [
+      "com.crispytwig.omf.fabric.data.OMFDataGenerator"
     ]
   },
   "mixins": [

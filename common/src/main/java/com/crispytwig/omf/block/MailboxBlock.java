@@ -6,6 +6,7 @@ import com.crispytwig.omf.block.properties.FlagStatus;
 import com.crispytwig.omf.inventory.MailboxMenu;
 import com.crispytwig.omf.registry.OMFBlockEntities;
 import com.crispytwig.omf.world.OMFSavedData;
+import dev.architectury.registry.menu.ExtendedMenuProvider;
 import dev.architectury.registry.menu.MenuRegistry;
 import io.netty.buffer.Unpooled;
 import net.minecraft.ChatFormatting;
@@ -124,12 +125,15 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
             } else if (blockEntity instanceof MailboxBlockEntity mailboxBlockEntity1) {
 
                 if (player instanceof ServerPlayer serverPlayer) {
-                    MenuRegistry.openMenu(serverPlayer, new MenuProvider() {
+                    MenuRegistry.openExtendedMenu(serverPlayer, new ExtendedMenuProvider() {
+                        @Override
+                        public void saveExtraData(FriendlyByteBuf buf) {
+                            buf.writeBlockPos(pos.immutable());
+                        }
+
                         @Override
                         public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-                            var buf = new FriendlyByteBuf(Unpooled.buffer());
-                            buf.writeBlockPos(pos.immutable());
-                            return new MailboxMenu(id, inventory, buf);
+                            return new MailboxMenu(id, inventory);
                         }
 
                         @Override

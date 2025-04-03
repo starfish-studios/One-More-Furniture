@@ -16,11 +16,9 @@ import eu.midnightdust.lib.config.MidnightConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class OneMoreFurniture {
@@ -31,14 +29,40 @@ public class OneMoreFurniture {
 
     public static final RegistrySupplier<CreativeModeTab> MAIN = TABS.register("main",
             () -> CreativeTabRegistry.create(builder -> {
-                builder.title(Component.translatable("itemGroup.nookcranny.tab"));
+                builder.title(Component.translatable("itemGroup.omf.tab"));
                 builder.icon(() -> new ItemStack(OMFItems.BENCHES.get(OMFWoodType.OAK).get()));
                 builder.displayItems((params, output) -> {
-                    OMFItems.ITEMS.forEach(itemRegistrySupplier ->
-                            output.accept(itemRegistrySupplier.get().getDefaultInstance()));
+                    output.accept(OMFItems.COPPER_SAW.get().getDefaultInstance());
+
+                    addAll(output, OMFItems.SOFAS);
+                    addAll(output, OMFItems.CURTAINS);
+                    addAll(output, OMFItems.BENCHES);
+                    addAll(output, OMFItems.DRAWERS);
+                    addAll(output, OMFItems.TALL_STOOLS);
+                    addAll(output, OMFItems.FLOWER_BASKETS);
+                    addAll(output, OMFItems.LAMPS);
+                    addAll(output, OMFItems.MAIL_BOXES);
+                    addAll(output, OMFItems.SHELVES);
+                    addAll(output, OMFItems.TABLES);
+                    addAll(output, OMFItems.CHAIRS);
+                    addAll(output, OMFItems.FANS);
+                    addAll(output, OMFItems.CABINET);
+
+                    // Add standalone items
+                    output.accept(OMFItems.SPIGOT.get().getDefaultInstance());
+                    output.accept(OMFItems.AMETHYST_WIND_CHIMES.get().getDefaultInstance());
+                    output.accept(OMFItems.BAMBOO_WIND_CHIMES.get().getDefaultInstance());
+                    output.accept(OMFItems.BAMBOO_STRIPPED_WIND_CHIMES.get().getDefaultInstance());
+                    output.accept(OMFItems.BONE_WIND_CHIMES.get().getDefaultInstance());
+                    output.accept(OMFItems.COPPER_WIND_CHIMES.get().getDefaultInstance());
+                    output.accept(OMFItems.ECHO_SHARD_WIND_CHIMES.get().getDefaultInstance());
                 });
             })
     );
+
+    private static void addAll(CreativeModeTab.Output output, Map<?, RegistrySupplier<BlockItem>> map) {
+        map.values().forEach(supplier -> output.accept(supplier.get().getDefaultInstance()));
+    }
 
 
     public static void init() {

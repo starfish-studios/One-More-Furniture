@@ -10,6 +10,7 @@ import com.crispytwig.omf.block.DrawerBlock;
 import com.crispytwig.omf.inventory.DrawerMenu;
 import com.crispytwig.omf.registry.OMFMenus;
 import com.mojang.datafixers.util.Pair;
+import dev.architectury.registry.menu.ExtendedMenuProvider;
 import dev.architectury.registry.menu.MenuRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -148,7 +149,12 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
     }
 
     private void openScreen(AbstractDrawerBlockEntity blockEntity, ServerPlayer player, Pair<Integer, Direction> raycastResult) {
-        MenuRegistry.openMenu(player, new MenuProvider() {
+        MenuRegistry.openExtendedMenu(player, new ExtendedMenuProvider() {
+            @Override
+            public void saveExtraData(FriendlyByteBuf buf) {
+
+            }
+
             @Override
             public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
                 int drawerIndex = (blockEntity instanceof CabinetBlockEntity)

@@ -7,37 +7,41 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public enum OMFWoodType {
-    OAK("oak", Items.OAK_PLANKS, Blocks.OAK_PLANKS),
-    SPRUCE("spruce", Items.SPRUCE_PLANKS, Blocks.SPRUCE_PLANKS),
-    BIRCH("birch", Items.BIRCH_PLANKS, Blocks.BIRCH_PLANKS),
-    JUNGLE("jungle", Items.JUNGLE_PLANKS, Blocks.JUNGLE_PLANKS),
-    DARK_OAK("dark_oak", Items.DARK_OAK_PLANKS, Blocks.DARK_OAK_PLANKS),
-    MANGROVE("mangrove", Items.MANGROVE_PLANKS, Blocks.MANGROVE_PLANKS),
-    CHERRY("cherry", Items.CHERRY_PLANKS, Blocks.CHERRY_PLANKS),
-    BAMBOO("bamboo", Items.BAMBOO_PLANKS, Blocks.BAMBOO_PLANKS),
-    CRIMSON("crimson", Items.CRIMSON_PLANKS, Blocks.CRIMSON_PLANKS),
-    WARPED("warped", Items.WARPED_PLANKS, Blocks.WARPED_PLANKS),
-    ACACIA("acacia", Items.ACACIA_PLANKS, Blocks.ACACIA_PLANKS);
+    OAK("oak", Blocks.OAK_PLANKS, Blocks.OAK_SLAB),
+    SPRUCE("spruce", Blocks.SPRUCE_PLANKS, Blocks.SPRUCE_SLAB),
+    BIRCH("birch", Blocks.BIRCH_PLANKS, Blocks.BIRCH_SLAB),
+    JUNGLE("jungle", Blocks.JUNGLE_PLANKS, Blocks.JUNGLE_SLAB),
+    DARK_OAK("dark_oak", Blocks.DARK_OAK_PLANKS, Blocks.DARK_OAK_SLAB),
+    MANGROVE("mangrove", Blocks.MANGROVE_PLANKS, Blocks.MANGROVE_SLAB),
+    CHERRY("cherry", Blocks.CHERRY_PLANKS, Blocks.CHERRY_SLAB),
+    BAMBOO("bamboo", Blocks.BAMBOO_PLANKS, Blocks.BAMBOO_SLAB),
+    CRIMSON("crimson", Blocks.CRIMSON_PLANKS, Blocks.CRIMSON_SLAB),
+    WARPED("warped", Blocks.WARPED_PLANKS, Blocks.WARPED_SLAB),
+    ACACIA("acacia", Blocks.ACACIA_PLANKS, Blocks.ACACIA_SLAB);
 
     private final String name;
-    private final Item planksItem;
-    private final Block baseBlock;
+    private final Block planks;
+    private final Block slab;
 
-    OMFWoodType(String name, Item planksItem, Block baseBlock) {
+    OMFWoodType(String name, Block planks, Block slab) {
         this.name = name;
-        this.planksItem = planksItem;
-        this.baseBlock = baseBlock;
+        this.planks = planks;
+        this.slab = slab;
     }
 
     public String getName() {
         return name;
     }
 
-    public Item getPlanksItem() {
-        return planksItem;
+    public Block getPlanks() {
+        return planks;
+    }
+
+    public Block getSlab() {
+        return slab;
     }
 
     public BlockBehaviour.Properties getBlockProperties() {
-        return BlockBehaviour.Properties.copy(baseBlock).noOcclusion();
+        return BlockBehaviour.Properties.copy(planks).noOcclusion();
     }
 }

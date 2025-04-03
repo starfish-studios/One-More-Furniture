@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.function.Function;
 
-public class NCModelProvider extends FabricModelProvider {
+public class OMFModelProvider extends FabricModelProvider {
 
     public static final TextureSlot SIDES = TextureSlot.create("sides");
     public static final TextureSlot COUNTERTOP_SIDES = TextureSlot.create("countertop");
@@ -93,7 +93,7 @@ public class NCModelProvider extends FabricModelProvider {
     public static final ModelTemplate FAN = createTemplate("ceiling_fan", TextureSlot.ALL);
 
 
-    public NCModelProvider(FabricDataOutput output) {
+    public OMFModelProvider(FabricDataOutput output) {
         super(output);
     }
 
@@ -102,54 +102,32 @@ public class NCModelProvider extends FabricModelProvider {
         for (CountertopType type : CountertopType.values()) {
             createCountertopType(generators, type);
         }
-        /*
-        for (Block block : OMFBlocks.BLOCKS) {
-            if (block instanceof FlowerBasketBlock) {
-                createFlowerBasket(generators, block);
-            }
-            if (block instanceof CurtainBlock) {
-                createCurtainBlock(generators, block);
-            }
-            if (block instanceof SofaBlock) {
-                createSofaBlock(generators, block);
-            }
-            if (block instanceof NightstandBlock) {
-                createNightstandBlock(generators, block);
-            }
-            if (block instanceof DrawerBlock) {
-                createDrawerBlock(generators, block);
-            }
-            if (block instanceof CabinetBlock) {
-                createCabinetBlock(generators, block);
-            }
-            if (block instanceof LampBlock) {
-                //createLampBlock(generators, block);
-            }
-            if (block instanceof ShelfBlock) {
-                createShelfBlock(generators, block);
-            }
-            if (block instanceof ChairBlock) {
-                createChairBlock(generators, block);
-            }
 
-            if (block instanceof WindChimeBlock) {
-                TextureMapping one = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "wind_chime", ""));
+        OMFBlocks.FLOWER_BASKETS.forEach((omfWoodType, supplier) -> createFlowerBasket(generators, supplier.get()));
+        OMFBlocks.CURTAINS.forEach((omfWoodType, supplier) -> createCurtainBlock(generators, supplier.get()));
+        OMFBlocks.SOFAS.forEach((omfWoodType, supplier) -> createSofaBlock(generators, supplier.get()));
+        OMFBlocks.DRAWERS.forEach((omfWoodType, supplier) -> createDrawerBlock(generators, supplier.get()));
+        OMFBlocks.CABINET.forEach((omfWoodType, supplier) -> createCabinetBlock(generators, supplier.get()));
+        OMFBlocks.SHELVES.forEach((omfWoodType, supplier) -> createShelfBlock(generators, supplier.get()));
+        OMFBlocks.CHAIRS.forEach((omfWoodType, supplier) -> createChairBlock(generators, supplier.get()));
 
-                var res = WIND_CHIME.create(block, one, generators.modelOutput);
-                MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, res));
+        createWindChimeBlock(generators, OMFBlocks.AMETHYST_WIND_CHIMES.get());
+        createWindChimeBlock(generators, OMFBlocks.BAMBOO_WIND_CHIMES.get());
+        createWindChimeBlock(generators, OMFBlocks.BAMBOO_STRIPPED_WIND_CHIMES.get());
+        createWindChimeBlock(generators, OMFBlocks.BONE_WIND_CHIMES.get());
+        createWindChimeBlock(generators, OMFBlocks.COPPER_WIND_CHIMES.get());
+        createWindChimeBlock(generators, OMFBlocks.ECHO_SHARD_WIND_CHIMES.get());
 
-                multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
-                generators.blockStateOutput.accept(multiVariant);
-            }
+    }
 
-            if (block instanceof FanBlock) {
-                //createFan(generators, block);
-            }
+    private void createWindChimeBlock(BlockModelGenerators generators, Block block){
+        TextureMapping one = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "wind_chime", ""));
 
+        var res = WIND_CHIME.create(block, one, generators.modelOutput);
+        MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, res));
 
-        }
-
-         */
+        multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
+        generators.blockStateOutput.accept(multiVariant);
     }
 
     private void createFlowerBasket(BlockModelGenerators generators, Block block) {
@@ -276,71 +254,14 @@ public class NCModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerators generators) {
-        /*
-        generators.generateFlatItem(OMFItems.COPPER_SAW, ModelTemplates.FLAT_HANDHELD_ITEM);
-        createDrawerItem(generators, OMFItems.OAK_DRAWER, OMFBlocks.OAK_DRAWER);
-        createDrawerItem(generators, OMFItems.SPRUCE_DRAWER, OMFBlocks.SPRUCE_DRAWER);
-        createDrawerItem(generators, OMFItems.BIRCH_DRAWER, OMFBlocks.BIRCH_DRAWER);
-        createDrawerItem(generators, OMFItems.JUNGLE_DRAWER, OMFBlocks.JUNGLE_DRAWER);
-        createDrawerItem(generators, OMFItems.ACACIA_DRAWER, OMFBlocks.ACACIA_DRAWER);
-        createDrawerItem(generators, OMFItems.MANGROVE_DRAWER, OMFBlocks.MANGROVE_DRAWER);
-        createDrawerItem(generators, OMFItems.CRIMSON_DRAWER, OMFBlocks.CRIMSON_DRAWER);
-        createDrawerItem(generators, OMFItems.DARK_OAK_DRAWER, OMFBlocks.DARK_OAK_DRAWER);
-        createDrawerItem(generators, OMFItems.BAMBOO_DRAWER, OMFBlocks.BAMBOO_DRAWER);
-        createDrawerItem(generators, OMFItems.WARPED_DRAWER, OMFBlocks.WARPED_DRAWER);
-        createDrawerItem(generators, OMFItems.CHERRY_DRAWER, OMFBlocks.CHERRY_DRAWER);
-        createChairItem(generators, OMFItems.OAK_CHAIR, OMFBlocks.OAK_CHAIR);
-        createChairItem(generators, OMFItems.SPRUCE_CHAIR, OMFBlocks.SPRUCE_CHAIR);
-        createChairItem(generators, OMFItems.BIRCH_CHAIR, OMFBlocks.BIRCH_CHAIR);
-        createChairItem(generators, OMFItems.JUNGLE_CHAIR, OMFBlocks.JUNGLE_CHAIR);
-        createChairItem(generators, OMFItems.ACACIA_CHAIR, OMFBlocks.ACACIA_CHAIR);
-        createChairItem(generators, OMFItems.MANGROVE_CHAIR, OMFBlocks.MANGROVE_CHAIR);
-        createChairItem(generators, OMFItems.CRIMSON_CHAIR, OMFBlocks.CRIMSON_CHAIR);
-        createChairItem(generators, OMFItems.DARK_OAK_CHAIR, OMFBlocks.DARK_OAK_CHAIR);
-        createChairItem(generators, OMFItems.BAMBOO_CHAIR, OMFBlocks.BAMBOO_CHAIR);
-        createChairItem(generators, OMFItems.WARPED_CHAIR, OMFBlocks.WARPED_CHAIR);
-        createChairItem(generators, OMFItems.CHERRY_CHAIR, OMFBlocks.CHERRY_CHAIR);
 
-        createCabinetItem(generators, OMFItems.OAK_CABINET, OMFBlocks.OAK_CABINET);
-        createCabinetItem(generators, OMFItems.SPRUCE_CABINET, OMFBlocks.SPRUCE_CABINET);
-        createCabinetItem(generators, OMFItems.BIRCH_CABINET, OMFBlocks.BIRCH_CABINET);
-        createCabinetItem(generators, OMFItems.JUNGLE_CABINET, OMFBlocks.JUNGLE_CABINET);
-        createCabinetItem(generators, OMFItems.ACACIA_CABINET, OMFBlocks.ACACIA_CABINET);
-        createCabinetItem(generators, OMFItems.MANGROVE_CABINET, OMFBlocks.MANGROVE_CABINET);
-        createCabinetItem(generators, OMFItems.CRIMSON_CABINET, OMFBlocks.CRIMSON_CABINET);
-        createCabinetItem(generators, OMFItems.DARK_OAK_CABINET, OMFBlocks.DARK_OAK_CABINET);
-        createCabinetItem(generators, OMFItems.BAMBOO_CABINET, OMFBlocks.BAMBOO_CABINET);
-        createCabinetItem(generators, OMFItems.WARPED_CABINET, OMFBlocks.WARPED_CABINET);
-        createCabinetItem(generators, OMFItems.CHERRY_CABINET, OMFBlocks.CHERRY_CABINET);
+        generators.generateFlatItem(OMFItems.COPPER_SAW.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
-        generators.generateFlatItem(OMFItems.ACACIA_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(OMFItems.BIRCH_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(OMFItems.OAK_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(OMFItems.SPRUCE_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(OMFItems.MANGROVE_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(OMFItems.JUNGLE_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(OMFItems.CHERRY_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(OMFItems.BAMBOO_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(OMFItems.DARK_OAK_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(OMFItems.WARPED_FAN, ModelTemplates.FLAT_ITEM);
-        generators.generateFlatItem(OMFItems.CRIMSON_FAN, ModelTemplates.FLAT_ITEM);
+        OMFBlocks.DRAWERS.forEach(((omfWoodType, supplier) -> createDrawerItem(generators, supplier.get().asItem(), supplier.get())));
+        OMFBlocks.CHAIRS.forEach(((omfWoodType, supplier) -> createChairItem(generators, supplier.get().asItem(), supplier.get())));
+        OMFBlocks.CABINET.forEach(((omfWoodType, supplier) -> createCabinetItem(generators, supplier.get().asItem(), supplier.get())));
+        OMFItems.FANS.forEach(((omfWoodType, supplier) ->  generators.generateFlatItem(supplier.get(), ModelTemplates.FLAT_ITEM)));
 
-         */
-    }
-
-    private void createNightstandBlock(BlockModelGenerators generators, Block nightstand) {
-        MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(nightstand);
-        var textMap = new TextureMapping()
-                .put(CORE, getTexture(nightstand, "nightstand", "_core"))
-                .put(BITS, getTexture(nightstand, "nightstand", "_bits"))
-                .put(TextureSlot.PARTICLE, getTexture(nightstand, "nightstand", "_core"));
-        ResourceLocation closed = NIGHTSTAND.create(nightstand, textMap, generators.modelOutput);
-        ResourceLocation open = NIGHTSTAND_OPEN.createWithSuffix(nightstand, "_open", textMap, generators.modelOutput);
-        multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
-        multiVariant.with(PropertyDispatch.property(NightstandBlock.OPEN)
-                .select(true, Variant.variant().with(VariantProperties.MODEL, open))
-                .select(false, Variant.variant().with(VariantProperties.MODEL, closed)));
-        generators.blockStateOutput.accept(multiVariant);
     }
 
     /**
@@ -769,45 +690,6 @@ public class NCModelProvider extends FabricModelProvider {
             };
         }
         return rotation;
-    }
-
-    public static BlockStateGenerator createLampMultipart(
-            Block lampBlock,
-            Function<LampBlock.LampType, ResourceLocation> lampModelFunction,
-            ResourceLocation lampId
-    ) {
-        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(lampBlock);
-        for (LampBlock.LampType type : LampBlock.LampType.values()) {
-            multiPart.with(
-                    Condition.condition().term(LampBlock.LAMP_TYPE, type),
-                    Variant.variant().with(VariantProperties.MODEL, lampModelFunction.apply(type))
-            );
-        }
-        for (ColorList color : ColorList.values()) {
-            multiPart.with(
-                    Condition.condition().term(LampBlock.LAMPSHADE, color),
-                    Variant.variant()
-                            .with(VariantProperties.MODEL, lampId)
-            );
-        }
-        return multiPart;
-    }
-
-    private void createLampBlock(BlockModelGenerators generators, Block lamp) {
-        var textMap = new TextureMapping()
-                .put(TextureSlot.ALL, getTexture(lamp, "lamp", ""))
-                .put(TextureSlot.PARTICLE, getTexture(lamp, "lamp", ""));
-        ResourceLocation bottom = LAMP_BOTTOM.createWithSuffix(lamp,"_bottom", textMap, generators.modelOutput);
-        ResourceLocation middle = LAMP_MIDDLE.createWithSuffix(lamp, "_middle", textMap, generators.modelOutput);
-        ResourceLocation top = LAMP_TOP.createWithSuffix(lamp, "_top", textMap, generators.modelOutput);
-        ResourceLocation single = LAMP.createWithSuffix(lamp, "", textMap, generators.modelOutput);
-        ResourceLocation shade = LAMPSHADE.createWithSuffix(lamp, "_shade", textMap, generators.modelOutput);
-        ResourceLocation lampId = LAMP.create(lamp, textMap, generators.modelOutput);
-        generators.blockStateOutput.accept(createLampMultipart(
-                lamp,
-                type -> LAMP.createWithSuffix(lamp, "_type", textMap, generators.modelOutput),
-                lampId
-        ));
     }
 
     public static ResourceLocation getTexture(Block block, String folder, String textureSuffix) {

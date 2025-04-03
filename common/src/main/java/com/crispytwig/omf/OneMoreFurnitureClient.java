@@ -14,6 +14,7 @@ import com.crispytwig.omf.registry.OMFBlockEntities;
 import com.crispytwig.omf.registry.OMFBlocks;
 import com.crispytwig.omf.registry.OMFEntities;
 import com.crispytwig.omf.registry.OMFMenus;
+import dev.architectury.event.events.client.ClientLifecycleEvent;
 import dev.architectury.networking.NetworkManager;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
@@ -31,17 +32,18 @@ public class OneMoreFurnitureClient {
     public static void init() {
         EntityRendererRegistry.register(OMFEntities.SEAT, SeatRenderer::new);
 
+        EntityModelLayerRegistry.register(FanModel.LAYER_LOCATION, FanModel::createBodyLayer);
+        EntityModelLayerRegistry.register(ChimeModel.LAYER_LOCATION, ChimeModel::createBodyLayer);
+
         BlockEntityRendererRegistry.register(OMFBlockEntities.SHELF.get(), ShelfRenderer::new);
         BlockEntityRendererRegistry.register(OMFBlockEntities.FLOWER_BASKET.get(), FlowerBasketRenderer::new);
         BlockEntityRendererRegistry.register(OMFBlockEntities.FAN.get(), FanBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(OMFBlockEntities.CHIME.get(), ChimeBlockEntityRenderer::new);
 
-
-        EntityModelLayerRegistry.register(FanModel.LAYER_LOCATION, FanModel::createBodyLayer);
-        EntityModelLayerRegistry.register(ChimeModel.LAYER_LOCATION, ChimeModel::createBodyLayer);
-
-        MenuRegistry.registerScreenFactory(OMFMenus.DRAWER.get(), DrawerScreen::new);
-        MenuRegistry.registerScreenFactory(OMFMenus.GENERIC_1X5.get(), MailboxScreen::new);
+        ClientLifecycleEvent.CLIENT_SETUP.register(instance -> {
+            MenuRegistry.registerScreenFactory(OMFMenus.DRAWER.get(), DrawerScreen::new);
+            MenuRegistry.registerScreenFactory(OMFMenus.GENERIC_1X5.get(), MailboxScreen::new);
+        });
 
         NetworkManager.registerReceiver(NetworkManager.Side.S2C, MailboxBlockEntity.packetChannel, ((buf, context) -> {
             var pos = buf.readBlockPos();
