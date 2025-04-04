@@ -6,6 +6,7 @@ import com.crispytwig.omf.util.OMFSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -100,5 +101,17 @@ public class FanBlockEntity extends BlockEntity {
 
     public float getRotationAngle(float partialTick) {
         return (currentRotation + rotationSpeed * partialTick) % 360;
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        tag.putBoolean("On", fanOn);
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        fanOn = tag.getBoolean("On");
     }
 }
