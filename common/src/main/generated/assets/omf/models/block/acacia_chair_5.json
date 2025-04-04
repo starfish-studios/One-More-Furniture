@@ -1,6 +1,7 @@
 {
   "parent": "omf:block/template/chair_5",
   "textures": {
-    "all": "omf:block/chair/acacia_chair5"
+    "all": "omf:block/chair/acacia_chair5",
+    "particle": "minecraft:block/acacia_planks"
   }
 }

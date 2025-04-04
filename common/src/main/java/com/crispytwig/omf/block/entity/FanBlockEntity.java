@@ -1,16 +1,10 @@
 package com.crispytwig.omf.block.entity;
 
 import com.crispytwig.omf.registry.OMFBlockEntities;
-import com.crispytwig.omf.registry.OMFSoundEvents;
-import com.crispytwig.omf.util.OMFSoundInstance;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;

@@ -7,6 +7,7 @@ import com.crispytwig.omf.block.properties.ColorList;
 import com.crispytwig.omf.block.properties.CountertopType;
 import com.crispytwig.omf.registry.OMFBlocks;
 import com.crispytwig.omf.registry.OMFItems;
+import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.core.Direction;
@@ -72,7 +73,7 @@ public class OMFModelProvider extends FabricModelProvider {
     public static final ModelTemplate SHELF_TOP_SINGLE = createTemplate("shelf/shelf_wall_top", TextureSlot.ALL, TextureSlot.PARTICLE);
 
     public static final ModelTemplate CHAIR_BACKLESS = createTemplate("chair_backless", TextureSlot.ALL);
-    public static final ModelTemplate CHAIR_ITEM = createTemplate("chair_1", TextureSlot.ALL);
+    public static final ModelTemplate CHAIR_ITEM = createTemplate("chair1", TextureSlot.ALL, TextureSlot.PARTICLE);
 
     public static final ModelTemplate CURTAIN_SINGLE_CLOSED = createTemplate("curtain_single_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate CURTAIN_BOTTOM_MIDDLE_CLOSED = createTemplate("curtain_bottom_middle_closed", TextureSlot.ALL, TextureSlot.PARTICLE);
@@ -323,11 +324,18 @@ public class OMFModelProvider extends FabricModelProvider {
     }
 
     public final void createChairItem(ItemModelGenerators generators, Item item, Block block) {
-        TextureMapping baseMapping = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "chair", ""));
-        ResourceLocation resourceLocation = BuiltInRegistries.ITEM.getKey(item);
-        resourceLocation = resourceLocation.withPrefix("item/");
-        CHAIR_ITEM.create(resourceLocation, baseMapping, generators.output);
+        String blockPath = BuiltInRegistries.BLOCK.getKey(block).getPath();
+        ResourceLocation parent = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/" + blockPath + "_1");
+        ResourceLocation itemModelLocation = ModelLocationUtils.getModelLocation(item);
+
+        generators.output.accept(itemModelLocation, () -> {
+            JsonObject json = new JsonObject();
+            json.addProperty("parent", parent.toString());
+            return json;
+        });
     }
+
+
 
     public final void createDrawerBlock(BlockModelGenerators generators, Block block) {
         TextureMapping baseMapping = new TextureMapping()
@@ -577,22 +585,33 @@ public class OMFModelProvider extends FabricModelProvider {
         return multiPart;
     }
     private void createChairBlock(BlockModelGenerators generators, Block chair) {
+        String blockPath = BuiltInRegistries.BLOCK.getKey(chair).getPath();
+        String wood = blockPath.replace("_chair", "");
+
         TextureMapping baseMapping = new TextureMapping()
-                .put(TextureSlot.ALL, getTexture(chair, "chair", ""));
+                .put(TextureSlot.ALL, getTexture(chair, "chair", ""))
+                .put(TextureSlot.PARTICLE, new ResourceLocation("block/" + wood + "_planks"));
+
         Map<ColorList, ResourceLocation> cushionModels = new HashMap<>();
         for (ColorList color : ColorList.values()) {
             cushionModels.put(color, new ResourceLocation(OneMoreFurniture.MOD_ID, "block/chair/cushion/" + color + "_cushion"));
         }
+
         ResourceLocation chairBacklessId = CHAIR_BACKLESS.createWithSuffix(chair, "_backless", baseMapping, generators.modelOutput);
         String chairBaseName = BuiltInRegistries.BLOCK.getKey(chair).getPath();
         Map<ChairType, ResourceLocation> backTypeModels = new HashMap<>();
+
         for (ChairType type : ChairType.values()) {
             ModelTemplate chairTemplate = createTemplate(
                     "chair_" + type.getSerializedName().toLowerCase(),
-                    TextureSlot.ALL
+                    TextureSlot.ALL, TextureSlot.PARTICLE
             );
-            baseMapping = new TextureMapping().put(TextureSlot.ALL, getTexture(chair, "chair", type.getSerializedName().toLowerCase()));
-            chairTemplate.createWithSuffix(chair, "_" + type.getSerializedName().toLowerCase(), baseMapping, generators.modelOutput);
+
+            TextureMapping typeMapping = new TextureMapping()
+                    .put(TextureSlot.ALL, getTexture(chair, "chair", type.getSerializedName().toLowerCase()))
+                    .put(TextureSlot.PARTICLE, new ResourceLocation("block/" + wood + "_planks"));
+
+            chairTemplate.createWithSuffix(chair, "_" + type.getSerializedName().toLowerCase(), typeMapping, generators.modelOutput);
             ResourceLocation chairTypeId = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase());
             backTypeModels.put(type, chairTypeId);
         }
@@ -600,6 +619,7 @@ public class OMFModelProvider extends FabricModelProvider {
         generators.skipAutoItemBlock(chair);
         generators.blockStateOutput.accept(createChairMultipart(chair, chairBacklessId, cushionModels, backTypeModels));
     }
+
 
     /* removed
     private void createChairTuckableBlock(BlockModelGenerators generators, Block chair) {

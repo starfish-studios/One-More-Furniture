@@ -1,6 +1,7 @@
 package com.crispytwig.omf.block;
 
 import com.crispytwig.omf.block.properties.ColorList;
+import com.crispytwig.omf.registry.OMFSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -91,7 +92,11 @@ public class LampBlock extends Block implements SimpleWaterloggedBlock {
                 }
 
                 float f = level.getBlockState(topLampPos).getValue(LIT) ? 0.8F : 0.7F;
-                level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, f);
+                if (state.getValue(LIT)) {
+                    level.playSound(null, pos, OMFSoundEvents.LAMP_OFF.get(), SoundSource.BLOCKS, f, 1.0F);
+                } else {
+                    level.playSound(null, pos, OMFSoundEvents.LAMP_ON.get(), SoundSource.BLOCKS, f, 1.0F);
+                }
 
                 level.setBlock(topLampPos, level.getBlockState(topLampPos).cycle(LIT), 3);
 

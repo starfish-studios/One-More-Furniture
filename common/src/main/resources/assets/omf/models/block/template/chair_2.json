@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"particle": "omf:block/chair/oak_chair_back2",
-		"all": "omf:block/chair/oak_chair_back2"
+		"particle": "omf:block/chair/oak_chair2",
+		"all": "block/oak_planks"
 	},
 	"elements": [
 		{
