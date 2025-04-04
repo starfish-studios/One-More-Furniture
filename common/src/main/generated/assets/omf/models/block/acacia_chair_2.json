@@ -1,6 +1,6 @@
 {
   "parent": "omf:block/template/chair_2",
   "textures": {
-    "all": "omf:block/chair/acacia_chair"
+    "all": "omf:block/chair/acacia_chair2"
   }
 }

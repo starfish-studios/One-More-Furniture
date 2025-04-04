@@ -583,6 +583,7 @@ public class OMFModelProvider extends FabricModelProvider {
         for (ColorList color : ColorList.values()) {
             cushionModels.put(color, new ResourceLocation(OneMoreFurniture.MOD_ID, "block/chair/cushion/" + color + "_cushion"));
         }
+        ResourceLocation chairBacklessId = CHAIR_BACKLESS.createWithSuffix(chair, "_backless", baseMapping, generators.modelOutput);
         String chairBaseName = BuiltInRegistries.BLOCK.getKey(chair).getPath();
         Map<ChairType, ResourceLocation> backTypeModels = new HashMap<>();
         for (ChairType type : ChairType.values()) {
@@ -590,11 +591,12 @@ public class OMFModelProvider extends FabricModelProvider {
                     "chair_" + type.getSerializedName().toLowerCase(),
                     TextureSlot.ALL
             );
+            baseMapping = new TextureMapping().put(TextureSlot.ALL, getTexture(chair, "chair", type.getSerializedName().toLowerCase()));
             chairTemplate.createWithSuffix(chair, "_" + type.getSerializedName().toLowerCase(), baseMapping, generators.modelOutput);
             ResourceLocation chairTypeId = new ResourceLocation(OneMoreFurniture.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase());
             backTypeModels.put(type, chairTypeId);
         }
-        ResourceLocation chairBacklessId = CHAIR_BACKLESS.createWithSuffix(chair, "_backless", baseMapping, generators.modelOutput);
+
         generators.skipAutoItemBlock(chair);
         generators.blockStateOutput.accept(createChairMultipart(chair, chairBacklessId, cushionModels, backTypeModels));
     }

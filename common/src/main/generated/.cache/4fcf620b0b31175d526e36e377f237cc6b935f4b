@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-03T23:15:16.249915543	One More Furniture/Tags for minecraft:block
-1f476b75a0c6f03999b8e66b0fad636cb6d30329 data/omf/tags/blocks/tables_connectable.json
+// 1.20.1	2025-04-04T10:36:18.743442858	One More Furniture/Tags for minecraft:block
+dbf171c42cd173ff73459f44b557068271d72b85 data/omf/tags/blocks/tables_connectable.json
 43e88ed183f2b709a2eda475bcd2ac896d739b19 data/minecraft/tags/blocks/mineable/pickaxe.json
-0268eeebe93c5c34445461eebc2cf21b18c2b61e data/minecraft/tags/blocks/mineable/axe.json
+d720ccf36462d66e81feb61a627ebec5db76e354 data/minecraft/tags/blocks/mineable/axe.json

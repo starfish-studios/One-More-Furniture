@@ -2,6 +2,39 @@
   "multipart": [
     {
       "apply": {
+        "model": "omf:block/spruce_chair_7",
+        "y": 0
+      },
+      "when": {
+        "type": "7",
+        "back": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_4",
+        "y": 0
+      },
+      "when": {
+        "type": "4",
+        "back": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_3",
+        "y": 0
+      },
+      "when": {
+        "type": "3",
+        "back": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
         "model": "omf:block/spruce_chair_2",
         "y": 0
       },
@@ -24,12 +57,67 @@
     },
     {
       "apply": {
+        "model": "omf:block/spruce_chair_6",
+        "y": 0
+      },
+      "when": {
+        "type": "6",
+        "back": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_5",
+        "y": 0
+      },
+      "when": {
+        "type": "5",
+        "back": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
         "model": "omf:block/spruce_chair_backless",
         "y": 0
       },
       "when": {
         "back": "false",
         "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_7",
+        "y": 90
+      },
+      "when": {
+        "type": "7",
+        "back": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_4",
+        "y": 90
+      },
+      "when": {
+        "type": "4",
+        "back": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_3",
+        "y": 90
+      },
+      "when": {
+        "type": "3",
+        "back": "true",
+        "facing": "east"
       }
     },
     {
@@ -56,12 +144,67 @@
     },
     {
       "apply": {
+        "model": "omf:block/spruce_chair_6",
+        "y": 90
+      },
+      "when": {
+        "type": "6",
+        "back": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_5",
+        "y": 90
+      },
+      "when": {
+        "type": "5",
+        "back": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
         "model": "omf:block/spruce_chair_backless",
         "y": 90
       },
       "when": {
         "back": "false",
         "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_7",
+        "y": 180
+      },
+      "when": {
+        "type": "7",
+        "back": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_4",
+        "y": 180
+      },
+      "when": {
+        "type": "4",
+        "back": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_3",
+        "y": 180
+      },
+      "when": {
+        "type": "3",
+        "back": "true",
+        "facing": "south"
       }
     },
     {
@@ -88,12 +231,67 @@
     },
     {
       "apply": {
+        "model": "omf:block/spruce_chair_6",
+        "y": 180
+      },
+      "when": {
+        "type": "6",
+        "back": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_5",
+        "y": 180
+      },
+      "when": {
+        "type": "5",
+        "back": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
         "model": "omf:block/spruce_chair_backless",
         "y": 180
       },
       "when": {
         "back": "false",
         "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_7",
+        "y": 270
+      },
+      "when": {
+        "type": "7",
+        "back": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_4",
+        "y": 270
+      },
+      "when": {
+        "type": "4",
+        "back": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_3",
+        "y": 270
+      },
+      "when": {
+        "type": "3",
+        "back": "true",
+        "facing": "west"
       }
     },
     {
@@ -120,11 +318,153 @@
     },
     {
       "apply": {
+        "model": "omf:block/spruce_chair_6",
+        "y": 270
+      },
+      "when": {
+        "type": "6",
+        "back": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/spruce_chair_5",
+        "y": 270
+      },
+      "when": {
+        "type": "5",
+        "back": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
         "model": "omf:block/spruce_chair_backless",
         "y": 270
       },
       "when": {
         "back": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/chair/cushion/light_blue_cushion",
+        "y": 0
+      },
+      "when": {
+        "cushion": "light_blue",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/chair/cushion/light_blue_cushion",
+        "y": 90
+      },
+      "when": {
+        "cushion": "light_blue",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/chair/cushion/light_blue_cushion",
+        "y": 180
+      },
+      "when": {
+        "cushion": "light_blue",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/chair/cushion/light_blue_cushion",
+        "y": 270
+      },
+      "when": {
+        "cushion": "light_blue",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/chair/cushion/black_cushion",
+        "y": 0
+      },
+      "when": {
+        "cushion": "black",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/chair/cushion/black_cushion",
+        "y": 90
+      },
+      "when": {
+        "cushion": "black",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/chair/cushion/black_cushion",
+        "y": 180
+      },
+      "when": {
+        "cushion": "black",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/chair/cushion/black_cushion",
+        "y": 270
+      },
+      "when": {
+        "cushion": "black",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/chair/cushion/light_gray_cushion",
+        "y": 0
+      },
+      "when": {
+        "cushion": "light_gray",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/chair/cushion/light_gray_cushion",
+        "y": 90
+      },
+      "when": {
+        "cushion": "light_gray",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/chair/cushion/light_gray_cushion",
+        "y": 180
+      },
+      "when": {
+        "cushion": "light_gray",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "omf:block/chair/cushion/light_gray_cushion",
+        "y": 270
+      },
+      "when": {
+        "cushion": "light_gray",
         "facing": "west"
       }
     },
@@ -170,41 +510,41 @@
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/black_cushion",
+        "model": "omf:block/chair/cushion/green_cushion",
         "y": 0
       },
       "when": {
-        "cushion": "black",
+        "cushion": "green",
         "facing": "north"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/black_cushion",
+        "model": "omf:block/chair/cushion/green_cushion",
         "y": 90
       },
       "when": {
-        "cushion": "black",
+        "cushion": "green",
         "facing": "east"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/black_cushion",
+        "model": "omf:block/chair/cushion/green_cushion",
         "y": 180
       },
       "when": {
-        "cushion": "black",
+        "cushion": "green",
         "facing": "south"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/black_cushion",
+        "model": "omf:block/chair/cushion/green_cushion",
         "y": 270
       },
       "when": {
-        "cushion": "black",
+        "cushion": "green",
         "facing": "west"
       }
     },
@@ -290,121 +630,81 @@
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/yellow_cushion",
+        "model": "omf:block/chair/cushion/red_cushion",
         "y": 0
       },
       "when": {
-        "cushion": "yellow",
+        "cushion": "red",
         "facing": "north"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/yellow_cushion",
+        "model": "omf:block/chair/cushion/red_cushion",
         "y": 90
       },
       "when": {
-        "cushion": "yellow",
+        "cushion": "red",
         "facing": "east"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/yellow_cushion",
+        "model": "omf:block/chair/cushion/red_cushion",
         "y": 180
       },
       "when": {
-        "cushion": "yellow",
+        "cushion": "red",
         "facing": "south"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/yellow_cushion",
+        "model": "omf:block/chair/cushion/red_cushion",
         "y": 270
       },
       "when": {
-        "cushion": "yellow",
+        "cushion": "red",
         "facing": "west"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/light_blue_cushion",
+        "model": "omf:block/chair/cushion/magenta_cushion",
         "y": 0
       },
       "when": {
-        "cushion": "light_blue",
+        "cushion": "magenta",
         "facing": "north"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/light_blue_cushion",
+        "model": "omf:block/chair/cushion/magenta_cushion",
         "y": 90
       },
       "when": {
-        "cushion": "light_blue",
+        "cushion": "magenta",
         "facing": "east"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/light_blue_cushion",
+        "model": "omf:block/chair/cushion/magenta_cushion",
         "y": 180
       },
       "when": {
-        "cushion": "light_blue",
+        "cushion": "magenta",
         "facing": "south"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/light_blue_cushion",
+        "model": "omf:block/chair/cushion/magenta_cushion",
         "y": 270
       },
       "when": {
-        "cushion": "light_blue",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "omf:block/chair/cushion/lime_cushion",
-        "y": 0
-      },
-      "when": {
-        "cushion": "lime",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "omf:block/chair/cushion/lime_cushion",
-        "y": 90
-      },
-      "when": {
-        "cushion": "lime",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "omf:block/chair/cushion/lime_cushion",
-        "y": 180
-      },
-      "when": {
-        "cushion": "lime",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "omf:block/chair/cushion/lime_cushion",
-        "y": 270
-      },
-      "when": {
-        "cushion": "lime",
+        "cushion": "magenta",
         "facing": "west"
       }
     },
@@ -450,121 +750,81 @@
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/light_gray_cushion",
+        "model": "omf:block/chair/cushion/brown_cushion",
         "y": 0
       },
       "when": {
-        "cushion": "light_gray",
+        "cushion": "brown",
         "facing": "north"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/light_gray_cushion",
+        "model": "omf:block/chair/cushion/brown_cushion",
         "y": 90
       },
       "when": {
-        "cushion": "light_gray",
+        "cushion": "brown",
         "facing": "east"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/light_gray_cushion",
+        "model": "omf:block/chair/cushion/brown_cushion",
         "y": 180
       },
       "when": {
-        "cushion": "light_gray",
+        "cushion": "brown",
         "facing": "south"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/light_gray_cushion",
+        "model": "omf:block/chair/cushion/brown_cushion",
         "y": 270
       },
       "when": {
-        "cushion": "light_gray",
+        "cushion": "brown",
         "facing": "west"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/gray_cushion",
+        "model": "omf:block/chair/cushion/lime_cushion",
         "y": 0
       },
       "when": {
-        "cushion": "gray",
+        "cushion": "lime",
         "facing": "north"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/gray_cushion",
+        "model": "omf:block/chair/cushion/lime_cushion",
         "y": 90
       },
       "when": {
-        "cushion": "gray",
+        "cushion": "lime",
         "facing": "east"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/gray_cushion",
+        "model": "omf:block/chair/cushion/lime_cushion",
         "y": 180
       },
       "when": {
-        "cushion": "gray",
+        "cushion": "lime",
         "facing": "south"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/gray_cushion",
+        "model": "omf:block/chair/cushion/lime_cushion",
         "y": 270
       },
       "when": {
-        "cushion": "gray",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "omf:block/chair/cushion/brown_cushion",
-        "y": 0
-      },
-      "when": {
-        "cushion": "brown",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "omf:block/chair/cushion/brown_cushion",
-        "y": 90
-      },
-      "when": {
-        "cushion": "brown",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "omf:block/chair/cushion/brown_cushion",
-        "y": 180
-      },
-      "when": {
-        "cushion": "brown",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "omf:block/chair/cushion/brown_cushion",
-        "y": 270
-      },
-      "when": {
-        "cushion": "brown",
+        "cushion": "lime",
         "facing": "west"
       }
     },
@@ -610,81 +870,41 @@
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/green_cushion",
+        "model": "omf:block/chair/cushion/yellow_cushion",
         "y": 0
       },
       "when": {
-        "cushion": "green",
+        "cushion": "yellow",
         "facing": "north"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/green_cushion",
+        "model": "omf:block/chair/cushion/yellow_cushion",
         "y": 90
       },
       "when": {
-        "cushion": "green",
+        "cushion": "yellow",
         "facing": "east"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/green_cushion",
+        "model": "omf:block/chair/cushion/yellow_cushion",
         "y": 180
       },
       "when": {
-        "cushion": "green",
+        "cushion": "yellow",
         "facing": "south"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/green_cushion",
+        "model": "omf:block/chair/cushion/yellow_cushion",
         "y": 270
       },
       "when": {
-        "cushion": "green",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "omf:block/chair/cushion/red_cushion",
-        "y": 0
-      },
-      "when": {
-        "cushion": "red",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "omf:block/chair/cushion/red_cushion",
-        "y": 90
-      },
-      "when": {
-        "cushion": "red",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "omf:block/chair/cushion/red_cushion",
-        "y": 180
-      },
-      "when": {
-        "cushion": "red",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "omf:block/chair/cushion/red_cushion",
-        "y": 270
-      },
-      "when": {
-        "cushion": "red",
+        "cushion": "yellow",
         "facing": "west"
       }
     },
@@ -730,41 +950,41 @@
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/magenta_cushion",
+        "model": "omf:block/chair/cushion/gray_cushion",
         "y": 0
       },
       "when": {
-        "cushion": "magenta",
+        "cushion": "gray",
         "facing": "north"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/magenta_cushion",
+        "model": "omf:block/chair/cushion/gray_cushion",
         "y": 90
       },
       "when": {
-        "cushion": "magenta",
+        "cushion": "gray",
         "facing": "east"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/magenta_cushion",
+        "model": "omf:block/chair/cushion/gray_cushion",
         "y": 180
       },
       "when": {
-        "cushion": "magenta",
+        "cushion": "gray",
         "facing": "south"
       }
     },
     {
       "apply": {
-        "model": "omf:block/chair/cushion/magenta_cushion",
+        "model": "omf:block/chair/cushion/gray_cushion",
         "y": 270
       },
       "when": {
-        "cushion": "magenta",
+        "cushion": "gray",
         "facing": "west"
       }
     }
