@@ -74,9 +74,15 @@ public class FanBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (player.isShiftKeyDown()) {
+            state = state.cycle(BlockStateProperties.POWERED);
+            level.setBlock(pos, state, 2);
+        } else {
+            if (level.getBlockEntity(pos) instanceof FanBlockEntity fanBlockEntity) {
+                fanBlockEntity.fanOn = !fanBlockEntity.fanOn;
+            }
+        }
 
-        state = state.cycle(BlockStateProperties.POWERED);
-        level.setBlock(pos, state, 2);
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
 

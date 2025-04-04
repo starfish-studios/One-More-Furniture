@@ -22,6 +22,9 @@ public class OMFSoundEvents {
     public static final RegistrySupplier<SoundEvent> CABINET_CLOSE = register("block.cabinet.close");
 
 
+    public static final RegistrySupplier<SoundEvent> FAN_ON = register("block.fan.on");
+    public static final RegistrySupplier<SoundEvent> FAN_OFF = register("block.fan.off");
+
     public static RegistrySupplier<SoundEvent> register(String name) {
         ResourceLocation id = new ResourceLocation(OneMoreFurniture.MOD_ID, name);
         return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(id));

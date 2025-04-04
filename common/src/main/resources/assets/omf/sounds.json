@@ -73,5 +73,23 @@
       "omf:block/windchimes/echo_shard/idle_4"
     ],
     "subtitle": "omf.subtitles.block.windchimes.echo_shard"
+  },
+  "block.fan.on": {
+    "sounds": [
+      "omf:block/fan/on_1",
+      "omf:block/fan/on_2",
+      "omf:block/fan/on_3",
+      "omf:block/fan/on_4"
+    ],
+    "subtitle": "omf.subtitles.block.fan.on"
+  },
+  "block.fan.off": {
+    "sounds": [
+      "omf:block/fan/off_1",
+      "omf:block/fan/off_2",
+      "omf:block/fan/off_3",
+      "omf:block/fan/off_4"
+    ],
+    "subtitle": "omf.subtitles.block.fan.off"
   }
 }
