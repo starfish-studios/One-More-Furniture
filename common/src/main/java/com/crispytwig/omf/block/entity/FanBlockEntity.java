@@ -3,6 +3,8 @@ package com.crispytwig.omf.block.entity;
 import com.crispytwig.omf.registry.OMFBlockEntities;
 import com.crispytwig.omf.registry.OMFSoundEvents;
 import com.crispytwig.omf.util.OMFSoundInstance;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -36,30 +38,25 @@ public class FanBlockEntity extends BlockEntity {
 
     public boolean fanOn = false;
 
-    private OMFSoundInstance soundInstance;
-
     public FanBlockEntity(BlockPos pos, BlockState blockState) {
         super(OMFBlockEntities.FAN.get(), pos, blockState);
     }
 
     public void commonTick(Level level, BlockState state) {
         boolean powered = state.getValue(BlockStateProperties.POWERED);
-
-        if (soundInstance == null) {
-            soundInstance = new OMFSoundInstance(this, OMFSoundEvents.FAN_ON.get(), this.getLevel().random);
+        if (powered) {
+            fanOn = true;
         }
 
         if (level.isClientSide()) {
             if (powered || fanOn) {
                 rotationSpeed = Math.min(rotationSpeed + ACCELERATION, MAX_SPEED);
-                soundInstance.playSound();
             } else {
                 rotationSpeed = Math.max(rotationSpeed - DECELERATION, 0);
-                soundInstance.stopSound();
-                level.playSound(null, getBlockPos(), OMFSoundEvents.FAN_OFF.get(), SoundSource.BLOCKS, 1f, 1f);
             }
 
             currentRotation = (currentRotation + rotationSpeed) % 360;
+
         }
 
         if (!powered && !fanOn) {

@@ -1,9 +1,12 @@
 package com.crispytwig.omf.block;
 
 import com.crispytwig.omf.block.entity.FanBlockEntity;
+import com.crispytwig.omf.registry.OMFSoundEvents;
+import com.crispytwig.omf.util.OMFSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -77,13 +80,35 @@ public class FanBlock extends BaseEntityBlock {
         if (player.isShiftKeyDown()) {
             state = state.cycle(BlockStateProperties.POWERED);
             level.setBlock(pos, state, 2);
+
+            if (level.getBlockEntity(pos) instanceof FanBlockEntity fanBlockEntity) {
+                fanBlockEntity.fanOn = state.getValue(BlockStateProperties.POWERED);
+                playSound(level, state, pos);
+            }
         } else {
             if (level.getBlockEntity(pos) instanceof FanBlockEntity fanBlockEntity) {
                 fanBlockEntity.fanOn = !fanBlockEntity.fanOn;
+                playSound(level, state, pos);
             }
         }
 
         return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    private void playSound(Level level, BlockState state, BlockPos pos) {
+        var powered = state.getValue(BlockStateProperties.POWERED);
+        if (powered) {
+            level.playSound(null, pos, OMFSoundEvents.LAMP_ON.get(), SoundSource.BLOCKS);
+        } else {
+            level.playSound(null, pos, OMFSoundEvents.LAMP_OFF.get(), SoundSource.BLOCKS);
+        }
+        if (level.isClientSide && level.getBlockEntity(pos) instanceof FanBlockEntity fanBlockEntity) {
+            if (fanBlockEntity.fanOn) {
+                OMFSoundInstance.tryPlay(fanBlockEntity);
+            } else {
+                OMFSoundInstance.stop(fanBlockEntity);
+            }
+        }
     }
 
     @Override
@@ -93,9 +118,10 @@ public class FanBlock extends BaseEntityBlock {
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
-        if (!level.isClientSide) {
-            boolean bl = level.hasNeighborSignal(pos);
-            if (bl != state.getValue(BlockStateProperties.POWERED)) {
+        boolean bl = level.hasNeighborSignal(pos);
+        boolean isPowered = state.getValue(BlockStateProperties.POWERED);
+        if (bl != isPowered) {
+            if (!level.isClientSide) {
                 level.setBlock(pos, state.setValue(BlockStateProperties.POWERED, bl), 2);
             }
         }

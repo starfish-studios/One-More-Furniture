@@ -74,22 +74,28 @@
     ],
     "subtitle": "omf.subtitles.block.windchimes.echo_shard"
   },
-  "block.fan.on": {
+  "block.lamp.on": {
     "sounds": [
-      "omf:block/fan/on_1",
-      "omf:block/fan/on_2",
-      "omf:block/fan/on_3",
-      "omf:block/fan/on_4"
+      "omf:block/lamp/on_1",
+      "omf:block/lamp/on_2",
+      "omf:block/lamp/on_3",
+      "omf:block/lamp/on_4"
     ],
-    "subtitle": "omf.subtitles.block.fan.on"
+    "subtitle": "omf.subtitles.block.lamp.on"
   },
-  "block.fan.off": {
+  "block.lamp.off": {
     "sounds": [
-      "omf:block/fan/off_1",
-      "omf:block/fan/off_2",
-      "omf:block/fan/off_3",
-      "omf:block/fan/off_4"
+      "omf:block/lamp/off_1",
+      "omf:block/lamp/off_2",
+      "omf:block/lamp/off_3",
+      "omf:block/lamp/off_4"
     ],
-    "subtitle": "omf.subtitles.block.fan.off"
+    "subtitle": "omf.subtitles.block.lamp.off"
+  },
+  "block.fan.ambience": {
+    "sounds": [
+      "omf:block/fan/ambience"
+    ],
+    "subtitle": "omf.subtitles.block.lamp.ambience"
   }
 }
