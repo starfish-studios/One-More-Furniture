@@ -1,3 +1,6 @@
 {
-  "parent": "omf:block/spruce_flower_basket"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "omf:item/spruce_flower_basket"
+  }
 }

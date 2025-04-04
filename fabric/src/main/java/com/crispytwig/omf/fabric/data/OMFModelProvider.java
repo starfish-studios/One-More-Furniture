@@ -205,10 +205,12 @@ public class OMFModelProvider extends FabricModelProvider {
 
         var singleClosed = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_single_closed"));
         var singleOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_single_open"));
-        var bottomClosedAndTopOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_top_open"));
+        var topOpenMapping = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_top_open"));
+        var closedMapping = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_bottom"));
+
 
         ResourceLocation bottomMiddleOpenResource = CURTAIN_BOTTOM_MIDDLE_OPEN.createWithSuffix(block, "_middle_open", bottomMiddleAndMiddleOpen, generators.modelOutput);
-        ResourceLocation bottomMiddleClosedResource = CURTAIN_BOTTOM_MIDDLE_CLOSED.createWithSuffix(block, "_closed", bottomClosedAndTopOpen, generators.modelOutput);
+        ResourceLocation bottomMiddleClosedResource = CURTAIN_BOTTOM_MIDDLE_CLOSED.createWithSuffix(block, "_closed", closedMapping, generators.modelOutput);
 
         ResourceLocation bottomLeftOpenResource = CURTAIN_BOTTOM_LEFT_OPEN.createWithSuffix(block, "_bottom_left_open", bottomRightAndBottomLeftOpen, generators.modelOutput);
         ResourceLocation bottomRightOpenResource = CURTAIN_BOTTOM_RIGHT_OPEN.createWithSuffix(block, "_bottom_right_open", bottomRightAndBottomLeftOpen, generators.modelOutput);
@@ -218,7 +220,7 @@ public class OMFModelProvider extends FabricModelProvider {
         ResourceLocation defaultClosed = CURTAIN_SINGLE_CLOSED.createWithSuffix(block, "_single_closed", singleClosed, generators.modelOutput);
         ResourceLocation singleOpenResource = CURTAIN_SINGLE_OPEN.createWithSuffix(block, "_single_open", singleOpen, generators.modelOutput);
 
-        ResourceLocation topOpenResource = CURTAIN_TOP_OPEN.createWithSuffix(block, "_top_open", bottomClosedAndTopOpen, generators.modelOutput);
+        ResourceLocation topOpenResource = CURTAIN_TOP_OPEN.createWithSuffix(block, "_top_open", topOpenMapping, generators.modelOutput);
         ResourceLocation topSingleOpenResource = CURTAIN_TOP_SINGLE_OPEN.createWithSuffix(block, "_top_single_open", topAndBottomSingleOpen, generators.modelOutput);
 
         ResourceLocation leftOpenResource = CURTAIN_LEFT_OPEN.createWithSuffix(block, "_left_open", rightAndLeftOpen, generators.modelOutput);
@@ -292,6 +294,8 @@ public class OMFModelProvider extends FabricModelProvider {
 
         generators.generateFlatItem(OMFItems.COPPER_SAW.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
+        OMFBlocks.FLOWER_BASKETS.forEach((omfWoodType, supplier) -> generators.generateFlatItem(supplier.get().asItem(), ModelTemplates.FLAT_ITEM));
+        OMFBlocks.CURTAINS.forEach((omfWoodType, supplier) -> generators.generateFlatItem(supplier.get().asItem(), ModelTemplates.FLAT_ITEM));
         OMFBlocks.DRAWERS.forEach(((omfWoodType, supplier) -> createDrawerItem(generators, supplier.get().asItem(), supplier.get())));
         OMFBlocks.CHAIRS.forEach(((omfWoodType, supplier) -> createChairItem(generators, supplier.get().asItem(), supplier.get())));
         OMFBlocks.CABINET.forEach(((omfWoodType, supplier) -> createCabinetItem(generators, supplier.get().asItem(), supplier.get())));

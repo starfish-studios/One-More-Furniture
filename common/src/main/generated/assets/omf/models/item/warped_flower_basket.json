@@ -1,3 +1,6 @@
 {
-  "parent": "omf:block/warped_flower_basket"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "omf:item/warped_flower_basket"
+  }
 }

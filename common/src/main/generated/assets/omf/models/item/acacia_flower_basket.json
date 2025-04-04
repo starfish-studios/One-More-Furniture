@@ -1,3 +1,6 @@
 {
-  "parent": "omf:block/acacia_flower_basket"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "omf:item/acacia_flower_basket"
+  }
 }

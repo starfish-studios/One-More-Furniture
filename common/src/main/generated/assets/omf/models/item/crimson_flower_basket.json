@@ -1,3 +1,6 @@
 {
-  "parent": "omf:block/crimson_flower_basket"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "omf:item/crimson_flower_basket"
+  }
 }

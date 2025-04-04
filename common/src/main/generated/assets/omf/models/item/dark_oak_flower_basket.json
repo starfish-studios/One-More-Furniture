@@ -1,3 +1,6 @@
 {
-  "parent": "omf:block/dark_oak_flower_basket"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "omf:item/dark_oak_flower_basket"
+  }
 }
