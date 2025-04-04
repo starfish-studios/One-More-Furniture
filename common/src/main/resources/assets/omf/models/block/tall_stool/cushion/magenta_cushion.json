@@ -1,7 +1,7 @@
 {
     "parent": "omf:block/template/tall_stool_cushion",
     "textures": {
-        "all": "omf:block/tall_stool/cushion/magenta_cushion",
+        "all": "omf:block/chair/cushion/magenta_cushion",
         "particle": "block/magenta_wool"
     }
 }

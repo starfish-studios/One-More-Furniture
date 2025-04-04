@@ -15,6 +15,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -136,6 +137,30 @@ public class FlowerBasketBlock extends BaseEntityBlock {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
+    public boolean isAllowedFlower(Item item) {
+        ResourceLocation itemId = new ResourceLocation(item.toString());
+
+        for (String entry : OMFConfig.flowerBoxItems) {
+            if (entry.startsWith("#")) {
+                String tagName = entry.substring(1);
+                ResourceLocation tagResource = new ResourceLocation(tagName);
+
+                TagKey<Item> tagKey = TagKey.create(Registries.ITEM, tagResource);
+
+                if (item.builtInRegistryHolder().is(tagKey)) {
+                    return true;
+                }
+            } else {
+                if (itemId.toString().equals(entry)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
     @Override
     @SuppressWarnings("deprecation")
     public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
@@ -193,7 +218,8 @@ public class FlowerBasketBlock extends BaseEntityBlock {
                 : 0);
         ItemStack currentFlower = flowerBoxBE.getItemFromSlot(slot).getDefaultInstance();
 
-        if (currentFlower.isEmpty()) {
+        if (currentFlower.isEmpty() && heldStack.getItem() instanceof BlockItem
+                && isAllowedFlower(heldStack.getItem())) {
             if (flowerBoxBE.placeFlower(player.getAbilities().instabuild ? heldStack.copy() : heldStack, slot)) {
                 if (!player.getAbilities().instabuild) {
                     heldStack.shrink(1);
@@ -201,7 +227,9 @@ public class FlowerBasketBlock extends BaseEntityBlock {
                 return InteractionResult.SUCCESS;
             }
         } else {
-            if (heldStack.getItem() != currentFlower.getItem()) {
+            if (!heldStack.getItem().equals(currentFlower.getItem())
+                    && heldStack.getItem() instanceof BlockItem
+                    && isAllowedFlower(heldStack.getItem())) {
                 flowerBoxBE.removeFlower(slot);
                 level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, currentFlower.copy()));
                 if (flowerBoxBE.placeFlower(player.getAbilities().instabuild ? heldStack.copy() : heldStack, slot)) {
@@ -212,6 +240,8 @@ public class FlowerBasketBlock extends BaseEntityBlock {
                 }
             }
         }
+
+
 
         return InteractionResult.CONSUME;
     }

@@ -531,7 +531,7 @@ public class OMFModelProvider extends FabricModelProvider {
             Block chairBlock,
             ResourceLocation chairBacklessId,
             Map<ColorList, ResourceLocation> cushionModels,
-            Map<ChairType, ResourceLocation> backTypeModels
+            Map< ChairType, ResourceLocation> backTypeModels
     ) {
         MultiPartGenerator multiPart = MultiPartGenerator.multiPart(chairBlock);
         for (Direction direction : Direction.Plane.HORIZONTAL) {

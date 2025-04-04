@@ -104,6 +104,9 @@ public class CushionableEvents {
                 level.setBlockAndUpdate(pos, blockState.setValue(OMFBlockProperties.CUSHION, ColorList.EMPTY));
                 level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, new ItemStack(carpet, 1)));
                 level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, player.getSoundSource(), 1.0F, 1.0F);
+                if (!player.isCreative()) {
+                    itemStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                }
                 return EventResult.interruptTrue();
             }
         } else if (item instanceof DyeItem && block instanceof Cushionable && blockState.getValue(OMFBlockProperties.CUSHION) != ColorList.EMPTY) {
@@ -116,6 +119,9 @@ public class CushionableEvents {
             level.setBlockAndUpdate(pos, newState);
             DyeColor color = ((DyeItem) item).getDyeColor();
             level.playSound(null, pos, SoundEvents.DYE_USE, player.getSoundSource(), 1.0F, 1.0F);
+            if (!player.isCreative()) {
+                itemStack.shrink(1);
+            }
             for (int j = 0; j < 5; ++j) {
                 double g = level.random.nextGaussian() * 0.2;
                 double h = level.random.nextGaussian() * 0.1;

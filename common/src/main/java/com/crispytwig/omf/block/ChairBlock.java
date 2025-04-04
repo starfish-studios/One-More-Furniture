@@ -83,6 +83,7 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
         if (!state.getValue(BACK)) {
             return hasCushion ? BOTTOM_WITH_CUSHION : BOTTOM_WITHOUT_CUSHION;
         }
+
         // Select the precomputed shape based on the state values
         return switch (facing) {
             case NORTH -> hasCushion ? NORTH_WITH_CUSHION : NORTH_WITHOUT_CUSHION;

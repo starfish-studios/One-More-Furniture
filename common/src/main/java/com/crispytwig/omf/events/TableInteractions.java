@@ -11,20 +11,18 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class TableInteractions   {
+public class TableInteractions {
 
     private static final Map<ColorList, Item> SHEAR_MAP = Util.make(new HashMap<>(), (map) -> {
         map.put(ColorList.WHITE, Items.WHITE_CARPET);
@@ -129,9 +127,8 @@ public class TableInteractions   {
         }
     }
 
-
     public static EventResult interact(Player player, InteractionHand hand, BlockPos pos, Direction direction) {
-        var level = player.level();
+        Level level = player.level();
         BlockState blockState = level.getBlockState(pos);
         Block block = blockState.getBlock();
         ItemStack itemStack = player.getItemInHand(hand);
@@ -147,27 +144,42 @@ public class TableInteractions   {
                 } else {
                     level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, new ItemStack(carpet, 1)));
                 }
+                if (!player.isCreative()) {
+                    itemStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                }
                 level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, player.getSoundSource(), 1.0F, 1.0F);
                 return EventResult.interruptTrue();
             }
         } else if (item instanceof DyeItem && block instanceof TableBlock && blockState.getValue(TableBlock.TABLECLOTH) != ColorList.EMPTY) {
+            ColorList currentColor = blockState.getValue(TableBlock.TABLECLOTH);
+            ColorList dyeColor = getColorFor(item);
+
+            if (currentColor == dyeColor) {
+                return EventResult.pass();
+            }
+
             BlockState newState = getBlockstateForDye(item, blockState);
             level.setBlockAndUpdate(pos, newState);
             DyeColor color = ((DyeItem) item).getDyeColor();
             level.playSound(null, pos, SoundEvents.DYE_USE, player.getSoundSource(), 1.0F, 1.0F);
+            if (!player.isCreative()) {
+                itemStack.shrink(1);
+            }
             for (int j = 0; j < 5; ++j) {
                 double g = level.random.nextGaussian() * 0.2;
                 double h = level.random.nextGaussian() * 0.1;
                 double i = level.random.nextGaussian() * 0.2;
 
-                DustParticleOptions dustParticleOptions = new DustParticleOptions(Vec3.fromRGB24(color.getTextColor()).toVector3f(), 1.0F);
+                DustParticleOptions dustParticleOptions = new DustParticleOptions(
+                        Vec3.fromRGB24(color.getTextColor()).toVector3f(), 1.0F);
 
                 if (!level.isClientSide) {
                     ServerLevel serverLevel = (ServerLevel) level;
                     if (blockState.getValue(TableBlock.SHORT)) {
-                        serverLevel.sendParticles(dustParticleOptions, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 1, g, h, i, 0.0D);
-                    } else
-                        serverLevel.sendParticles(dustParticleOptions, (double) pos.getX() + 0.5, (double) pos.getY() + 1.1, (double) pos.getZ() + 0.5, 1, g, h, i, 0.0D);
+                        serverLevel.sendParticles(dustParticleOptions, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1, g, h, i, 0.0D);
+                    } else {
+                        serverLevel.sendParticles(dustParticleOptions, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, 1, g, h, i, 0.0D);
+                    }
                 }
             }
             return EventResult.interruptTrue();

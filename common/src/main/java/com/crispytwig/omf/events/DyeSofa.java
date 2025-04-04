@@ -61,6 +61,9 @@ public class DyeSofa {
                     .setValue(BlockStateProperties.HORIZONTAL_FACING, blockState.getValue(BlockStateProperties.HORIZONTAL_FACING))
                     .setValue(SofaBlock.SHAPE, blockState.getValue(SofaBlock.SHAPE))
             );
+            if (!player.isCreative()) {
+                itemStack.shrink(1);
+            }
             level.playSound(null, pos, SoundEvents.DYE_USE, player.getSoundSource(), 1.0F, 1.0F);
             for(int j = 0; j < 10; ++j) {
                 double g = level.random.nextGaussian() * 0.2;

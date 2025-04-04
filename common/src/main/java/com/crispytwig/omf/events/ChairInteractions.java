@@ -12,6 +12,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
+import static com.crispytwig.omf.block.ChairBlock.BACK;
+
 public class ChairInteractions implements Cushionable {
 
     public static EventResult interact(Player player, InteractionHand hand, BlockPos pos, Direction direction) {
@@ -21,6 +23,10 @@ public class ChairInteractions implements Cushionable {
 
         if (block instanceof ChairBlock) {
             if (player.isShiftKeyDown() && player.getItemInHand(hand).is(OMFItems.COPPER_SAW.get())) {
+                if (!blockState.getValue(BACK)) {
+                    return EventResult.interruptFalse();
+                }
+
                 blockState = blockState.cycle(ChairBlock.BACK_TYPE);
 
                 level.setBlock(pos, blockState, 3);

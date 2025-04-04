@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"all": "omf:block/chair/oak_chair",
-		"particle": "#all"
+		"particle": "omf:block/chair/oak_chair_back2",
+		"all": "omf:block/chair/oak_chair_back2"
 	},
 	"elements": [
 		{
@@ -126,11 +126,7 @@
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
 			"faces": {
 				"north": {"uv": [7, 0, 11, 6], "texture": "#all"},
-				"east": {"uv": [0, 0, 0, 6], "texture": "#all"},
-				"south": {"uv": [7, 0, 11, 6], "texture": "#all"},
-				"west": {"uv": [0, 0, 0, 6], "texture": "#all"},
-				"up": {"uv": [4, 0, 0, 0], "texture": "#all"},
-				"down": {"uv": [4, 0, 0, 0], "texture": "#all"}
+				"south": {"uv": [7, 0, 11, 6], "texture": "#all"}
 			}
 		},
 		{

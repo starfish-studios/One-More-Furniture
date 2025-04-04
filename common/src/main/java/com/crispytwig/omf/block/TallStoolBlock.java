@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -41,6 +42,7 @@ public class TallStoolBlock extends SeatBlock implements SimpleWaterloggedBlock,
             Block.box(10.0D, 0.0D, 10.0D, 12.0D, 14.0D, 12.0D),
             Block.box(5.0D, 6.0D, 5.0D, 11.0D, 8.0D, 11.0D)
     );
+    protected static final VoxelShape CUSHION_AABB = Block.box(2.0D, 13.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
     @Override
     public double dyeHeight() {
@@ -56,8 +58,12 @@ public class TallStoolBlock extends SeatBlock implements SimpleWaterloggedBlock,
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, net.minecraft.world.phys.shapes.CollisionContext context) {
-        return SHAPE;
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        VoxelShape shape = SHAPE;
+        if (state.getValue(CUSHION) != ColorList.EMPTY) {
+            shape = CUSHION_AABB;
+        }
+        return shape;
     }
 
     @Override
