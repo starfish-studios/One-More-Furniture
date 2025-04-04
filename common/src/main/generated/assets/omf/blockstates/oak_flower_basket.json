@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=east": {
-      "model": "omf:block/oak_flower_basket",
+    "face=ceiling,facing=east": {
+      "model": "omf:block/oak_flower_basket_ceiling",
       "y": 90
     },
-    "facing=north": {
-      "model": "omf:block/oak_flower_basket"
+    "face=ceiling,facing=north": {
+      "model": "omf:block/oak_flower_basket_ceiling"
     },
-    "facing=south": {
-      "model": "omf:block/oak_flower_basket",
+    "face=ceiling,facing=south": {
+      "model": "omf:block/oak_flower_basket_ceiling",
       "y": 180
     },
-    "facing=west": {
-      "model": "omf:block/oak_flower_basket",
+    "face=ceiling,facing=west": {
+      "model": "omf:block/oak_flower_basket_ceiling",
+      "y": 270
+    },
+    "face=floor,facing=east": {
+      "model": "omf:block/oak_flower_basket_floor",
+      "y": 90
+    },
+    "face=floor,facing=north": {
+      "model": "omf:block/oak_flower_basket_floor"
+    },
+    "face=floor,facing=south": {
+      "model": "omf:block/oak_flower_basket_floor",
+      "y": 180
+    },
+    "face=floor,facing=west": {
+      "model": "omf:block/oak_flower_basket_floor",
+      "y": 270
+    },
+    "face=wall,facing=east": {
+      "model": "omf:block/oak_flower_basket_wall",
+      "y": 90
+    },
+    "face=wall,facing=north": {
+      "model": "omf:block/oak_flower_basket_wall"
+    },
+    "face=wall,facing=south": {
+      "model": "omf:block/oak_flower_basket_wall",
+      "y": 180
+    },
+    "face=wall,facing=west": {
+      "model": "omf:block/oak_flower_basket_wall",
       "y": 270
     }
   }

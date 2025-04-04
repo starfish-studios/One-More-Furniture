@@ -336,6 +336,7 @@
   "item.omf.yellow_curtain": "Yellow Curtain",
   "item.omf.yellow_sofa": "Yellow Sofa",
   "itemGroup.omf.tab": "One More Furniture",
+  "key.omf.tooltip": "Show Tooltip",
   "omf.mailbox.at": "at",
   "omf.mailbox.receiving": "Receiving item(s) from %s at %s",
   "omf.mailbox.sending": "Sending item(s) from %s at %s"

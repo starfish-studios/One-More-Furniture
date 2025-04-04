@@ -131,17 +131,51 @@ public class OMFModelProvider extends FabricModelProvider {
     }
 
     private void createFlowerBasket(BlockModelGenerators generators, Block block) {
-        TextureMapping one = new TextureMapping()
-                .put(TextureSlot.ALL, getTexture(block, "flower_basket", ""))
-                .put(TextureSlot.PARTICLE, getTexture(block, "flower_basket", ""))
+        String blockPath = BuiltInRegistries.BLOCK.getKey(block).getPath();
+        String wood = blockPath.replace("_flower_basket", "");
+
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.ALL, new ResourceLocation(OneMoreFurniture.MOD_ID, "block/flower_basket/" + wood + "_flower_basket"))
+                .put(TextureSlot.PARTICLE, new ResourceLocation("block/" + wood + "_planks"))
                 .put(TextureSlot.DIRT, new ResourceLocation("block/dirt"));
 
-        var res = FLOWER_BASKET.create(block, one, generators.modelOutput);
-        MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, res));
+        ModelTemplate ceilingTemplate = createTemplate("flower_basket_ceiling", TextureSlot.ALL, TextureSlot.PARTICLE);
+        ModelTemplate floorTemplate   = createTemplate("flower_basket_floor", TextureSlot.ALL, TextureSlot.PARTICLE);
+        ModelTemplate wallTemplate    = createTemplate("flower_basket_wall", TextureSlot.ALL, TextureSlot.PARTICLE);
 
-        multiVariant.with(BlockModelGenerators.createHorizontalFacingDispatch());
+        ResourceLocation ceilingModel = ceilingTemplate.createWithSuffix(block, "_ceiling", mapping, generators.modelOutput);
+        ResourceLocation floorModel   = floorTemplate.createWithSuffix(block, "_floor", mapping, generators.modelOutput);
+        ResourceLocation wallModel    = wallTemplate.createWithSuffix(block, "_wall", mapping, generators.modelOutput);
+
+        PropertyDispatch.C2<AttachFace, Direction> dispatch =
+                PropertyDispatch.properties(FlowerBasketBlock.FACE, FlowerBasketBlock.FACING);
+        for (AttachFace face : new AttachFace[]{AttachFace.CEILING, AttachFace.FLOOR, AttachFace.WALL}) {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                Variant variant = Variant.variant();
+                if (face == AttachFace.CEILING) {
+                    variant = variant.with(VariantProperties.MODEL, ceilingModel);
+                } else if (face == AttachFace.FLOOR) {
+                    variant = variant.with(VariantProperties.MODEL, floorModel);
+                } else {
+                    variant = variant.with(VariantProperties.MODEL, wallModel);
+                }
+                VariantProperties.Rotation rotation = switch (direction) {
+                    case EAST  -> VariantProperties.Rotation.R90;
+                    case SOUTH -> VariantProperties.Rotation.R180;
+                    case WEST  -> VariantProperties.Rotation.R270;
+                    default    -> VariantProperties.Rotation.R0;
+                };
+                if (rotation != VariantProperties.Rotation.R0) {
+                    variant = variant.with(VariantProperties.Y_ROT, rotation);
+                }
+                dispatch = dispatch.select(face, direction, variant);
+            }
+        }
+        MultiVariantGenerator multiVariant = MultiVariantGenerator.multiVariant(block).with(dispatch);
         generators.blockStateOutput.accept(multiVariant);
     }
+
+
 
     public record OpenClosed(ResourceLocation open, ResourceLocation closed){}
 
