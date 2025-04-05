@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/countertop_bottom",
+  "textures": {
+    "sides": "yaf:block/drawers/countertop/warped_drawer_countertop_sides",
+    "top": "yaf:block/drawers/warped_drawer_top"
+  }
+}

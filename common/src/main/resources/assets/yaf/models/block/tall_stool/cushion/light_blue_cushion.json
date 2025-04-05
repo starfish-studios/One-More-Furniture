@@ -1,0 +1,7 @@
+{
+    "parent": "yaf:block/template/tall_stool_cushion",
+    "textures": {
+        "all": "yaf:block/chair/cushion/light_blue_cushion",
+        "particle": "block/light_blue_wool"
+    }
+}

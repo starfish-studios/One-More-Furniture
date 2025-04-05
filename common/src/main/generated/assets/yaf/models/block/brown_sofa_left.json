@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/sofa_left",
+  "textures": {
+    "all": "yaf:block/sofa/brown_sofa",
+    "particle": "yaf:block/sofa/brown_sofa"
+  }
+}

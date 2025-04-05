@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/tall_stool",
+  "textures": {
+    "all": "yaf:block/tall_stool/oak_tall_stool",
+    "particle": "block/oak_planks"
+  }
+}

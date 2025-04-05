@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/lamp_on",
+  "textures": {
+    "all": "yaf:block/lamp/crimson_lamp",
+    "particle": "block/crimson_planks"
+  }
+}

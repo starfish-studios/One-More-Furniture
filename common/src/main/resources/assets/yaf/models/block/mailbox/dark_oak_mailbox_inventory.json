@@ -1,0 +1,7 @@
+{
+    "parent": "yaf:block/template/mailbox/mailbox_inventory",
+    "textures": {
+        "post": "yaf:block/mailbox/post/dark_oak_post",
+        "mailbox": "yaf:block/mailbox/mailbox"
+    }
+}

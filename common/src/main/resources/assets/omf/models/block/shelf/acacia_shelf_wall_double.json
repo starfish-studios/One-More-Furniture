@@ -1,7 +1,0 @@
-{
-    "parent": "omf:block/template/shelf/shelf_wall_double",
-    "textures": {
-        "all": "omf:block/shelf/acacia_shelf",
-        "particle": "block/acacia_planks"
-    }
-}

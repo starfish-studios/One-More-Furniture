@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
-  "id": "omf",
+  "id": "yaf",
   "version": "${version}",
-  "name": "One More Furniture",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Yet Another Furniture",
+  "description": "There are furniture mods, then there are more- then we made ANOTHER, but this time, it's YET ANOTHER. How many more furniture mods can we make? Find out in the next episode of \"Furniture Mods\".",
   "authors": [
-    "Starfish Studios"
+    "Starfish Studios : crispytwig, MrSterner, thelamb_"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://starfish-studios.com/",
+    "sources": "https://github.com/starfish-studios/Yet-Another-Furniture"
   },
-  "license": "Insert License Here",
-  "icon": "assets/omf/icon.png",
+  "license": "https://github.com/starfish-studios/One-More-Furniture?tab=License-1-ov-file#readme",
+  "icon": "assets/yaf/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.crispytwig.omf.fabric.OneMoreFurnitureFabric"
+      "com.starfish_studios.yaf.fabric.YetAnotherFurnitureFabric"
     ],
     "client": [
-      "com.crispytwig.omf.fabric.OneMoreFurnitureFabricClient"
+      "com.starfish_studios.yaf.fabric.YetAnotherFurnitureFabricClient"
     ],
     "fabric-datagen": [
-      "com.crispytwig.omf.fabric.data.OMFDataGenerator"
+      "com.starfish_studios.yaf.fabric.data.YAFDataGenerator"
     ]
   },
   "mixins": [
-    "omf.mixins.json",
-    "omf-common.mixins.json"
+    "yaf.mixins.json",
+    "yaf-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",

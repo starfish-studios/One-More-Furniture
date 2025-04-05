@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/countertop",
+  "textures": {
+    "sides": "yaf:block/drawers/countertop/cherry_drawer_countertop_sides",
+    "top": "yaf:block/drawers/cherry_drawer_top"
+  }
+}

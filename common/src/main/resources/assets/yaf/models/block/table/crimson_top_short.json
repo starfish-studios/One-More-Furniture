@@ -1,0 +1,6 @@
+{
+    "parent": "yaf:block/template/table_top_short",
+    "textures": {
+        "all": "yaf:block/table/crimson_table"
+    }
+}

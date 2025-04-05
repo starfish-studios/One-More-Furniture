@@ -1,7 +1,0 @@
-{
-    "parent": "omf:block/template/mailbox/mailbox_post",
-    "textures": {
-        "post": "omf:block/mailbox/post/bamboo_post",
-        "particle": "block/bamboo_planks"
-    }
-}

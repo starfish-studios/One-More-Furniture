@@ -1,0 +1,18 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"mailbox": "yaf:block/mailbox/mailbox"
+	},
+	"elements": [
+		{
+			"from": [3.75, 6, -4],
+			"to": [3.75, 13, 0],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3.75, 7.5, -3.5]},
+			"faces": {
+				"east": {"uv": [10.5, 4, 12.5, 7.5], "texture": "#mailbox"},
+				"west": {"uv": [10.5, 4, 12.5, 7.5], "texture": "#mailbox"}
+			}
+		}
+	]
+}

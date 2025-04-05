@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "W": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "pattern": [
+    "NW ",
+    "NWW"
+  ],
+  "result": {
+    "count": 2,
+    "item": "yaf:dark_oak_bench"
+  },
+  "show_notification": true
+}

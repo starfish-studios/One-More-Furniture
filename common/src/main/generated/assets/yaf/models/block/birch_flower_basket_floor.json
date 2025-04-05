@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/flower_basket_floor",
+  "textures": {
+    "all": "yaf:block/flower_basket/birch_flower_basket",
+    "particle": "minecraft:block/birch_planks"
+  }
+}

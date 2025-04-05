@@ -1,0 +1,6 @@
+{
+    "parent": "yaf:block/template/table_full",
+    "textures": {
+        "all": "yaf:block/table/warped_table"
+    }
+}

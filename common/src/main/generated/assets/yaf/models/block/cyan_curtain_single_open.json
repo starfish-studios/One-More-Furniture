@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/curtain_single_open",
+  "textures": {
+    "all": "yaf:block/curtain/cyan_curtain_single_open",
+    "particle": "yaf:block/curtain/cyan_curtain_single_open"
+  }
+}

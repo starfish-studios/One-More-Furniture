@@ -1,7 +1,0 @@
-{
-    "parent": "omf:block/template/bench_inventory",
-    "textures": {
-        "all": "omf:block/bench/cherry_bench",
-        "particle": "block/cherry_planks"
-    }
-}

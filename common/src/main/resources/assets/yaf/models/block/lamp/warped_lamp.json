@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/lamp",
+  "textures": {
+    "all": "yaf:block/lamp/warped_lamp",
+    "particle": "block/warped_planks"
+  }
+}

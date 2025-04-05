@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/curtain_single_closed",
+  "textures": {
+    "all": "yaf:block/curtain/white_curtain_single_closed",
+    "particle": "yaf:block/curtain/white_curtain_single_closed"
+  }
+}

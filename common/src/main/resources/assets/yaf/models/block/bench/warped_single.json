@@ -1,0 +1,7 @@
+{
+    "parent": "yaf:block/template/bench_single",
+    "textures": {
+        "all": "yaf:block/bench/warped_bench",
+        "particle": "block/warped_planks"
+    }
+}

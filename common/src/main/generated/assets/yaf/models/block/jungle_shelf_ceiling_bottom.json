@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/shelf/shelf_ceiling_bottom",
+  "textures": {
+    "all": "yaf:block/shelf/jungle_shelf",
+    "particle": "yaf:block/shelf/jungle_shelf"
+  }
+}

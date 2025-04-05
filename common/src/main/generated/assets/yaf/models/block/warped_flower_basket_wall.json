@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/flower_basket_wall",
+  "textures": {
+    "all": "yaf:block/flower_basket/warped_flower_basket",
+    "particle": "minecraft:block/warped_planks"
+  }
+}

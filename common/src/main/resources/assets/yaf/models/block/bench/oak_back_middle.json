@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/bench_back_middle",
+  "textures": {
+    "all": "yaf:block/bench/oak_bench",
+    "particle": "block/oak_planks"
+  }
+}

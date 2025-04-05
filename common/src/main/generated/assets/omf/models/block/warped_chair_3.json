@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/chair_3",
-  "textures": {
-    "all": "omf:block/chair/warped_chair3",
-    "particle": "minecraft:block/warped_planks"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/flower_basket_floor",
-  "textures": {
-    "all": "omf:block/flower_basket/warped_flower_basket",
-    "particle": "minecraft:block/warped_planks"
-  }
-}

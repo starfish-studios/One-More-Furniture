@@ -1,0 +1,9 @@
+{
+    "parent": "yaf:block/template/shelf/shelf_floor_top",
+    "textures": {
+        "all": "yaf:block/shelf/cherry_shelf",
+        "log": "block/cherry_log",
+        "log_top": "block/cherry_log_top",
+        "particle": "block/cherry_planks"
+    }
+}

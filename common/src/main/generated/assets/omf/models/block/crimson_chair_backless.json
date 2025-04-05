@@ -1,6 +1,0 @@
-{
-  "parent": "omf:block/template/chair_backless",
-  "textures": {
-    "all": "omf:block/chair/crimson_chair"
-  }
-}

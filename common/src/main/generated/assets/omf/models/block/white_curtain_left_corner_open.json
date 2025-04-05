@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/curtain_left_corner_open",
-  "textures": {
-    "all": "omf:block/curtain/white_curtain_corner_open",
-    "particle": "omf:block/curtain/white_curtain_corner_open"
-  }
-}

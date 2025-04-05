@@ -1,0 +1,7 @@
+{
+    "parent": "yaf:block/template/bench_inventory",
+    "textures": {
+        "all": "yaf:block/bench/cherry_bench",
+        "particle": "block/cherry_planks"
+    }
+}

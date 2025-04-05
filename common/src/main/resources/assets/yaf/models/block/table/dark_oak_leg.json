@@ -1,0 +1,6 @@
+{
+    "parent": "yaf:block/template/table_leg",
+    "textures": {
+        "all": "yaf:block/table/dark_oak_table"
+    }
+}

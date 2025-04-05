@@ -1,0 +1,6 @@
+{
+    "parent": "yaf:block/template/table_leg_short",
+    "textures": {
+        "all": "yaf:block/table/cherry_table"
+    }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "yaf:block/template/chime",
+  "textures": {
+    "all": "yaf:block/wind_chime/bamboo_stripped_wind_chimes"
+  }
+}

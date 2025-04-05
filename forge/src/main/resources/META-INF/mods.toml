@@ -1,33 +1,31 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
 #issueTrackerURL = ""
-license = "Insert License Here"
+license = "https://github.com/starfish-studios/One-More-Furniture?tab=License-1-ov-file#readme"
 
 [[mods]]
-modId = "omf"
+modId = "yaf"
 version = "${version}"
-displayName = "One More Furniture"
-authors = "Starfish Studios"
-description = '''
-This is an example description! Tell everyone what your mod is about!
-'''
+displayName = "Yet Another Furniture"
+authors = "Starfish Studios : crispytwig, MrSterner, thelamb_"
+description = '''There are furniture mods, then there are more- then we made ANOTHER, but this time, it's YET ANOTHER. How many more furniture mods can we make? Find out in the next episode of \"Furniture Mods\".'''
 #logoFile = ""
 
-[[dependencies.omf]]
+[[dependencies.yaf]]
 modId = "forge"
 mandatory = true
 versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.omf]]
+[[dependencies.yaf]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.20.1,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.omf]]
+[[dependencies.yaf]]
 modId = "architectury"
 mandatory = true
 versionRange = "[9.1.12,)"

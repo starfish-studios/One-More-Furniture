@@ -1,0 +1,7 @@
+{
+    "parent": "yaf:block/template/shelf/shelf_wall_bottom",
+    "textures": {
+        "all": "yaf:block/shelf/bamboo_shelf",
+        "particle": "block/bamboo_planks"
+    }
+}

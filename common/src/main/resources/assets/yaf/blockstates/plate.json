@@ -1,0 +1,65 @@
+{
+    "multipart": [
+        {
+            "apply": {
+                "model": "yaf:block/plate"
+            }
+        },
+        {
+            "apply": {
+                "model": "yaf:block/foods/apple"
+            },
+            "when": {
+                "food": "apple"
+            }
+        },
+        {
+            "apply": {
+                "model": "yaf:block/foods/baked_potato"
+            },
+            "when": {
+                "food": "baked_potato"
+            }
+        },
+        {
+            "apply": {
+                "model": "yaf:block/foods/beetroot"
+            },
+            "when": {
+                "food": "beetroot"
+            }
+        },
+        {
+            "apply": {
+                "model": "yaf:block/foods/bread"
+            },
+            "when": {
+                "food": "bread"
+            }
+        },
+        {
+            "apply": {
+                "model": "yaf:block/foods/carrot"
+            },
+            "when": {
+                "food": "carrot"
+            }
+        },
+        {
+            "apply": {
+                "model": "yaf:block/foods/cookie"
+            },
+            "when": {
+                "food": "cookie"
+            }
+        },
+        {
+            "apply": {
+                "model": "yaf:block/foods/potato"
+            },
+            "when": {
+                "food": "potato"
+            }
+        }
+    ]
+}

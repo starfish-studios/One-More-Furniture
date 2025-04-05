@@ -1,0 +1,7 @@
+{
+    "parent": "yaf:block/template/shelf/shelf_wall_bottom",
+    "textures": {
+        "all": "yaf:block/shelf/mangrove_shelf",
+        "particle": "block/mangrove_planks"
+    }
+}

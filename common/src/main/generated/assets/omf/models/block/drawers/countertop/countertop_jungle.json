@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/countertop",
-  "textures": {
-    "sides": "omf:block/drawers/countertop/jungle_drawer_countertop_sides",
-    "top": "omf:block/drawers/jungle_drawer_top"
-  }
-}

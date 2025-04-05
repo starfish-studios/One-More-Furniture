@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/curtain_right_corner_open",
+  "textures": {
+    "all": "yaf:block/curtain/lime_curtain_corner_open",
+    "particle": "yaf:block/curtain/lime_curtain_corner_open"
+  }
+}

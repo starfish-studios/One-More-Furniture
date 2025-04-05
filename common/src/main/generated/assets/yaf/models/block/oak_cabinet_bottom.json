@@ -1,0 +1,9 @@
+{
+  "parent": "yaf:block/template/cabinet_top",
+  "textures": {
+    "front": "yaf:block/cabinet/oak_cabinet_front_upper",
+    "particle": "yaf:block/cabinet/oak_cabinet_front_upper",
+    "sides": "yaf:block/cabinet/oak_cabinet_sides_upper",
+    "top": "yaf:block/drawers/oak_drawer_top"
+  }
+}

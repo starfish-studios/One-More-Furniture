@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/lamp_inventory",
+  "textures": {
+    "all": "yaf:block/lamp/warped_lamp",
+    "lampshade": "yaf:block/lamp/lampshade/white_lampshade"
+  }
+}

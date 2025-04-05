@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/lamp_top",
+  "textures": {
+    "all": "yaf:block/lamp/birch_lamp",
+    "particle": "block/birch_planks"
+  }
+}

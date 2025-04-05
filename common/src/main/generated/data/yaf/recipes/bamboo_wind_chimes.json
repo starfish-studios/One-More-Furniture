@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "minecraft:string"
+    },
+    "W": {
+      "item": "minecraft:bamboo_block"
+    }
+  },
+  "pattern": [
+    "P",
+    "W"
+  ],
+  "result": {
+    "item": "yaf:bamboo_wind_chimes"
+  },
+  "show_notification": true
+}

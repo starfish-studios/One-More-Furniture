@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "W": {
+      "item": "minecraft:light_gray_wool"
+    }
+  },
+  "pattern": [
+    "W ",
+    "WW"
+  ],
+  "result": {
+    "count": 2,
+    "item": "yaf:light_gray_sofa"
+  },
+  "show_notification": true
+}

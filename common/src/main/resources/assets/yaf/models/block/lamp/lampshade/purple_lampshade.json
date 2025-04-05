@@ -1,0 +1,7 @@
+{
+    "parent": "yaf:block/template/lampshade",
+    "textures": {
+        "all": "yaf:block/lamp/lampshade/purple_lampshade",
+        "particle": "block/purple_wool"
+    }
+}

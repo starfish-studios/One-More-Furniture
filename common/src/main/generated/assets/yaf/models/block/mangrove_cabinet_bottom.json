@@ -1,0 +1,9 @@
+{
+  "parent": "yaf:block/template/cabinet_top",
+  "textures": {
+    "front": "yaf:block/cabinet/mangrove_cabinet_front_upper",
+    "particle": "yaf:block/cabinet/mangrove_cabinet_front_upper",
+    "sides": "yaf:block/cabinet/mangrove_cabinet_sides_upper",
+    "top": "yaf:block/drawers/mangrove_drawer_top"
+  }
+}

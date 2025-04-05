@@ -1,0 +1,7 @@
+{
+    "parent": "yaf:block/template/bench_right",
+    "textures": {
+        "all": "yaf:block/bench/birch_bench",
+        "particle": "block/birch_planks"
+    }
+}

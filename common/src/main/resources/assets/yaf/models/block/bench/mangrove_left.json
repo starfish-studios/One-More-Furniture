@@ -1,0 +1,7 @@
+{
+    "parent": "yaf:block/template/bench_left",
+    "textures": {
+        "all": "yaf:block/bench/mangrove_bench",
+        "particle": "block/mangrove_planks"
+    }
+}

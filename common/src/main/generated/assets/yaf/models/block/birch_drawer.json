@@ -1,0 +1,9 @@
+{
+  "parent": "yaf:block/template/drawer",
+  "textures": {
+    "front": "yaf:block/drawers/birch_drawer_front",
+    "particle": "yaf:block/drawers/birch_drawer_front",
+    "sides": "yaf:block/drawers/birch_drawer_side",
+    "top": "yaf:block/drawers/birch_drawer_top"
+  }
+}

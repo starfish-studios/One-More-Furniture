@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/lamp_top",
+  "textures": {
+    "all": "yaf:block/lamp/mangrove_lamp",
+    "particle": "block/mangrove_planks"
+  }
+}

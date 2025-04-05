@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/shelf/shelf_ceiling_double",
+  "textures": {
+    "all": "yaf:block/shelf/cherry_shelf",
+    "particle": "yaf:block/shelf/cherry_shelf"
+  }
+}

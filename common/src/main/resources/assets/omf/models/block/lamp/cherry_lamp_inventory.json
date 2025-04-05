@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/lamp_inventory",
-  "textures": {
-    "all": "omf:block/lamp/cherry_lamp",
-    "lampshade": "omf:block/lamp/lampshade/white_lampshade"
-  }
-}

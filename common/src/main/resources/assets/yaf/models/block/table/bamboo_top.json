@@ -1,0 +1,6 @@
+{
+    "parent": "yaf:block/template/table_top",
+    "textures": {
+        "all": "yaf:block/table/bamboo_table"
+    }
+}

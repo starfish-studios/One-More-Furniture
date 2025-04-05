@@ -1,9 +1,0 @@
-{
-  "parent": "omf:block/template/cabinet_inventory",
-  "textures": {
-    "countertop": "omf:block/drawers/countertop/acacia_drawer_countertop_sides",
-    "front": "omf:block/cabinet/acacia_cabinet_front",
-    "sides": "omf:block/cabinet/acacia_cabinet_sides",
-    "top": "omf:block/drawers/acacia_drawer_top"
-  }
-}

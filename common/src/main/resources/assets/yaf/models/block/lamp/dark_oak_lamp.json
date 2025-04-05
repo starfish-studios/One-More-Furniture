@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/lamp",
+  "textures": {
+    "all": "yaf:block/lamp/dark_oak_lamp",
+    "particle": "block/dark_oak_planks"
+  }
+}

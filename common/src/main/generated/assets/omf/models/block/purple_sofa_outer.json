@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/sofa_corner_outer",
-  "textures": {
-    "all": "omf:block/sofa/purple_sofa",
-    "particle": "omf:block/sofa/purple_sofa"
-  }
-}

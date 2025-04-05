@@ -1,0 +1,9 @@
+{
+  "parent": "yaf:block/template/drawer_inventory",
+  "textures": {
+    "countertop": "yaf:block/drawers/countertop/cherry_drawer_countertop_sides",
+    "front": "yaf:block/drawers/cherry_drawer_front",
+    "sides": "yaf:block/drawers/cherry_drawer_side",
+    "top": "yaf:block/drawers/cherry_drawer_top"
+  }
+}

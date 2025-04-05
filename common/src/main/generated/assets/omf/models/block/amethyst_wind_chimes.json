@@ -1,6 +1,0 @@
-{
-  "parent": "omf:block/template/chime",
-  "textures": {
-    "all": "omf:block/wind_chime/amethyst_wind_chimes"
-  }
-}

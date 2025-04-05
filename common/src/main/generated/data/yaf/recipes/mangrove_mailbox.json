@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "W": {
+      "item": "minecraft:mangrove_planks"
+    }
+  },
+  "pattern": [
+    "III",
+    "IPI",
+    " W "
+  ],
+  "result": {
+    "item": "yaf:mangrove_mailbox"
+  },
+  "show_notification": true
+}

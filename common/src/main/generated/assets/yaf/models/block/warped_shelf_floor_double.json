@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/shelf/shelf_floor_double",
+  "textures": {
+    "all": "yaf:block/shelf/warped_shelf",
+    "particle": "yaf:block/shelf/warped_shelf"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "yaf:block/template/cabinet_inventory",
+  "textures": {
+    "countertop": "yaf:block/drawers/countertop/bamboo_drawer_countertop_sides",
+    "front": "yaf:block/cabinet/bamboo_cabinet_front",
+    "sides": "yaf:block/cabinet/bamboo_cabinet_sides",
+    "top": "yaf:block/drawers/bamboo_drawer_top"
+  }
+}

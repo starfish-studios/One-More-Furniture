@@ -1,16 +1,16 @@
 {
   "replace": false,
   "values": [
-    "omf:oak_shelf",
-    "omf:spruce_shelf",
-    "omf:birch_shelf",
-    "omf:jungle_shelf",
-    "omf:acacia_shelf",
-    "omf:cherry_shelf",
-    "omf:dark_oak_shelf",
-    "omf:mangrove_shelf",
-    "omf:bamboo_shelf",
-    "omf:crimson_shelf",
-    "omf:warped_shelf"
+    "yaf:oak_shelf",
+    "yaf:spruce_shelf",
+    "yaf:birch_shelf",
+    "yaf:jungle_shelf",
+    "yaf:acacia_shelf",
+    "yaf:cherry_shelf",
+    "yaf:dark_oak_shelf",
+    "yaf:mangrove_shelf",
+    "yaf:bamboo_shelf",
+    "yaf:crimson_shelf",
+    "yaf:warped_shelf"
   ]
 }

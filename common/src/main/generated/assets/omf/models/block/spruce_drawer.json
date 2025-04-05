@@ -1,9 +1,0 @@
-{
-  "parent": "omf:block/template/drawer",
-  "textures": {
-    "front": "omf:block/drawers/spruce_drawer_front",
-    "particle": "omf:block/drawers/spruce_drawer_front",
-    "sides": "omf:block/drawers/spruce_drawer_side",
-    "top": "omf:block/drawers/spruce_drawer_top"
-  }
-}

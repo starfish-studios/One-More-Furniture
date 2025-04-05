@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/shelf/shelf_ceiling_bottom",
-  "textures": {
-    "all": "omf:block/shelf/spruce_shelf",
-    "particle": "omf:block/shelf/spruce_shelf"
-  }
-}

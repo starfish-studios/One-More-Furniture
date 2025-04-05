@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/lamp_middle",
+  "textures": {
+    "all": "yaf:block/lamp/acacia_lamp",
+    "particle": "block/acacia_planks"
+  }
+}

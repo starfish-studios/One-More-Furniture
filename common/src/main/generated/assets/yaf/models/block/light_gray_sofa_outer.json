@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/sofa_corner_outer",
+  "textures": {
+    "all": "yaf:block/sofa/light_gray_sofa",
+    "particle": "yaf:block/sofa/light_gray_sofa"
+  }
+}

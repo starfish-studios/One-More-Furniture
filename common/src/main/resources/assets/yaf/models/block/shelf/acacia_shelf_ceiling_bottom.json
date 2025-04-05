@@ -1,0 +1,7 @@
+{
+    "parent": "yaf:block/template/shelf/shelf_ceiling_top",
+    "textures": {
+        "all": "yaf:block/shelf/acacia_shelf",
+        "particle": "block/acacia_planks"
+    }
+}

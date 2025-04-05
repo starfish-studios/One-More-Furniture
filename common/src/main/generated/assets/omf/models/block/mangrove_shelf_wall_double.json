@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/shelf/shelf_wall_double",
-  "textures": {
-    "all": "omf:block/shelf/mangrove_shelf",
-    "particle": "omf:block/shelf/mangrove_shelf"
-  }
-}

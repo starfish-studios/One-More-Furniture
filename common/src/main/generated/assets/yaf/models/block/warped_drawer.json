@@ -1,0 +1,9 @@
+{
+  "parent": "yaf:block/template/drawer",
+  "textures": {
+    "front": "yaf:block/drawers/warped_drawer_front",
+    "particle": "yaf:block/drawers/warped_drawer_front",
+    "sides": "yaf:block/drawers/warped_drawer_side",
+    "top": "yaf:block/drawers/warped_drawer_top"
+  }
+}

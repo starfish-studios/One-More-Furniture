@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "W": {
+      "item": "minecraft:purple_wool"
+    }
+  },
+  "pattern": [
+    "W ",
+    "WW"
+  ],
+  "result": {
+    "count": 2,
+    "item": "yaf:purple_sofa"
+  },
+  "show_notification": true
+}

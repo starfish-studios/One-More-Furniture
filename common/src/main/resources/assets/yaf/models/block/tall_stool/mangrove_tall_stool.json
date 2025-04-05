@@ -1,0 +1,7 @@
+{
+    "parent": "yaf:block/template/tall_stool",
+    "textures": {
+        "all": "yaf:block/tall_stool/mangrove_tall_stool",
+        "particle": "block/mangrove_planks"
+    }
+}

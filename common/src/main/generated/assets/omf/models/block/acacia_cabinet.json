@@ -1,9 +1,0 @@
-{
-  "parent": "omf:block/template/cabinet",
-  "textures": {
-    "front": "omf:block/cabinet/acacia_cabinet_front",
-    "particle": "omf:block/cabinet/acacia_cabinet_front",
-    "sides": "omf:block/cabinet/acacia_cabinet_sides",
-    "top": "omf:block/drawers/acacia_drawer_top"
-  }
-}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "W": {
+      "item": "minecraft:spruce_slab"
+    }
+  },
+  "pattern": [
+    "NW ",
+    "NWW"
+  ],
+  "result": {
+    "count": 2,
+    "item": "yaf:spruce_bench"
+  },
+  "show_notification": true
+}

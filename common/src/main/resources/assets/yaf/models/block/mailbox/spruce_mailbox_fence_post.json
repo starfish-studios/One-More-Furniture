@@ -1,0 +1,7 @@
+{
+    "parent": "yaf:block/template/mailbox/mailbox_fence_post",
+    "textures": {
+        "post": "yaf:block/mailbox/post/spruce_post",
+        "particle": "block/spruce_planks"
+    }
+}

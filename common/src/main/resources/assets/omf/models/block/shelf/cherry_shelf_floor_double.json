@@ -1,9 +1,0 @@
-{
-    "parent": "omf:block/template/shelf/shelf_floor_double",
-    "textures": {
-        "all": "omf:block/shelf/cherry_shelf",
-        "log": "block/cherry_log",
-        "log_top": "block/cherry_log_top",
-        "particle": "block/cherry_planks"
-    }
-}

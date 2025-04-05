@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/flower_basket_ceiling",
-  "textures": {
-    "all": "omf:block/flower_basket/spruce_flower_basket",
-    "particle": "minecraft:block/spruce_planks"
-  }
-}

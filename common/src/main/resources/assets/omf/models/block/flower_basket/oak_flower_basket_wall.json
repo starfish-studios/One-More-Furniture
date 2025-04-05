@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/flower_basket_wall",
-  "textures": {
-    "all": "omf:block/flower_basket/oak_flower_basket",
-    "particle": "block/oak_planks"
-  }
-}

@@ -1,7 +1,0 @@
-{
-    "parent": "omf:block/template/bench_middle",
-    "textures": {
-        "all": "omf:block/bench/mangrove_bench",
-        "particle": "block/mangrove_planks"
-    }
-}

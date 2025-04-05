@@ -1,7 +1,0 @@
-{
-  "parent": "omf:block/template/lamp_top",
-  "textures": {
-    "all": "omf:block/lamp/warped_lamp",
-    "particle": "block/warped_planks"
-  }
-}

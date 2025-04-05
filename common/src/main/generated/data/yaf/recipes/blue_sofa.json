@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "W": {
+      "item": "minecraft:blue_wool"
+    }
+  },
+  "pattern": [
+    "W ",
+    "WW"
+  ],
+  "result": {
+    "count": 2,
+    "item": "yaf:blue_sofa"
+  },
+  "show_notification": true
+}

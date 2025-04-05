@@ -1,0 +1,7 @@
+{
+  "parent": "yaf:block/template/flower_basket_ceiling",
+  "textures": {
+    "all": "yaf:block/flower_basket/crimson_flower_basket",
+    "particle": "minecraft:block/crimson_planks"
+  }
+}

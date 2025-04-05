@@ -1,7 +1,0 @@
-{
-    "parent": "omf:block/template/bench_right",
-    "textures": {
-        "all": "omf:block/bench/warped_bench",
-        "particle": "block/warped_planks"
-    }
-}
