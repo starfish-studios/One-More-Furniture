@@ -346,14 +346,19 @@
   "yaf.midnightconfig.clientComment": "§c§l§n[!]§7§o Configs in this category are client-side and §9§odo not require you to restart your world/server.",
   "yaf.midnightconfig.stillItems": "§7Still Items",
   "yaf.midnightconfig.stillItems.tooltip": "§8§o[?]§7§o If enabled, items will not be animated like dropped items.",
-  "yaf.midnightconfig.constantStackCount": "§7Constant Stack Count",
-  "yaf.midnightconfig.constantStackCount.tooltip": "§8§o[?]§7§o Always renders the stack count, even if not crouching.",
-  "yaf.midnightconfig.enum.stackCountMode.NEVER": "§cNEVER",
-  "yaf.midnightconfig.enum.stackCountMode.CROUCH": "§eCROUCH",
-  "yaf.midnightconfig.enum.stackCountMode.ALWAYS": "§aALWAYS",
+
+  "yaf.midnightconfig.neverShowShelfNumbers": "§7Never Show Shelf Numbers",
+  "yaf.midnightconfig.neverShowShelfNumbers.tooltip": "§8§o[?]§7§o If enabled, shelf numbers will never be shown, even when crouching.",
+  "yaf.midnightconfig.alwaysShowShelfNumbers": "§7Always Show Shelf Numbers",
+  "yaf.midnightconfig.alwaysShowShelfNumbers.tooltip": "§8§o[?]§7§o If enabled, shelf numbers will always be shown, even when not crouching.",
+
+  "yaf.midnightconfig.shelfNumberTag": "§7Shelf Stack Mode",
+  "yaf.midnightconfig.enum.StackCountMode.NEVER": "§cNEVER",
+  "yaf.midnightconfig.enum.StackCountMode.CROUCH": "§eCROUCH",
+  "yaf.midnightconfig.enum.StackCountMode.ALWAYS": "§aALWAYS",
 
   "yaf.midnightconfig.category.server": "§6Server",
-  "yaf.midnightconfig.serverComment": "§c§l§n[!]§7§o Configs in this category are server-side and §9§orequire you to restart your world/server.",
+  "yaf.midnightconfig.serverComment": "§c§l§n[!]§7§o Configs in this category are server-side and §6§orequire you to restart your world/server.",
   "yaf.midnightconfig.flowerBasketItems": "§7Flower Box Items",
   "yaf.midnightconfig.flowerBasketItems.tooltip": "§8§o[?]§7§o Items that can be placed in Flower Baskets; accepts tags - i.e. \"#minecraft:flowers\" or \"minecraft:poppy\"."
 }

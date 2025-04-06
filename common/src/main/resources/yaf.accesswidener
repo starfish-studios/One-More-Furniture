@@ -1,2 +1,3 @@
 accessWidener   v2  named
 accessible class net/minecraft/world/entity/item/FallingBlockEntity
+accessible class eu/midnightdust/lib/config/MidnightConfig$EntryInfo

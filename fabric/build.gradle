@@ -77,5 +77,7 @@ shadowJar {
 }
 
 remapJar {
-    inputFile.set shadowJar.archiveFile
+    archiveBaseName.set("${project.full_name}")
+    archiveVersion.set("${project.mod_version}+fabric-${project.minecraft_version}")
+    inputFile.set(shadowJar.archiveFile)
 }

@@ -68,13 +68,8 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
                 poseStack.scale(0.375F, 0.375F, 0.375F);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90f));
 
-                boolean shouldRender = Minecraft.getInstance().player != null && Minecraft.getInstance().player.isShiftKeyDown();
-                if (YAFConfig.shelfNumberTag == YAFConfig.stackCountMode.ALWAYS) {
-                    shouldRender = true;
-                }
-                if (YAFConfig.shelfNumberTag == YAFConfig.stackCountMode.NEVER) {
-                    shouldRender = false;
-                }
+
+                boolean shouldRender = isShouldRender();
 
                 if (shouldRender && i == 0) {
                     int count = stack.getCount();
@@ -102,6 +97,20 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
 
         }
         poseStack.popPose();
+    }
+
+    private static boolean isShouldRender() {
+        boolean shouldRender;
+
+        if (YAFConfig.neverShowShelfNumbers) {
+            shouldRender = false;
+        } else if (YAFConfig.alwaysShowShelfNumbers) {
+            shouldRender = true;
+        } else {
+            assert Minecraft.getInstance().player != null;
+            shouldRender = Minecraft.getInstance().player.isShiftKeyDown();
+        }
+        return shouldRender;
     }
 
     public static void renderFloatingText(PoseStack poseStack, MultiBufferSource buffer, String text, float scale, int packedLight) {
