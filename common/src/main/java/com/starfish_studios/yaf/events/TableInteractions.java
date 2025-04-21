@@ -1,6 +1,7 @@
 package com.starfish_studios.yaf.events;
 
 import com.starfish_studios.yaf.block.TableBlock;
+import com.starfish_studios.yaf.block.entity.TableBlockEntity;
 import com.starfish_studios.yaf.block.properties.ColorList;
 import dev.architectury.event.EventResult;
 import net.minecraft.Util;
@@ -43,10 +44,6 @@ public class TableInteractions {
         map.put(ColorList.PINK, Items.PINK_CARPET);
     });
 
-    public static BlockState getBlockstateForDye(Item item, BlockState blockState) {
-        return blockState.setValue(TableBlock.TABLECLOTH, getColorFor(item));
-    }
-
     public static ColorList getColorFor(Item item) {
         if (item == Items.WHITE_DYE) {
             return ColorList.WHITE;
@@ -83,10 +80,6 @@ public class TableInteractions {
         } else {
             return ColorList.EMPTY;
         }
-    }
-
-    public static BlockState getBlockstateForCarpet(Item item, BlockState blockState) {
-        return blockState.setValue(TableBlock.TABLECLOTH, getCarpetFor(item));
     }
 
     public static ColorList getCarpetFor(Item item) {
@@ -134,11 +127,11 @@ public class TableInteractions {
         ItemStack itemStack = player.getItemInHand(hand);
         Item item = itemStack.getItem();
 
-        if (item instanceof ShearsItem && block instanceof TableBlock && blockState.getValue(TableBlock.TABLECLOTH) != ColorList.EMPTY) {
-            ColorList color = blockState.getValue(TableBlock.TABLECLOTH);
+        if (item instanceof ShearsItem && level.getBlockEntity(pos) instanceof TableBlockEntity tableBlockEntity && tableBlockEntity.getColor() != ColorList.EMPTY) {
+            ColorList color = tableBlockEntity.getColor();
             Item carpet = SHEAR_MAP.get(color);
             if (carpet != null) {
-                level.setBlockAndUpdate(pos, blockState.setValue(TableBlock.TABLECLOTH, ColorList.EMPTY));
+                tableBlockEntity.setColor(ColorList.EMPTY);
                 if (blockState.getValue(TableBlock.SHORT)) {
                     level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(carpet, 1)));
                 } else {
@@ -150,16 +143,14 @@ public class TableInteractions {
                 level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, player.getSoundSource(), 1.0F, 1.0F);
                 return EventResult.interruptTrue();
             }
-        } else if (item instanceof DyeItem && block instanceof TableBlock && blockState.getValue(TableBlock.TABLECLOTH) != ColorList.EMPTY) {
-            ColorList currentColor = blockState.getValue(TableBlock.TABLECLOTH);
+        } else if (item instanceof DyeItem && level.getBlockEntity(pos) instanceof TableBlockEntity tableBlockEntity && tableBlockEntity.getColor() != ColorList.EMPTY) {
+            ColorList currentColor = tableBlockEntity.getColor();
             ColorList dyeColor = getColorFor(item);
 
             if (currentColor == dyeColor) {
                 return EventResult.pass();
             }
-
-            BlockState newState = getBlockstateForDye(item, blockState);
-            level.setBlockAndUpdate(pos, newState);
+            tableBlockEntity.setColor(dyeColor);
             DyeColor color = ((DyeItem) item).getDyeColor();
             level.playSound(null, pos, SoundEvents.DYE_USE, player.getSoundSource(), 1.0F, 1.0F);
             if (!player.isCreative()) {
@@ -183,9 +174,8 @@ public class TableInteractions {
                 }
             }
             return EventResult.interruptTrue();
-        } else if (itemStack.is(ItemTags.WOOL_CARPETS) && block instanceof TableBlock && blockState.getValue(TableBlock.TABLECLOTH) == ColorList.EMPTY) {
-            BlockState newState = getBlockstateForCarpet(item, blockState);
-            level.setBlockAndUpdate(pos, newState);
+        } else if (itemStack.is(ItemTags.WOOL_CARPETS) && level.getBlockEntity(pos) instanceof TableBlockEntity tableBlockEntity && tableBlockEntity.getColor() == ColorList.EMPTY) {
+            tableBlockEntity.setColor(getCarpetFor(item));
             level.playSound(null, pos, SoundEvents.WOOL_PLACE, player.getSoundSource(), 1.0F, 1.0F);
             if (!player.isCreative()) {
                 itemStack.shrink(1);

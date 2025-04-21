@@ -18,6 +18,7 @@ public class TableBlockEntity extends BlockEntity {
 
     private byte legs = 0b1111; // All legs present by default (bits 0-3 set)
     private ColorList color = ColorList.WHITE;
+    private boolean isShort = false;
 
     public TableBlockEntity(BlockPos pos, BlockState blockState) {
         super(YAFBlockEntities.TABLE.get(), pos, blockState);
@@ -64,6 +65,7 @@ public class TableBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putByte("Legs", legs);
+        tag.putBoolean("Short", isShort);
         ColorList.CODEC.encodeStart(NbtOps.INSTANCE, color)
                 .result()
                 .ifPresent(encoded -> tag.put("Color", encoded));
@@ -73,6 +75,7 @@ public class TableBlockEntity extends BlockEntity {
     public void load(CompoundTag tag) {
         super.load(tag);
         this.legs = tag.getByte("Legs");
+        this.isShort = tag.getBoolean("Short");
         if (tag.contains("Color", Tag.TAG_STRING)) {
             this.color = ColorList.CODEC.parse(NbtOps.INSTANCE, tag.get("Color"))
                     .result()

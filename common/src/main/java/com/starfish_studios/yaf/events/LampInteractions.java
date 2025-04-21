@@ -2,6 +2,7 @@ package com.starfish_studios.yaf.events;
 
 import com.starfish_studios.yaf.block.LampBlock;
 import com.starfish_studios.yaf.block.TableBlock;
+import com.starfish_studios.yaf.block.entity.TableBlockEntity;
 import com.starfish_studios.yaf.block.properties.ColorList;
 import dev.architectury.event.EventResult;
 import net.minecraft.Util;
@@ -133,11 +134,11 @@ public class LampInteractions {
         ItemStack itemStack = player.getItemInHand(hand);
         Item item = itemStack.getItem();
 
-        if (item instanceof ShearsItem && block instanceof TableBlock && blockState.getValue(TableBlock.TABLECLOTH) != ColorList.EMPTY) {
-            ColorList color = blockState.getValue(TableBlock.TABLECLOTH);
+        if (item instanceof ShearsItem && level.getBlockEntity(pos) instanceof TableBlockEntity tableBlockEntity && tableBlockEntity.getColor() != ColorList.EMPTY) {
+            ColorList color = tableBlockEntity.getColor();
             Item carpet = SHEAR_MAP.get(color);
             if (carpet != null) {
-                level.setBlockAndUpdate(pos, blockState.setValue(TableBlock.TABLECLOTH, ColorList.EMPTY));
+                tableBlockEntity.setColor(ColorList.EMPTY);
                 level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, new ItemStack(carpet, 1)));
                 level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, player.getSoundSource(), 1.0F, 1.0F);
                 if (!player.isCreative()) {

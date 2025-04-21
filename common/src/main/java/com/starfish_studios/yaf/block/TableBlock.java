@@ -35,7 +35,6 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty UPDATE = BooleanProperty.create("update");
     public static final BooleanProperty SHORT = BooleanProperty.create("short");
-    public static final EnumProperty<ColorList> TABLECLOTH = EnumProperty.create("tablecloth", ColorList.class);
 
     protected static final VoxelShape TOP = Block.box(0.0D, 13.0D, 0.0D, 16.0D, 16.0D, 16.0D);
     protected static final VoxelShape TOP_CLOTHED = Block.box(0.0D, 7.0D, 0.0D, 16.0D, 16.0D, 16.0D);
@@ -93,8 +92,7 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
         registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(WATERLOGGED, false)
-                .setValue(SHORT, false)
-                .setValue(TABLECLOTH, ColorList.EMPTY));
+                .setValue(SHORT, false));
     }
 
     @Override
@@ -126,14 +124,7 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
             if (tableBlockEntity.hasLeg(4)) shape += 8;
         }
 
-        VoxelShape baseShape = state.getValue(SHORT) ? SHAPES_SHORT[shape] : SHAPES[shape];
-
-        if (state.getValue(TABLECLOTH) != ColorList.EMPTY) {
-            VoxelShape clothShape = state.getValue(SHORT) ? TOP_CLOTHED_SHORT : TOP_CLOTHED;
-            return Shapes.or(baseShape, clothShape);
-        }
-
-        return baseShape;
+        return state.getValue(SHORT) ? SHAPES_SHORT[shape] : SHAPES[shape];
     }
 
     @Nullable
@@ -159,7 +150,7 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, UPDATE, WATERLOGGED, TABLECLOTH, SHORT);
+        builder.add(FACING, UPDATE, WATERLOGGED, SHORT);
     }
 
     @Override
