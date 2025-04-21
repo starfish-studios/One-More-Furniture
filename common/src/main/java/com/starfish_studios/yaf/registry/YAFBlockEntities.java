@@ -64,6 +64,13 @@ public class YAFBlockEntities {
             ).build(null)
     );
 
+    public static final RegistrySupplier<BlockEntityType<TableBlockEntity>> TABLE = BLOCK_ENTITY_TYPES.register("table",
+            () -> BlockEntityType.Builder.of(TableBlockEntity::new,
+                    YAFBlocks.TABLES.values().stream()
+                            .map(RegistrySupplier::get)
+                            .toArray(Block[]::new)
+            ).build(null)
+    );
 
     public static final RegistrySupplier<BlockEntityType<WindChimeBlockEntity>> CHIME = BLOCK_ENTITY_TYPES.register("chime",  () -> BlockEntityType.Builder.of(WindChimeBlockEntity::new,
             YAFBlocks.AMETHYST_WIND_CHIMES.get(),

@@ -1,5 +1,6 @@
 package com.starfish_studios.yaf.block;
 
+import com.starfish_studios.yaf.block.entity.TableBlockEntity;
 import com.starfish_studios.yaf.block.properties.ChangeableBlock;
 import com.starfish_studios.yaf.block.properties.ColorList;
 import com.starfish_studios.yaf.registry.YAFTags;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -28,12 +30,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class TableBlock extends HalfTransparentBlock implements SimpleWaterloggedBlock, ChangeableBlock {
+public class TableBlock extends HalfTransparentBlock implements SimpleWaterloggedBlock, ChangeableBlock, EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty LEG1 = BooleanProperty.create("leg_1");
-    public static final BooleanProperty LEG2 = BooleanProperty.create("leg_2");
-    public static final BooleanProperty LEG3 = BooleanProperty.create("leg_3");
-    public static final BooleanProperty LEG4 = BooleanProperty.create("leg_4");
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty UPDATE = BooleanProperty.create("update");
     public static final BooleanProperty SHORT = BooleanProperty.create("short");
@@ -94,13 +92,20 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
         super(properties);
         registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
-                .setValue(LEG1, true)
-                .setValue(LEG2, true)
-                .setValue(LEG3, true)
-                .setValue(LEG4, true)
                 .setValue(WATERLOGGED, false)
                 .setValue(SHORT, false)
                 .setValue(TABLECLOTH, ColorList.EMPTY));
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.INVISIBLE;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new TableBlockEntity(pos, state);
     }
 
     @Override
@@ -114,10 +119,12 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         int shape = 0;
-        if (state.getValue(LEG1)) shape += 1;
-        if (state.getValue(LEG2)) shape += 2;
-        if (state.getValue(LEG3)) shape += 4;
-        if (state.getValue(LEG4)) shape += 8;
+        if (level.getBlockEntity(pos) instanceof TableBlockEntity tableBlockEntity) {
+            if (tableBlockEntity.hasLeg(1)) shape += 1;
+            if (tableBlockEntity.hasLeg(2)) shape += 2;
+            if (tableBlockEntity.hasLeg(3)) shape += 4;
+            if (tableBlockEntity.hasLeg(4)) shape += 8;
+        }
 
         VoxelShape baseShape = state.getValue(SHORT) ? SHAPES_SHORT[shape] : SHAPES[shape];
 
@@ -128,7 +135,6 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
 
         return baseShape;
     }
-
 
     @Nullable
     @Override
@@ -153,7 +159,7 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, LEG1, LEG2, LEG3, LEG4, UPDATE, WATERLOGGED, TABLECLOTH, SHORT);
+        builder.add(FACING, UPDATE, WATERLOGGED, TABLECLOTH, SHORT);
     }
 
     @Override
@@ -163,29 +169,8 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
 
     @Override
     public BlockState rotate(BlockState state, Rotation rotation) {
-        boolean leg1 = state.getValue(LEG1);
-        boolean leg2 = state.getValue(LEG2);
-        boolean leg3 = state.getValue(LEG3);
-        boolean leg4 = state.getValue(LEG4);
         return switch(rotation) {
-            case NONE -> state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
-            case CLOCKWISE_90 -> state
-                    .setValue(FACING, rotation.rotate(state.getValue(FACING)))
-                    .setValue(LEG1, leg4)
-                    .setValue(LEG2, leg1)
-                    .setValue(LEG3, leg2)
-                    .setValue(LEG4, leg3);
-            case CLOCKWISE_180 -> state
-                    .setValue(FACING, rotation.rotate(state.getValue(FACING)))
-                    .setValue(LEG1, leg3)
-                    .setValue(LEG2, leg4)
-                    .setValue(LEG3, leg1).setValue(LEG4, leg2);
-            case COUNTERCLOCKWISE_90 -> state
-                    .setValue(FACING, rotation.rotate(state.getValue(FACING)))
-                    .setValue(LEG1, leg2)
-                    .setValue(LEG2, leg3)
-                    .setValue(LEG3, leg4)
-                    .setValue(LEG4, leg1);
+            case NONE, CLOCKWISE_90, CLOCKWISE_180, COUNTERCLOCKWISE_90 -> state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
         };
     }
 
@@ -204,7 +189,13 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
         boolean leg3 = (!s && !w) || (s && w && !(validConnection(state, level.getBlockState(pos.south().west()))));
         boolean leg4 = (!n && !w) || (n && w && !(validConnection(state, level.getBlockState(pos.north().west()))));
         boolean update = ((n ? 1 : 0) + (e ? 1 : 0) + (s ? 1 : 0) + (w ? 1 : 0)) % 2 == 0;
-        return state.setValue(LEG1, leg1).setValue(LEG2, leg2).setValue(LEG3, leg3).setValue(LEG4, leg4).setValue(UPDATE, update);
+        if (level.getBlockEntity(pos) instanceof TableBlockEntity tableBlockEntity) {
+            tableBlockEntity.setLeg(1, leg1);
+            tableBlockEntity.setLeg(2, leg2);
+            tableBlockEntity.setLeg(3, leg3);
+            tableBlockEntity.setLeg(4, leg4);
+        }
+        return state.setValue(UPDATE, update);
     }
 
     public boolean validConnection(BlockState thisState, BlockState state) {

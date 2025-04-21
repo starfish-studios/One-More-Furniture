@@ -3,6 +3,7 @@ package com.starfish_studios.yaf.forge;
 import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.starfish_studios.yaf.client.ChimeModel;
 import com.starfish_studios.yaf.client.FanModel;
+import com.starfish_studios.yaf.client.model.TableBlockEntityModel;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,5 +16,6 @@ public class YAFClientEvents {
     public static void registerModels(final EntityRenderersEvent.RegisterLayerDefinitions event){
         event.registerLayerDefinition(FanModel.LAYER_LOCATION, FanModel::createBodyLayer);
         event.registerLayerDefinition(ChimeModel.LAYER_LOCATION, ChimeModel::createBodyLayer);
+        event.registerLayerDefinition(TableBlockEntityModel.LAYER_LOCATION, TableBlockEntityModel::createBodyLayer);
     }
 }

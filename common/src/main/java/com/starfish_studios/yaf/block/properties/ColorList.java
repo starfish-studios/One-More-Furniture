@@ -5,6 +5,7 @@
 
 package com.starfish_studios.yaf.block.properties;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,6 +29,8 @@ public enum ColorList implements StringRepresentable {
     BLACK("black");
 
     private final String name;
+
+    public static final Codec<ColorList> CODEC = StringRepresentable.fromEnum(ColorList::values);
 
     ColorList(String string2) {
         this.name = string2;

@@ -5,8 +5,10 @@ import com.starfish_studios.yaf.client.ChimeModel;
 import com.starfish_studios.yaf.client.FanModel;
 import com.starfish_studios.yaf.client.gui.screens.DrawerScreen;
 import com.starfish_studios.yaf.client.gui.screens.MailboxScreen;
+import com.starfish_studios.yaf.client.model.TableBlockEntityModel;
 import com.starfish_studios.yaf.client.renderer.SeatRenderer;
 import com.starfish_studios.yaf.client.renderer.ShelfRenderer;
+import com.starfish_studios.yaf.client.renderer.TableBlockEntityRenderer;
 import com.starfish_studios.yaf.client.renderer.blockentity.ChimeBlockEntityRenderer;
 import com.starfish_studios.yaf.client.renderer.blockentity.FanBlockEntityRenderer;
 import com.starfish_studios.yaf.client.renderer.blockentity.FlowerBasketRenderer;
@@ -34,11 +36,13 @@ public class YetAnotherFurnitureClient {
 
         EntityModelLayerRegistry.register(FanModel.LAYER_LOCATION, FanModel::createBodyLayer);
         EntityModelLayerRegistry.register(ChimeModel.LAYER_LOCATION, ChimeModel::createBodyLayer);
+        EntityModelLayerRegistry.register(TableBlockEntityModel.LAYER_LOCATION, TableBlockEntityModel::createBodyLayer);
 
         BlockEntityRendererRegistry.register(YAFBlockEntities.SHELF.get(), ShelfRenderer::new);
         BlockEntityRendererRegistry.register(YAFBlockEntities.FLOWER_BASKET.get(), FlowerBasketRenderer::new);
         BlockEntityRendererRegistry.register(YAFBlockEntities.FAN.get(), FanBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(YAFBlockEntities.CHIME.get(), ChimeBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(YAFBlockEntities.TABLE.get(), TableBlockEntityRenderer::new);
 
         ClientLifecycleEvent.CLIENT_SETUP.register(instance -> {
             MenuRegistry.registerScreenFactory(YAFMenus.DRAWER.get(), DrawerScreen::new);
