@@ -3,7 +3,7 @@ package com.crispytwig.nookcranny.client.renderer.blockentity;
 import com.crispytwig.nookcranny.NookAndCranny;
 import com.crispytwig.nookcranny.blocks.WindChimeBlock;
 import com.crispytwig.nookcranny.blocks.entities.WindChimeBlockEntity;
-import com.crispytwig.nookcranny.client.ChimeModel;
+import com.crispytwig.nookcranny.client.model.ChimeModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;

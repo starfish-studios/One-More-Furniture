@@ -1,4 +1,4 @@
-package com.crispytwig.nookcranny.client;
+package com.crispytwig.nookcranny.client.model;
 
 import com.crispytwig.nookcranny.NookAndCranny;
 import com.mojang.blaze3d.vertex.PoseStack;

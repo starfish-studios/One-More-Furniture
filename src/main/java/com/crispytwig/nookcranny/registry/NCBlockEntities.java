@@ -124,6 +124,20 @@ public class NCBlockEntities {
 
     ).build(null));
 
+    public static final BlockEntityType<TableBlockEntity> TABLE = register("table", FabricBlockEntityTypeBuilder.create(TableBlockEntity::new,
+            NCBlocks.OAK_TABLE,
+            NCBlocks.SPRUCE_TABLE,
+            NCBlocks.BIRCH_TABLE,
+            NCBlocks.ACACIA_TABLE,
+            NCBlocks.DARK_OAK_TABLE,
+            NCBlocks.JUNGLE_TABLE,
+            NCBlocks.CHERRY_TABLE,
+            NCBlocks.MANGROVE_TABLE,
+            NCBlocks.BAMBOO_TABLE,
+            NCBlocks.CRIMSON_TABLE,
+            NCBlocks.WARPED_TABLE
+    ).build(null));
+
     public static <T extends BlockEntityType<?>> T register(String name, T blockEntityType) {
         return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(MOD_ID, name), blockEntityType);
     }

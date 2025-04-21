@@ -3,7 +3,7 @@ package com.crispytwig.nookcranny.client.renderer.blockentity;
 import com.crispytwig.nookcranny.NookAndCranny;
 import com.crispytwig.nookcranny.blocks.FanBlock;
 import com.crispytwig.nookcranny.blocks.entities.FanBlockEntity;
-import com.crispytwig.nookcranny.client.FanModel;
+import com.crispytwig.nookcranny.client.model.FanModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.geom.ModelPart;

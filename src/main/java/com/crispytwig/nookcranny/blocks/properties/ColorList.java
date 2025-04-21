@@ -5,6 +5,7 @@
 
 package com.crispytwig.nookcranny.blocks.properties;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,17 +28,21 @@ public enum ColorList implements StringRepresentable {
     RED("red"),
     BLACK("black");
 
+    public static final Codec<ColorList> CODEC = StringRepresentable.fromEnum(ColorList::values);
+
     private final String name;
 
-    ColorList(String string2) {
-        this.name = string2;
+    ColorList(String name) {
+        this.name = name;
     }
 
-    public String toString() {
-        return this.getSerializedName();
-    }
-
+    @Override
     public @NotNull String getSerializedName() {
         return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return getSerializedName();
     }
 }

@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/entity",
+    "textures": {
+        "particle": "nookcranny:block/table/oak_table"
+    }
+}
