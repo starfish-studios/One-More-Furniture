@@ -20,10 +20,12 @@ public class TableBlockEntityRenderer implements BlockEntityRenderer<TableBlockE
 
     private final TableBlockEntityModel model;
     private final TableclothModel cloth;
+    private final float oy;
 
     public TableBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         model = new TableBlockEntityModel(context.bakeLayer(TableBlockEntityModel.LAYER_LOCATION));
         cloth = new TableclothModel(context.bakeLayer(TableclothModel.LAYER_LOCATION));
+        oy = model.top.y;
     }
 
     @Override
@@ -33,10 +35,21 @@ public class TableBlockEntityRenderer implements BlockEntityRenderer<TableBlockE
         var leg3 = blockEntity.hasLeg(3);
         var leg4 = blockEntity.hasLeg(4);
 
-        model.leg1.visible = leg1;
-        model.leg2.visible = leg2;
-        model.leg3.visible = leg3;
-        model.leg4.visible = leg4;
+        var isShort = blockEntity.isShort();
+
+        model.leg1.visible = leg1 && !isShort;
+        model.leg2.visible = leg2 && !isShort;
+        model.leg3.visible = leg3 && !isShort;
+        model.leg4.visible = leg4 && !isShort;
+
+        model.small1.visible = leg1 && isShort;
+        model.small2.visible = leg2 && isShort;
+        model.small3.visible = leg3 && isShort;
+        model.small4.visible = leg4 && isShort;
+
+        var shortY = (isShort ? 8f : 0f);
+
+        model.top.y = oy + shortY;
 
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(blockEntity)));
 
@@ -46,6 +59,7 @@ public class TableBlockEntityRenderer implements BlockEntityRenderer<TableBlockE
         model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
         if (blockEntity.getColor() != ColorList.EMPTY) {
             VertexConsumer clothConsumer = buffer.getBuffer(RenderType.entityTranslucent(getClothTextureLocation(blockEntity)));
+            poseStack.translate(0.0,shortY / 16,0.0);
             cloth.renderToBuffer(poseStack, clothConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
         }
 

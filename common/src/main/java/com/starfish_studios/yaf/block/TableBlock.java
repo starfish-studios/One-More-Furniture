@@ -17,10 +17,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -112,6 +109,17 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
 
         if (hand == InteractionHand.MAIN_HAND) return InteractionResult.FAIL;
         return super.use(state, level, pos, player, hand, hit);
+    }
+
+    @Override
+    public boolean tryChangeBlock(Property<?> property, BlockState state, LevelAccessor level, BlockPos pos, Player player, InteractionHand hand) {
+        var success = ChangeableBlock.super.tryChangeBlock(property, state, level, pos, player, hand);
+        if (success) {
+            if (level.getBlockEntity(pos) instanceof TableBlockEntity entity) {
+                entity.setShort(!state.getValue(SHORT));
+            }
+        }
+        return success;
     }
 
     @Override

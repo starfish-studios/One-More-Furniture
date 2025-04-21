@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 public class TableBlockEntity extends BlockEntity {
 
     private byte legs = 0b1111; // All legs present by default (bits 0-3 set)
-    private ColorList color = ColorList.WHITE;
+    private ColorList color = ColorList.EMPTY;
     private boolean isShort = false;
 
     public TableBlockEntity(BlockPos pos, BlockState blockState) {
@@ -46,6 +46,15 @@ public class TableBlockEntity extends BlockEntity {
     public void setColor(ColorList color) {
         this.color = color;
         setChanged();
+    }
+
+    public void setShort(boolean isShort){
+        this.isShort = isShort;
+        setChanged();
+    }
+
+    public boolean isShort() {
+        return isShort;
     }
 
     @Nullable
