@@ -3,7 +3,7 @@ package com.starfish_studios.yaf.client.renderer.blockentity;
 import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.starfish_studios.yaf.block.WindChimeBlock;
 import com.starfish_studios.yaf.block.entity.WindChimeBlockEntity;
-import com.starfish_studios.yaf.client.ChimeModel;
+import com.starfish_studios.yaf.client.model.ChimeBlockEntityModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,10 +14,10 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBlockEntity> {
 
-    ChimeModel model;
+    ChimeBlockEntityModel model;
 
     public ChimeBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
-        model = new ChimeModel(context.bakeLayer(ChimeModel.LAYER_LOCATION));
+        model = new ChimeBlockEntityModel(context.bakeLayer(ChimeBlockEntityModel.LAYER_LOCATION));
     }
 
     public ResourceLocation getTextureLocation(WindChimeBlockEntity entity) {

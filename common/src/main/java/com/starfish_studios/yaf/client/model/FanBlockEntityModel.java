@@ -1,4 +1,4 @@
-package com.starfish_studios.yaf.client;
+package com.starfish_studios.yaf.client.model;
 
 import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -11,11 +11,11 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
-public class FanModel extends Model {
+public class FanBlockEntityModel extends Model {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(YetAnotherFurniture.MOD_ID, "ceiling_fan_oak_head"), "main");
     private final ModelPart wings;
 
-    public FanModel(ModelPart root) {
+    public FanBlockEntityModel(ModelPart root) {
         super(RenderType::entityTranslucent);
         this.wings = root.getChild("wings");
     }

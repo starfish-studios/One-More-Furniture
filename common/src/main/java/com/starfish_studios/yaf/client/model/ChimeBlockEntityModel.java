@@ -1,4 +1,4 @@
-package com.starfish_studios.yaf.client;
+package com.starfish_studios.yaf.client.model;
 
 import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -11,7 +11,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
-public class ChimeModel extends Model {
+public class ChimeBlockEntityModel extends Model {
 
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(YetAnotherFurniture.MOD_ID, "chime"), "main");
     public final ModelPart base;
@@ -24,7 +24,7 @@ public class ChimeModel extends Model {
     public final ModelPart chime_bound_4;
     public final ModelPart chime_4;
 
-    public ChimeModel(ModelPart root) {
+    public ChimeBlockEntityModel(ModelPart root) {
         super(RenderType::entityTranslucent);
         this.base = root.getChild("base");
         this.chime_bound_1 = base.getChild("chime_bound_1");

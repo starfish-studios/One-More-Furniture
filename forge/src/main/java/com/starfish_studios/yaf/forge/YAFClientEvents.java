@@ -1,8 +1,8 @@
 package com.starfish_studios.yaf.forge;
 
 import com.starfish_studios.yaf.YetAnotherFurniture;
-import com.starfish_studios.yaf.client.ChimeModel;
-import com.starfish_studios.yaf.client.FanModel;
+import com.starfish_studios.yaf.client.model.ChimeBlockEntityModel;
+import com.starfish_studios.yaf.client.model.FanBlockEntityModel;
 import com.starfish_studios.yaf.client.model.TableBlockEntityModel;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -14,8 +14,8 @@ public class YAFClientEvents {
 
     @SubscribeEvent
     public static void registerModels(final EntityRenderersEvent.RegisterLayerDefinitions event){
-        event.registerLayerDefinition(FanModel.LAYER_LOCATION, FanModel::createBodyLayer);
-        event.registerLayerDefinition(ChimeModel.LAYER_LOCATION, ChimeModel::createBodyLayer);
+        event.registerLayerDefinition(FanBlockEntityModel.LAYER_LOCATION, FanBlockEntityModel::createBodyLayer);
+        event.registerLayerDefinition(ChimeBlockEntityModel.LAYER_LOCATION, ChimeBlockEntityModel::createBodyLayer);
         event.registerLayerDefinition(TableBlockEntityModel.LAYER_LOCATION, TableBlockEntityModel::createBodyLayer);
     }
 }

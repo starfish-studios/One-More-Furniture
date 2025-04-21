@@ -1,11 +1,10 @@
-package com.starfish_studios.yaf.client.renderer;
+package com.starfish_studios.yaf.client.renderer.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.starfish_studios.yaf.block.entity.TableBlockEntity;
 import com.starfish_studios.yaf.client.model.TableBlockEntityModel;
-import com.starfish_studios.yaf.registry.YAFWoodType;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;

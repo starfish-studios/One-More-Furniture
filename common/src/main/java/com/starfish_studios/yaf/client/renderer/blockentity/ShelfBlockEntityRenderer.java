@@ -1,4 +1,4 @@
-package com.starfish_studios.yaf.client.renderer;
+package com.starfish_studios.yaf.client.renderer.blockentity;
 
 import com.starfish_studios.yaf.YAFConfig;
 import com.starfish_studios.yaf.block.ShelfBlock;
@@ -24,11 +24,11 @@ import net.minecraft.world.level.block.state.properties.AttachFace;
 import java.util.Objects;
 
 @Environment(value= EnvType.CLIENT)
-public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
+public class ShelfBlockEntityRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
 
     private final RandomSource random = RandomSource.create();
 
-    public ShelfRenderer(BlockEntityRendererProvider.Context context) {
+    public ShelfBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
 
     }
 

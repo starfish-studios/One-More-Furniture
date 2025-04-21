@@ -3,7 +3,7 @@ package com.starfish_studios.yaf.client.renderer.blockentity;
 import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.starfish_studios.yaf.block.FanBlock;
 import com.starfish_studios.yaf.block.entity.FanBlockEntity;
-import com.starfish_studios.yaf.client.FanModel;
+import com.starfish_studios.yaf.client.model.FanBlockEntityModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.geom.ModelPart;
@@ -19,7 +19,7 @@ public class FanBlockEntityRenderer implements BlockEntityRenderer<FanBlockEntit
     ModelPart model;
 
     public FanBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
-        model = context.bakeLayer(FanModel.LAYER_LOCATION);
+        model = context.bakeLayer(FanBlockEntityModel.LAYER_LOCATION);
     }
 
     public ResourceLocation getTextureLocation(FanBlockEntity entity) {
