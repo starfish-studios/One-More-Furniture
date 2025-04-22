@@ -38,7 +38,7 @@ public class TallStoolBlockEntityRenderer implements BlockEntityRenderer<TallSto
         if (blockEntity.getColor() != ColorList.EMPTY) {
             VertexConsumer clothConsumer = buffer.getBuffer(RenderType.entityTranslucent(getClothTextureLocation(blockEntity)));
             poseStack.translate(0.0, -4.0 / 16.0, 0.0);
-            poseStack.scale(0.8F, 0.8F, 0.8F);
+            poseStack.scale(0.91F, 0.91F, 0.91F);
             cloth.renderToBuffer(poseStack, clothConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
         }
 
