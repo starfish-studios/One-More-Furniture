@@ -88,7 +88,7 @@ public class TableBlockEntity extends BlockEntity {
         if (tag.contains("Color", Tag.TAG_STRING)) {
             this.color = ColorList.CODEC.parse(NbtOps.INSTANCE, tag.get("Color"))
                     .result()
-                    .orElse(ColorList.WHITE);
+                    .orElse(ColorList.EMPTY);
         }
     }
 }
