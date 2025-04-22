@@ -1,6 +1,7 @@
 package com.starfish_studios.yaf.events;
 
 import com.starfish_studios.yaf.block.ChairBlock;
+import com.starfish_studios.yaf.block.entity.ChairBlockEntity;
 import com.starfish_studios.yaf.block.properties.Cushionable;
 import com.starfish_studios.yaf.registry.YAFItems;
 import dev.architectury.event.EventResult;
@@ -27,7 +28,9 @@ public class ChairInteractions implements Cushionable {
                     return EventResult.interruptFalse();
                 }
 
-                blockState = blockState.cycle(ChairBlock.BACK_TYPE);
+                if (level.getBlockEntity(pos) instanceof ChairBlockEntity chairBlockEntity) {
+                    chairBlockEntity.setChairType(chairBlockEntity.getChairType().next());
+                }
 
                 level.setBlock(pos, blockState, 3);
                 level.playSound(null, pos, blockState.getBlock().getSoundType(blockState).getPlaceSound(), SoundSource.BLOCKS, 1.0f, 1.0f);

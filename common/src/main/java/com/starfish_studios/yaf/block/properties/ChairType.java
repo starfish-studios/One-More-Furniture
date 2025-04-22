@@ -1,5 +1,6 @@
 package com.starfish_studios.yaf.block.properties;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,10 +13,18 @@ public enum ChairType implements StringRepresentable {
     TYPE_6("6"),
     TYPE_7("7");
 
-    private final String id;
+    public final String id;
+
+    public static final Codec<ChairType> CODEC = StringRepresentable.fromEnum(ChairType::values);
 
     ChairType(String id) {
         this.id = id;
+    }
+
+    public ChairType next() {
+        ChairType[] values = ChairType.values();
+        int nextOrdinal = (this.ordinal() + 1) % values.length;
+        return values[nextOrdinal];
     }
 
     @Override

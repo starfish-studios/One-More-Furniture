@@ -109,7 +109,7 @@ public class YAFModelProvider extends FabricModelProvider {
         YAFBlocks.DRAWERS.forEach((omfWoodType, supplier) -> createDrawerBlock(generators, supplier.get()));
         YAFBlocks.CABINET.forEach((omfWoodType, supplier) -> createCabinetBlock(generators, supplier.get()));
         YAFBlocks.SHELVES.forEach((omfWoodType, supplier) -> createShelfBlock(generators, supplier.get()));
-        YAFBlocks.CHAIRS.forEach((omfWoodType, supplier) -> createChairBlock(generators, supplier.get()));
+        //YAFBlocks.CHAIRS.forEach((omfWoodType, supplier) -> createChairBlock(generators, supplier.get()));
 
         createWindChimeBlock(generators, YAFBlocks.AMETHYST_WIND_CHIMES.get());
         createWindChimeBlock(generators, YAFBlocks.BAMBOO_WIND_CHIMES.get());
@@ -537,92 +537,6 @@ public class YAFModelProvider extends FabricModelProvider {
     }
 
      */
-
-    public static BlockStateGenerator createChairMultipart(
-            Block chairBlock,
-            ResourceLocation chairBacklessId,
-            Map<ColorList, ResourceLocation> cushionModels,
-            Map< ChairType, ResourceLocation> backTypeModels
-    ) {
-        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(chairBlock);
-        for (Direction direction : Direction.Plane.HORIZONTAL) {
-            int yRotation = ((direction.get2DDataValue() * 90 + 180) % 360);
-            for (Map.Entry<ChairType, ResourceLocation> entry : backTypeModels.entrySet()) {
-                ChairType type = entry.getKey();
-                ResourceLocation backModel = entry.getValue();
-                multiPart.with(
-                        Condition.condition()
-                                .term(BlockStateProperties.HORIZONTAL_FACING, direction)
-                                .term(ChairBlock.BACK, true)
-                                .term(ChairBlock.BACK_TYPE, type),
-                        Variant.variant()
-                                .with(VariantProperties.MODEL, backModel)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[yRotation / 90])
-                );
-            }
-            multiPart.with(
-                    Condition.condition()
-                            .term(BlockStateProperties.HORIZONTAL_FACING, direction)
-                            .term(ChairBlock.BACK, false),
-                    Variant.variant()
-                            .with(VariantProperties.MODEL, chairBacklessId)
-                            .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[yRotation / 90])
-            );
-        }
-        for (Map.Entry<ColorList, ResourceLocation> entry : cushionModels.entrySet()) {
-            if (entry.getKey() == ColorList.EMPTY) continue;
-            ColorList cushionColor = entry.getKey();
-            ResourceLocation cushionModel = entry.getValue();
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                int yRotation = ((direction.get2DDataValue() * 90 + 180) % 360);
-                multiPart.with(
-                        Condition.condition()
-                                .term(BlockStateProperties.HORIZONTAL_FACING, direction)
-                                .term(ChairBlock.CUSHION, cushionColor),
-                        Variant.variant()
-                                .with(VariantProperties.MODEL, cushionModel)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.values()[yRotation / 90])
-                );
-            }
-        }
-        return multiPart;
-    }
-    private void createChairBlock(BlockModelGenerators generators, Block chair) {
-        String blockPath = BuiltInRegistries.BLOCK.getKey(chair).getPath();
-        String wood = blockPath.replace("_chair", "");
-
-        TextureMapping baseMapping = new TextureMapping()
-                .put(TextureSlot.ALL, getTexture(chair, "chair", ""))
-                .put(TextureSlot.PARTICLE, new ResourceLocation("block/" + wood + "_planks"));
-
-        Map<ColorList, ResourceLocation> cushionModels = new HashMap<>();
-        for (ColorList color : ColorList.values()) {
-            cushionModels.put(color, new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/chair/cushion/" + color + "_cushion"));
-        }
-
-        ResourceLocation chairBacklessId = CHAIR_BACKLESS.createWithSuffix(chair, "_backless", baseMapping, generators.modelOutput);
-        String chairBaseName = BuiltInRegistries.BLOCK.getKey(chair).getPath();
-        Map<ChairType, ResourceLocation> backTypeModels = new HashMap<>();
-
-        for (ChairType type : ChairType.values()) {
-            ModelTemplate chairTemplate = createTemplate(
-                    "chair_" + type.getSerializedName().toLowerCase(),
-                    TextureSlot.ALL, TextureSlot.PARTICLE
-            );
-
-            TextureMapping typeMapping = new TextureMapping()
-                    .put(TextureSlot.ALL, getTexture(chair, "chair", type.getSerializedName().toLowerCase()))
-                    .put(TextureSlot.PARTICLE, new ResourceLocation("block/" + wood + "_planks"));
-
-            chairTemplate.createWithSuffix(chair, "_" + type.getSerializedName().toLowerCase(), typeMapping, generators.modelOutput);
-            ResourceLocation chairTypeId = new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/" + chairBaseName + "_" + type.getSerializedName().toLowerCase());
-            backTypeModels.put(type, chairTypeId);
-        }
-
-        generators.skipAutoItemBlock(chair);
-        generators.blockStateOutput.accept(createChairMultipart(chair, chairBacklessId, cushionModels, backTypeModels));
-    }
-
 
     /* removed
     private void createChairTuckableBlock(BlockModelGenerators generators, Block chair) {

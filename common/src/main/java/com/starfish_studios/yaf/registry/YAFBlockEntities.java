@@ -72,6 +72,15 @@ public class YAFBlockEntities {
             ).build(null)
     );
 
+    public static final RegistrySupplier<BlockEntityType<ChairBlockEntity>> CHAIR = BLOCK_ENTITY_TYPES.register("chair",
+            () -> BlockEntityType.Builder.of(ChairBlockEntity::new,
+                    YAFBlocks.CHAIRS.values().stream()
+                            .map(RegistrySupplier::get)
+                            .toArray(Block[]::new)
+            ).build(null)
+    );
+
+
     public static final RegistrySupplier<BlockEntityType<WindChimeBlockEntity>> CHIME = BLOCK_ENTITY_TYPES.register("chime",  () -> BlockEntityType.Builder.of(WindChimeBlockEntity::new,
             YAFBlocks.AMETHYST_WIND_CHIMES.get(),
             YAFBlocks.BAMBOO_WIND_CHIMES.get(),

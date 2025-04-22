@@ -31,8 +31,8 @@ public class YAFBlockLootTableProvider extends FabricBlockLootTableProvider {
 
         YAFBlocks.BLOCKS.forEach((blockRegistrySupplier -> {
             var block = blockRegistrySupplier.get();
-            if (block instanceof ChairBlock) {
-                this.add(block, createLootTableForChair(block));
+            if (false && block instanceof ChairBlock) {
+                //this.add(block, createLootTableForChair(block));
             } else if (block instanceof ShelfBlock) {
                 this.add(block, createShelfTable(block));
             } else {

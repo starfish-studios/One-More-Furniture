@@ -1,10 +1,7 @@
 package com.starfish_studios.yaf.forge;
 
 import com.starfish_studios.yaf.YetAnotherFurniture;
-import com.starfish_studios.yaf.client.model.ChimeBlockEntityModel;
-import com.starfish_studios.yaf.client.model.FanBlockEntityModel;
-import com.starfish_studios.yaf.client.model.TableBlockEntityModel;
-import com.starfish_studios.yaf.client.model.TableclothModel;
+import com.starfish_studios.yaf.client.model.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,5 +16,7 @@ public class YAFClientEvents {
         event.registerLayerDefinition(ChimeBlockEntityModel.LAYER_LOCATION, ChimeBlockEntityModel::createBodyLayer);
         event.registerLayerDefinition(TableBlockEntityModel.LAYER_LOCATION, TableBlockEntityModel::createBodyLayer);
         event.registerLayerDefinition(TableclothModel.LAYER_LOCATION, TableclothModel::createBodyLayer);
+        event.registerLayerDefinition(ChairBlockEntityModel.LAYER_LOCATION, ChairBlockEntityModel::createBodyLayer);
+        event.registerLayerDefinition(ChairCushionModel.LAYER_LOCATION, ChairCushionModel::createBodyLayer);
     }
 }

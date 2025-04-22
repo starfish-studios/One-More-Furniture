@@ -1,5 +1,6 @@
 package com.starfish_studios.yaf.block;
 
+import com.starfish_studios.yaf.block.entity.ChairBlockEntity;
 import com.starfish_studios.yaf.block.properties.ChairType;
 import com.starfish_studios.yaf.block.properties.ChangeableBlock;
 import com.starfish_studios.yaf.block.properties.ColorList;
@@ -14,10 +15,8 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -31,12 +30,10 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cushionable, ChangeableBlock {
+public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cushionable, ChangeableBlock, EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final EnumProperty<ColorList> CUSHION = EnumProperty.create("cushion", ColorList.class);
     public static final BooleanProperty BACK = BooleanProperty.create("back");
-    public static final EnumProperty<ChairType> BACK_TYPE = EnumProperty.create("type", ChairType.class);
 
     public static final VoxelShape BOTTOM_AABB = Shapes.or(
             Block.box(1.0D, 8.0D, 1.0D, 15.0D, 10.0D, 15.0D),
@@ -70,27 +67,23 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(WATERLOGGED, false)
-                .setValue(BACK, true)
-                .setValue(BACK_TYPE, ChairType.TYPE_1)
-                .setValue(CUSHION, ColorList.EMPTY));
+                .setValue(BACK, true));
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, net.minecraft.world.phys.shapes.CollisionContext context) {
-        boolean hasCushion = state.getValue(CUSHION) != ColorList.EMPTY;
         Direction facing = state.getValue(FACING);
 
         if (!state.getValue(BACK)) {
-            return hasCushion ? BOTTOM_WITH_CUSHION : BOTTOM_WITHOUT_CUSHION;
+            return BOTTOM_WITHOUT_CUSHION;
         }
 
-        // Select the precomputed shape based on the state values
         return switch (facing) {
-            case NORTH -> hasCushion ? NORTH_WITH_CUSHION : NORTH_WITHOUT_CUSHION;
-            case EAST -> hasCushion ? EAST_WITH_CUSHION : EAST_WITHOUT_CUSHION;
-            case SOUTH -> hasCushion ? SOUTH_WITH_CUSHION : SOUTH_WITHOUT_CUSHION;
-            case WEST -> hasCushion ? WEST_WITH_CUSHION : WEST_WITHOUT_CUSHION;
-            default -> BOTTOM_AABB; // Default in case of unexpected direction
+            case NORTH -> NORTH_WITHOUT_CUSHION;
+            case EAST -> EAST_WITHOUT_CUSHION;
+            case SOUTH -> SOUTH_WITHOUT_CUSHION;
+            case WEST -> WEST_WITHOUT_CUSHION;
+            default -> BOTTOM_AABB;
         };
     }
 
@@ -102,10 +95,14 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
         return super.use(state, level, pos, player, hand, hit);
     }
 
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.INVISIBLE;
+    }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateDefinition) {
-        stateDefinition.add(FACING, WATERLOGGED, CUSHION, BACK, BACK_TYPE);
+        stateDefinition.add(FACING, WATERLOGGED, BACK);
     }
 
     @Override
@@ -145,7 +142,6 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
 
         return this.getStateDefinition().any()
                 .setValue(FACING, context.getHorizontalDirection().getOpposite())
-                .setValue(BACK_TYPE, ChairType.TYPE_1)
                 .setValue(WATERLOGGED, waterlogged);
     }
 
@@ -158,5 +154,11 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
         if (state.getValue(WATERLOGGED)) level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ChairBlockEntity(pos, state);
     }
 }
