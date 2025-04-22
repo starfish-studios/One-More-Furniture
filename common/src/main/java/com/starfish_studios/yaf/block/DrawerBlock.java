@@ -24,7 +24,6 @@ public class DrawerBlock extends AbstractDrawerBlock {
         super(planks, properties);
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(FACING, Direction.NORTH)
-                .setValue(WATERLOGGED, false)
                 .setValue(COUNTERTOP, CountertopType.OAK)
                 .setValue(TOP_OPEN, false)
                 .setValue(BOTTOM_OPEN, false));
@@ -32,19 +31,16 @@ public class DrawerBlock extends AbstractDrawerBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateDefinition) {
-        stateDefinition.add(FACING, WATERLOGGED, TOP_OPEN, BOTTOM_OPEN, COUNTERTOP);
+        stateDefinition.add(FACING, TOP_OPEN, BOTTOM_OPEN, COUNTERTOP);
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        boolean waterlogged = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
-
         var countertop = CountertopType.getFromBlock(plankBlock);
 
         return this.getStateDefinition().any()
                 .setValue(FACING, context.getHorizontalDirection().getOpposite())
-                .setValue(WATERLOGGED, waterlogged)
                 .setValue(TOP_OPEN, false)
                 .setValue(BOTTOM_OPEN, false)
                 .setValue(COUNTERTOP, countertop);

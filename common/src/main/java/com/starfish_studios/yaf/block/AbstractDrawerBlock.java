@@ -35,7 +35,6 @@ import java.util.Arrays;
 
 public abstract class AbstractDrawerBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public static final EnumProperty<CountertopType> COUNTERTOP = EnumProperty.create("countertop", CountertopType.class);
 
@@ -97,11 +96,6 @@ public abstract class AbstractDrawerBlock extends BaseEntityBlock implements Sim
         }
 
         return InteractionResult.PASS;
-    }
-
-    @Override
-    public @NotNull FluidState getFluidState(BlockState state) {
-        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override

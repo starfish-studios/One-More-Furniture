@@ -17,7 +17,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class CabinetBlock extends AbstractDrawerBlock {
 
-    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty BOTTOM = BlockStateProperties.BOTTOM;
 
     public static final BooleanProperty LEFT_OPEN = BooleanProperty.create("left_open");
@@ -29,7 +28,6 @@ public class CabinetBlock extends AbstractDrawerBlock {
                 .setValue(FACING, Direction.NORTH)
                 .setValue(BOTTOM, true)
                 .setValue(COUNTERTOP, CountertopType.OAK)
-                .setValue(WATERLOGGED, false)
         );
     }
 
@@ -41,19 +39,16 @@ public class CabinetBlock extends AbstractDrawerBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, BOTTOM, WATERLOGGED, COUNTERTOP);
+        builder.add(FACING, BOTTOM, COUNTERTOP);
     }
 
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        BlockPos blockPos = context.getClickedPos();
         var countertop = CountertopType.getFromBlock(plankBlock);
 
-        FluidState fluidState = context.getLevel().getFluidState(blockPos);
         BlockState blockState2 = this.defaultBlockState()
                 .setValue(BOTTOM, true)
                 .setValue(COUNTERTOP, countertop)
-                .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER)
                 .setValue(FACING, context.getHorizontalDirection().getOpposite());
 
         Direction upOrDown = context.getNearestLookingVerticalDirection();
@@ -62,5 +57,4 @@ public class CabinetBlock extends AbstractDrawerBlock {
         }
         return blockState2;
     }
-
 }
