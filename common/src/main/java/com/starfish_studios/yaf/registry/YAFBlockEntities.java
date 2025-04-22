@@ -80,6 +80,14 @@ public class YAFBlockEntities {
             ).build(null)
     );
 
+    public static final RegistrySupplier<BlockEntityType<TallStoolBlockEntity>> TALL_STOOL = BLOCK_ENTITY_TYPES.register("tall_stool",
+            () -> BlockEntityType.Builder.of(TallStoolBlockEntity::new,
+                    YAFBlocks.TALL_STOOLS.values().stream()
+                            .map(RegistrySupplier::get)
+                            .toArray(Block[]::new)
+            ).build(null)
+    );
+
 
     public static final RegistrySupplier<BlockEntityType<WindChimeBlockEntity>> CHIME = BLOCK_ENTITY_TYPES.register("chime",  () -> BlockEntityType.Builder.of(WindChimeBlockEntity::new,
             YAFBlocks.AMETHYST_WIND_CHIMES.get(),

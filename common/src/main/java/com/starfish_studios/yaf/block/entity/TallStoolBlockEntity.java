@@ -16,23 +16,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 
-public class ChairBlockEntity extends BlockEntity implements Cushionable {
+public class TallStoolBlockEntity extends BlockEntity implements Cushionable {
 
     private ColorList color = ColorList.EMPTY;
-    private ChairType chairType = ChairType.TYPE_1;
-    private boolean hasBack = true;
 
-    public boolean hasBack() {
-        return hasBack;
-    }
-
-    public void setHasBack(boolean hasBack) {
-        this.hasBack = hasBack;
-        setChanged();
-    }
-
-    public ChairBlockEntity(BlockPos pos, BlockState blockState) {
-        super(YAFBlockEntities.CHAIR.get(), pos, blockState);
+    public TallStoolBlockEntity(BlockPos pos, BlockState blockState) {
+        super(YAFBlockEntities.TALL_STOOL.get(), pos, blockState);
     }
 
     @Override
@@ -44,14 +33,6 @@ public class ChairBlockEntity extends BlockEntity implements Cushionable {
     public void setColor(ColorList color) {
         this.color = color;
         setChanged();
-    }
-
-    public ChairType getChairType() {
-        return chairType;
-    }
-
-    public void setChairType(ChairType type) {
-        this.chairType = type;
     }
 
     @Nullable
@@ -70,30 +51,18 @@ public class ChairBlockEntity extends BlockEntity implements Cushionable {
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.putBoolean("hasBack", hasBack);
         ColorList.CODEC.encodeStart(NbtOps.INSTANCE, color)
                 .result()
                 .ifPresent(encoded -> tag.put("Color", encoded));
-        ChairType.CODEC.encodeStart(NbtOps.INSTANCE, chairType)
-                .result()
-                .ifPresent(encoded -> tag.put("ChairType", encoded));
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        hasBack = tag.getBoolean("hasBack");
         if (tag.contains("Color", Tag.TAG_STRING)) {
             this.color = ColorList.CODEC.parse(NbtOps.INSTANCE, tag.get("Color"))
                     .result()
                     .orElse(ColorList.WHITE);
         }
-        if (tag.contains("ChairType", Tag.TAG_STRING)) {
-            this.chairType = ChairType.CODEC.parse(NbtOps.INSTANCE, tag.get("ChairType"))
-                    .result()
-                    .orElse(ChairType.TYPE_1);
-        }
     }
-
-
 }

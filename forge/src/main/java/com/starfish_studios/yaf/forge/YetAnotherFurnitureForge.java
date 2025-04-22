@@ -25,6 +25,9 @@ import java.util.Map;
 
 @Mod(YetAnotherFurniture.MOD_ID)
 public class YetAnotherFurnitureForge {
+
+    private static final boolean runBlockStateTest = false;
+
     public YetAnotherFurnitureForge(FMLJavaModLoadingContext ctx) {
 
         var bus = ctx.getModEventBus();
@@ -39,29 +42,29 @@ public class YetAnotherFurnitureForge {
 
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            Map<String, Integer> stateCounts = new HashMap<>();
-            int totalStates = 0;
+        if (runBlockStateTest) {
+            event.enqueueWork(() -> {
+                Map<String, Integer> stateCounts = new HashMap<>();
+                int totalStates = 0;
 
-            for (Block block : ForgeRegistries.BLOCKS) {
-                ResourceLocation id = ForgeRegistries.BLOCKS.getKey(block);
-                if (id != null && id.getNamespace().equals(YetAnotherFurniture.MOD_ID)) {
-                    String className = block.getClass().getSimpleName();
-                    int count = block.getStateDefinition().getPossibleStates().size();
+                for (Block block : ForgeRegistries.BLOCKS) {
+                    ResourceLocation id = ForgeRegistries.BLOCKS.getKey(block);
+                    if (id != null && id.getNamespace().equals(YetAnotherFurniture.MOD_ID)) {
+                        String className = block.getClass().getSimpleName();
+                        int count = block.getStateDefinition().getPossibleStates().size();
 
-                    stateCounts.merge(className, count, Integer::sum);
-                    totalStates += count;
+                        stateCounts.merge(className, count, Integer::sum);
+                        totalStates += count;
+                    }
                 }
-            }
 
-            System.out.println("[YAF] BlockState breakdown by block type:");
-            stateCounts.forEach((type, count) ->
-                    System.out.println("  " + type + ": " + count + " states"));
+                stateCounts.forEach((type, count) ->
+                        System.out.println("  " + type + ": " + count + " states"));
 
-            System.out.println("[YAF] Total BlockStates registered: " + totalStates);
-        });
+                System.out.println("[YAF] Total BlockStates registered: " + totalStates);
+            });
+        }
     }
-
 
     @SubscribeEvent
     public static void onClientSetup(final FMLClientSetupEvent event) {

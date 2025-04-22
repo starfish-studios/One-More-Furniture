@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static com.starfish_studios.yaf.block.ChairBlock.BACK;
 
-public class ChairInteractions implements Cushionable {
+public class ChairInteractions {
 
     public static EventResult interact(Player player, InteractionHand hand, BlockPos pos, Direction direction) {
         var level = player.level();

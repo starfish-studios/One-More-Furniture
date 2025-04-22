@@ -2,6 +2,8 @@ package com.starfish_studios.yaf.forge;
 
 import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.starfish_studios.yaf.client.model.*;
+import com.starfish_studios.yaf.client.renderer.SeatRenderer;
+import com.starfish_studios.yaf.registry.YAFEntities;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,5 +20,12 @@ public class YAFClientEvents {
         event.registerLayerDefinition(TableclothModel.LAYER_LOCATION, TableclothModel::createBodyLayer);
         event.registerLayerDefinition(ChairBlockEntityModel.LAYER_LOCATION, ChairBlockEntityModel::createBodyLayer);
         event.registerLayerDefinition(ChairCushionModel.LAYER_LOCATION, ChairCushionModel::createBodyLayer);
+        event.registerLayerDefinition(TallStoolBlockEntityModel.LAYER_LOCATION, TallStoolBlockEntityModel::createBodyLayer);
+        event.registerLayerDefinition(TallStoolCushionModel.LAYER_LOCATION, TallStoolCushionModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
+    public static void registerEntityrtender(final EntityRenderersEvent.RegisterRenderers event){
+        event.registerEntityRenderer(YAFEntities.SEAT.get(), SeatRenderer::new);
     }
 }

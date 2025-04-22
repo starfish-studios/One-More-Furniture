@@ -1,5 +1,6 @@
 package com.starfish_studios.yaf.block;
 
+import com.starfish_studios.yaf.block.entity.TallStoolBlockEntity;
 import com.starfish_studios.yaf.block.properties.ColorList;
 import com.starfish_studios.yaf.block.properties.Cushionable;
 import com.starfish_studios.yaf.registry.YAFBlockProperties;
@@ -12,10 +13,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -30,10 +28,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class TallStoolBlock extends SeatBlock implements SimpleWaterloggedBlock, Cushionable {
+public class TallStoolBlock extends SeatBlock implements SimpleWaterloggedBlock, EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final EnumProperty<ColorList> CUSHION = YAFBlockProperties.CUSHION;
     protected static final VoxelShape SHAPE = Shapes.or(
             Block.box(2.0D, 14.0D, 2.0D, 14.0D, 16.0D, 14.0D),
             Block.box(4.0D, 0.0D, 4.0D, 6.0D, 14.0D, 6.0D),
@@ -44,31 +41,22 @@ public class TallStoolBlock extends SeatBlock implements SimpleWaterloggedBlock,
     );
     protected static final VoxelShape CUSHION_AABB = Block.box(2.0D, 13.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
-    @Override
-    public double dyeHeight() {
-        return 0.6;
-    }
 
     public TallStoolBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(FACING, Direction.NORTH)
-                .setValue(WATERLOGGED, false)
-                .setValue(CUSHION, ColorList.EMPTY));
+                .setValue(WATERLOGGED, false));
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        VoxelShape shape = SHAPE;
-        if (state.getValue(CUSHION) != ColorList.EMPTY) {
-            shape = CUSHION_AABB;
-        }
-        return shape;
+        return SHAPE;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateDefinition) {
-        stateDefinition.add(FACING, WATERLOGGED, CUSHION);
+        stateDefinition.add(FACING, WATERLOGGED);
     }
 
     @Override
@@ -124,5 +112,16 @@ public class TallStoolBlock extends SeatBlock implements SimpleWaterloggedBlock,
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
         if (state.getValue(WATERLOGGED)) level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new TallStoolBlockEntity(pos, state);
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.INVISIBLE;
     }
 }

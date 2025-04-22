@@ -1,6 +1,7 @@
 package com.starfish_studios.yaf.block;
 
 import com.starfish_studios.yaf.block.entity.ChairBlockEntity;
+import com.starfish_studios.yaf.block.entity.TableBlockEntity;
 import com.starfish_studios.yaf.block.properties.ChairType;
 import com.starfish_studios.yaf.block.properties.ChangeableBlock;
 import com.starfish_studios.yaf.block.properties.ColorList;
@@ -19,10 +20,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -30,7 +28,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cushionable, ChangeableBlock, EntityBlock {
+public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, ChangeableBlock, EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty BACK = BooleanProperty.create("back");
@@ -93,6 +91,17 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cus
 
         if (hand == InteractionHand.MAIN_HAND) return InteractionResult.FAIL;
         return super.use(state, level, pos, player, hand, hit);
+    }
+
+    @Override
+    public boolean tryChangeBlock(Property<?> property, BlockState state, LevelAccessor level, BlockPos pos, Player player, InteractionHand hand) {
+        var success = ChangeableBlock.super.tryChangeBlock(property, state, level, pos, player, hand);
+        if (success) {
+            if (level.getBlockEntity(pos) instanceof ChairBlockEntity entity) {
+                entity.setHasBack(!state.getValue(BACK));
+            }
+        }
+        return success;
     }
 
     @Override

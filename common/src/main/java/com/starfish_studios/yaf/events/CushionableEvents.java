@@ -25,13 +25,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CushionableEvents {
-    public static BlockState getBlockstateForDye(Item item, BlockState blockState) {
-        return blockState.setValue(YAFBlockProperties.CUSHION, DYE_MAP.get(item));
-    }
-
-    public static BlockState getBlockstateForCarpet(Item item, BlockState blockState) {
-        return blockState.setValue(YAFBlockProperties.CUSHION, CARPET_MAP.get(item));
-    }
 
     private static final Map<ColorList, Item> SHEAR_MAP = Util.make(new HashMap<>(), (map) -> {
         map.put(ColorList.WHITE, Items.WHITE_CARPET);
@@ -90,16 +83,14 @@ public class CushionableEvents {
 
     public static EventResult interact(Player player, InteractionHand hand, BlockPos pos, Direction direction) {
         Level level = player.level();
-        BlockState blockState = level.getBlockState(pos);
-        Block block = blockState.getBlock();
         ItemStack itemStack = player.getItemInHand(hand);
         Item item = itemStack.getItem();
 
-        if (item instanceof ShearsItem && block instanceof Cushionable && blockState.getValue(YAFBlockProperties.CUSHION) != ColorList.EMPTY) {
-            ColorList cushion = blockState.getValue(YAFBlockProperties.CUSHION);
+        if (item instanceof ShearsItem && level.getBlockEntity(pos) instanceof Cushionable cushionable && cushionable.getColor() != ColorList.EMPTY) {
+            ColorList cushion = cushionable.getColor();
             Item carpet = SHEAR_MAP.get(cushion);
             if (carpet != null) {
-                level.setBlockAndUpdate(pos, blockState.setValue(YAFBlockProperties.CUSHION, ColorList.EMPTY));
+                cushionable.setColor(ColorList.EMPTY);
                 level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, new ItemStack(carpet, 1)));
                 level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, player.getSoundSource(), 1.0F, 1.0F);
                 if (!player.isCreative()) {
@@ -107,14 +98,13 @@ public class CushionableEvents {
                 }
                 return EventResult.interruptTrue();
             }
-        } else if (item instanceof DyeItem && block instanceof Cushionable && blockState.getValue(YAFBlockProperties.CUSHION) != ColorList.EMPTY) {
+        } else if (item instanceof DyeItem && level.getBlockEntity(pos) instanceof Cushionable cushionable && cushionable.getColor() != ColorList.EMPTY) {
 
-            if (DYE_MAP.get(item) == blockState.getValue(YAFBlockProperties.CUSHION)) {
+            if (DYE_MAP.get(item) == cushionable.getColor()) {
                 return EventResult.pass();
             }
 
-            BlockState newState = getBlockstateForDye(item, blockState);
-            level.setBlockAndUpdate(pos, newState);
+            cushionable.setColor(DYE_MAP.get(item));
             DyeColor color = ((DyeItem) item).getDyeColor();
             level.playSound(null, pos, SoundEvents.DYE_USE, player.getSoundSource(), 1.0F, 1.0F);
             if (!player.isCreative()) {
@@ -134,9 +124,8 @@ public class CushionableEvents {
             }
 
             return EventResult.interruptTrue();
-        } else if (itemStack.is(ItemTags.WOOL_CARPETS) && block instanceof Cushionable && blockState.getValue(YAFBlockProperties.CUSHION) == ColorList.EMPTY) {
-            BlockState newState = getBlockstateForCarpet(item, blockState);
-            level.setBlockAndUpdate(pos, newState.setValue(BlockStateProperties.HORIZONTAL_FACING, blockState.getValue(BlockStateProperties.HORIZONTAL_FACING)));
+        } else if (itemStack.is(ItemTags.WOOL_CARPETS) && level.getBlockEntity(pos) instanceof Cushionable cushionable && cushionable.getColor() == ColorList.EMPTY) {
+            cushionable.setColor(CARPET_MAP.get(item));
             level.playSound(null, pos, SoundEvents.WOOL_PLACE, player.getSoundSource(), 1.0F, 1.0F);
             if (!player.isCreative()) {
                 itemStack.shrink(1);
