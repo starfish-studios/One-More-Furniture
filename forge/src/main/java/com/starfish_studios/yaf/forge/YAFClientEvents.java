@@ -21,7 +21,6 @@ public class YAFClientEvents {
         event.registerLayerDefinition(ChairBlockEntityModel.LAYER_LOCATION, ChairBlockEntityModel::createBodyLayer);
         event.registerLayerDefinition(ChairCushionModel.LAYER_LOCATION, ChairCushionModel::createBodyLayer);
         event.registerLayerDefinition(TallStoolBlockEntityModel.LAYER_LOCATION, TallStoolBlockEntityModel::createBodyLayer);
-        event.registerLayerDefinition(TallStoolCushionModel.LAYER_LOCATION, TallStoolCushionModel::createBodyLayer);
     }
 
     @SubscribeEvent

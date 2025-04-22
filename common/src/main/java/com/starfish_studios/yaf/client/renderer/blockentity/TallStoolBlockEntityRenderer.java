@@ -2,33 +2,28 @@ package com.starfish_studios.yaf.client.renderer.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import com.starfish_studios.yaf.YetAnotherFurniture;
-import com.starfish_studios.yaf.block.entity.ChairBlockEntity;
 import com.starfish_studios.yaf.block.entity.TallStoolBlockEntity;
 import com.starfish_studios.yaf.block.properties.ColorList;
-import com.starfish_studios.yaf.client.model.ChairBlockEntityModel;
 import com.starfish_studios.yaf.client.model.ChairCushionModel;
 import com.starfish_studios.yaf.client.model.TallStoolBlockEntityModel;
-import com.starfish_studios.yaf.client.model.TallStoolCushionModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.Locale;
 
 public class TallStoolBlockEntityRenderer implements BlockEntityRenderer<TallStoolBlockEntity> {
 
     private final TallStoolBlockEntityModel model;
-    private final TallStoolCushionModel cloth;
+    private final ChairCushionModel cloth;
 
     public TallStoolBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         model = new TallStoolBlockEntityModel(context.bakeLayer(TallStoolBlockEntityModel.LAYER_LOCATION));
-        cloth = new TallStoolCushionModel(context.bakeLayer(TallStoolCushionModel.LAYER_LOCATION));
+        cloth = new ChairCushionModel(context.bakeLayer(ChairCushionModel.LAYER_LOCATION));
     }
 
     @Override
@@ -42,6 +37,8 @@ public class TallStoolBlockEntityRenderer implements BlockEntityRenderer<TallSto
         model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
         if (blockEntity.getColor() != ColorList.EMPTY) {
             VertexConsumer clothConsumer = buffer.getBuffer(RenderType.entityTranslucent(getClothTextureLocation(blockEntity)));
+            poseStack.translate(0.0, -4.0 / 16.0, 0.0);
+            poseStack.scale(0.8F, 0.8F, 0.8F);
             cloth.renderToBuffer(poseStack, clothConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
         }
 
@@ -58,6 +55,6 @@ public class TallStoolBlockEntityRenderer implements BlockEntityRenderer<TallSto
     private ResourceLocation getClothTextureLocation(TallStoolBlockEntity blockEntity) {
         var name = blockEntity.getColor().getSerializedName().toLowerCase(Locale.ROOT);
 
-        return new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/entity/tall_stool/" + name + "_cushion.png");
+        return new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/entity/chair/" + name + "_cushion.png");
     }
 }

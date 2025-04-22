@@ -35,7 +35,6 @@ public class YetAnotherFurnitureClient {
         EntityModelLayerRegistry.register(ChairBlockEntityModel.LAYER_LOCATION, ChairBlockEntityModel::createBodyLayer);
         EntityModelLayerRegistry.register(ChairCushionModel.LAYER_LOCATION, ChairCushionModel::createBodyLayer);
         EntityModelLayerRegistry.register(TallStoolBlockEntityModel.LAYER_LOCATION, TallStoolBlockEntityModel::createBodyLayer);
-        EntityModelLayerRegistry.register(TallStoolCushionModel.LAYER_LOCATION, TallStoolCushionModel::createBodyLayer);
 
         BlockEntityRendererRegistry.register(YAFBlockEntities.SHELF.get(), ShelfBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(YAFBlockEntities.FLOWER_BASKET.get(), FlowerBasketRenderer::new);
