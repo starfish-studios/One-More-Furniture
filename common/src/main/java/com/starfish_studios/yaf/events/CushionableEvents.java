@@ -26,24 +26,6 @@ import java.util.Map;
 
 public class CushionableEvents {
 
-    private static final Map<ColorList, Item> SHEAR_MAP = Util.make(new HashMap<>(), (map) -> {
-        map.put(ColorList.WHITE, Items.WHITE_CARPET);
-        map.put(ColorList.LIGHT_GRAY, Items.LIGHT_GRAY_CARPET);
-        map.put(ColorList.GRAY, Items.GRAY_CARPET);
-        map.put(ColorList.BLACK, Items.BLACK_CARPET);
-        map.put(ColorList.BROWN, Items.BROWN_CARPET);
-        map.put(ColorList.RED, Items.RED_CARPET);
-        map.put(ColorList.ORANGE, Items.ORANGE_CARPET);
-        map.put(ColorList.YELLOW, Items.YELLOW_CARPET);
-        map.put(ColorList.LIME, Items.LIME_CARPET);
-        map.put(ColorList.GREEN, Items.GREEN_CARPET);
-        map.put(ColorList.CYAN, Items.CYAN_CARPET);
-        map.put(ColorList.LIGHT_BLUE, Items.LIGHT_BLUE_CARPET);
-        map.put(ColorList.BLUE, Items.BLUE_CARPET);
-        map.put(ColorList.PURPLE, Items.PURPLE_CARPET);
-        map.put(ColorList.MAGENTA, Items.MAGENTA_CARPET);
-        map.put(ColorList.PINK, Items.PINK_CARPET);
-    });
     private static final Map<Item, ColorList> DYE_MAP = Util.make(new HashMap<>(), (map) -> {
         map.put(Items.WHITE_DYE, ColorList.WHITE);
         map.put(Items.ORANGE_DYE, ColorList.ORANGE);
@@ -81,6 +63,12 @@ public class CushionableEvents {
         map.put(Items.PINK_CARPET, ColorList.PINK);
     });
 
+    public static final Map<ColorList, Item> REVERSE_CARPET_MAP = Util.make(new HashMap<>(), (map) -> {
+        for (Map.Entry<Item, ColorList> entry : CARPET_MAP.entrySet()) {
+            map.put(entry.getValue(), entry.getKey());
+        }
+    });
+
     public static EventResult interact(Player player, InteractionHand hand, BlockPos pos, Direction direction) {
         Level level = player.level();
         ItemStack itemStack = player.getItemInHand(hand);
@@ -88,7 +76,7 @@ public class CushionableEvents {
 
         if (item instanceof ShearsItem && level.getBlockEntity(pos) instanceof Cushionable cushionable && cushionable.getColor() != ColorList.EMPTY) {
             ColorList cushion = cushionable.getColor();
-            Item carpet = SHEAR_MAP.get(cushion);
+            Item carpet = REVERSE_CARPET_MAP.get(cushion);
             if (carpet != null) {
                 cushionable.setColor(ColorList.EMPTY);
                 level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, new ItemStack(carpet, 1)));

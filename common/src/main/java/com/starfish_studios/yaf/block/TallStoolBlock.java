@@ -1,11 +1,15 @@
 package com.starfish_studios.yaf.block;
 
+import com.starfish_studios.yaf.block.entity.ChairBlockEntity;
+import com.starfish_studios.yaf.block.entity.TableBlockEntity;
 import com.starfish_studios.yaf.block.entity.TallStoolBlockEntity;
 import com.starfish_studios.yaf.block.properties.ColorList;
 import com.starfish_studios.yaf.block.properties.Cushionable;
+import com.starfish_studios.yaf.events.CushionableEvents;
 import com.starfish_studios.yaf.registry.YAFBlockProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -123,5 +127,13 @@ public class TallStoolBlock extends SeatBlock implements SimpleWaterloggedBlock,
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.INVISIBLE;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (level.getBlockEntity(pos) instanceof Cushionable cushionable) {
+            cushionable.dropCarpet(level, pos);
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 }

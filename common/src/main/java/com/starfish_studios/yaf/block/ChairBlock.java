@@ -6,8 +6,10 @@ import com.starfish_studios.yaf.block.properties.ChairType;
 import com.starfish_studios.yaf.block.properties.ChangeableBlock;
 import com.starfish_studios.yaf.block.properties.ColorList;
 import com.starfish_studios.yaf.block.properties.Cushionable;
+import com.starfish_studios.yaf.events.CushionableEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -107,6 +109,14 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cha
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.INVISIBLE;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (level.getBlockEntity(pos) instanceof Cushionable cushionable) {
+            cushionable.dropCarpet(level, pos);
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
     @Override

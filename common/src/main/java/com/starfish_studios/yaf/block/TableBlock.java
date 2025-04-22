@@ -1,11 +1,15 @@
 package com.starfish_studios.yaf.block;
 
+import com.starfish_studios.yaf.block.entity.ChairBlockEntity;
 import com.starfish_studios.yaf.block.entity.TableBlockEntity;
 import com.starfish_studios.yaf.block.properties.ChangeableBlock;
 import com.starfish_studios.yaf.block.properties.ColorList;
+import com.starfish_studios.yaf.block.properties.Cushionable;
+import com.starfish_studios.yaf.events.CushionableEvents;
 import com.starfish_studios.yaf.registry.YAFTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -202,5 +206,13 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
             return (state.getValue(SHORT) && thisState.getValue(SHORT)) || (!state.getValue(SHORT) && !thisState.getValue(SHORT));
         }
         return state.is(YAFTags.BlockTags.TABLES_CONNECTABLE);
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (level.getBlockEntity(pos) instanceof Cushionable cushionable) {
+            cushionable.dropCarpet(level, pos);
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 }
