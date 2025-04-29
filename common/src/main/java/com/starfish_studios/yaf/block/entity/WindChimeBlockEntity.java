@@ -1,6 +1,8 @@
 package com.starfish_studios.yaf.block.entity;
 
 import com.starfish_studios.yaf.registry.YAFBlockEntities;
+import dev.architectury.platform.Platform;
+import dev.architectury.utils.Env;
 import net.minecraft.util.Mth;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -37,8 +39,10 @@ public class WindChimeBlockEntity extends BlockEntity {
     }
 
     public void commonTick(Level level, BlockState state) {
-        if (level instanceof ClientLevel clientLevel) {
-            clientTick(clientLevel);
+        if (Platform.getEnvironment() != Env.SERVER) {
+            if (level instanceof ClientLevel clientLevel) {
+                clientTick(clientLevel);
+            }
         }
     }
 
