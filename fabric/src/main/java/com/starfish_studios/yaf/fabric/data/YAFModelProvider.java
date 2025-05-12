@@ -135,9 +135,9 @@ public class YAFModelProvider extends FabricModelProvider {
         String wood = blockPath.replace("_flower_basket", "");
 
         TextureMapping mapping = new TextureMapping()
-                .put(TextureSlot.ALL, new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/flower_basket/" + wood + "_flower_basket"))
-                .put(TextureSlot.PARTICLE, new ResourceLocation("block/" + wood + "_planks"))
-                .put(TextureSlot.DIRT, new ResourceLocation("block/dirt"));
+                .put(TextureSlot.ALL, YetAnotherFurniture.id("block/flower_basket/" + wood + "_flower_basket"))
+                .put(TextureSlot.PARTICLE, ResourceLocation.withDefaultNamespace("block/" + wood + "_planks"))
+                .put(TextureSlot.DIRT, ResourceLocation.withDefaultNamespace("block/dirt"));
 
         ModelTemplate ceilingTemplate = createTemplate("flower_basket_ceiling", TextureSlot.ALL, TextureSlot.PARTICLE);
         ModelTemplate floorTemplate   = createTemplate("flower_basket_floor", TextureSlot.ALL, TextureSlot.PARTICLE);
@@ -196,7 +196,7 @@ public class YAFModelProvider extends FabricModelProvider {
     private void createCurtainBlock(BlockModelGenerators generators, Block block) {
         Map<CurtainBlock.CurtainShape, OpenClosed> curtainMappings = new HashMap<>();
 
-        var bottomMiddleAndMiddleOpen = new TextureMapping().put(TextureSlot.ALL, new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/curtain/empty"));
+        var bottomMiddleAndMiddleOpen = new TextureMapping().put(TextureSlot.ALL, YetAnotherFurniture.id("block/curtain/empty"));
         var bottomRightAndBottomLeftOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_bottom_open"));
         var cornerRightAndCornerLeftOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_corner_open"));
         var rightAndLeftOpen = new TextureMapping().put(TextureSlot.ALL, getTexture(block, "curtain", "_open"));
@@ -281,11 +281,11 @@ public class YAFModelProvider extends FabricModelProvider {
 
     private void createCountertopType(BlockModelGenerators generators, CountertopType type) {
         TextureMapping baseMapping = new TextureMapping()
-                .put(TextureSlot.TOP, new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/drawers/" + type.getSerializedName() + "_drawer_top"))
-                .put(SIDES, new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/drawers/countertop/" + type.getSerializedName() + "_drawer_countertop_sides"));
-        COUNTERTOP.create(new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName()), baseMapping, generators.modelOutput);
+                .put(TextureSlot.TOP, YetAnotherFurniture.id("block/drawers/" + type.getSerializedName() + "_drawer_top"))
+                .put(SIDES, YetAnotherFurniture.id("block/drawers/countertop/" + type.getSerializedName() + "_drawer_countertop_sides"));
+        COUNTERTOP.create(YetAnotherFurniture.id("block/drawers/countertop/countertop_" + type.getSerializedName()), baseMapping, generators.modelOutput);
 
-        COUNTERTOP_BOTTOM.create(new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName() + "_bottom"), baseMapping, generators.modelOutput);
+        COUNTERTOP_BOTTOM.create(YetAnotherFurniture.id("block/drawers/countertop/countertop_" + type.getSerializedName() + "_bottom"), baseMapping, generators.modelOutput);
     }
 
     @Override
@@ -307,8 +307,7 @@ public class YAFModelProvider extends FabricModelProvider {
      */
     public static ModelTemplate createTemplate(String blockModelLocation, TextureSlot... requiredSlots) {
         return new ModelTemplate(Optional.of(
-                new ResourceLocation(
-                        YetAnotherFurniture.MOD_ID,
+                YetAnotherFurniture.id(
                         "block/template/" + blockModelLocation
                 )
         ),
@@ -328,7 +327,7 @@ public class YAFModelProvider extends FabricModelProvider {
 
     public final void createChairItem(ItemModelGenerators generators, Item item, Block block) {
         String blockPath = BuiltInRegistries.BLOCK.getKey(block).getPath();
-        ResourceLocation parent = new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/" + blockPath + "_1");
+        ResourceLocation parent = YetAnotherFurniture.id("block/" + blockPath + "_1");
         ResourceLocation itemModelLocation = ModelLocationUtils.getModelLocation(item);
 
         generators.output.accept(itemModelLocation, () -> {
@@ -357,8 +356,8 @@ public class YAFModelProvider extends FabricModelProvider {
     public final void createCabinetItem(ItemModelGenerators generators, Item item, Block block) {
         String wood = BuiltInRegistries.BLOCK.getKey(block).getPath();
         String firstName = wood.split("_cabinet")[0];
-        ResourceLocation loc = new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/drawers/" + firstName + "_drawer_top");
-        ResourceLocation countertopLoc = new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/drawers/countertop/" + firstName + "_drawer_countertop_sides");
+        ResourceLocation loc = YetAnotherFurniture.id("block/drawers/" + firstName + "_drawer_top");
+        ResourceLocation countertopLoc = YetAnotherFurniture.id("block/drawers/countertop/" + firstName + "_drawer_countertop_sides");
 
         TextureMapping baseMapping = new TextureMapping()
                 .put(TextureSlot.TOP, loc)
@@ -371,7 +370,7 @@ public class YAFModelProvider extends FabricModelProvider {
     public final void createCabinetBlock(BlockModelGenerators generators, Block block) {
         String wood = BuiltInRegistries.BLOCK.getKey(block).getPath();
         String firstName = wood.split("_cabinet")[0];
-        ResourceLocation loc = new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/drawers/" + firstName + "_drawer_top");
+        ResourceLocation loc = YetAnotherFurniture.id( "block/drawers/" + firstName + "_drawer_top");
 
         TextureMapping baseMapping = new TextureMapping()
                 .put(TextureSlot.TOP, loc)
@@ -412,7 +411,7 @@ public class YAFModelProvider extends FabricModelProvider {
                                 .term(DrawerBlock.COUNTERTOP, type)
                                 .term(CabinetBlock.BOTTOM, bl),
                         Variant.variant()
-                                .with(VariantProperties.MODEL, new ResourceLocation(YetAnotherFurniture.MOD_ID, string))
+                                .with(VariantProperties.MODEL, YetAnotherFurniture.id( string))
                 );
             }
             for (Direction direction : Direction.Plane.HORIZONTAL) {
@@ -438,7 +437,7 @@ public class YAFModelProvider extends FabricModelProvider {
         for (CountertopType type : CountertopType.values()) {
             multiPart.with(
                     Condition.condition().term(DrawerBlock.COUNTERTOP, type),
-                    Variant.variant().with(VariantProperties.MODEL, new ResourceLocation(YetAnotherFurniture.MOD_ID, "block/drawers/countertop/countertop_" + type.getSerializedName()))
+                    Variant.variant().with(VariantProperties.MODEL, YetAnotherFurniture.id( "block/drawers/countertop/countertop_" + type.getSerializedName()))
             );
         }
         for (Direction direction : Direction.Plane.HORIZONTAL) {

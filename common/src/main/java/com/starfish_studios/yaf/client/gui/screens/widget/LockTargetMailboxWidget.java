@@ -25,7 +25,7 @@ public class LockTargetMailboxWidget extends AbstractWidget {
     @Override
     protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         guiGraphics.blit(
-                new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/gui/"+ (locked ? "lock" : "unlock") + ".png"),
+                YetAnotherFurniture.id( "textures/gui/"+ (locked ? "lock" : "unlock") + ".png"),
                 this.getX(),
                 this.getY(),
                 0,

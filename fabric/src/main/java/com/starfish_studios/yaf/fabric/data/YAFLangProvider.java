@@ -4,20 +4,22 @@ import com.starfish_studios.yaf.registry.YAFBlocks;
 import com.starfish_studios.yaf.registry.YAFItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.core.HolderLookup;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 public class YAFLangProvider extends FabricLanguageProvider {
-    public YAFLangProvider(FabricDataOutput dataOutput) {
-        super(dataOutput);
+
+    public YAFLangProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        super(dataOutput, registryLookup);
     }
 
     @Override
-    public void generateTranslations(TranslationBuilder builder) {
-
+    public void generateTranslations(HolderLookup.Provider provider, TranslationBuilder builder) {
         YAFItems.ITEMS.forEach(supplier -> {
             String name = supplier.getId().getPath();
             String prepend = "item.yaf." + (name);
@@ -70,4 +72,6 @@ public class YAFLangProvider extends FabricLanguageProvider {
         }
         return Character.toUpperCase(lowerWord.charAt(0)) + lowerWord.substring(1);
     }
+
+
 }

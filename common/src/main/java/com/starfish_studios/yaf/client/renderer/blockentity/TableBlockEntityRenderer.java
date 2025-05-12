@@ -70,12 +70,12 @@ public class TableBlockEntityRenderer implements BlockEntityRenderer<TableBlockE
         var state = blockEntity.getBlockState().getBlock();
         var name = BuiltInRegistries.BLOCK.getKey(state).getPath();
 
-        return new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/entity/table/" + name + ".png");
+        return YetAnotherFurniture.id( "textures/entity/table/" + name + ".png");
     }
 
     private ResourceLocation getClothTextureLocation(TableBlockEntity blockEntity) {
         var name = blockEntity.getColor().getSerializedName().toLowerCase(Locale.ROOT);
 
-        return new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/entity/table/" + name + "_tablecloth.png");
+        return YetAnotherFurniture.id( "textures/entity/table/" + name + "_tablecloth.png");
     }
 }

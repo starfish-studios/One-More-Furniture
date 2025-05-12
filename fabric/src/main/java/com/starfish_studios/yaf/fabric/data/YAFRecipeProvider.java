@@ -3,22 +3,25 @@ package com.starfish_studios.yaf.fabric.data;
 import com.starfish_studios.yaf.registry.YAFItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class YAFRecipeProvider extends FabricRecipeProvider {
-    public YAFRecipeProvider(FabricDataOutput output) {
-        super(output);
+
+    public YAFRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(output, registriesFuture);
     }
-    
+
     @Override
-    public void buildRecipes(Consumer<FinishedRecipe> consumer) {
+    public void buildRecipes(RecipeOutput consumer) {
 
         YAFItems.DRAWERS.forEach((omfWoodType, drawerSupplier) -> {
             createDrawer(consumer, drawerSupplier.get(), omfWoodType.getPlanks().asItem(), omfWoodType.getSlab().asItem());
@@ -82,11 +85,9 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
         createWindchime(consumer, YAFItems.BONE_WIND_CHIMES.get(), Items.BONE);
         createWindchime(consumer, YAFItems.COPPER_WIND_CHIMES.get(), Items.COPPER_INGOT);
         createWindchime(consumer, YAFItems.ECHO_SHARD_WIND_CHIMES.get(), Items.ECHO_SHARD);
-
-
     }
 
-    private void createWindchime(Consumer<FinishedRecipe> consumer, Item chime, Item material){
+    private void createWindchime(RecipeOutput consumer, Item chime, Item material){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, chime)
                 .define('W', material)
                 .define('P', Items.STRING)
@@ -96,7 +97,7 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
                 .save(consumer);
     }
 
-    private void createMailbox(Consumer<FinishedRecipe> consumer, Item box, Item planks){
+    private void createMailbox(RecipeOutput consumer, Item box, Item planks){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, box)
                 .define('W', planks)
                 .define('P', Items.PAPER)
@@ -109,7 +110,7 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
     }
 
 
-    private void createBench(Consumer<FinishedRecipe> consumer, Item bench, Item planks){
+    private void createBench(RecipeOutput consumer, Item bench, Item planks){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, bench, 2)
                 .define('W', planks)
                 .define('N', Items.IRON_NUGGET)
@@ -120,7 +121,7 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
     }
 
 
-    private void createShelf(Consumer<FinishedRecipe> consumer, Item shelf, Item slab){
+    private void createShelf(RecipeOutput consumer, Item shelf, Item slab){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, shelf, 4)
                 .define('W', slab)
                 .define('S', Items.STICK)
@@ -130,7 +131,7 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
                 .save(consumer);
     }
 
-    private void createFan(Consumer<FinishedRecipe> consumer, Item fan, Item plank){
+    private void createFan(RecipeOutput consumer, Item fan, Item plank){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, fan)
                 .define('W', plank)
                 .define('I', Items.IRON_INGOT)
@@ -142,7 +143,7 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
     }
 
 
-    private void createTable(Consumer<FinishedRecipe> consumer, Item table, Item slab){
+    private void createTable(RecipeOutput consumer, Item table, Item slab){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, table)
                 .define('W', slab)
                 .define('S', Items.STICK)
@@ -152,7 +153,7 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
                 .save(consumer);
     }
 
-    private void createChair(Consumer<FinishedRecipe> consumer, Item chair, Item slab){
+    private void createChair(RecipeOutput consumer, Item chair, Item slab){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, chair, 2)
                 .define('W', slab)
                 .define('S', Items.STICK)
@@ -163,7 +164,7 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
                 .save(consumer);
     }
 
-    private void createSofa(Consumer<FinishedRecipe> consumer, Item sofa, Item wool){
+    private void createSofa(RecipeOutput consumer, Item sofa, Item wool){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, sofa, 2)
                 .define('W', wool)
                 .pattern("W ")
@@ -172,7 +173,7 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
                 .save(consumer);
     }
 
-    private void createCabinet(Consumer<FinishedRecipe> consumer, Item drawer, Item plank, Item slab) {
+    private void createCabinet(RecipeOutput consumer, Item drawer, Item plank, Item slab) {
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, drawer, 1)
                 .define('P', plank)
                 .define('S', slab)
@@ -184,7 +185,7 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
                 .save(consumer);
     }
 
-    private void createTallStool(Consumer<FinishedRecipe> consumer, Item tallStool, Item slab){
+    private void createTallStool(RecipeOutput consumer, Item tallStool, Item slab){
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, tallStool, 2)
                 .define('P', slab)
                 .define('S', Items.STICK)
@@ -194,7 +195,7 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
                 .save(consumer);
     }
 
-    private void createDrawer(Consumer<FinishedRecipe> consumer, Item drawer, Item plank, Item slab) {
+    private void createDrawer(RecipeOutput consumer, Item drawer, Item plank, Item slab) {
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, drawer, 1)
                 .define('P', plank)
                 .define('S', slab)
@@ -206,7 +207,7 @@ public class YAFRecipeProvider extends FabricRecipeProvider {
                 .save(consumer);
     }
 
-    private void createLamp(Consumer<FinishedRecipe> consumer, Item lamp, Item wood) {
+    private void createLamp(RecipeOutput consumer, Item lamp, Item wood) {
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, lamp, 2)
                 .define('W', ItemTags.WOOL)
                 .define('T', Items.TORCH)

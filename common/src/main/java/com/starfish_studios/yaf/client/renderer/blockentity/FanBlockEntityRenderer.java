@@ -24,7 +24,7 @@ public class FanBlockEntityRenderer implements BlockEntityRenderer<FanBlockEntit
 
     public ResourceLocation getTextureLocation(FanBlockEntity entity) {
         var wood = ((FanBlock) entity.getBlockState().getBlock()).wood;
-        return new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/block/fan/" + wood + "_fan.png");
+        return YetAnotherFurniture.id( "textures/block/fan/" + wood + "_fan.png");
     }
 
     @Override

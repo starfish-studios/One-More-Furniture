@@ -49,12 +49,12 @@ public class TallStoolBlockEntityRenderer implements BlockEntityRenderer<TallSto
         var state = blockEntity.getBlockState().getBlock();
         var name = BuiltInRegistries.BLOCK.getKey(state).getPath();
 
-        return new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/entity/tall_stool/" + name + ".png");
+        return YetAnotherFurniture.id( "textures/entity/tall_stool/" + name + ".png");
     }
 
     private ResourceLocation getClothTextureLocation(TallStoolBlockEntity blockEntity) {
         var name = blockEntity.getColor().getSerializedName().toLowerCase(Locale.ROOT);
 
-        return new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/entity/chair/" + name + "_cushion.png");
+        return YetAnotherFurniture.id( "textures/entity/chair/" + name + "_cushion.png");
     }
 }

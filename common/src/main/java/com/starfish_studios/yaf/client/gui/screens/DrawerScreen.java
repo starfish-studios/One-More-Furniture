@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 @Environment(EnvType.CLIENT)
 public class DrawerScreen extends AbstractContainerScreen<DrawerMenu> {
-    private static final ResourceLocation CONTAINER_LOCATION = new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/gui/generic_1x5.png");
+    private static final ResourceLocation CONTAINER_LOCATION = YetAnotherFurniture.id( "textures/gui/generic_1x5.png");
 
     public DrawerScreen(DrawerMenu drawerMenu, Inventory inventory, Component component) {
         super(drawerMenu, inventory, component);

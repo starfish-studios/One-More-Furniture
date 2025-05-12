@@ -56,12 +56,12 @@ public class ChairBlockEntityRenderer implements BlockEntityRenderer<ChairBlockE
         var name = BuiltInRegistries.BLOCK.getKey(state).getPath();
         var type = blockEntity.getChairType().id;
 
-        return new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/entity/chair/" + name + type + ".png");
+        return YetAnotherFurniture.id( "textures/entity/chair/" + name + type + ".png");
     }
 
     private ResourceLocation getClothTextureLocation(ChairBlockEntity blockEntity) {
         var name = blockEntity.getColor().getSerializedName().toLowerCase(Locale.ROOT);
 
-        return new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/entity/chair/" + name + "_cushion.png");
+        return YetAnotherFurniture.id( "textures/entity/chair/" + name + "_cushion.png");
     }
 }

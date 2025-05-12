@@ -22,7 +22,7 @@ public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBl
 
     public ResourceLocation getTextureLocation(WindChimeBlockEntity entity) {
         var material = ((WindChimeBlock) entity.getBlockState().getBlock()).material;
-        return new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/block/wind_chime/" + material + "_wind_chimes_world.png");
+        return YetAnotherFurniture.id( "textures/block/wind_chime/" + material + "_wind_chimes_world.png");
     }
 
     @Override

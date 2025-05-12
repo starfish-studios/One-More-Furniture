@@ -27,7 +27,7 @@ public class YAFSoundEvents {
     public static final RegistrySupplier<SoundEvent> FAN_AMBIENCE = register("block.fan.ambience");
 
     public static RegistrySupplier<SoundEvent> register(String name) {
-        ResourceLocation id = new ResourceLocation(YetAnotherFurniture.MOD_ID, name);
+        ResourceLocation id = YetAnotherFurniture.id( name);
         return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(id));
     }
 }

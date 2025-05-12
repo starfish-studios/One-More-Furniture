@@ -19,7 +19,7 @@ import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class MailboxScreen extends AbstractContainerScreen<MailboxMenu> {
-    private static final ResourceLocation CONTAINER_LOCATION = new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/gui/mailbox.png");
+    private static final ResourceLocation CONTAINER_LOCATION = YetAnotherFurniture.id( "textures/gui/mailbox.png");
 
     private EditBox targetString;
     private final int boxX = 148;
@@ -106,7 +106,7 @@ public class MailboxScreen extends AbstractContainerScreen<MailboxMenu> {
 
         if (data) {
             guiGraphics.blit(
-                    new ResourceLocation(YetAnotherFurniture.MOD_ID, "textures/gui/excl.png"),
+                    YetAnotherFurniture.id( "textures/gui/excl.png"),
                     x + 21,
                     this.titleLabelY - 2,
                     0,

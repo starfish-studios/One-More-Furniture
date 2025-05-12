@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class TableBlockEntityModel extends Model {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(YetAnotherFurniture.MOD_ID, "table_full"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(YetAnotherFurniture.id( "table_full"), "main");
 
     public final ModelPart top;
     public final ModelPart leg4;

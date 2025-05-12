@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
 public class TallStoolBlockEntityModel extends Model {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(YetAnotherFurniture.MOD_ID, "tall_stool"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(YetAnotherFurniture.id( "tall_stool"), "main");
     private final ModelPart group;
 
     public TallStoolBlockEntityModel(ModelPart root) {

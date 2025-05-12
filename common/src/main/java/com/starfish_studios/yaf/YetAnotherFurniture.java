@@ -26,8 +26,14 @@ public class YetAnotherFurniture {
 
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(MOD_ID, Registries.CREATIVE_MODE_TAB);
 
+    public static ResourceLocation id(String id){
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, id);
+    }
+
     //Moved from Client-side only code so it can be registered on server
-    public static ResourceLocation lockTargetId = new ResourceLocation(YetAnotherFurniture.MOD_ID, "switch_lock");
+    public static ResourceLocation lockTargetId = id("switch_lock");
+
+
 
     public static final RegistrySupplier<CreativeModeTab> MAIN = TABS.register("main",
             () -> CreativeTabRegistry.create(builder -> {

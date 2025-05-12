@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ChairCushionModel extends Model {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(YetAnotherFurniture.MOD_ID, "chair_cushion_converted"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(YetAnotherFurniture.id( "chair_cushion_converted"), "main");
     private final ModelPart cushion;
 
     public ChairCushionModel(ModelPart root) {

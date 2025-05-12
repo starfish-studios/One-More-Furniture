@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
 public class FanBlockEntityModel extends Model {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(YetAnotherFurniture.MOD_ID, "ceiling_fan_oak_head"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(YetAnotherFurniture.id( "ceiling_fan_oak_head"), "main");
     private final ModelPart wings;
 
     public FanBlockEntityModel(ModelPart root) {

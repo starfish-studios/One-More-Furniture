@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ChimeBlockEntityModel extends Model {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(YetAnotherFurniture.MOD_ID, "chime"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(YetAnotherFurniture.id( "chime"), "main");
     public final ModelPart base;
     public final ModelPart chime_bound_1;
     public final ModelPart chime_1;

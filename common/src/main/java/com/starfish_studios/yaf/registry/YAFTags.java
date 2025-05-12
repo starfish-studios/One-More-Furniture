@@ -17,7 +17,7 @@ public interface YAFTags {
         public static final TagKey<Block> CHAIRS_TUCKABLE_UNDER = tag("chairs_tuckable");
 
         private static TagKey<Block> tag(String name) {
-            return TagKey.create(BuiltInRegistries.BLOCK.key(), new ResourceLocation(YetAnotherFurniture.MOD_ID, name));
+            return TagKey.create(BuiltInRegistries.BLOCK.key(), YetAnotherFurniture.id( name));
         }
     }
 
@@ -26,7 +26,7 @@ public interface YAFTags {
         public static final TagKey<EntityType<?>> CAN_SIT_IN_SEATS = tag("can_sit_in_seats");
 
         private static TagKey<EntityType<?>> tag(String name) {
-            return TagKey.create(BuiltInRegistries.ENTITY_TYPE.key(), new ResourceLocation(YetAnotherFurniture.MOD_ID, name));
+            return TagKey.create(BuiltInRegistries.ENTITY_TYPE.key(), YetAnotherFurniture.id( name));
         }
     }
 
@@ -34,7 +34,7 @@ public interface YAFTags {
 
 
         private static TagKey<Item> tag(String name) {
-            return TagKey.create(BuiltInRegistries.ITEM.key(), new ResourceLocation(YetAnotherFurniture.MOD_ID, name));
+            return TagKey.create(BuiltInRegistries.ITEM.key(), YetAnotherFurniture.id( name));
         }
     }
 

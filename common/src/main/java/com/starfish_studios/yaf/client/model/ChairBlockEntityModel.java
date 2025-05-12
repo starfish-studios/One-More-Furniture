@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ChairBlockEntityModel extends Model {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(YetAnotherFurniture.MOD_ID, "chair"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(YetAnotherFurniture.id( "chair"), "main");
     public final ModelPart base;
     public final ModelPart back;
 

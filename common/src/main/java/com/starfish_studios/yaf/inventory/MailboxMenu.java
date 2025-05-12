@@ -26,7 +26,7 @@ public class MailboxMenu extends AbstractContainerMenu {
     private final Container mailbox;
     public final BlockPos pos;
     public MailboxBlockEntity mailboxBlockEntity;
-    public static ResourceLocation packetChannel = new ResourceLocation(YetAnotherFurniture.MOD_ID, "mailbox_sync");
+    public static ResourceLocation packetChannel = YetAnotherFurniture.id( "mailbox_sync");
 
 
     public MailboxMenu(int i, Inventory inventory, FriendlyByteBuf buf) {

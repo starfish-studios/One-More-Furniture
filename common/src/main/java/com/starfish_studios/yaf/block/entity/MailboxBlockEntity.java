@@ -46,8 +46,8 @@ public class MailboxBlockEntity extends BlockEntity
     private int sendDelay = 20 * 2;
     @Nullable
     private Component name;
-    public static ResourceLocation packetChannel = new ResourceLocation(YetAnotherFurniture.MOD_ID, "sync_mailbox_fail");
-    public static ResourceLocation packetChannel2 = new ResourceLocation(YetAnotherFurniture.MOD_ID, "sync_mailbox_text_reset");
+    public static ResourceLocation packetChannel = YetAnotherFurniture.id( "sync_mailbox_fail");
+    public static ResourceLocation packetChannel2 = YetAnotherFurniture.id( "sync_mailbox_text_reset");
 
     public boolean failedToSend = false;
 

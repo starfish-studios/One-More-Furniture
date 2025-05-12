@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class TableclothModel extends Model {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(YetAnotherFurniture.MOD_ID, "tablecloth"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(YetAnotherFurniture.id( "tablecloth"), "main");
     private final ModelPart cloth;
 
     public TableclothModel(ModelPart root) {
