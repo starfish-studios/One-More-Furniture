@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[47,)"
+loaderVersion = "[5.5.0,)"
 #issueTrackerURL = ""
 license = "https://github.com/starfish-studios/One-More-Furniture?tab=License-1-ov-file#readme"
 
@@ -12,22 +12,27 @@ description = '''There are furniture mods, then there are more- then we made ANO
 #logoFile = ""
 
 [[dependencies.yaf]]
-modId = "forge"
-mandatory = true
-versionRange = "[47,)"
+modId = "neoforge"
+type="required"
+versionRange="[21.1.55,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.yaf]]
 modId = "minecraft"
-mandatory = true
-versionRange = "[1.20.1,)"
+type="required"
+versionRange="[1.21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.yaf]]
 modId = "architectury"
-mandatory = true
-versionRange = "[9.1.12,)"
+type="required"
+versionRange = "[13.0.6,)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[mixins]]
+config="yaf.mixins.json"
+[[mixins]]
+config="yaf-common.mixins.json"
