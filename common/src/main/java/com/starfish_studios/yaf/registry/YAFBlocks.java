@@ -35,7 +35,7 @@ public class YAFBlocks {
     public static BlockBehaviour.Properties lamps =
             Block.Properties.of().noOcclusion().instabreak().lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0);
 
-    public static final RegistrySupplier<Block> SPIGOT = BLOCKS.register("spigot", () -> new SpigotBlock(BlockBehaviour.Properties.copy(Blocks.CAULDRON).noOcclusion().randomTicks()));
+    public static final RegistrySupplier<Block> SPIGOT = BLOCKS.register("spigot", () -> new SpigotBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON).noOcclusion().randomTicks()));
 
     public static final RegistrySupplier<Block> AMETHYST_WIND_CHIMES = BLOCKS.register("amethyst_wind_chimes", () -> new WindChimeBlock(
                     "amethyst",

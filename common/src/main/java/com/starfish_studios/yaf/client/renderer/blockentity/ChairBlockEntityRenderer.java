@@ -42,10 +42,10 @@ public class ChairBlockEntityRenderer implements BlockEntityRenderer<ChairBlockE
         poseStack.translate(0.5, 1.5, 0.5);
         poseStack.scale(-1, -1, 1);
         poseStack.mulPose(Axis.YP.rotationDegrees(180 + blockEntity.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot()));
-        model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
+        model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, -1);
         if (blockEntity.getColor() != ColorList.EMPTY) {
             VertexConsumer clothConsumer = buffer.getBuffer(RenderType.entityTranslucent(getClothTextureLocation(blockEntity)));
-            cloth.renderToBuffer(poseStack, clothConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
+            cloth.renderToBuffer(poseStack, clothConsumer, packedLight, packedOverlay, -1);
         }
 
         poseStack.popPose();

@@ -18,7 +18,7 @@ public interface ChangeableBlock {
         state = updateAfterCycle(state, level, pos);
 
         level.setBlock(pos, state, 3);
-        level.playSound(null, pos, state.getBlock().getSoundType(state).getPlaceSound(), SoundSource.BLOCKS, 1.0f, 1.0f);
+        level.playSound(null, pos, state.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0f, 1.0f);
 
         return true;
     }

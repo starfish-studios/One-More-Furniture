@@ -34,12 +34,12 @@ public class TallStoolBlockEntityRenderer implements BlockEntityRenderer<TallSto
         poseStack.pushPose();
         poseStack.translate(0.5, 1.5, 0.5);
         poseStack.scale(-1, -1, 1);
-        model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
+        model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, -1);
         if (blockEntity.getColor() != ColorList.EMPTY) {
             VertexConsumer clothConsumer = buffer.getBuffer(RenderType.entityTranslucent(getClothTextureLocation(blockEntity)));
             poseStack.translate(0.0, -4.0 / 16.0, 0.0);
             poseStack.scale(0.91F, 0.91F, 0.91F);
-            cloth.renderToBuffer(poseStack, clothConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
+            cloth.renderToBuffer(poseStack, clothConsumer, packedLight, packedOverlay, -1);
         }
 
         poseStack.popPose();

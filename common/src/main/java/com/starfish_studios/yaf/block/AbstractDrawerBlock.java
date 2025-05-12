@@ -1,16 +1,17 @@
 package com.starfish_studios.yaf.block;
 
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.starfish_studios.yaf.block.entity.AbstractDrawerBlockEntity;
 import com.starfish_studios.yaf.block.properties.CountertopType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -40,6 +41,12 @@ public abstract class AbstractDrawerBlock extends BaseEntityBlock implements Sim
 
     public final Item plankBlock;
 
+    public static final MapCodec<CabinetBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            ResourceLocation.CODEC.fieldOf("plank").forGetter(cabinet -> BuiltInRegistries.ITEM.getKey(cabinet.plankBlock)),
+            propertiesCodec()
+    ).apply(instance, (plankKey, properties) -> new CabinetBlock(BuiltInRegistries.ITEM.get(plankKey), properties)));
+
+
     public AbstractDrawerBlock(Item plank, Properties properties) {
         super(properties);
         this.plankBlock = plank;
@@ -55,9 +62,9 @@ public abstract class AbstractDrawerBlock extends BaseEntityBlock implements Sim
     }
 
     @Override
-    public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!level.isClientSide) {
-            var handItem = player.getMainHandItem().getItem();
+            var handItem = stack.getItem();
             var counterTops = Arrays.stream(CountertopType.values());
             var filtered = counterTops.filter(type -> type.getItem() == handItem).toList();
 
@@ -79,16 +86,21 @@ public abstract class AbstractDrawerBlock extends BaseEntityBlock implements Sim
 
                         level.setBlockAndUpdate(pos, state.setValue(COUNTERTOP, newCounterTop));
 
-                        return InteractionResult.SUCCESS;
+                        return ItemInteractionResult.SUCCESS;
                     }
                 }
             }
         }
 
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
 
         Direction facing = state.getValue(FACING);
-        Direction hitLoc = hit.getDirection();
+        Direction hitLoc = hitResult.getDirection();
 
         if (blockEntity instanceof AbstractDrawerBlockEntity drawerBlockEntity && facing == hitLoc) {
             player.openMenu(drawerBlockEntity);
@@ -143,5 +155,10 @@ public abstract class AbstractDrawerBlock extends BaseEntityBlock implements Sim
     @Override
     public @NotNull RenderShape getRenderShape(@NotNull BlockState blockState) {
         return RenderShape.MODEL;
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 }

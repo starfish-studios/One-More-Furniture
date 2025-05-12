@@ -2,16 +2,16 @@ package com.starfish_studios.yaf.entities;
 
 import com.starfish_studios.yaf.block.SeatBlock;
 import com.starfish_studios.yaf.registry.YAFEntities;
+import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Wolf;
@@ -22,6 +22,7 @@ import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -30,6 +31,11 @@ public class SeatEntity extends Entity {
     public SeatEntity(EntityType<?> entityEntityType, Level level) {
         super(entityEntityType, level);
         this.noPhysics = true;
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+
     }
 
     public SeatEntity(Level level, BlockPos pos) {
@@ -53,23 +59,23 @@ public class SeatEntity extends Entity {
     }
 
     @Override
-    protected void defineSynchedData() {}
-
-    @Override
     protected void readAdditionalSaveData(CompoundTag compound) {}
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compound) {}
 
     @Override
-    public double getPassengersRidingOffset() {
+    public @NotNull Vec3 getPassengerRidingPosition(Entity entity) {
         List<Entity> passengers = this.getPassengers();
-        if (passengers.isEmpty()) return 0.0;
+        var original = super.getPassengerRidingPosition(entity);
+        if (passengers.isEmpty()) return original;
         double seatHeight = 0.0;
         BlockState state = level().getBlockState(this.blockPosition());
         if (state.getBlock() instanceof SeatBlock seatBlock) seatHeight = seatBlock.seatHeight(state);
 
-        return seatHeight + getEntitySeatOffset(passengers.get(0));
+        var y = seatHeight + getEntitySeatOffset(passengers.getFirst());
+
+        return original.add(0, y, 0);
     }
 
     public static double getEntitySeatOffset(Entity entity) {
@@ -89,8 +95,8 @@ public class SeatEntity extends Entity {
     }
 
     @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return new ClientboundAddEntityPacket(this);
+    public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity entity) {
+        return new ClientboundAddEntityPacket(this, entity);
     }
 
     @Override

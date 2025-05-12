@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -138,7 +139,7 @@ public class TableInteractions {
                     level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, new ItemStack(carpet, 1)));
                 }
                 if (!player.isCreative()) {
-                    itemStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                    itemStack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }
                 level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, player.getSoundSource(), 1.0F, 1.0F);
                 return EventResult.interruptTrue();

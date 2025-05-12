@@ -40,6 +40,6 @@ public enum YAFWoodType {
     }
 
     public BlockBehaviour.Properties getBlockProperties() {
-        return BlockBehaviour.Properties.copy(planks).noOcclusion();
+        return BlockBehaviour.Properties.ofFullCopy(planks).noOcclusion();
     }
 }

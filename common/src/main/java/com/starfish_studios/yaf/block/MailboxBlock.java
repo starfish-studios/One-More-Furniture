@@ -1,5 +1,6 @@
 package com.starfish_studios.yaf.block;
 
+import com.mojang.serialization.MapCodec;
 import com.starfish_studios.yaf.block.entity.MailboxBlockEntity;
 import com.starfish_studios.yaf.block.properties.FlagStatus;
 import com.starfish_studios.yaf.inventory.MailboxMenu;
@@ -73,6 +74,11 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 .setValue(FENCE_BELOW, false));
     }
 
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return simpleCodec(MailboxBlock::new);
+    }
+
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return switch (blockState.getValue(FACING)) {
             default -> blockState.getValue(FENCE_BELOW) ? NORTH_FENCE_AABB : NORTH_AABB;
@@ -89,7 +95,7 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!level.isClientSide) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             MailboxBlockEntity mailboxBlockEntity = (MailboxBlockEntity) blockEntity;
@@ -99,8 +105,8 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                     assert blockEntity != null;
                     player.displayClientMessage(
                             Component.translatable("nookcranny.mailbox.sending",
-                                            mailboxBlockEntity.getMailboxName(),
-                                            "XYZ: " + pos.getX() + " / " + pos.getY() + " / "  + pos.getZ()
+                                    mailboxBlockEntity.getMailboxName(),
+                                    "XYZ: " + pos.getX() + " / " + pos.getY() + " / "  + pos.getZ()
                             ).withStyle(ChatFormatting.GREEN).withStyle(ChatFormatting.ITALIC), true
                     );
 

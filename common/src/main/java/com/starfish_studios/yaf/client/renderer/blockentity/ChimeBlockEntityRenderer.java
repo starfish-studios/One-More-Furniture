@@ -49,7 +49,7 @@ public class ChimeBlockEntityRenderer implements BlockEntityRenderer<WindChimeBl
             model.getChime(i + 1).zRot = (float) Math.toRadians(chimeAngleZ);
         }
 
-        model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
+        model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, -1);
         poseStack.popPose();
     }
 

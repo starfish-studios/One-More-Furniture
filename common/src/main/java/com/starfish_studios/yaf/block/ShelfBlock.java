@@ -1,5 +1,6 @@
 package com.starfish_studios.yaf.block;
 
+import com.mojang.serialization.MapCodec;
 import com.starfish_studios.yaf.block.entity.ShelfBlockEntity;
 import com.starfish_studios.yaf.util.block.BlockPart;
 import net.minecraft.core.BlockPos;
@@ -9,6 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -67,6 +69,11 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         this.defaultBlockState().setValue(HALF, SlabType.BOTTOM).setValue(FACING, Direction.NORTH).setValue(FACE, AttachFace.WALL).setValue(WATERLOGGED, false);
     }
 
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return simpleCodec(ShelfBlock::new);
+    }
+
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
@@ -92,50 +99,50 @@ public class ShelfBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (!(blockentity instanceof ShelfBlockEntity shelfBE))
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         Direction facing = state.getValue(FACING);
-        int slot = BlockPart.get2D(pos, hit.getLocation(), Direction.UP, facing.getClockWise(), 2, 2);
+        int slot = BlockPart.get2D(pos, hitResult.getLocation(), Direction.UP, facing.getClockWise(), 2, 2);
         ItemStack handStack = player.getItemInHand(hand);
         ItemStack shelfStack = shelfBE.getItems().get(slot);
         if (handStack.is(this.asItem()))
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (handStack.isEmpty()) {
             if (!shelfStack.isEmpty()) {
                 player.setItemSlot(EquipmentSlot.MAINHAND, shelfStack.copy());
                 shelfBE.getItems().set(slot, ItemStack.EMPTY);
                 shelfBE.markUpdated();
                 level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1.0F, 1.0F);
-                return InteractionResult.SUCCESS;
+                return ItemInteractionResult.SUCCESS;
             } else {
-                return InteractionResult.PASS;
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
         }
         if (shelfStack.isEmpty()) {
             shelfBE.getItems().set(slot, handStack.split(handStack.getCount()));
             shelfBE.markUpdated();
             level.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
         if (ItemStack.isSameItem(handStack, shelfStack)) {
             int room = shelfStack.getMaxStackSize() - shelfStack.getCount();
             if (room <= 0)
-                return InteractionResult.PASS;
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             int transfer = Math.min(handStack.getCount(), room);
             handStack.shrink(transfer);
             shelfStack.grow(transfer);
             shelfBE.markUpdated();
             level.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         } else {
             ItemStack temp = shelfStack.copy();
             shelfBE.getItems().set(slot, handStack.copy());
             player.setItemSlot(EquipmentSlot.MAINHAND, temp);
             shelfBE.markUpdated();
             level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1.0F, 1.0F);
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
     }
 

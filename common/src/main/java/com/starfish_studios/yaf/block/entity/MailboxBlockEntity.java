@@ -8,10 +8,7 @@ import com.starfish_studios.yaf.registry.YAFBlockEntities;
 import com.starfish_studios.yaf.world.YAFSavedData;
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.GlobalPos;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.Vec3i;
+import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -85,37 +82,39 @@ public class MailboxBlockEntity extends BlockEntity
     }
 
 
-    protected void saveAdditional(CompoundTag compoundTag) {
-        super.saveAdditional(compoundTag);
-        ContainerHelper.saveAllItems(compoundTag, this.items);
+    @Override
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider registries) {
+        super.saveAdditional(compoundTag, registries);
+        ContainerHelper.saveAllItems(compoundTag, this.items, registries);
         if (!targetString.isEmpty()) {
             compoundTag.putString("Target", targetString);
         }
         compoundTag.putInt("SendDelay", sendDelay);
         if (this.name != null) {
-            compoundTag.putString("CustomName", Component.Serializer.toJson(this.name));
+            compoundTag.putString("CustomName", Component.Serializer.toJson(this.name, registries));
         }
         compoundTag.putBoolean("FailedToSend", failedToSend);
         compoundTag.putBoolean("LockTarget", lockTarget);
     }
 
-    public void load(CompoundTag compoundTag) {
-        super.load(compoundTag);
+    @Override
+    public void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider registries) {
+        super.loadAdditional(compoundTag, registries);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(compoundTag, this.items);
+        ContainerHelper.loadAllItems(compoundTag, this.items, registries);
         if (compoundTag.contains("Target")) {
             targetString = compoundTag.getString("Target");
         }
         sendDelay = compoundTag.getInt("SendDelay");
         if (compoundTag.contains("CustomName", 8)) {
-            this.name = Component.Serializer.fromJson(compoundTag.getString("CustomName"));
+            this.name = Component.Serializer.fromJson(compoundTag.getString("CustomName"), registries);
         }
         failedToSend = compoundTag.getBoolean("FailedToSend");
         lockTarget = compoundTag.getBoolean("LockTarget");
     }
 
     private static boolean canMergeItems(ItemStack stack1, ItemStack stack2) {
-        return stack1.getCount() <= stack1.getMaxStackSize() && ItemStack.isSameItemSameTags(stack1, stack2);
+        return stack1.getCount() <= stack1.getMaxStackSize() && ItemStack.isSameItemSameComponents(stack1, stack2);
     }
 
     private void serverTick() {

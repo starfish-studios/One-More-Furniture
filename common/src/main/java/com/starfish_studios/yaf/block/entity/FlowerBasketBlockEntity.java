@@ -2,6 +2,7 @@ package com.starfish_studios.yaf.block.entity;
 
 import com.starfish_studios.yaf.registry.YAFBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -34,16 +35,16 @@ public class FlowerBasketBlockEntity extends BlockEntity implements Clearable {
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
         this.items.clear();
-        ContainerHelper.loadAllItems(tag, this.items);
+        ContainerHelper.loadAllItems(tag, this.items, registries);
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
-        ContainerHelper.saveAllItems(tag, this.items, true);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        ContainerHelper.saveAllItems(tag, this.items,true ,registries);
     }
 
     @Override
@@ -52,9 +53,9 @@ public class FlowerBasketBlockEntity extends BlockEntity implements Clearable {
     }
 
     @Override
-    public @NotNull CompoundTag getUpdateTag() {
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag compoundtag = new CompoundTag();
-        ContainerHelper.saveAllItems(compoundtag, this.items, true);
+        ContainerHelper.saveAllItems(compoundtag, this.items, true, registries);
         return compoundtag;
     }
 
@@ -62,7 +63,7 @@ public class FlowerBasketBlockEntity extends BlockEntity implements Clearable {
         ItemStack itemstack = this.items.get(slot);
         if (itemstack.isEmpty()) {
             Block block = ((BlockItem)stack.getItem()).getBlock();
-            Objects.requireNonNull(this.getLevel()).playSound(null, this.getBlockPos(), block.getSoundType(block.defaultBlockState()).getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+            Objects.requireNonNull(this.getLevel()).playSound(null, this.getBlockPos(), block.defaultBlockState().getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
             this.items.set(slot, stack.split(1));
             this.markUpdated();
             return true;

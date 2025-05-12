@@ -1,10 +1,15 @@
 package com.starfish_studios.yaf.block;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.starfish_studios.yaf.block.entity.FanBlockEntity;
 import com.starfish_studios.yaf.registry.YAFSoundEvents;
 import com.starfish_studios.yaf.util.YAFSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -35,6 +40,12 @@ public class FanBlock extends BaseEntityBlock {
     private static final VoxelShape SHAPE_UP = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 12.0D, 12.0D);
     private static final VoxelShape SHAPE_DOWN = Block.box(4.0D, 4.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 
+    public static final MapCodec<FanBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Codec.STRING.fieldOf("wood").forGetter(fan -> fan.wood),
+            propertiesCodec()
+    ).apply(instance, FanBlock::new));
+
+
     public FanBlock(String wood, Properties properties) {
         super(properties
                 .lightLevel(state -> state.getValue(BlockStateProperties.POWERED) ? 12 : 0)
@@ -44,6 +55,11 @@ public class FanBlock extends BaseEntityBlock {
                 .setValue(BlockStateProperties.POWERED, false)
         );
         this.wood = wood;
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     public RenderShape getRenderShape(BlockState state) {
@@ -73,7 +89,7 @@ public class FanBlock extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (player.isShiftKeyDown()) {
             state = state.cycle(BlockStateProperties.POWERED);
             level.setBlock(pos, state, 2);

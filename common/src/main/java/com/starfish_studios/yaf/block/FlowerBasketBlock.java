@@ -1,5 +1,6 @@
 package com.starfish_studios.yaf.block;
 
+import com.mojang.serialization.MapCodec;
 import com.starfish_studios.yaf.YAFConfig;
 import com.starfish_studios.yaf.block.entity.FlowerBasketBlockEntity;
 import com.starfish_studios.yaf.util.block.BlockPart;
@@ -13,6 +14,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -56,6 +59,11 @@ public class FlowerBasketBlock extends BaseEntityBlock {
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(FACE, AttachFace.FLOOR));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return simpleCodec(FlowerBasketBlock::new);
     }
 
     @Nullable
@@ -132,8 +140,7 @@ public class FlowerBasketBlock extends BaseEntityBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType type) {
+    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
         return false;
     }
 
@@ -142,13 +149,12 @@ public class FlowerBasketBlock extends BaseEntityBlock {
         if (item == null) {
             return false;
         }
-        ResourceLocation itemId = new ResourceLocation(item.toString());
+        ResourceLocation itemId = ResourceLocation.parse(item.toString());
 
         for (String entry : YAFConfig.flowerBasketItems) {
             if (entry.startsWith("#")) {
                 String tagName = entry.substring(1);
-                ResourceLocation tagResource = new ResourceLocation(tagName);
-
+                ResourceLocation tagResource =  ResourceLocation.parse(tagName);
                 TagKey<Item> tagKey = TagKey.create(Registries.ITEM, tagResource);
 
                 if (item.builtInRegistryHolder().is(tagKey)) {
@@ -163,17 +169,14 @@ public class FlowerBasketBlock extends BaseEntityBlock {
         return false;
     }
 
-
-
     @Override
-    @SuppressWarnings("deprecation")
-    public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (!(blockEntity instanceof FlowerBasketBlockEntity flowerBoxBE)) return InteractionResult.PASS;
+        if (!(blockEntity instanceof FlowerBasketBlockEntity flowerBoxBE)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
         ItemStack heldStack = player.getItemInHand(hand);
         if (heldStack.isEmpty()) {
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
         if (heldStack.getItem() != Items.SHEARS) {
@@ -181,13 +184,13 @@ public class FlowerBasketBlock extends BaseEntityBlock {
             for (String entry : YAFConfig.flowerBasketItems) {
                 if (entry.startsWith("#")) {
                     String tagName = entry.substring(1);
-                    TagKey<Item> tag = TagKey.create(Registries.ITEM, new ResourceLocation(tagName));
+                    TagKey<Item> tag = TagKey.create(Registries.ITEM, ResourceLocation.parse(tagName));
                     if (heldStack.is(tag)) {
                         validFlower = true;
                         break;
                     }
                 } else {
-                    ResourceLocation itemId = Registries.ITEM.toString().equals(entry) ? null : new ResourceLocation(entry);
+                    ResourceLocation itemId = Registries.ITEM.toString().equals(entry) ? null : ResourceLocation.parse(entry);
                     if (itemId != null && itemId.toString().equals(entry)) {
                         validFlower = true;
                         break;
@@ -195,7 +198,7 @@ public class FlowerBasketBlock extends BaseEntityBlock {
                 }
             }
             if (!validFlower) {
-                return InteractionResult.PASS;
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
         }
 
@@ -203,22 +206,22 @@ public class FlowerBasketBlock extends BaseEntityBlock {
 
         if (heldStack.getItem() == Items.SHEARS) {
             int slot = (attachFace == AttachFace.WALL
-                    ? BlockPart.get1D(pos, hit.getLocation(), state.getValue(FACING).getClockWise(), 2)
+                    ? BlockPart.get1D(pos, hitResult.getLocation(), state.getValue(FACING).getClockWise(), 2)
                     : 0);
             ItemStack flowerStack = flowerBoxBE.getItemFromSlot(slot).getDefaultInstance();
             if (!flowerStack.isEmpty()) {
                 flowerBoxBE.removeFlower(slot);
                 level.addFreshEntity(new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, flowerStack.copy()));
                 level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0f, 1.0f);
-                heldStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
-                return InteractionResult.SUCCESS;
+                heldStack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+                return ItemInteractionResult.SUCCESS;
             } else {
-                return InteractionResult.PASS;
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
         }
 
         int slot = (attachFace == AttachFace.WALL
-                ? BlockPart.get1D(pos, hit.getLocation(), state.getValue(FACING).getClockWise(), 2)
+                ? BlockPart.get1D(pos, hitResult.getLocation(), state.getValue(FACING).getClockWise(), 2)
                 : 0);
         ItemStack currentFlower = flowerBoxBE.getItemFromSlot(slot).getDefaultInstance();
 
@@ -228,7 +231,7 @@ public class FlowerBasketBlock extends BaseEntityBlock {
                 if (!player.getAbilities().instabuild) {
                     heldStack.shrink(1);
                 }
-                return InteractionResult.SUCCESS;
+                return ItemInteractionResult.SUCCESS;
             }
         } else {
             if (!heldStack.getItem().equals(currentFlower.getItem())
@@ -240,15 +243,14 @@ public class FlowerBasketBlock extends BaseEntityBlock {
                     if (!player.getAbilities().instabuild) {
                         heldStack.shrink(1);
                     }
-                    return InteractionResult.SUCCESS;
+                    return ItemInteractionResult.SUCCESS;
                 }
             }
         }
 
 
 
-        return InteractionResult.CONSUME;
+        return ItemInteractionResult.CONSUME;
     }
-
 }
 

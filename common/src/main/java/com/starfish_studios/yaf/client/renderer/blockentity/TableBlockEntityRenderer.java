@@ -56,11 +56,11 @@ public class TableBlockEntityRenderer implements BlockEntityRenderer<TableBlockE
         poseStack.pushPose();
         poseStack.translate(0.5, 1.5, 0.5);
         poseStack.scale(-1, -1, 1);
-        model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
+        model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, -1);
         if (blockEntity.getColor() != ColorList.EMPTY) {
             VertexConsumer clothConsumer = buffer.getBuffer(RenderType.entityTranslucent(getClothTextureLocation(blockEntity)));
             poseStack.translate(0.0,shortY / 16,0.0);
-            cloth.renderToBuffer(poseStack, clothConsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f);
+            cloth.renderToBuffer(poseStack, clothConsumer, packedLight, packedOverlay, -1);
         }
 
         poseStack.popPose();

@@ -58,8 +58,8 @@ public class ChimeBlockEntityModel extends Model {
 
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        base.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+        base.render(poseStack, buffer, packedLight, packedOverlay, color);
     }
 
     public ModelPart getChimeBound(int i) {

@@ -75,15 +75,15 @@ public class TableBlockEntityModel extends Model {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        top.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        leg1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        leg2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        leg3.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        leg4.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        small1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        small2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        small3.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        small4.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+        top.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        leg1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        leg2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        leg3.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        leg4.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        small1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        small2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        small3.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        small4.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

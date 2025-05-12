@@ -114,12 +114,7 @@ public class CurtainBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(@NotNull BlockState state,
-                                          Level level,
-                                          @NotNull BlockPos pos,
-                                          @NotNull Player player,
-                                          @NotNull InteractionHand hand,
-                                          @NotNull BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         }

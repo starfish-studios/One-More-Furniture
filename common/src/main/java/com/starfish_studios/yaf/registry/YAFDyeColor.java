@@ -52,6 +52,6 @@ public enum YAFDyeColor {
     }
 
     public BlockBehaviour.Properties getBlockProperties() {
-        return BlockBehaviour.Properties.copy(wool).noOcclusion();
+        return BlockBehaviour.Properties.ofFullCopy(wool).noOcclusion();
     }
 }

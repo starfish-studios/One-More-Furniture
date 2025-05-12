@@ -1,13 +1,22 @@
 package com.starfish_studios.yaf.block;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.starfish_studios.yaf.block.entity.CabinetBlockEntity;
 import com.starfish_studios.yaf.block.properties.CountertopType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.RegistryFixedCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
@@ -22,8 +31,12 @@ public class CabinetBlock extends AbstractDrawerBlock {
     public static final BooleanProperty LEFT_OPEN = BooleanProperty.create("left_open");
     public static final BooleanProperty RIGHT_OPEN = BooleanProperty.create("right_open");
 
+    private final Item plank;
+
+
     public CabinetBlock(Item plank, Properties properties) {
         super(plank, properties);
+        this.plank = plank;
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(BOTTOM, true)

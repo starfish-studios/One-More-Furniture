@@ -3,6 +3,7 @@ package com.starfish_studios.yaf.block.entity;
 import com.starfish_studios.yaf.block.properties.ColorList;
 import com.starfish_studios.yaf.registry.YAFBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
@@ -64,15 +65,15 @@ public class TableBlockEntity extends BlockEntity {
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        CompoundTag compound = super.getUpdateTag();
-        saveAdditional(compound);
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag compound = super.getUpdateTag(registries);
+        saveAdditional(compound, registries);
         return compound;
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
         tag.putByte("Legs", legs);
         tag.putBoolean("Short", isShort);
         ColorList.CODEC.encodeStart(NbtOps.INSTANCE, color)
@@ -81,8 +82,8 @@ public class TableBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
         this.legs = tag.getByte("Legs");
         this.isShort = tag.getBoolean("Short");
         if (tag.contains("Color", Tag.TAG_STRING)) {

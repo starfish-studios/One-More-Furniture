@@ -45,7 +45,7 @@ public class ShelfInteractions   {
 
                 Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(blockState.getBlock().asItem()));
 
-                itemStack.hurtAndBreak(1, player, livingEntity -> livingEntity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+                itemStack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
 
                 level.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
                 return InteractionResult.SUCCESS;

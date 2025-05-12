@@ -1,5 +1,6 @@
 package com.starfish_studios.yaf.block;
 
+import com.mojang.serialization.MapCodec;
 import com.starfish_studios.yaf.block.entity.SpigotBlockEntity;
 import com.starfish_studios.yaf.registry.YAFBlockEntities;
 import com.starfish_studios.yaf.registry.YAFSoundEvents;
@@ -11,9 +12,10 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -66,6 +68,11 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     }
 
     @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return simpleCodec(SpigotBlock::new);
+    }
+
+    @Override
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
     }
@@ -97,7 +104,7 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
         BlockState blockState2;
 
         boolean waterOn = blockState.getValue(POWERED);
@@ -112,7 +119,7 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
             level.playSound(null, blockPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
         } else if (waterOn && player.getItemInHand(interactionHand).getItem() == Items.GLASS_BOTTLE) {
             player.getItemInHand(interactionHand).shrink(1);
-            player.addItem(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
+            player.addItem(PotionContents.createItemStack(Items.POTION, Potions.WATER));
             level.playSound(null, blockPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
         } else {
             blockState2 = this.pull(blockState, level, blockPos);
@@ -122,7 +129,7 @@ public class SpigotBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
                     SoundSource.BLOCKS, f,
                     1.0f);
         }
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
     }
 
     public BlockState pull(BlockState blockState, Level level, BlockPos blockPos) {

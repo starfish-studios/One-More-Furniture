@@ -1,5 +1,8 @@
 package com.starfish_studios.yaf.block;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.starfish_studios.yaf.block.entity.WindChimeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,12 +28,24 @@ public class WindChimeBlock extends BaseEntityBlock {
     private SoundEvent sound;
     public String material;
 
+    public static final MapCodec<WindChimeBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Codec.STRING.fieldOf("material").forGetter(fan -> fan.material),
+            SoundEvent.DIRECT_CODEC.fieldOf("sound").forGetter(fan -> fan.sound),
+            propertiesCodec()
+    ).apply(instance, WindChimeBlock::new));
+
+
     public WindChimeBlock(String material, SoundEvent sound, Properties properties) {
         super(properties);
         this.sound = sound;
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
         this.material = material;
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Override

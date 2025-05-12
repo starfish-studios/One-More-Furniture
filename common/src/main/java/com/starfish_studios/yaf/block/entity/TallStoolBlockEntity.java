@@ -5,6 +5,7 @@ import com.starfish_studios.yaf.block.properties.ColorList;
 import com.starfish_studios.yaf.block.properties.Cushionable;
 import com.starfish_studios.yaf.registry.YAFBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
@@ -42,23 +43,23 @@ public class TallStoolBlockEntity extends BlockEntity implements Cushionable {
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        CompoundTag compound = super.getUpdateTag();
-        saveAdditional(compound);
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag compound = super.getUpdateTag(registries);
+        saveAdditional(compound, registries);
         return compound;
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
         ColorList.CODEC.encodeStart(NbtOps.INSTANCE, color)
                 .result()
                 .ifPresent(encoded -> tag.put("Color", encoded));
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
         if (tag.contains("Color", Tag.TAG_STRING)) {
             this.color = ColorList.CODEC.parse(NbtOps.INSTANCE, tag.get("Color"))
                     .result()
