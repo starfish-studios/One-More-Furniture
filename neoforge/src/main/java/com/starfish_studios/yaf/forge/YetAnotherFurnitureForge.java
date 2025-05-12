@@ -6,32 +6,32 @@ import com.starfish_studios.yaf.client.gui.screens.DrawerScreen;
 import com.starfish_studios.yaf.client.gui.screens.MailboxScreen;
 import com.starfish_studios.yaf.events.ShelfInteractions;
 import com.starfish_studios.yaf.registry.YAFMenus;
-import dev.architectury.platform.forge.EventBuses;
-import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Mod(YetAnotherFurniture.MOD_ID)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class YetAnotherFurnitureForge {
 
     private static final boolean runBlockStateTest = false;
 
-    public YetAnotherFurnitureForge(FMLJavaModLoadingContext ctx) {
+    public YetAnotherFurnitureForge() {
 
-        var bus = ctx.getModEventBus();
-        EventBuses.registerModEventBus(YetAnotherFurniture.MOD_ID,bus);
+        var bus = NeoForge.EVENT_BUS;
         YetAnotherFurniture.init();
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -47,9 +47,9 @@ public class YetAnotherFurnitureForge {
                 Map<String, Integer> stateCounts = new HashMap<>();
                 int totalStates = 0;
 
-                for (Block block : ForgeRegistries.BLOCKS) {
-                    ResourceLocation id = ForgeRegistries.BLOCKS.getKey(block);
-                    if (id != null && id.getNamespace().equals(YetAnotherFurniture.MOD_ID)) {
+                for (Block block : BuiltInRegistries.BLOCK) {
+                    ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
+                    if (id.getNamespace().equals(YetAnotherFurniture.MOD_ID)) {
                         String className = block.getClass().getSimpleName();
                         int count = block.getStateDefinition().getPossibleStates().size();
 
@@ -67,12 +67,15 @@ public class YetAnotherFurnitureForge {
     }
 
     @SubscribeEvent
+    public static void registerScreens(final RegisterMenuScreensEvent event) {
+        event.register(YAFMenus.DRAWER.get(), DrawerScreen::new);
+        event.register(YAFMenus.GENERIC_1X5.get(), MailboxScreen::new);
+    }
+
+    @SubscribeEvent
     public static void onClientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(YetAnotherFurnitureClient::init);
-        event.enqueueWork(() -> {
-            MenuScreens.register(YAFMenus.DRAWER.get(), DrawerScreen::new);
-            MenuScreens.register(YAFMenus.GENERIC_1X5.get(), MailboxScreen::new);
-        });
+
     }
 
     @SubscribeEvent
