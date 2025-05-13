@@ -2,6 +2,7 @@ package com.starfish_studios.yaf.client.gui.screens.widget;
 
 import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.starfish_studios.yaf.inventory.MailboxMenu;
+import com.starfish_studios.yaf.payload.LockTargetC2SPayload;
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.gui.GuiGraphics;
@@ -42,10 +43,7 @@ public class LockTargetMailboxWidget extends AbstractWidget {
     public void onClick(double mouseX, double mouseY) {
         super.onClick(mouseX, mouseY);
         locked = !locked;
-        FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-        buf.writeBlockPos(this.mailboxMenu.pos);
-        buf.writeBoolean(locked);
-        NetworkManager.sendToServer(YetAnotherFurniture.lockTargetId, buf);
+        NetworkManager.sendToServer(new LockTargetC2SPayload(locked, this.mailboxMenu.pos));
         this.mailboxMenu.mailboxBlockEntity.lockTarget = locked;
     }
 

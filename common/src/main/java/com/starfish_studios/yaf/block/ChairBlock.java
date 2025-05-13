@@ -88,16 +88,15 @@ public class ChairBlock extends SeatBlock implements SimpleWaterloggedBlock, Cha
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (tryChangeBlock(BACK, state, level, pos, player, hand)) return InteractionResult.SUCCESS;
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (tryChangeBlock(BACK, state, level, pos, player)) return InteractionResult.SUCCESS;
 
-        if (hand == InteractionHand.MAIN_HAND) return InteractionResult.FAIL;
-        return super.use(state, level, pos, player, hand, hit);
+        return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 
     @Override
-    public boolean tryChangeBlock(Property<?> property, BlockState state, LevelAccessor level, BlockPos pos, Player player, InteractionHand hand) {
-        var success = ChangeableBlock.super.tryChangeBlock(property, state, level, pos, player, hand);
+    public boolean tryChangeBlock(Property<?> property, BlockState state, LevelAccessor level, BlockPos pos, Player player) {
+        var success = ChangeableBlock.super.tryChangeBlock(property, state, level, pos, player);
         if (success) {
             if (level.getBlockEntity(pos) instanceof ChairBlockEntity entity) {
                 entity.setHasBack(!state.getValue(BACK));

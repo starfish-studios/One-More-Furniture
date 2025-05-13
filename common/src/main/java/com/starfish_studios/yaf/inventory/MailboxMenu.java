@@ -7,6 +7,7 @@ package com.starfish_studios.yaf.inventory;
 
 import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.starfish_studios.yaf.block.entity.MailboxBlockEntity;
+import com.starfish_studios.yaf.payload.MailboxC2SPayload;
 import com.starfish_studios.yaf.registry.YAFMenus;
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
@@ -109,10 +110,8 @@ public class MailboxMenu extends AbstractContainerMenu {
     }
 
     public void updateTargetString(String s) {
-        FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-        buf.writeUtf(s);
-        buf.writeBlockPos(pos);
-        NetworkManager.sendToServer(packetChannel, buf);
+        NetworkManager.sendToServer(new MailboxC2SPayload(s, pos));
+
         mailboxBlockEntity.targetString = s;
         mailboxBlockEntity.setChanged();
     }

@@ -30,11 +30,6 @@ public class YetAnotherFurniture {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, id);
     }
 
-    //Moved from Client-side only code so it can be registered on server
-    public static ResourceLocation lockTargetId = id("switch_lock");
-
-
-
     public static final RegistrySupplier<CreativeModeTab> MAIN = TABS.register("main",
             () -> CreativeTabRegistry.create(builder -> {
                 builder.title(Component.translatable("itemGroup.yaf.tab"));
@@ -83,37 +78,13 @@ public class YetAnotherFurniture {
         YAFBlockEntities.BLOCK_ENTITY_TYPES.register();
         YAFMenus.MENUS.register();
         YAFEntities.ENTITY_TYPES.register();
+        YAFDataComponents.DATA_COMPONENT_TYPES.register();
+        YAFPayloads.register();
 
         InteractionEvent.RIGHT_CLICK_BLOCK.register(ChairInteractions::interact);
         InteractionEvent.RIGHT_CLICK_BLOCK.register(CushionableEvents::interact);
         InteractionEvent.RIGHT_CLICK_BLOCK.register(DyeSofa::interact);
         InteractionEvent.RIGHT_CLICK_BLOCK.register(LampInteractions::interact);
         InteractionEvent.RIGHT_CLICK_BLOCK.register(TableInteractions::interact);
-
-        NetworkManager.registerReceiver(NetworkManager.Side.C2S, MailboxMenu.packetChannel, ((buf, context) -> {
-            var name =  buf.readUtf();
-            var pos = buf.readBlockPos();
-            var player = context.getPlayer();
-            context.queue(() -> {
-                var be = player.level().getBlockEntity(pos);
-                if (be instanceof MailboxBlockEntity mailboxBlockEntity) {
-                    mailboxBlockEntity.targetString = name;
-                    mailboxBlockEntity.setChanged();
-                }
-            });
-        }));
-
-
-        NetworkManager.registerReceiver(NetworkManager.Side.C2S, lockTargetId, ((buf, context)  -> {
-            var posi = buf.readBlockPos();
-            var lockTarget = buf.readBoolean();
-            context.queue(() -> {
-                var be = context.getPlayer().level().getBlockEntity(posi);
-                if (be instanceof MailboxBlockEntity mailboxBlockEntity) {
-                    mailboxBlockEntity.lockTarget = lockTarget;
-                    mailboxBlockEntity.setChanged();
-                }
-            });
-        }));
     }
 }

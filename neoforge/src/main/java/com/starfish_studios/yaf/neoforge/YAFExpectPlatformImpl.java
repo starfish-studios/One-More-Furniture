@@ -1,4 +1,4 @@
-package com.starfish_studios.yaf.forge;
+package com.starfish_studios.yaf.neoforge;
 
 
 import net.neoforged.fml.loading.FMLPaths;

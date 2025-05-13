@@ -11,9 +11,9 @@ import net.minecraft.world.level.block.state.properties.Property;
 
 public interface ChangeableBlock {
 
-    default boolean tryChangeBlock(Property<?> property, BlockState state, LevelAccessor level, BlockPos pos, Player player, InteractionHand hand) {
+    default boolean tryChangeBlock(Property<?> property, BlockState state, LevelAccessor level, BlockPos pos, Player player) {
         if (property == null || !state.hasProperty(property)) return false;
-        if (!player.getItemInHand(hand).is(YAFItems.COPPER_SAW.get())) return false;
+        if (!player.getMainHandItem().is(YAFItems.COPPER_SAW.get())) return false;
         state = state.cycle(property);
         state = updateAfterCycle(state, level, pos);
 

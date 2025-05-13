@@ -108,16 +108,15 @@ public class TableBlock extends HalfTransparentBlock implements SimpleWaterlogge
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (tryChangeBlock(SHORT, state, level, pos, player, hand)) return InteractionResult.SUCCESS;
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (tryChangeBlock(SHORT, state, level, pos, player)) return InteractionResult.SUCCESS;
 
-        if (hand == InteractionHand.MAIN_HAND) return InteractionResult.FAIL;
-        return super.use(state, level, pos, player, hand, hit);
+        return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 
     @Override
-    public boolean tryChangeBlock(Property<?> property, BlockState state, LevelAccessor level, BlockPos pos, Player player, InteractionHand hand) {
-        var success = ChangeableBlock.super.tryChangeBlock(property, state, level, pos, player, hand);
+    public boolean tryChangeBlock(Property<?> property, BlockState state, LevelAccessor level, BlockPos pos, Player player) {
+        var success = ChangeableBlock.super.tryChangeBlock(property, state, level, pos, player);
         if (success) {
             if (level.getBlockEntity(pos) instanceof TableBlockEntity entity) {
                 entity.setShort(!state.getValue(SHORT));

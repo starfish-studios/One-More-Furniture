@@ -1,5 +1,6 @@
 package com.starfish_studios.yaf.mixin;
 
+import com.starfish_studios.yaf.registry.YAFDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -24,16 +25,17 @@ public abstract class ItemMixin {
     @Shadow public abstract String toString();
 
     @Inject(method = "appendHoverText", at = @At("TAIL"))
-    private void addMailboxTooltip(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flag, CallbackInfo ci) {
-        CompoundTag tag = stack.getTag();
-        if (tag != null && tag.contains("mailboxTooltip")) {
-            String fromText = tag.getString("mailboxTooltip");
-            tooltip.add(Component.literal(fromText)
-                    .withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
-            if (tag.contains("mailboxTooltipTimer")) {
-                int timer = tag.getInt("mailboxTooltipTimer");
+    private void addMailboxTooltip(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag, CallbackInfo ci) {
+        if (stack.has(YAFDataComponents.MAILBOX_STRING.get())) {
+            String fromText = stack.get(YAFDataComponents.MAILBOX_STRING.get());
+            if (fromText != null) {
+                tooltipComponents.add(Component.literal(fromText)
+                        .withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
+            }
+            if (stack.has(YAFDataComponents.MAILBOX_TIMER.get())) {
+                int timer = stack.getOrDefault(YAFDataComponents.MAILBOX_TIMER.get(), 0);
                 String timerDisplay = timer < 0 ? "Not started" : String.valueOf(timer);
-                tooltip.add(Component.literal("Time left: " + timerDisplay + " ticks")
+                tooltipComponents.add(Component.literal("Time left: " + timerDisplay + " ticks")
                         .withStyle(ChatFormatting.DARK_GRAY));
             }
         }
@@ -41,35 +43,27 @@ public abstract class ItemMixin {
 
     @Inject(method = "inventoryTick", at = @At("HEAD"))
     private void mailboxTooltipInventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected, CallbackInfo ci) {
-        CompoundTag tag = stack.getTag();
-        if (tag == null || !tag.contains("mailboxTooltipTimer")) {
-            return;
-        }
-        if (entity instanceof Player) {
-            int timer = tag.getInt("mailboxTooltipTimer");
-            if (timer < 0) {
-                tag.putInt("mailboxTooltipTimer", 200);
-            } else if (timer > 0) {
-                timer--;
-                tag.putInt("mailboxTooltipTimer", timer);
-                if (timer == 0) {
-                    removeMailboxTags(stack);
+        if (stack.has(YAFDataComponents.MAILBOX_TIMER.get())) {
+            if (entity instanceof Player) {
+                int timer = stack.getOrDefault(YAFDataComponents.MAILBOX_TIMER.get(), 0);
+                if (timer < 0) {
+                    stack.set(YAFDataComponents.MAILBOX_TIMER.get(), 200);
+                } else if (timer > 0) {
+                    timer--;
+                    stack.set(YAFDataComponents.MAILBOX_TIMER.get(), timer);
+                    if (timer == 0) {
+                        removeMailboxTags(stack);
+                    }
                 }
+            } else {
+                removeMailboxTags(stack);
             }
-        } else {
-            removeMailboxTags(stack);
         }
     }
 
     @Unique
     private void removeMailboxTags(ItemStack stack) {
-        CompoundTag tag = stack.getTag();
-        if (tag != null) {
-            tag.remove("mailboxTooltip");
-            tag.remove("mailboxTooltipTimer");
-            if (tag.isEmpty()) {
-                stack.setTag(null);
-            }
-        }
+        stack.remove(YAFDataComponents.MAILBOX_STRING.get());
+        stack.remove(YAFDataComponents.MAILBOX_TIMER.get());
     }
 }

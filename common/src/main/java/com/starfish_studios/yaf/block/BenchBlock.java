@@ -116,11 +116,10 @@ public class BenchBlock extends SeatBlock implements SimpleWaterloggedBlock, Cha
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (tryChangeBlock(BACK, state, level, pos, player, hand)) return InteractionResult.SUCCESS;
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (tryChangeBlock(BACK, state, level, pos, player)) return InteractionResult.SUCCESS;
 
-        if (hand == InteractionHand.MAIN_HAND) return InteractionResult.FAIL;
-        return super.use(state, level, pos, player, hand, hit);
+        return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 
     public FluidState getFluidState(BlockState state) {
@@ -143,7 +142,7 @@ public class BenchBlock extends SeatBlock implements SimpleWaterloggedBlock, Cha
     }
 
     @Override
-    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
         return false;
     }
 }

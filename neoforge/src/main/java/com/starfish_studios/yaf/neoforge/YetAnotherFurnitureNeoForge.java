@@ -1,22 +1,18 @@
-package com.starfish_studios.yaf.forge;
+package com.starfish_studios.yaf.neoforge;
 
 import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.starfish_studios.yaf.YetAnotherFurnitureClient;
-import com.starfish_studios.yaf.client.gui.screens.DrawerScreen;
-import com.starfish_studios.yaf.client.gui.screens.MailboxScreen;
 import com.starfish_studios.yaf.events.ShelfInteractions;
-import com.starfish_studios.yaf.registry.YAFMenus;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
@@ -24,24 +20,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Mod(YetAnotherFurniture.MOD_ID)
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public class YetAnotherFurnitureForge {
+public class YetAnotherFurnitureNeoForge {
 
+    /**
+     * Set to true to print out the number of block states registered for each block type. For optimization purposes.
+     */
     private static final boolean runBlockStateTest = false;
 
-    public YetAnotherFurnitureForge() {
-
-        var bus = NeoForge.EVENT_BUS;
+    public YetAnotherFurnitureNeoForge(IEventBus modEventBus, ModContainer modContainer) {
         YetAnotherFurniture.init();
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            bus.addListener(YetAnotherFurnitureForge::onClientSetup);
+            modEventBus.addListener(this::onClientSetup);
         }
-        bus.addListener(YetAnotherFurnitureForge::onCommonSetup);
+        modEventBus.addListener(this::onCommonSetup);
+
+        var neoBus = NeoForge.EVENT_BUS;
+
+        neoBus.addListener(this::registerBlockInteract);
     }
 
-    @SubscribeEvent
-    public static void onCommonSetup(FMLCommonSetupEvent event) {
+    private void onCommonSetup(FMLCommonSetupEvent event) {
         if (runBlockStateTest) {
             event.enqueueWork(() -> {
                 Map<String, Integer> stateCounts = new HashMap<>();
@@ -66,20 +65,11 @@ public class YetAnotherFurnitureForge {
         }
     }
 
-    @SubscribeEvent
-    public static void registerScreens(final RegisterMenuScreensEvent event) {
-        event.register(YAFMenus.DRAWER.get(), DrawerScreen::new);
-        event.register(YAFMenus.GENERIC_1X5.get(), MailboxScreen::new);
-    }
-
-    @SubscribeEvent
-    public static void onClientSetup(final FMLClientSetupEvent event) {
+    public void onClientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(YetAnotherFurnitureClient::init);
-
     }
 
-    @SubscribeEvent
-    public static void registerBlockInteract(final PlayerInteractEvent.RightClickBlock event) {
+    public void registerBlockInteract(final PlayerInteractEvent.RightClickBlock event) {
         var result = ShelfInteractions.interact(event.getEntity(), event.getHand(), event.getHitVec());
         if (result.consumesAction()) {
             event.setCanceled(true);

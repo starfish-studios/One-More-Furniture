@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[5.5.0,)"
+loaderVersion = "[4,)"
 #issueTrackerURL = ""
 license = "https://github.com/starfish-studios/One-More-Furniture?tab=License-1-ov-file#readme"
 
@@ -11,10 +11,13 @@ authors = "Starfish Studios : crispytwig, MrSterner, thelamb_"
 description = '''There are furniture mods, then there are more- then we made ANOTHER, but this time, it's YET ANOTHER. How many more furniture mods can we make? Find out in the next episode of \"Furniture Mods\".'''
 #logoFile = ""
 
+[[mixins]]
+config="yaf-common.mixins.json"
+
 [[dependencies.yaf]]
 modId = "neoforge"
 type="required"
-versionRange="[21.1.55,)"
+versionRange="[21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -31,8 +34,3 @@ type="required"
 versionRange = "[13.0.6,)"
 ordering = "AFTER"
 side = "BOTH"
-
-[[mixins]]
-config="yaf.mixins.json"
-[[mixins]]
-config="yaf-common.mixins.json"

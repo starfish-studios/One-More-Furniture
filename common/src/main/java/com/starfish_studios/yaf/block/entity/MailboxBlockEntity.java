@@ -4,7 +4,10 @@ import com.starfish_studios.yaf.YetAnotherFurniture;
 import com.starfish_studios.yaf.block.MailboxBlock;
 import com.starfish_studios.yaf.block.properties.FlagStatus;
 import com.starfish_studios.yaf.inventory.MailboxMenu;
+import com.starfish_studios.yaf.payload.FailMailboxS2CPayload;
+import com.starfish_studios.yaf.payload.ResetMailboxS2CPayload;
 import com.starfish_studios.yaf.registry.YAFBlockEntities;
+import com.starfish_studios.yaf.registry.YAFDataComponents;
 import com.starfish_studios.yaf.world.YAFSavedData;
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
@@ -141,7 +144,7 @@ public class MailboxBlockEntity extends BlockEntity
                                 for (ServerPlayer serverPlayer : list) {
                                     FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
                                     buf.writeBlockPos(getBlockPos());
-                                    NetworkManager.sendToPlayer(serverPlayer, packetChannel2, buf);
+                                    NetworkManager.sendToPlayer(serverPlayer, new ResetMailboxS2CPayload(getBlockPos()));
                                 }
                             }
                             setChanged();
@@ -159,14 +162,10 @@ public class MailboxBlockEntity extends BlockEntity
     }
 
     private void sendMessageState(boolean fail){
-
         if (level instanceof ServerLevel serverLevel) {
             var list = serverLevel.getChunkSource().chunkMap.getPlayers(new ChunkPos(getBlockPos()), false);
             for (ServerPlayer serverPlayer : list) {
-                FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-                buf.writeBlockPos(getBlockPos());
-                buf.writeBoolean(fail);
-                NetworkManager.sendToPlayer(serverPlayer, packetChannel, buf);
+                NetworkManager.sendToPlayer(serverPlayer, new FailMailboxS2CPayload(fail, getBlockPos()));
             }
         }
     }
@@ -213,8 +212,8 @@ public class MailboxBlockEntity extends BlockEntity
             ItemStack toSendStack = this.items.get(o).copy();
 
             if (!toSendStack.isEmpty()) {
-                toSendStack.getOrCreateTag().putString("mailboxTooltip", "From: " + this.getMailboxName().getString());
-                toSendStack.getOrCreateTag().putInt("mailboxTooltipTimer", -1);
+                toSendStack.set(YAFDataComponents.MAILBOX_STRING.get(), "From: " + this.getMailboxName().getString());
+                toSendStack.set(YAFDataComponents.MAILBOX_TIMER.get(), -1);
 
                 boolean merged = false;
 
@@ -227,8 +226,8 @@ public class MailboxBlockEntity extends BlockEntity
 
                         if (transferAmount > 0) {
                             targetStack.grow(transferAmount);
-                            targetStack.getOrCreateTag().putString("mailboxTooltip", "From: " + this.getMailboxName().getString());
-                            targetStack.getOrCreateTag().putInt("mailboxTooltipTimer", -1);
+                            toSendStack.set(YAFDataComponents.MAILBOX_STRING.get(), "From: " + this.getMailboxName().getString());
+                            toSendStack.set(YAFDataComponents.MAILBOX_TIMER.get(), -1);
 
                             toSendStack.shrink(transferAmount);
                             sentMail = true;

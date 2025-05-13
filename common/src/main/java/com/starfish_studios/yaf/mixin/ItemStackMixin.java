@@ -1,5 +1,6 @@
 package com.starfish_studios.yaf.mixin;
 
+import com.starfish_studios.yaf.registry.YAFDataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,20 +11,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
 
-    @Inject(method = "isSameItemSameTags", at = @At("HEAD"))
+    @Inject(method = "isSameItemSameComponents", at = @At("HEAD"))
     private static void acceptMailboxTagCombine(ItemStack stack, ItemStack other, CallbackInfoReturnable<Boolean> cir) {
 
-        CompoundTag tag1 = stack.getTag();
-        CompoundTag tag2 = other.getTag();
-
-        if (tag1 != null) {
-            tag1.remove("mailboxTooltip");
-            tag1.remove("mailboxTooltipTimer");
+        if (stack.has(YAFDataComponents.MAILBOX_STRING.get())) {
+            stack.remove(YAFDataComponents.MAILBOX_STRING.get());
         }
 
-        if (tag2 != null) {
-            tag2.remove("mailboxTooltip");
-            tag2.remove("mailboxTooltipTimer");
+        if (stack.has(YAFDataComponents.MAILBOX_TIMER.get())) {
+            stack.remove(YAFDataComponents.MAILBOX_TIMER.get());
         }
+
+        if (other.has(YAFDataComponents.MAILBOX_STRING.get())) {
+            other.remove(YAFDataComponents.MAILBOX_STRING.get());
+        }
+
+        if (other.has(YAFDataComponents.MAILBOX_TIMER.get())) {
+            other.remove(YAFDataComponents.MAILBOX_TIMER.get());
+        }
+
     }
 }

@@ -141,10 +141,4 @@ public class MailboxScreen extends AbstractContainerScreen<MailboxMenu> {
         int l = (this.height - this.imageHeight) / 2;
         guiGraphics.blit(CONTAINER_LOCATION, k, l, 0, 0, this.imageWidth, this.imageHeight);
     }
-
-    @Override
-    protected void containerTick() {
-        super.containerTick();
-        targetString.tick();
-    }
 }

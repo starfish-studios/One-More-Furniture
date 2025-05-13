@@ -13,6 +13,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.GlobalPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -34,6 +35,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -236,11 +238,12 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         Player player = livingEntity instanceof Player ? (Player)livingEntity : null;
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
 
-        if (blockEntity instanceof MailboxBlockEntity) {
-            if (player != null && !itemStack.hasCustomHoverName()) {
-                ((MailboxBlockEntity)blockEntity).setCustomName(Component.translatable("container.mailbox.player_name", player.getDisplayName()));
-            } else if (itemStack.hasCustomHoverName()) {
-                ((MailboxBlockEntity)blockEntity).setCustomName(itemStack.getHoverName());
+        if (blockEntity instanceof MailboxBlockEntity mailboxBlockEntity) {
+            var hasCustomName = itemStack.has(DataComponents.CUSTOM_NAME);
+            if (player != null && !hasCustomName) {
+                mailboxBlockEntity.setCustomName(Component.translatable("container.mailbox.player_name", player.getDisplayName()));
+            } else if (hasCustomName) {
+                mailboxBlockEntity.setCustomName(itemStack.getHoverName());
             }
 
             if (level instanceof ServerLevel serverLevel) {
@@ -249,7 +252,7 @@ public class MailboxBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
                 mailboxes.mailboxes.add(new YAFSavedData.MailboxData(
                         player != null ? player.getDisplayName().getString() : "PlayerName",
-                        itemStack.hasCustomHoverName() ? itemStack.getHoverName().getString() : "PlayerMailbox",
+                        hasCustomName ? itemStack.getHoverName().getString() : "PlayerMailbox",
                         globalPos
                 ));
                 mailboxes.setDirty();

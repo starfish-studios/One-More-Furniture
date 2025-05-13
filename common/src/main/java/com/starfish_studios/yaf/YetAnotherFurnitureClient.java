@@ -49,35 +49,6 @@ public class YetAnotherFurnitureClient {
             MenuRegistry.registerScreenFactory(YAFMenus.GENERIC_1X5.get(), MailboxScreen::new);
         });
 
-        NetworkManager.registerReceiver(NetworkManager.Side.S2C, MailboxBlockEntity.packetChannel, ((buf, context) -> {
-            var pos = buf.readBlockPos();
-            var state = buf.readBoolean();
-
-            var client = Minecraft.getInstance();
-            client.execute(() -> {
-                var be = client.level.getBlockEntity(pos);
-                if (be instanceof MailboxBlockEntity mailbox) {
-                    mailbox.failedToSend = state;
-                    mailbox.setChanged();
-                }
-            });
-
-
-        }));
-
-        NetworkManager.registerReceiver(NetworkManager.Side.S2C, MailboxBlockEntity.packetChannel2, ((buf, context) -> {
-            var pos = buf.readBlockPos();
-            var state = buf.readBoolean();
-            var client = Minecraft.getInstance();
-            client.execute(() -> {
-                var be = client.level.getBlockEntity(pos);
-                if (be instanceof MailboxBlockEntity mailbox) {
-                    mailbox.failedToSend = state;
-                    mailbox.setChanged();
-                }
-            });
-        }));
-
         YAFBlocks.LAMPS.forEach((key, value) -> RenderTypeRegistry.register(RenderType.translucent(), value.get()));
         YAFBlocks.MAIL_BOXES.forEach((key, value) -> RenderTypeRegistry.register(RenderType.cutout(), value.get()));
         YAFBlocks.FANS.forEach((key, value) -> RenderTypeRegistry.register(RenderType.translucent(), value.get()));

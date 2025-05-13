@@ -9,6 +9,7 @@ import com.starfish_studios.yaf.block.CabinetBlock;
 import com.starfish_studios.yaf.block.DrawerBlock;
 import com.starfish_studios.yaf.inventory.DrawerMenu;
 import com.mojang.datafixers.util.Pair;
+import com.starfish_studios.yaf.mixin.CustomNameAccessor;
 import dev.architectury.registry.menu.ExtendedMenuProvider;
 import dev.architectury.registry.menu.MenuRegistry;
 import net.minecraft.core.*;
@@ -22,6 +23,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.Nameable;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -37,7 +39,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlockEntity implements MenuProvider {
+public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlockEntity implements MenuProvider, Nameable {
     private static final SoundEvent SOUND_OPEN = SoundEvents.BARREL_OPEN;
     private static final SoundEvent SOUND_CLOSE = SoundEvents.BARREL_CLOSE;
 
@@ -123,15 +125,15 @@ public abstract class AbstractDrawerBlockEntity extends RandomizableContainerBlo
                 if (abstractDrawerBlockEntity instanceof CabinetBlockEntity) {
                     // Swap left/right naming: positive dot now means right side.
                     if (raycastResult.getFirst() > 0) {
-                        abstractDrawerBlockEntity.setCustomName(Component.translatable("container.cabinet_right"));
+                        ((CustomNameAccessor)abstractDrawerBlockEntity).setName(Component.translatable("container.cabinet_right"));
                     } else {
-                        abstractDrawerBlockEntity.setCustomName(Component.translatable("container.cabinet_left"));
+                        ((CustomNameAccessor)abstractDrawerBlockEntity).setName(Component.translatable("container.cabinet_left"));
                     }
                 } else {
                     if (raycastResult.getFirst() > 7) {
-                        abstractDrawerBlockEntity.setCustomName(Component.translatable("container.drawer_top"));
+                        ((CustomNameAccessor)abstractDrawerBlockEntity).setName(Component.translatable("container.drawer_top"));
                     } else {
-                        abstractDrawerBlockEntity.setCustomName(Component.translatable("container.drawer_bottom"));
+                        ((CustomNameAccessor)abstractDrawerBlockEntity).setName(Component.translatable("container.drawer_bottom"));
                     }
                 }
 
